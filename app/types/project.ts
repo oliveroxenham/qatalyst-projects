@@ -1,5 +1,6 @@
-import { MethodCreateProjectEnum } from '../(authenticated)/projects/new/components/ChooseMethod';
-import { QatalystProjectTypeEnum } from '../(authenticated)/projects/new/components/ChooseQatalystProjectType';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import { MethodCreateProjectEnum } from '../(authenticated)/projects/new/components/ChooseMethod';
+// import { QatalystProjectTypeEnum } from '../(authenticated)/projects/new/components/ChooseQatalystProjectType';
 import { Developer } from './developer';
 import { Document, LastActivityDescription } from './document';
 import { ProjectEsgStatus, ProjectFinancialStatus } from './status';
@@ -50,7 +51,7 @@ export type Project = {
   latitude: number;
   longitude: number;
   sdgs: number[];
-  sourceType: MethodCreateProjectEnum;
+  // sourceType: MethodCreateProjectEnum;
   activities: Activity[];
   activitiesDetails: {
     count: number;
@@ -62,7 +63,7 @@ export type Project = {
   originalId: string;
   registryProjectId: string;
   financialFinalComment?: FinalComment;
-  qatalystProjectType: QatalystProjectTypeEnum;
+  // qatalystProjectType: QatalystProjectTypeEnum;
   // only for UI
   countrySourceType?: string;
   lastLlmTask: LastLLmTask;

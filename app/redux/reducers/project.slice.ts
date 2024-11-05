@@ -1,7 +1,7 @@
-import { MethodCreateProjectEnum } from '@/app/(authenticated)/projects/new/components/ChooseMethod';
-import { QatalystProjectTypeEnum } from '@/app/(authenticated)/projects/new/components/ChooseQatalystProjectType';
-import { Project } from '@/app/types/project';
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+// import { MethodCreateProjectEnum } from '@/app/(authenticated)/projects/new/components/ChooseMethod';
+// import { QatalystProjectTypeEnum } from '@/app/(authenticated)/projects/new/components/ChooseQatalystProjectType';
+// import { Project } from '@/app/types/project';
+import { createSlice, /* type PayloadAction */ } from '@reduxjs/toolkit';
 
 const initialState = {
   createdMethod: null,
@@ -10,12 +10,12 @@ const initialState = {
   importedId: '',
 };
 
-type CreatedProjectPayload = {
-  project: Project & { id: string };
-  qatalystType: QatalystProjectTypeEnum | null;
-  method: MethodCreateProjectEnum | null;
-  importId: string;
-};
+// type CreatedProjectPayload = {
+//   project: Project & { id: string };
+//   // qatalystType: QatalystProjectTypeEnum | null;
+//   // method: MethodCreateProjectEnum | null;
+//   importId: string;
+// };
 
 const projectSlice = createSlice({
   initialState,
@@ -27,16 +27,13 @@ const projectSlice = createSlice({
       state.createdMethod = null;
       state.importedId = '';
     },
-    setCreatedProject: (state, action: PayloadAction<CreatedProjectPayload>) => {
-      // @ts-ignore
-      state.createdQatalystType = action.payload.qatalystType;
-      // @ts-ignore
-      state.createdProject = action.payload.project;
-      // @ts-ignore
-      state.createdMethod = action.payload.method;
-      state.importedId = action.payload.importId;
-    },
+    // setCreatedProject: (state, action: PayloadAction<CreatedProjectPayload>) => {
+    //   state.createdQatalystType = action.payload.qatalystType;
+    //   state.createdProject = action.payload.project;
+    //   state.createdMethod = action.payload.method;
+    //   state.importedId = action.payload.importId;
+    // },
   },
 });
-export const { setCreatedProject, clearCreatedProject } = projectSlice.actions;
+export const { /* setCreatedProject, */ clearCreatedProject } = projectSlice.actions;
 export default projectSlice.reducer;
