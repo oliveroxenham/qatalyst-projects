@@ -1,0 +1,10 @@
+<svg width="100%" height="100%" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon/arrow-right">
+<path id="Vector" d="M4.1665 10H15.8332" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Vector_2">
+<path d="M10.8335 15L15.8335 10L10.8335 15Z" fill="currentColor"/>
+<path d="M10.8335 15L15.8335 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path id="Vector_3" d="M10.8335 5L15.8335 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
