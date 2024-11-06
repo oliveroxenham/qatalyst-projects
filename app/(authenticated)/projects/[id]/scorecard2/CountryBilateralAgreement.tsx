@@ -65,7 +65,7 @@ function CountryBilateralAgreement({ project }: { project: number }) {
   return (
     <div className="rounded-lg border border-neutral-200 bg-white p-6">
       <div className="pb-4">
-        <span className="text-2xl font-semibold">
+        <span className="text-xl font-semibold">
           <ReactCountryFlag countryCode={project === 1 ? 'KH' : 'BR'} />{' '}
           {project === 1 ? 'Cambodia' : 'Brazil'} Bilateral Agreements &
           Cooperation

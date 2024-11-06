@@ -68,7 +68,7 @@ function CreditForecast({ project = 1 }: { project?: number }) {
   return (
     <div className="h-[400px] rounded-lg border border-neutral-200 bg-white p-6 pb-20">
       <div className="pb-4">
-        <span className="text-2xl font-semibold">
+        <span className="text-xl font-semibold">
           Realised vs Forecast Credits
         </span>
       </div>

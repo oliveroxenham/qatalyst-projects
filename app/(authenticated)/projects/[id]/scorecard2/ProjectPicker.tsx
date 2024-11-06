@@ -3,7 +3,7 @@ import CreditForecast from './CreditForecast';
 import EsgAssessment from './EsgAssessment';
 import Map from './map';
 import FinancialAssessment from './FinancialAssessment';
-import ProjectBilateralAgreement from './ProjectBilateralAgreement';
+// import ProjectBilateralAgreement from './ProjectBilateralAgreement';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
 import RevenueForecast from './RevenueForecast';
@@ -112,13 +112,17 @@ const ProjectPicker = () => {
   const [projectSelected, setProjectSelected] = useState<string | undefined>();
   if (!projectSelected)
     return (
-      <div className="m-4 rounded-lg border border-neutral-200 bg-white p-6">
+      <div className="m-2 rounded-lg border border-neutral-200 bg-white p-4">
         <ProjectListComboBox setProjectSelected={setProjectSelected} />
       </div>
     );
   return (
     <div>
-      <ProjectTitle title="The Russas Project" countryCode="BR" />
+      <ProjectTitle
+        title="The Russas Project"
+        countryCode="BR"
+        projectId="1112"
+      />
       <ProjectSummary
         benchmarkLayoutVisible
         data={{
@@ -126,13 +130,13 @@ const ProjectPicker = () => {
           carbonCredits: '1,474,189',
           lifetime: '60',
           area: '41,976',
-          status: 'Registered'
+          status: 'Registered',
         }}
       />
-      <SdgSummary />
+      <SdgSummary project={2} />
       {/* <CreditForecast project={2} /> */}
       <div
-        className={clsx('m-4 grid grid-cols-1 gap-4', {
+        className={clsx('m-2 grid grid-cols-1 gap-4', {
           'lg:grid-cols-2': false,
         })}
       >
@@ -140,11 +144,79 @@ const ProjectPicker = () => {
         <Map project={2} />
       </div>{' '}
       <div
-        className={clsx('m-4 grid grid-cols-1 gap-4', {
+        className={clsx('m-2 grid grid-cols-1 gap-4', {
           'lg:grid-cols-2': false,
         })}
       >
-        <FinancialAssessment />
+        <FinancialAssessment data={[
+                    {
+                      id: 1,
+                      title: 'Capital expense intensity',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.022,
+                    },
+                    {
+                      id: 2,
+                      title: 'Operating expense intensity',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0,
+                    },
+                    {
+                      id: 3,
+                      title: 'Total expense intensity',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.023,
+                    },
+                    {
+                      id: 4,
+                      title:
+                        'Cost of production (including non carbon revenues)',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.023,
+                    },
+                    {
+                      id: 5,
+                      title: 'Total net costs',
+                      unit: <span>kUSD</span>,
+                      value: 8.5,
+                    },
+                    {
+                      id: 6,
+                      title: 'Cost of production (net - including financing)',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.023,
+                    },
+                    {
+                      id: 7,
+                      title: 'Estimated reduction per unit of area per year',
+                      unit: (
+                        <span>
+                          tCO<sub>2</sub>e/ha/yr
+                        </span>
+                      ),
+                      value: 0.654,
+                    },
+                  ]}/>
         <EsgAssessment
           risk="Medium"
           data={[
@@ -208,14 +280,13 @@ const ProjectPicker = () => {
         />
       </div>
       <div
-        className={clsx('m-4 grid grid-cols-1 gap-4', {
+        className={clsx('m-2 grid grid-cols-1 gap-4', {
           'lg:grid-cols-2': false,
         })}
       >
         <CountryBilateralAgreement project={2} />
-        <ProjectBilateralAgreement />
+        <RevenueForecast />
       </div>
-      <RevenueForecast />
     </div>
   );
 };

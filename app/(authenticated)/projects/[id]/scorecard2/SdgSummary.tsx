@@ -17,20 +17,29 @@ import IconGoal5 from '@/public/icons/goal-05.svg';
 // import IconGoal16 from '@/public/icons/goal-16.svg';
 // import IconGoal17 from '@/public/icons/goal-17.svg';
 
-function SdgSummary() {
+function SdgSummary({ project = 1 }: { project?: number }) {
   return (
-    <div className="m-4 rounded-lg border border-neutral-200 bg-white p-6">
+    <div className="m-2 rounded-lg border border-neutral-200 bg-white p-4">
       <div className="flex flex-col gap-2">
         <span className="text-sm text-neutral-500">
           Sustainable Development Goals
         </span>
-        <div className="flex flex-row gap-1">
-          <Image src={IconGoal1} alt="SDG Goal 1" width={56} height={56} />
-          <Image src={IconGoal2} alt="SDG Goal 2" width={56} height={56} />
-          <Image src={IconGoal3} alt="SDG Goal 3" width={56} height={56} />
-          <Image src={IconGoal4} alt="SDG Goal 4" width={56} height={56} />
-          <Image src={IconGoal5} alt="SDG Goal 5" width={56} height={56} />
-        </div>
+        {project === 1 ? (
+          <div className="flex flex-row gap-1">
+            <Image src={IconGoal1} alt="SDG Goal 1" width={56} height={56} />
+            <Image src={IconGoal2} alt="SDG Goal 2" width={56} height={56} />
+            <Image src={IconGoal3} alt="SDG Goal 3" width={56} height={56} />
+            <Image src={IconGoal4} alt="SDG Goal 4" width={56} height={56} />
+            <Image src={IconGoal5} alt="SDG Goal 5" width={56} height={56} />
+          </div>
+        ) : (
+          <div className="flex flex-row gap-1">
+            {/* <Image src={IconGoal1} alt="SDG Goal 1" width={56} height={56} /> */}
+            <div className="w-[56px] h-[56px] bg-[#e5e5e5] flex justify-center items-center rounded">
+              <span className="text-neutral-400">N/A</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableFooter, TableRow } from '@/components/ui/table';
 
 // const data = [
 //   {
@@ -79,7 +79,7 @@ function EsgAssessment({risk = 'Low', data}: {risk: string, data: {id: number, s
   return (
     <div className='rounded-lg border border-neutral-200 bg-white p-6'>
       <div className='pb-4'>
-        <span className='text-2xl font-semibold'>ESG Assessment</span>
+        <span className='text-xl font-semibold'>ESG Assessment</span>
       </div>
       <div className={`flex w-full items-center rounded ${bgColor} p-2`}>
         <span className='text-sm text-white'>{risk} Risk</span>
@@ -98,6 +98,12 @@ function EsgAssessment({risk = 'Low', data}: {risk: string, data: {id: number, s
               </TableRow>
             ))}
           </TableBody>
+          <TableFooter>
+            <TableCell colSpan={3}>
+              <span className="text-xs text-neutral-400">Completed by Kopal on 15 Oct 2024</span>
+            </TableCell>
+          </TableFooter>
+
         </Table>
       </div>
     </div>

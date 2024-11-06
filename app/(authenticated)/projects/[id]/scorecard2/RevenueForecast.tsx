@@ -1,7 +1,7 @@
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Slider } from '@/components/ui/slider';
 import { useState } from 'react';
-import { CartesianGrid, Legend, Line, LineChart, Text, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis } from 'recharts';
 
 const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
@@ -52,11 +52,11 @@ const RevenueForecast: React.FC = () => {
   } satisfies ChartConfig;
 
   return (
-    <div className='m-4 flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-6 pb-20'>
+    <div className='flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-6'>
       <div className='pb-4'>
-        <span className='text-2xl font-semibold'>Revenue Scenario Over Time</span>
+        <span className='text-xl font-semibold'>Revenue Scenario Over Time</span>
       </div>
-      <ChartContainer config={chartConfig} className='h-[500px] w-full'>
+      <ChartContainer config={chartConfig} className='h-[200px] w-full'>
         <LineChart
           accessibilityLayer
           data={chartData}
@@ -70,11 +70,11 @@ const RevenueForecast: React.FC = () => {
             axisLine={false}
             tickMargin={4}
             tickFormatter={(value) => formatter.format(value).slice(0, -3)}
-            label={
-              <Text x={0} y={0} dx={-250} dy={10} textAnchor='start' width={180} transform='rotate(-90)'>
-                Estimated Revenue
-              </Text>
-            }
+            // label={
+            //   <Text x={0} y={0} dx={-250} dy={10} textAnchor='start' width={180} transform='rotate(-90)'>
+            //     Estimated Revenue
+            //   </Text>
+            // }
           />
           <XAxis
             dataKey='year'

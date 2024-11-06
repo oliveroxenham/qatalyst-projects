@@ -6,7 +6,7 @@ import CountryBilateralAgreement from './CountryBilateralAgreement';
 import CreditForecast from './CreditForecast';
 import EsgAssessment from './EsgAssessment';
 import FinancialAssessment from './FinancialAssessment';
-import ProjectBilateralAgreement from './ProjectBilateralAgreement';
+// import ProjectBilateralAgreement from './ProjectBilateralAgreement';
 import ProjectPicker from './ProjectPicker';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
@@ -57,7 +57,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
               Compare
             </Button>
           </div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-0">
             <main
               className={clsx('h-[calc(100%-84px)] bg-neutral-100', {
                 'w-1/2': benchmarkLayoutVisible,
@@ -65,6 +65,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
               })}
             >
               <ProjectTitle
+                projectId="1650"
                 title="Reduced Emissions From Deforestation And Degradation In Keo Seima Wildlife Sanctuary"
                 countryCode="KH"
               />
@@ -75,12 +76,12 @@ export default function ScoreCardPage({ id }: { id: string }) {
                   carbonCredits: '4,784,566',
                   lifetime: '60',
                   area: '384,566',
-                  status: 'Verified'
+                  status: 'Verified',
                 }}
               />
               <SdgSummary />
               <div
-                className={clsx('m-4 grid grid-cols-1 gap-4', {
+                className={clsx('m-2 grid grid-cols-1 gap-4', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
@@ -88,11 +89,81 @@ export default function ScoreCardPage({ id }: { id: string }) {
                 <Map project={1} />
               </div>
               <div
-                className={clsx('m-4 grid grid-cols-1 gap-4', {
+                className={clsx('m-2 grid grid-cols-1 gap-4', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
-                <FinancialAssessment />
+                <FinancialAssessment
+                  data={[
+                    {
+                      id: 1,
+                      title: 'Capital expense intensity',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.03,
+                    },
+                    {
+                      id: 2,
+                      title: 'Operating expense intensity',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.1,
+                    },
+                    {
+                      id: 3,
+                      title: 'Total expense intensity',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.025,
+                    },
+                    {
+                      id: 4,
+                      title:
+                        'Cost of production (including non carbon revenues)',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.025,
+                    },
+                    {
+                      id: 5,
+                      title: 'Total net costs',
+                      unit: <span>kUSD</span>,
+                      value: 9.5,
+                    },
+                    {
+                      id: 6,
+                      title: 'Cost of production (net - including financing)',
+                      unit: (
+                        <span>
+                          USD/tCO<sub>2</sub>e
+                        </span>
+                      ),
+                      value: 0.025,
+                    },
+                    {
+                      id: 7,
+                      title: 'Estimated reduction per unit of area per year',
+                      unit: (
+                        <span>
+                          tCO<sub>2</sub>e/ha/yr
+                        </span>
+                      ),
+                      value: 0.0754,
+                    },
+                  ]}
+                />
                 <EsgAssessment
                   risk="Low"
                   data={[
@@ -157,14 +228,14 @@ export default function ScoreCardPage({ id }: { id: string }) {
                 />
               </div>
               <div
-                className={clsx('m-4 grid grid-cols-1 gap-4', {
+                className={clsx('m-2 grid grid-cols-1 gap-4', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
                 <CountryBilateralAgreement project={1} />
-                <ProjectBilateralAgreement />
+                {/* <ProjectBilateralAgreement /> */}
+                <RevenueForecast />
               </div>
-              <RevenueForecast />
             </main>
             {benchmarkLayoutVisible && (
               <div className="h-[calc(100%-84px)] w-1/2">
