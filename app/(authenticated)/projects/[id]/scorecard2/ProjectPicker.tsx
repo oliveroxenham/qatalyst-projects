@@ -91,7 +91,7 @@ const ProjectPicker = () => {
       <ProjectTitle />
       <ProjectSummary benchmarkLayoutVisible />
       <SdgSummary />
-      <CreditForecast />
+      <CreditForecast project={2} />
       <div
         className={clsx('m-4 grid grid-cols-1 gap-4', {
           'lg:grid-cols-2': false,

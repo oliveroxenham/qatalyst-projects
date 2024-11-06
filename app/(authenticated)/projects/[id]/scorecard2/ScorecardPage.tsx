@@ -53,7 +53,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
               variant="outline"
               onClick={() => setBenchmarkLayoutVisible(!benchmarkLayoutVisible)}
             >
-              Benchmark
+              Compare
             </Button>
           </div>
           <div className="flex flex-row gap-2">
@@ -66,7 +66,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
               <ProjectTitle />
               <ProjectSummary benchmarkLayoutVisible={benchmarkLayoutVisible} />
               <SdgSummary />
-              <CreditForecast />
+              <CreditForecast project={1} />
               <div
                 className={clsx('m-4 grid grid-cols-1 gap-4', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
