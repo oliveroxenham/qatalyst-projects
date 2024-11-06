@@ -144,14 +144,74 @@ const ProjectPicker = () => {
         })}
       >
         <FinancialAssessment />
-        <EsgAssessment />
+        <EsgAssessment
+          risk="Medium"
+          data={[
+            {
+              id: 1,
+              satisfactory: true,
+              title: 'Human Rights',
+            },
+            {
+              id: 2,
+              satisfactory: true,
+              title: 'Gender Equality',
+            },
+            {
+              id: 3,
+              satisfactory: true,
+              title: 'Community health, safety and security',
+            },
+            {
+              id: 4,
+              satisfactory: true,
+              title: 'Labour rights of working conditions',
+            },
+            {
+              id: 5,
+              satisfactory: true,
+              title: 'Indigenous People and Local Communities (IPLCs)',
+            },
+            {
+              id: 6,
+              satisfactory: true,
+              title: 'Land acquisition, displacement and resettlement',
+            },
+            {
+              id: 7,
+              satisfactory: true,
+              title: 'Corruption',
+            },
+            {
+              id: 8,
+              satisfactory: true,
+              title: 'Climate change and disaster risks',
+            },
+            {
+              id: 9,
+              satisfactory: true,
+              title: 'Resource efficiency and pollution prevention; Energy',
+            },
+            {
+              id: 10,
+              satisfactory: true,
+              title: 'Water',
+            },
+            {
+              id: 11,
+              satisfactory: true,
+              title:
+                'Biodiversity conservation and sustainable natural resource management',
+            },
+          ]}
+        />
       </div>
       <div
         className={clsx('m-4 grid grid-cols-1 gap-4', {
           'lg:grid-cols-2': false,
         })}
       >
-        <CountryBilateralAgreement />
+        <CountryBilateralAgreement project={2} />
         <ProjectBilateralAgreement />
       </div>
       <RevenueForecast />

@@ -9,7 +9,7 @@ const ProjectTitle = ({
 }) => {
   return (
     <div className="m-4 flex flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-white p-6">
-      <ReactCountryFlag countryCode={countryCode} svg /> {title}
+      <ReactCountryFlag countryCode={countryCode} svg /> <span className="text-ellipsis truncate">{title}</span>
     </div>
   );
 };
