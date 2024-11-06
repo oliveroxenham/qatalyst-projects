@@ -66,7 +66,7 @@ function CreditForecast({ project = 1 }: { project?: number }) {
   } satisfies ChartConfig;
 
   return (
-    <div className="m-4 h-[400px] rounded-lg border border-neutral-200 bg-white p-6 pb-20">
+    <div className="h-[400px] rounded-lg border border-neutral-200 bg-white p-6 pb-20">
       <div className="pb-4">
         <span className="text-2xl font-semibold">
           Realised vs Forecast Credits

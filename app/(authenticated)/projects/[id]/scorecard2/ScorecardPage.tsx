@@ -1,6 +1,7 @@
 'use client';
 
 import useProject from '@/app/hooks/useProject';
+import Map from './map';
 import CountryBilateralAgreement from './CountryBilateralAgreement';
 import CreditForecast from './CreditForecast';
 import EsgAssessment from './EsgAssessment';
@@ -63,7 +64,10 @@ export default function ScoreCardPage({ id }: { id: string }) {
                 'w-full': !benchmarkLayoutVisible,
               })}
             >
-              <ProjectTitle />
+              <ProjectTitle
+                title="Reduced Emissions From Deforestation And Degradation In Keo Seima Wildlife Sanctuary"
+                countryCode="KH"
+              />
               <ProjectSummary
                 benchmarkLayoutVisible={benchmarkLayoutVisible}
                 data={{
@@ -74,7 +78,14 @@ export default function ScoreCardPage({ id }: { id: string }) {
                 }}
               />
               <SdgSummary />
-              <CreditForecast project={1} />
+              <div
+                className={clsx('m-4 grid grid-cols-1 gap-4', {
+                  'lg:grid-cols-2': !benchmarkLayoutVisible,
+                })}
+              >
+                <CreditForecast project={1} />
+                <Map project={1} />
+              </div>
               <div
                 className={clsx('m-4 grid grid-cols-1 gap-4', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
