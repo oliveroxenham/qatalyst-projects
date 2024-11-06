@@ -4,7 +4,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { CartesianGrid, Line, LineChart, Text, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
 
 function CreditForecast({ project = 1 }: { project?: number }) {
   const chartData =
@@ -68,8 +68,11 @@ function CreditForecast({ project = 1 }: { project?: number }) {
   return (
     <div className="h-[400px] rounded-lg border border-neutral-200 bg-white p-6 pb-20">
       <div className="pb-4">
-        <span className="text-xl font-semibold">
+        <span className="text-xl font-semibold mr-2">
           Realised vs Forecast Credits
+        </span>
+        <span className="text-lg font-normal">
+          (tCO<sub>2</sub>e)
         </span>
       </div>
       <ChartContainer config={chartConfig} className="h-full w-full">
@@ -86,19 +89,19 @@ function CreditForecast({ project = 1 }: { project?: number }) {
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            label={
-              <Text
-                x={0}
-                y={0}
-                dx={-150}
-                dy={20}
-                textAnchor="start"
-                width={180}
-                transform="rotate(-90)"
-              >
-                tCO2e
-              </Text>
-            }
+            // label={
+            //   <Text
+            //     x={0}
+            //     y={0}
+            //     dx={-150}
+            //     dy={20}
+            //     textAnchor="start"
+            //     width={180}
+            //     transform="rotate(-90)"
+            //   >
+            //     tCO2e
+            //   </Text>
+            // }
           />
           <XAxis
             dataKey="year"

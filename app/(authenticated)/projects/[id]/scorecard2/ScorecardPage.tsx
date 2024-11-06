@@ -45,8 +45,8 @@ export default function ScoreCardPage({ id }: { id: string }) {
         setIsOpenSideBarMobile={setIsOpenSideBarMobile}
       />
       <div className="wrapper w-full overflow-scroll">
-        <div className="h-full w-full overflow-auto pt-10">
-          <div className="flex w-full items-center justify-between border-b border-border-default bg-white p-4">
+        <div className="h-full w-full overflow-auto">
+          <div className="flex w-full items-center justify-between border-b border-border-default bg-white p-2">
             <div className="text-sm font-medium text-neutral-900">
               Scorecard
             </div>
