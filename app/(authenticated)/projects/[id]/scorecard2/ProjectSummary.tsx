@@ -9,13 +9,13 @@ const ProjectSummary = ({ benchmarkLayoutVisible }: { readonly benchmarkLayoutVi
     >
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Project Value
-        <p className='pt-2 text-2xl font-medium text-text-primary'>
+        <p className='pt-2 text-2xl font-medium text-primary'>
           8.5M <span className='text-lg font-normal'>USD</span>
         </p>
       </div>
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Carbon Credits
-        <p className='pt-2 text-2xl font-medium text-text-primary'>
+        <p className='pt-2 text-2xl font-medium text-primary'>
           4,784,566{' '}
           <span className='text-lg font-normal'>
             tCO<sub>2</sub>e
@@ -29,23 +29,23 @@ const ProjectSummary = ({ benchmarkLayoutVisible }: { readonly benchmarkLayoutVi
         })}
       >
         Project Lifetime
-        <p className='pt-2 text-2xl font-medium text-text-primary'>
+        <p className='pt-2 text-2xl font-medium text-primary'>
           60 <span className='text-lg font-normal'>Years</span>
         </p>
       </div>
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Project Area
-        <p className='pt-2 text-2xl font-medium text-text-primary'>
+        <p className='pt-2 text-2xl font-medium text-primary'>
           384,566 <span className='text-lg font-normal'>ha</span>
         </p>
       </div>
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Registry status
-        <p className='pt-2 text-2xl font-medium text-text-primary'>Verified</p>
+        <p className='pt-2 text-2xl font-medium text-primary'>Verified</p>
       </div>
       <div className='text-sm text-neutral-500'>
         Project type
-        <p className='pt-2 text-2xl font-medium text-text-primary'>Nature-Based</p>
+        <p className='pt-2 text-2xl font-medium text-primary'>Nature-Based</p>
       </div>
     </div>
   );
