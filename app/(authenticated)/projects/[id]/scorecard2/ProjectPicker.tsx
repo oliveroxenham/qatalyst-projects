@@ -29,7 +29,7 @@ import { useState } from 'react';
 
 const projects = [
   {
-    label: 'Planting Biodiverse Forests in Panama',
+    label: 'The Russas Project',
     value: '1',
   },
   {
@@ -126,6 +126,7 @@ const ProjectPicker = () => {
           carbonCredits: '1,474,189',
           lifetime: '60',
           area: '41,976',
+          status: 'Registered'
         }}
       />
       <SdgSummary />
@@ -154,7 +155,7 @@ const ProjectPicker = () => {
             },
             {
               id: 2,
-              satisfactory: true,
+              satisfactory: false,
               title: 'Gender Equality',
             },
             {
@@ -179,7 +180,7 @@ const ProjectPicker = () => {
             },
             {
               id: 7,
-              satisfactory: true,
+              satisfactory: false,
               title: 'Corruption',
             },
             {

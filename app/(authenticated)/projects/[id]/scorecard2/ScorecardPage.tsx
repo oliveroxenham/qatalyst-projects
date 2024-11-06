@@ -75,6 +75,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
                   carbonCredits: '4,784,566',
                   lifetime: '60',
                   area: '384,566',
+                  status: 'Verified'
                 }}
               />
               <SdgSummary />
@@ -102,7 +103,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
                     },
                     {
                       id: 2,
-                      satisfactory: false,
+                      satisfactory: true,
                       title: 'Gender Equality',
                     },
                     {
@@ -127,7 +128,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
                     },
                     {
                       id: 7,
-                      satisfactory: false,
+                      satisfactory: true,
                       title: 'Corruption',
                     },
                     {
