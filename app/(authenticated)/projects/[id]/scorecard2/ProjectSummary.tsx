@@ -1,6 +1,11 @@
 import { clsx } from 'clsx';
 
-const ProjectSummary = ({ benchmarkLayoutVisible }: { readonly benchmarkLayoutVisible: boolean }) => {
+const ProjectSummary = ({ benchmarkLayoutVisible, data }: { readonly benchmarkLayoutVisible: boolean, data: {
+  value: string;
+  carbonCredits: string;
+  lifetime: string;
+  area: string;
+} }) => {
   return (
     <div
       className={clsx('m-4 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-white p-6', {
@@ -10,13 +15,13 @@ const ProjectSummary = ({ benchmarkLayoutVisible }: { readonly benchmarkLayoutVi
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Project Value
         <p className='pt-2 text-2xl font-medium text-primary'>
-          8.5M <span className='text-lg font-normal'>USD</span>
+          {data.value} <span className='text-lg font-normal'>USD</span>
         </p>
       </div>
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Carbon Credits
         <p className='pt-2 text-2xl font-medium text-primary'>
-          4,784,566{' '}
+          {data.carbonCredits}{' '}
           <span className='text-lg font-normal'>
             tCO<sub>2</sub>e
           </span>
@@ -30,13 +35,13 @@ const ProjectSummary = ({ benchmarkLayoutVisible }: { readonly benchmarkLayoutVi
       >
         Project Lifetime
         <p className='pt-2 text-2xl font-medium text-primary'>
-          60 <span className='text-lg font-normal'>Years</span>
+          {data.lifetime} <span className='text-lg font-normal'>Years</span>
         </p>
       </div>
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>
         Project Area
         <p className='pt-2 text-2xl font-medium text-primary'>
-          384,566 <span className='text-lg font-normal'>ha</span>
+          {data.area} <span className='text-lg font-normal'>ha</span>
         </p>
       </div>
       <div className='border-r border-neutral-200 text-sm text-neutral-500'>

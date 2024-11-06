@@ -64,7 +64,15 @@ export default function ScoreCardPage({ id }: { id: string }) {
               })}
             >
               <ProjectTitle />
-              <ProjectSummary benchmarkLayoutVisible={benchmarkLayoutVisible} />
+              <ProjectSummary
+                benchmarkLayoutVisible={benchmarkLayoutVisible}
+                data={{
+                  value: '8.5M',
+                  carbonCredits: '4,784,566',
+                  lifetime: '60',
+                  area: '384,566',
+                }}
+              />
               <SdgSummary />
               <CreditForecast project={1} />
               <div

@@ -89,7 +89,12 @@ const ProjectPicker = () => {
   return (
     <div>
       <ProjectTitle />
-      <ProjectSummary benchmarkLayoutVisible />
+      <ProjectSummary benchmarkLayoutVisible data={{
+        value: '870,000',
+        carbonCredits: '1,474,189',
+        lifetime: '60',
+        area: '41,976'
+      }} />
       <SdgSummary />
       <CreditForecast project={2} />
       <div
