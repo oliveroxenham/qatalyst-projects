@@ -8,7 +8,6 @@ export default function Projects() {
   return (
     <div>
       <p>Projects</p>
-      <Link href="/projects/Io7hJkUHqEcSdZknSIUT-/scorecard2">Scorecard</Link>
       <Button onClick={() => signOut()}>Sign Out</Button>
     </div>
   );
