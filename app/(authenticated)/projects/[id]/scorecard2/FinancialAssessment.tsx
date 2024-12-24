@@ -78,7 +78,7 @@ import {
 function FinancialAssessment({
   data,
 }: {
-  data: { id: number; title: string; unit: JSX.Element; value: number }[];
+  data: { id: number; title: string; unit: React.ReactElement; value: number }[];
 }) {
   return (
     <div className="rounded-lg border border-neutral-200 bg-white p-6">
