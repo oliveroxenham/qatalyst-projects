@@ -88,10 +88,12 @@ function CountryBilateralAgreement({ project }: { project: number }) {
       <div className="flex flex-col rounded border-neutral-200 p-2">
         <Table>
           <TableHeader className="border-b">
-            <TableCell className="text-neutral-500">
-              Bilateral agreement with
-            </TableCell>
-            <TableCell className="text-neutral-500">MOU</TableCell>
+            <TableRow>
+              <TableCell className="text-neutral-500">
+                Bilateral agreement with
+              </TableCell>
+              <TableCell className="text-neutral-500">MOU</TableCell>
+            </TableRow>
           </TableHeader>
           <TableBody>
             {data.map((item) => (

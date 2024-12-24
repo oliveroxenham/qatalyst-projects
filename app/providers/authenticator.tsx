@@ -29,6 +29,7 @@ function AuthenticatorComponent({ cognitoAuth, children }: {cognitoAuth : {
 
       if (event === 'signedIn') {
         const attributes = await fetchUserAttributes();
+        console.log('user attributes=', attributes);
         // Add user to Datadog session
         datadogRum.setUser({
           email: attributes.email,
@@ -49,7 +50,7 @@ function AuthenticatorComponent({ cognitoAuth, children }: {cognitoAuth : {
       }
     });
     console.log('cognitoAuth', cognitoAuth);
-    Amplify.configure(cognitoAuth);
+    Amplify.configure(cognitoAuth, { ssr: true });
     setLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

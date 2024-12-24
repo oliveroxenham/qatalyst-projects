@@ -100,11 +100,13 @@ function FinancialAssessment({
             ))}
           </TableBody>
           <TableFooter>
-            <TableCell colSpan={3}>
-              <span className="text-xs text-neutral-400">
-                Completed by Kopal on 15 Oct 2024
-              </span>
-            </TableCell>
+            <TableRow>
+              <TableCell colSpan={3}>
+                <span className="text-xs text-neutral-400">
+                  Completed by Kopal on 15 Oct 2024
+                </span>
+              </TableCell>
+            </TableRow>
           </TableFooter>
         </Table>
       </div>

@@ -17,6 +17,7 @@ import { Loading } from '@/components/Loading';
 import { clsx } from 'clsx';
 import { useState } from 'react';
 import SideBar from '@/components/SideBar';
+import Link from 'next/link';
 
 export default function ScoreCardPage({ id }: { id: string }) {
   const [isOpenSideBarMobile, setIsOpenSideBarMobile] =
@@ -50,6 +51,7 @@ export default function ScoreCardPage({ id }: { id: string }) {
             <div className="text-sm font-medium text-neutral-900">
               Scorecard
             </div>
+            <Link href="/projects">Back</Link>
             <Button
               variant="outline"
               onClick={() => setBenchmarkLayoutVisible(!benchmarkLayoutVisible)}
