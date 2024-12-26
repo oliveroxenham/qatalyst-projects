@@ -1,10 +1,8 @@
 'use client';
 
-import { clearCreatedProject } from '@/app/redux/reducers/project.slice';
 import { MenuItem } from '@/app/types/sideBar';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
 import { Tooltip } from 'react-tooltip';
 import Image from 'next/image';
 
@@ -21,7 +19,6 @@ const SideBarItem: React.FC<Props> = ({
   menu,
   title,
 }) => {
-  const dispatch = useDispatch();
 
   return (
     <div className={`${additionStyle} mb-4`}>
@@ -37,7 +34,7 @@ const SideBarItem: React.FC<Props> = ({
               <li
                 onClick={() => {
                   if (title === 'Overview') {
-                    dispatch(clearCreatedProject());
+                    // dispatch(clearCreatedProject());
                   }
                 }}
                 className={clsx(
@@ -70,7 +67,7 @@ const SideBarItem: React.FC<Props> = ({
               <li
                 onClick={() => {
                   if (title === 'Overview') {
-                    dispatch(clearCreatedProject());
+                    // dispatch(clearCreatedProject());
                   }
                 }}
                 className={clsx(

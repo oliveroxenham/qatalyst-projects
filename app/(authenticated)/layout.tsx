@@ -1,15 +1,18 @@
 'use client';
-import store from '../redux/store';
-import { QueryProvider } from '@/app/providers';
-import { Provider } from 'react-redux';
+import { AppSidebar } from '@/components/AppSidebar/app-sidebar';
+import { SidebarInset } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
-const AuthenticatedLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+const AuthenticatedLayout = ({
+  children,
+}: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <div>
-        <Provider store={store}>
-          <QueryProvider>{children}</QueryProvider>
-        </Provider>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <main>{children}</main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
 

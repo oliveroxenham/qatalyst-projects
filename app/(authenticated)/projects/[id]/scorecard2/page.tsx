@@ -4,7 +4,6 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import ScoreCardPage from './ScorecardPage';
-import { fetchAuthSession } from 'aws-amplify/auth';
 
 export default async function ScorecardPageSC({
   params,
@@ -16,18 +15,13 @@ export default async function ScorecardPageSC({
   const apiUrl = process.env.API_URL!;
   console.log('[SERVER]: apiUrl=', apiUrl);
 
-  const session = await fetchAuthSession();
-  const idToken = session.tokens?.idToken;
-
-  console.log('[SERVER]: idToken=', idToken);
-
   await queryClient.prefetchQuery({
     queryKey: [`/projects/${id}`],
     queryFn: async () => {
       console.log(`[SERVER] fetching ${apiUrl}/api/projects/${id}`);
       const response = await fetch(`/api/projects/${id}`, {
         headers: {
-          Authorization: `Bearer ${idToken}`,
+          Authorization: `Bearer <ID_TOKEN>`,
           'Content-Type': 'application/json',
           'ngrok-skip-browser-warning': 'test',      
         }
