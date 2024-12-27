@@ -13,10 +13,10 @@ import {
   SidebarMenuItem,
   SidebarRail,
   SidebarSeparator,
-  // useSidebar,
+  useSidebar,
 } from '@/components/ui/sidebar';
-// import Logo from '@/public/icons/logo.svg';
-// import Qatalyst from '@/public/icons/qatalyst.svg';
+import Logo from '@/public/icons/logo.svg';
+import Qatalyst from '@/public/icons/qatalyst.svg';
 import {
   BookCopy,
   ChartNoAxesCombined,
@@ -158,7 +158,7 @@ const getProjectPathUrl = (url: string, projectId?: string) => {
 
 export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   const pathname = usePathname();
-  // const { open } = useSidebar();
+  const { open } = useSidebar();
   const currentUser = { name: 'Oliver Oxenham', email: 'oliver.oxenham@qatalystcarbon.com', avatar: '' };
   const nonProjectPaths = data.overview.map((item) => item.url);
   const splitPathname = pathname.split('/');
@@ -168,7 +168,7 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
       <SidebarHeader>
         <div className='py-2'>
           <Link href='/projects'>
-            {/* {open ? <Qatalyst className='ml-2 max-w-full fill-slate-50' /> : <Logo className='ml-2 fill-slate-50' />} */}
+            {open ? <Qatalyst className='ml-2 max-w-full fill-slate-50' /> : <Logo className='ml-2 fill-slate-50' />}
           </Link>
         </div>
       </SidebarHeader>
