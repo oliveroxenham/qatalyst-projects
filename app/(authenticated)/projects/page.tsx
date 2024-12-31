@@ -1,13 +1,13 @@
 'use client';
 import { TopBar } from '@/components/TopBar/TopBar';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Plus } from 'lucide-react';
+import { Plus, ListFilter } from 'lucide-react';
 import ReactCountryFlag from 'react-country-flag';
+import { SecondaryTopBar } from '@/components/SecondaryTopBar/SecondaryTopBar';
 
 function ProjectCard() {
   return (
-    <div className="border rounded-lg p-4 hover:border-neutral-500 group">
+    <div className="border rounded-lg p-4 bg-white hover:border-neutral-500 group">
       <div className="flex gap-2 items-start mb-2">
         <ReactCountryFlag countryCode="US" svg className="mt-[2px]" />
         <span className="text-sm line-clamp-2">Project Title</span>
@@ -58,7 +58,10 @@ function ProjectCard() {
         <div className="rounded-full w-6 h-6 bg-neutral-300"></div>
       </div>
 
-      <Button className="w-full group-hover:bg-neutral-800 group-hover:text-white" variant="secondary">
+      <Button
+        className="w-full group-hover:bg-neutral-800 group-hover:text-white"
+        variant="secondary"
+      >
         Open Project
       </Button>
     </div>
@@ -77,10 +80,14 @@ export default function Projects() {
         </div>
       </TopBar>
       <div className="p-2">
-        <div className="my-2">
-          <p className="font-semibold">Projects</p>
-        </div>
-        <Separator />
+        <SecondaryTopBar title="Projects">
+          <div>
+            <Button variant="secondary">
+              <ListFilter />
+              Filters
+            </Button>
+          </div>
+        </SecondaryTopBar>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
           <ProjectCard />
           <ProjectCard />

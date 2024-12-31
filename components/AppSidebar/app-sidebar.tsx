@@ -37,6 +37,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
+import pkgjson from '@/package.json';
 
 const data = {
   overview: [
@@ -156,20 +157,33 @@ const getProjectPathUrl = (url: string, projectId?: string) => {
   }
 };
 
-export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+export const AppSidebar = ({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) => {
   const pathname = usePathname();
   const { open } = useSidebar();
-  const currentUser = { name: 'Oliver Oxenham', email: 'oliver.oxenham@qatalystcarbon.com', avatar: '' };
+  const currentUser = {
+    name: 'Oliver Oxenham',
+    email: 'oliver.oxenham@qatalystcarbon.com',
+    avatar: '',
+  };
   const nonProjectPaths = data.overview.map((item) => item.url);
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
   return (
-    <Sidebar collapsible='icon' {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <div className='py-2'>
-          <Link href='/projects'>
-            {open ? <Qatalyst className='ml-2 max-w-full fill-slate-50' /> : <Logo className='ml-2 fill-slate-50' />}
+        <div className="py-2">
+          <Link href="/projects">
+            {open ? (
+              <Qatalyst className="ml-2 max-w-full fill-slate-50" />
+            ) : (
+              <Logo className="ml-2 fill-slate-50" />
+            )}
           </Link>
+          <div className={open ? 'text-left ml-3' : 'text-center'}>
+            <span className="text-xs text-neutral-500">{pkgjson.version}</span>
+          </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -177,44 +191,46 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
           <SidebarGroupLabel>Overview</SidebarGroupLabel>
           <SidebarMenu>
             {data.overview.map((item) => (
-              <SidebarMenuItem key={item.key} className='pl-2'>
+              <SidebarMenuItem key={item.key} className="pl-2">
                 <SidebarMenuButton
                   asChild
                   isActive={pathname === item.url}
                   tooltip={item.name}
-                  className='hover:bg-blaze-orange-600'
+                  className="hover:bg-blaze-orange-600"
                 >
                   <Link href={item.url}>
                     <item.icon />
-                    <span className='text-xs'>{item.name}</span>
+                    <span className="text-xs">{item.name}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
         </SidebarGroup>
-        <SidebarSeparator className='opacity-50' />
+        <SidebarSeparator className="opacity-50" />
         {!nonProjectPaths.includes(pathname) && (
           <SidebarGroup>
             <SidebarGroupLabel>Projects</SidebarGroupLabel>
             <SidebarMenu>
               {data.projects.map((item) => (
-                <SidebarMenuItem key={item.key} className='pl-2'>
+                <SidebarMenuItem key={item.key} className="pl-2">
                   {item.disabled ? (
-                    <SidebarMenuButton className='cursor-not-allowed text-xs text-disabled/60 hover:bg-disabled/20 hover:text-white/50'>
+                    <SidebarMenuButton className="cursor-not-allowed text-xs text-disabled/60 hover:bg-disabled/20 hover:text-white/50">
                       <item.icon /> {item.name}
                     </SidebarMenuButton>
                   ) : (
                     <SidebarMenuButton
                       asChild
                       disabled={item.disabled}
-                      className='hover:bg-blaze-orange-600'
-                      isActive={pathname === getProjectPathUrl(item.url, projectId)}
+                      className="hover:bg-blaze-orange-600"
+                      isActive={
+                        pathname === getProjectPathUrl(item.url, projectId)
+                      }
                       tooltip={item.name}
                     >
                       <Link href={getProjectPathUrl(item.url, projectId)}>
                         <item.icon />
-                        <span className='text-xs'>{item.name}</span>
+                        <span className="text-xs">{item.name}</span>
                       </Link>
                     </SidebarMenuButton>
                   )}
@@ -224,8 +240,10 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
           </SidebarGroup>
         )}
       </SidebarContent>
-      <div className='flex w-full items-center justify-center'>
-        <SidebarFooter>{currentUser ? <NavUser user={currentUser} /> : null}</SidebarFooter>
+      <div className="flex w-full items-center justify-center">
+        <SidebarFooter>
+          {currentUser ? <NavUser user={currentUser} /> : null}
+        </SidebarFooter>
       </div>
       <SidebarRail />
     </Sidebar>

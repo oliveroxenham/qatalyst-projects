@@ -9,7 +9,7 @@ const AuthenticatedLayout = ({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className='bg-neutral-100'>
         <main>{children}</main>
       </SidebarInset>
     </SidebarProvider>
