@@ -1,15 +1,10 @@
 import { TopBar } from '@/components/TopBar/TopBar';
 import { Button } from '@/components/ui/button';
 import { Plus, ListFilter } from 'lucide-react';
-import { SecondaryTopBar } from '@/components/SecondaryTopBar/SecondaryTopBar';
 import { ProjectCard } from '@/components/ProjectCard/ProjectCard';
+import { SecondaryTopBar } from '@/components/SecondaryTopBar/SecondaryTopBar';
 
-export default async function Projects() {
-  await new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve()
-    }, 2000);
-  })
+export default function Projects() {
   return (
     <div>
       <TopBar title="My Workspace">
@@ -30,12 +25,10 @@ export default async function Projects() {
           </div>
         </SecondaryTopBar>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
+          <ProjectCard loading />
+          <ProjectCard loading />
+          <ProjectCard loading />
+          <ProjectCard loading />
         </div>
       </div>
     </div>
