@@ -64,13 +64,16 @@ export default function DashboardPage() {
 
       <div className="m-2 grid lg:grid-cols-2 grid-cols-1 gap-2">
         <div className="bg-white rounded-lg p-4 shadow">
-          <span>
-            Projects by Geographic Distribution
-          </span>
+          <span>Projects by Geographic Distribution</span>
           <WorldMap />
-          
         </div>
-        <div className="bg-white rounded-lg p-4 shadow">Annual Carbon Credit Issuance</div>
+        <div className="bg-white rounded-lg p-4 shadow">
+          Annual Carbon Credit Issuance
+        </div>
+      </div>
+
+      <div className="absolute top-0 bottom-0 left-0 right-0 bg-neutral-200 opacity-70 flex items-center justify-center">
+        <span className='text-black text-xl'>The dashboard can be easily tailored to each user’s preferences.</span>
       </div>
     </div>
   );
