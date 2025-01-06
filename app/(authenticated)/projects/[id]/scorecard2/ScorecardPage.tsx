@@ -1,6 +1,6 @@
 'use client';
 
-import useProject from '@/app/hooks/useProject';
+// import useProject from '@/app/hooks/useProject';
 import Map from './map';
 import CountryBilateralAgreement from './CountryBilateralAgreement';
 import CreditForecast from './CreditForecast';
@@ -13,37 +13,37 @@ import ProjectTitle from './ProjectTitle';
 import RevenueForecast from './RevenueForecast';
 import SdgSummary from './SdgSummary';
 import { Button } from '@/components/ui/button';
-import { Loading } from '@/components/Loading';
+// import { Loading } from '@/components/Loading';
 import { clsx } from 'clsx';
 import { useState } from 'react';
 import SideBar from '@/components/SideBar';
 import Link from 'next/link';
 
-export default function ScoreCardPage({ id }: { id: string }) {
-  const [isOpenSideBarMobile, setIsOpenSideBarMobile] =
-    useState<boolean>(false);
+export default function ScoreCardPage() {
+  // const [isOpenSideBarMobile, setIsOpenSideBarMobile] =
+  //   useState<boolean>(false);
   const [benchmarkLayoutVisible, setBenchmarkLayoutVisible] = useState(false);
-  const { data, error, isPending } = useProject(id);
+  // const { data, error, isPending } = useProject(id);
 
-  if (isPending) {
-    return (
-      <div className="flex w-full justify-center p-4">
-        <Loading />
-      </div>
-    );
-  }
+  // if (isPending) {
+  //   return (
+  //     <div className="flex w-full justify-center p-4">
+  //       <Loading />
+  //     </div>
+  //   );
+  // }
 
-  if (error) {
-    return 'An error has occurred: ' + error.message;
-  }
+  // if (error) {
+  //   return 'An error has occurred: ' + error.message;
+  // }
 
-  console.log('data=', data);
+  // console.log('data=', data);
 
   return (
     <div className="flex flex-row bg-neutral-100">
       <SideBar
-        isOpenSideBarMobile={isOpenSideBarMobile}
-        setIsOpenSideBarMobile={setIsOpenSideBarMobile}
+        // isOpenSideBarMobile={isOpenSideBarMobile}
+        // setIsOpenSideBarMobile={setIsOpenSideBarMobile}
       />
       <div className="wrapper w-full overflow-scroll">
         <div className="h-full w-full overflow-auto">

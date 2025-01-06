@@ -2,9 +2,9 @@
 
 import './sidebar.css';
 import SideBarItem from './SideBar/SideBarItem';
-import useDevice from '@/app/hooks/useDevice';
+// import useDevice from '@/app/hooks/useDevice';
 import { Menu } from '@/app/types/sideBar';
-import Close from '../../public/icons/close.svg';
+// import Close from '../../public/icons/close.svg';
 import IconSidebarAIEstimator from '../../public/icons/icon-sidebar-ai-estimator.svg';
 import IconSidebarBenchmark from '../../public/icons/icon-sidebar-benchmark.svg';
 import IconSidebarCollapse from '../../public/icons/icon-sidebar-collapse.svg';
@@ -29,23 +29,24 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export type Props = {
-  isOpenSideBarMobile: boolean;
+  // isOpenSideBarMobile: boolean;
   projectId?: string;
-  setIsOpenSideBarMobile: (value: boolean) => void;
+  // setIsOpenSideBarMobile: (value: boolean) => void;
   showProjectLinks?: boolean;
 };
 
 const SideBar: React.FC<Props> = ({
-  isOpenSideBarMobile,
+  // isOpenSideBarMobile,
   projectId,
-  setIsOpenSideBarMobile,
+  // setIsOpenSideBarMobile,
   showProjectLinks = false,
 }) => {
   const router = useRouter();
   const currentPage = usePathname();
-  const { isMobileView } = useDevice();
+  // const { isMobileView } = useDevice();
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [isExpandedTemporary, setIsExpandedTemporary] = useState<boolean>(false);
+  const [isExpandedTemporary, setIsExpandedTemporary] =
+    useState<boolean>(false);
 
   const goHome = () => {
     router.push(`/projects`);
@@ -55,9 +56,9 @@ const SideBar: React.FC<Props> = ({
     setIsExpanded(!isExpanded);
   };
 
-  const onClose = () => {
-    setIsOpenSideBarMobile(false);
-  };
+  // const onClose = () => {
+  //   setIsOpenSideBarMobile(false);
+  // };
 
   const menu: Menu = {
     help: [
@@ -177,43 +178,63 @@ const SideBar: React.FC<Props> = ({
     <aside
       onMouseEnter={onHoverEnter}
       onMouseLeave={onHoverLeave}
-      className={`${!isOpenSideBarMobile && 'hidden'} ${isExpanded && 'sidebar-expanded'} sidebar absolute inset-y-0 left-0 z-50 transform md:sticky md:flex md:translate-x-0 md:flex-col md:justify-between`}
+      // className={`${!isOpenSideBarMobile && 'hidden'} ${
+      //   isExpanded && 'sidebar-expanded'
+      // } sidebar absolute inset-y-0 left-0 z-50 transform md:sticky md:flex md:translate-x-0 md:flex-col md:justify-between`}
     >
-      <nav className='sticky top-0 z-50 flex h-full flex-col'>
-        <div className=''>
-          {isMobileView ? (
-            <button className={`${(isExpanded || isExpandedTemporary) && 'mt-6'}`} onClick={onClose} type='submit'>
-              <Close width={24} height={24} color='#E5E7EB' />
-            </button>
-          ) : (
-            <div className='m-5 flex flex-row items-center justify-between gap-3'>
-              <div onClick={goHome} className='cursor-pointer'>
-                {isExpanded || isExpandedTemporary ? (
-                  <Image src={Qatalyst} alt='Qatalyst' width={128} height={32} className="stroke-white" />
-                ) : (
-                  <Image src={Logo} alt='Qatalyst' width={35} height={35} />
-                )}
-              </div>
-              <div onClick={onExpandSidebar} className='cursor-pointer'>
-                {isExpanded ? (
-                  <Image src={IconSidebarCollapse} alt='Collapse' width={26} height={26} />
-                ) : isExpandedTemporary ? (
-                  <Image src={IconSidebarExpand} alt='Expand' width={26} height={26} />
-                ) : null}
-              </div>
+      <nav className="sticky top-0 z-50 flex h-full flex-col">
+        <div className="">
+          <div className="m-5 flex flex-row items-center justify-between gap-3">
+            <div onClick={goHome} className="cursor-pointer">
+              {isExpanded || isExpandedTemporary ? (
+                <Image
+                  src={Qatalyst}
+                  alt="Qatalyst"
+                  width={128}
+                  height={32}
+                  className="stroke-white"
+                />
+              ) : (
+                <Image src={Logo} alt="Qatalyst" width={35} height={35} />
+              )}
             </div>
-          )}
+            <div onClick={onExpandSidebar} className="cursor-pointer">
+              {isExpanded ? (
+                <Image
+                  src={IconSidebarCollapse}
+                  alt="Collapse"
+                  width={26}
+                  height={26}
+                />
+              ) : isExpandedTemporary ? (
+                <Image
+                  src={IconSidebarExpand}
+                  alt="Expand"
+                  width={26}
+                  height={26}
+                />
+              ) : null}
+            </div>
+          </div>
         </div>
-        <div className='mx-2 h-full overflow-y-auto pt-2'>
-          <SideBarItem currentPage={currentPage} menu={menu?.overview} title='Overview' />
+        <div className="mx-2 h-full overflow-y-auto pt-2">
+          <SideBarItem
+            currentPage={currentPage}
+            menu={menu?.overview}
+            title="Overview"
+          />
           {showProjectLinks && (
-            <div className='border-t border-gray-700 pt-4'>
-              <SideBarItem currentPage={currentPage} menu={menu?.project} title='Project' />
+            <div className="border-t border-gray-700 pt-4">
+              <SideBarItem
+                currentPage={currentPage}
+                menu={menu?.project}
+                title="Project"
+              />
             </div>
           )}
         </div>
         <div>
-          <div className='mb-2 border-t border-gray-700' />
+          <div className="mb-2 border-t border-gray-700" />
           <SideBarItem currentPage={currentPage} menu={menu?.help} />
         </div>
       </nav>

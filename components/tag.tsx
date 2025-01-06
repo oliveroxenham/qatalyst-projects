@@ -11,7 +11,7 @@ export function Tag({
   size: string;
   className?: string;
 }) {
-  let cn = clsx({
+  const cn = clsx({
     'text-xs': size.toUpperCase() === 'SMALL',
     'text-md': size.toUpperCase() === 'MEDIUM',
     'text-lg': size.toUpperCase() === 'LARGE',
