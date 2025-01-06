@@ -221,6 +221,19 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
+        branding: {
+          green: {
+            '50': '#EDF9F5',
+            '100': '#D2F3EB',
+            '200': '#B0EADD',
+            '300': '#90E5D6',
+            '400': '#5EDFCF',
+            '500': '#32C1B3',
+            '600': '#00938C',
+            '700': '#116861',
+            '800': '#0A6059',
+          },
+        },
 				emerald: {
           '50': '#e6f4ef',
           '100': '#d4f5ed',
@@ -233,6 +246,10 @@ const config: Config = {
           '800': '#0a6059',
           '900': '#1b4542',
           '950': '#022c21',
+        },
+        glacier: {
+          '400': '#589CB8',
+          '500': '#3D809D',
         },
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
