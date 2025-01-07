@@ -167,7 +167,7 @@ export const AppSidebar = ({
     email: 'oliver.oxenham@qatalystcarbon.com',
     avatar: '',
   };
-  const nonProjectPaths = data.overview.map((item) => item.url);
+  const nonProjectPaths = data.overview.map((item) => item.url).join('/new');
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
   return (

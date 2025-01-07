@@ -1,6 +1,6 @@
 import { TopBar } from '@/components/TopBar/TopBar';
 import { Button } from '@/components/qbutton';
-import { Plus } from 'lucide-react';
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 
@@ -11,14 +11,15 @@ export default async function ProjectsLayout({
 }) {
   return (
     <div>
-      <TopBar title="My Workspace">
-        <div className="flex justify-end items-center w-full gap-2">
-          <Link href="/new">
-            <Button variant="primary" size="small">
-              <Plus className="w-6 h-6" />
-              Create
-            </Button>
-          </Link>
+      <TopBar title="Create a new project">
+        <div className="flex flex-row items-center justify-between w-full">
+          <div className="flex items-center gap-2">
+            <Link href="/projects">
+              <Button variant="secondary" size="small">
+                <X className="w-6 h-6" />
+              </Button>
+            </Link>
+          </div>
           <ThemeSwitcher />
         </div>
       </TopBar>
