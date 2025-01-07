@@ -7,15 +7,14 @@ import Link from 'next/link';
 export function ProjectCard({ loading }: { loading?: boolean }) {
   if (loading) {
     return (
-      <div className="flex flex-col border rounded-lg p-4 bg-white w-[344px] h-[550px] gap-2">
-        <Skeleton className="flex-grow h-[100px] rounded-sm" />
+      <div className="flex flex-col border rounded-lg p-4 bg-white w-[344px] h-[490px] gap-2 shadow-md">
+        <Skeleton className="h-[145px] rounded-sm" />
         <Skeleton className="flex-grow h-[210px] rounded-sm" />
-        <Skeleton className="flex-grow rounded-sm" />
       </div>
     );
   }
   return (
-    <Link className="border rounded-lg bg-white w-[344px] hover:border-neutral-500 group hover:cursor-pointer" href="/id/{project_id}">
+    <Link className="group border rounded-lg shadow bg-white w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg" href="/id/{project_id}">
       <div className="flex-grow bg-neutral-300 h-[161px] rounded-t-lg" />
       <div className="p-4">
         <div className="">
