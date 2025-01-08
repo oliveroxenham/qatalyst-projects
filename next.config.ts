@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'v3jxx0dboaeguwsf.public.blob.vercel-storage.com',
+      },
+    ],
+  },
   experimental: {
     turbo: {
       rules: {

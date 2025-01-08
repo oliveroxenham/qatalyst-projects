@@ -6,7 +6,6 @@ export default function ProjectsLoadingPage() {
       <ProjectCard loading />
       <ProjectCard loading />
       <ProjectCard loading />
-      <ProjectCard loading />
     </div>
   );
 }

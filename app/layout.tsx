@@ -1,7 +1,8 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/nextjs';
-import { CSPostHogProvider } from '@/providers/ph-provider';
+import Providers from '@/providers/providers';
 import './globals.css';
-import { ThemeProvider } from '@/providers/theme-provider';
+
 export default function RootLayout({
   children,
 }: {
@@ -9,11 +10,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className="w-full min-h-screen">
-          <ThemeProvider
+          <Providers
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
@@ -22,10 +23,11 @@ export default function RootLayout({
                 {children}
               </div>
             </SignedOut>
-            <SignedIn>
-              <CSPostHogProvider>{children}</CSPostHogProvider>
-            </SignedIn>
-          </ThemeProvider>
+            <SignedIn>{children}</SignedIn>
+            {process.env.NODE_ENV === 'development' && (
+              <ReactQueryDevtools initialIsOpen={false} />
+            )}
+          </Providers>
         </body>
       </html>
     </ClerkProvider>

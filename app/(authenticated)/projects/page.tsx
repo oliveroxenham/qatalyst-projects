@@ -1,22 +1,21 @@
-import { ProjectCard } from '@/components/ProjectCard/ProjectCard';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
+import { ProjectList } from './projectList';
+import { getProjects } from '@/server/db';
 
 export default async function ProjectsPage() {
-  await new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 2000);
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects,
   });
   return (
-    <div className="flex flex-wrap gap-4">
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ProjectList />
+    </HydrationBoundary>
   );
 }
