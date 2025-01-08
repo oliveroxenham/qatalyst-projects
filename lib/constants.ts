@@ -1,1 +1,1 @@
-export const PROJECTS_API_URL = '/api/projects';
+export const GET_PROJECTS_URL = '/api/projects/get';

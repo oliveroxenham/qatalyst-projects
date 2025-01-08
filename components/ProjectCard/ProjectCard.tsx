@@ -41,13 +41,14 @@ export function ProjectCard({
           ))}
         </div>
 
-        <div className="flex gap-2 items-start my-4">
+        <div className="flex gap-2 items-center my-4">
           <ReactCountryFlag
             countryCode={data.country}
             svg
+            className='bg-white rounded-full border border-neutral-400'
             style={{
-              width: 20,
-              height: 20,
+              width: 24,
+              height: 24
             }}
           />
           <span className="text-sm">{data.countryName}</span>

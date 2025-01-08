@@ -5,6 +5,7 @@ import { Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/qbutton';
 import { clsx } from 'clsx';
+import { importProject } from '@/server/actions';
 const NATURE_BASED = 0,
   COOKSTOVE = 1,
   OTHER = 2,
@@ -167,7 +168,7 @@ export default function NewProjectPage() {
                 1678
               </Badge>
               {typeof selectedProjectId !== 'undefined' && (
-                <Button size="small" variant="secondary">Import</Button>
+                <Button size="small" variant="secondary" onClick={importProject}>Import</Button>
               )}
             </div>
           </div>

@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation';
 
-const Home = () => {
+export default async function HomePage() {
   // NOTE: this page.tsx is kept in order to later load unauthenticated content.
-  redirect('/projects');
-};
-
-export default Home;
+  await fetch(`${process.env.BASE_URL}/api/projects/reset`, {
+    method: 'POST',
+  }).then(redirect('/projects'));
+  return null;
+}
