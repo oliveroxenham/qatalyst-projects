@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis';
 import { NextResponse } from 'next/server';
-import { getInitialMockProjects } from '@/mock/data';
+import { getInitialMockProjects, getDocuments } from '@/mock/data';
 
 const redis = Redis.fromEnv();
 
@@ -8,6 +8,7 @@ export async function POST() {
   try {
     await redis.del('projects');
     await redis.set('projects', getInitialMockProjects());
+    await redis.set('documents', getDocuments());
 
     return NextResponse.json(
       { message: 'Data reset successful' },

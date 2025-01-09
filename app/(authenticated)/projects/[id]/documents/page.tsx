@@ -1,24 +1,24 @@
-import { Button } from '@/components/qbutton';
-import { ThemeSwitcher } from '@/components/theme-switcher';
-import { TopBar } from '@/components/TopBar/TopBar';
-import { Upload } from 'lucide-react';
-import Link from 'next/link';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
+import { getDocumentsServer } from '@/server/db';
+import DocumentList from './document-list';
 
-export default function DocumentsPage() {
+export default async function DocumentsPage() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['documents'],
+    queryFn: getDocumentsServer,
+  });
+
   return (
-    <div>
-      <TopBar title="Documents">
-        <div className="flex justify-end items-center w-full gap-2">
-          <Link href="/new">
-            <Button variant="primary" size="small">
-              <Upload className="w-6 h-6" />
-              Upload
-            </Button>
-          </Link>
-          <ThemeSwitcher />
-        </div>
-      </TopBar>
-      <div className="p-4 flex justify-center"></div>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="w-full bg-white border border-neutral-200 rounded-sm">
+        <DocumentList />
+      </div>
+    </HydrationBoundary>
   );
 }

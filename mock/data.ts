@@ -4,7 +4,7 @@ export function getInitialMockProjects() {
       id: 1,
       imgUrl:
         'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img1-cR4Tlqih35QOMhPnC8AIH1BYoqRqPC.png',
-      title: 'Forest Conservation Project', 
+      title: 'Forest Conservation Project',
       country: 'US',
       countryName: 'United States',
       lastUpdated: 'Jan 4, 2022',
@@ -18,7 +18,7 @@ export function getInitialMockProjects() {
       owner: 'Kopal Agarwal',
       financialStatus: 'In Progress',
       financialProgress: 50,
-      esgStatus: 'Not Started', 
+      esgStatus: 'Not Started',
       esgProgress: 25,
       kycStatus: 'In Progress',
       kycProgress: 75,
@@ -41,7 +41,7 @@ export function getInitialMockProjects() {
       owner: 'John Smith',
       financialStatus: 'In Progress',
       financialProgress: 50,
-      esgStatus: 'Not Started', 
+      esgStatus: 'Not Started',
       esgProgress: 25,
       kycStatus: 'Eligible',
       kycProgress: 100,
@@ -64,7 +64,7 @@ export function getInitialMockProjects() {
       owner: 'Maria Santos',
       financialStatus: 'In Progress',
       financialProgress: 50,
-      esgStatus: 'Not Started', 
+      esgStatus: 'Not Started',
       esgProgress: 25,
       kycStatus: 'In Progress',
       kycProgress: 50,
@@ -91,9 +91,24 @@ export function importProject() {
     owner: 'Yuki Tanaka',
     financialStatus: 'In Progress',
     financialProgress: 50,
-    esgStatus: 'Not Started', 
+    esgStatus: 'Not Started',
     esgProgress: 25,
     kycStatus: 'In Progress',
     kycProgress: 85,
-};
+  };
+}
+
+export function getDocuments() {
+  return [
+    {
+      id: 1,
+      type: 'pdf',
+      name: 'PROJ_DESC_1650_29DEC2014.pdf',
+      status: 'Ready',
+      size: '8MB',
+      source: 'Verra',
+      date: 'October 16, 2024',
+      lastActivity: 'Kopal imported file',
+    },
+  ];
 }
