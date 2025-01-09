@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis';
 import { NextResponse } from 'next/server';
-import type { Project } from '@/app/types/project';
+import type { Project } from '@/types/project';
 import { getInitialMockProjects, importProject } from '@/mock/data';
 
 const redis = Redis.fromEnv();

@@ -4,7 +4,8 @@ import ReactCountryFlag from 'react-country-flag';
 import { Separator } from '../ui/separator';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Project } from '@/app/types/project';
+import type { Project } from '@/types/project';
+import { Progress } from '../ui/progress';
 
 export function ProjectCard({
   loading,
@@ -27,7 +28,13 @@ export function ProjectCard({
       href="/id/{project_id}"
     >
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>
-        <Image src={data.imgUrl} alt={data.title} width={344} height={161} className="rounded-t-lg" />
+        <Image
+          src={data.imgUrl}
+          alt={data.title}
+          width={344}
+          height={161}
+          className="rounded-t-lg"
+        />
       </div>
       <div className="p-4">
         <div className="">
@@ -45,10 +52,10 @@ export function ProjectCard({
           <ReactCountryFlag
             countryCode={data.country}
             svg
-            className='bg-white rounded-full border border-neutral-400'
+            className="bg-white rounded-full border border-neutral-400"
             style={{
               width: 24,
-              height: 24
+              height: 24,
             }}
           />
           <span className="text-sm">{data.countryName}</span>
@@ -72,14 +79,15 @@ export function ProjectCard({
             <Tag
               size="small"
               type="manual"
-              className="flex flex-row items-center gap-1"
+              className="flex flex-row items-center gap-1 w-1/2"
             >
               <div className="h-1 w-1 rounded-full bg-orange-500" />
-              In progress
+              {data.financialStatus}
             </Tag>
-            <div className="grow h-1 w-fit rounded-md bg-neutral-200">
-              <div className="w-1/2 bg-gradient-to-r from-branding-green-500 to-branding-green-800 h-1 rounded-md"></div>
-            </div>
+            <Progress
+              value={data.financialProgress ? data.financialProgress : 0}
+              className="w-1/2"
+            />{' '}
           </div>
           <div>
             <span className="text-xs">ESG</span>
@@ -88,14 +96,15 @@ export function ProjectCard({
             <Tag
               size="small"
               type="manual"
-              className="flex flex-row items-center gap-1"
+              className="flex flex-row items-center gap-1 w-1/2"
             >
               <div className="h-1 w-1 rounded-full bg-neutral-500" />
-              Not Started
+              {data.esgStatus}
             </Tag>
-            <div className="grow h-1 w-fit rounded-md bg-neutral-200">
-              <div className="w-0 bg-gradient-to-r from-branding-green-500 to-branding-green-800 h-1 rounded-md"></div>
-            </div>
+            <Progress
+              value={data.esgProgress ? data.esgProgress : 0}
+              className="w-1/2"
+            />
           </div>
           <div>
             <span className="text-xs">KYC</span>
@@ -105,14 +114,15 @@ export function ProjectCard({
             <Tag
               size="small"
               type="manual"
-              className="flex flex-row items-center gap-1"
+              className="flex flex-row items-center gap-1 w-1/2"
             >
               <div className="h-1 w-1 rounded-full bg-orange-500" />
-              Eligible
+              {data.kycStatus}
             </Tag>
-            <div className="grow h-1 w-fit rounded-md bg-neutral-200">
-              <div className="w-1/2 bg-gradient-to-r from-branding-green-500 to-branding-green-800 h-1 rounded-md"></div>
-            </div>
+            <Progress
+              value={data.kycProgress ? data.kycProgress : 0}
+              className="w-1/2"
+            />
           </div>
         </div>
       </div>

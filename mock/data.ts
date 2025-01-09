@@ -4,7 +4,7 @@ export function getInitialMockProjects() {
       id: 1,
       imgUrl:
         'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img1-cR4Tlqih35QOMhPnC8AIH1BYoqRqPC.png',
-      title: 'Forest Conservation Project',
+      title: 'Forest Conservation Project', 
       country: 'US',
       countryName: 'United States',
       lastUpdated: 'Jan 4, 2022',
@@ -16,6 +16,12 @@ export function getInitialMockProjects() {
         { value: 'Verified', type: 'MANUAL' },
       ],
       owner: 'Kopal Agarwal',
+      financialStatus: 'In Progress',
+      financialProgress: 50,
+      esgStatus: 'Not Started', 
+      esgProgress: 25,
+      kycStatus: 'In Progress',
+      kycProgress: 75,
     },
     {
       id: 2,
@@ -33,6 +39,12 @@ export function getInitialMockProjects() {
         { value: 'Verified', type: 'MANUAL' },
       ],
       owner: 'John Smith',
+      financialStatus: 'In Progress',
+      financialProgress: 50,
+      esgStatus: 'Not Started', 
+      esgProgress: 25,
+      kycStatus: 'Eligible',
+      kycProgress: 100,
     },
     {
       id: 3,
@@ -50,6 +62,12 @@ export function getInitialMockProjects() {
         { value: 'In Progress', type: 'MANUAL' },
       ],
       owner: 'Maria Santos',
+      financialStatus: 'In Progress',
+      financialProgress: 50,
+      esgStatus: 'Not Started', 
+      esgProgress: 25,
+      kycStatus: 'In Progress',
+      kycProgress: 50,
     },
   ];
 }
@@ -71,5 +89,11 @@ export function importProject() {
       { value: 'Verified', type: 'MANUAL' },
     ],
     owner: 'Yuki Tanaka',
-  };
+    financialStatus: 'In Progress',
+    financialProgress: 50,
+    esgStatus: 'Not Started', 
+    esgProgress: 25,
+    kycStatus: 'In Progress',
+    kycProgress: 85,
+};
 }

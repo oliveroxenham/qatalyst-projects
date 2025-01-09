@@ -37,7 +37,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import pkgjson from '@/package.json';
-import type { User } from '@/app/types/user';
+import type { User } from '@/types/user';
 
 const data = {
   overview: [

@@ -17,7 +17,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { useClerk } from '@clerk/nextjs';
-import type { User } from '@/app/types/user';
+import type { User } from '@/types/user';
 import { resetAppState } from '@/server/actions';
 import { Bell, ChevronsUpDown, LogOut, RotateCcw } from 'lucide-react';
 

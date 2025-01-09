@@ -1,7 +1,7 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import type { Project } from '@/app/types/project';
+import type { Project } from '@/types/project';
 import { getProjectsClient } from '@/server/db';
 import { ProjectCard } from '@/components/ProjectCard/ProjectCard';
 

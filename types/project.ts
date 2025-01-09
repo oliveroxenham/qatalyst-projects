@@ -11,5 +11,11 @@ export type Project = {
   countryName: string,
   tags: Tag[],
   owner: string
-  lastUpdated: string
+  lastUpdated: string,
+  financialStatus: string,
+  financialProgress: number,
+  esgStatus: string,
+  esgProgress: number,
+  kycStatus: string,
+  kycProgress: number
 };
