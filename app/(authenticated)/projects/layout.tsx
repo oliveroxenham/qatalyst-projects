@@ -22,7 +22,7 @@ export default async function ProjectsLayout({
           <ThemeSwitcher />
         </div>
       </TopBar>
-      <div className="p-4">{children}</div>
+      <div className="p-4 flex justify-center">{children}</div>
     </div>
   );
 }

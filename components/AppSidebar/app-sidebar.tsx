@@ -1,5 +1,4 @@
 'use client';
-
 import { NavUser } from '@/components/AppSidebar/nav-user';
 import {
   Sidebar,
@@ -38,6 +37,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import pkgjson from '@/package.json';
+import type { User } from '@/app/types/user';
 
 const data = {
   overview: [
@@ -158,15 +158,11 @@ const getProjectPathUrl = (url: string, projectId?: string) => {
 };
 
 export const AppSidebar = ({
+  user,
   ...props
-}: React.ComponentProps<typeof Sidebar>) => {
+}: React.ComponentProps<typeof Sidebar> & { user: User }) => {
   const pathname = usePathname();
   const { open } = useSidebar();
-  const currentUser = {
-    name: 'Oliver Oxenham',
-    email: 'oliver.oxenham@qatalystcarbon.com',
-    avatar: '',
-  };
   const nonProjectPaths = data.overview.map((item) => item.url).join('/new');
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
@@ -242,7 +238,7 @@ export const AppSidebar = ({
       </SidebarContent>
       <div className="flex w-full items-center justify-center">
         <SidebarFooter>
-          {currentUser ? <NavUser user={currentUser} /> : null}
+          {user ? <NavUser user={user} /> : null}
         </SidebarFooter>
       </div>
       <SidebarRail />

@@ -1,24 +1,21 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import type { Project } from '@/app/types/project';
-import { getProjects } from '@/server/db';
-import LoadingPage from './loading';
+import { getProjectsClient } from '@/server/db';
 import { ProjectCard } from '@/components/ProjectCard/ProjectCard';
 
 export function ProjectList() {
-  const { data: projectsData, isLoading } = useQuery<Project[]>({
+  const { data: projectsData } = useSuspenseQuery<Project[]>({
     queryKey: ['projects'],
-    queryFn: getProjects,
-  })
-
-  if (isLoading) {
-    return <LoadingPage />
-  }
+    queryFn: getProjectsClient,
+  });
 
   return (
     <div className="flex flex-wrap gap-4">
-      {projectsData?.map((project) => <ProjectCard key={project.id} data={project} />)}
+      {projectsData?.map((project) => (
+        <ProjectCard key={project.id} data={project} />
+      ))}
     </div>
   );
 }

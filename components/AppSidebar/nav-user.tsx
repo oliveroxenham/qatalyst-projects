@@ -17,25 +17,20 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { useClerk } from '@clerk/nextjs';
+import type { User } from '@/app/types/user';
 import { resetAppState } from '@/server/actions';
 import { Bell, ChevronsUpDown, LogOut, RotateCcw } from 'lucide-react';
 
-export const NavUser = ({
-  user,
-}: {
-  readonly user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}) => {
+export const NavUser = ({ user }: { readonly user: User }) => {
   const { isMobile } = useSidebar();
   const { signOut } = useClerk();
 
   const initials = user.name
-    .split(' ')
-    .map((n) => n[0])
-    .join('');
+    ? user.name
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+    : '';
   return (
     <SidebarMenu>
       <SidebarMenuItem>

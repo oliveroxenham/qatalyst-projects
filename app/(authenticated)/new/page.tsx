@@ -70,7 +70,7 @@ export default function NewProjectPage() {
         </span>
         <div className="flex flex-col gap-2">
           <span className="">Select Qatalyst Project Type</span>
-          <div className="flex flex-row gap-4 items-center justify-between">
+          <div className="flex flex-row gap-4 items-center justify-center flex-wrap">
             <BoxSelection
               selected={selectedProjectType === NATURE_BASED}
               onClickHandle={() => setSelectedProjectType(NATURE_BASED)}
@@ -80,6 +80,8 @@ export default function NewProjectPage() {
                 alt="Nature-Based"
                 width={128}
                 height={80}
+                priority
+                className="w-32 h-20"
               />
               <span>Nature-based</span>
             </BoxSelection>
@@ -92,6 +94,8 @@ export default function NewProjectPage() {
                 alt="Cookstove"
                 width={128}
                 height={80}
+                priority
+                className="w-32 h-20"
               />
               <span>Cookstove</span>
             </BoxSelection>
@@ -104,6 +108,8 @@ export default function NewProjectPage() {
                 alt="Other"
                 width={128}
                 height={80}
+                priority
+                className="w-32 h-20"
               />
               <span>Other</span>
             </BoxSelection>
@@ -122,6 +128,7 @@ export default function NewProjectPage() {
                   alt="Other"
                   width={128}
                   height={80}
+                  className="w-32 h-20"
                 />
                 <span>Create project manually</span>
               </BoxSelection>
@@ -134,6 +141,7 @@ export default function NewProjectPage() {
                   alt="Other"
                   width={128}
                   height={80}
+                  className="w-32 h-20"
                 />
                 <span>Import from Verra</span>
               </BoxSelection>
@@ -146,6 +154,7 @@ export default function NewProjectPage() {
                   alt="Other"
                   width={128}
                   height={80}
+                  className="w-32 h-20"
                 />
                 <span>Import from Gold Standard</span>
               </BoxSelection>
@@ -168,7 +177,13 @@ export default function NewProjectPage() {
                 1678
               </Badge>
               {typeof selectedProjectId !== 'undefined' && (
-                <Button size="small" variant="secondary" onClick={importProject}>Import</Button>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={importProject}
+                >
+                  Import
+                </Button>
               )}
             </div>
           </div>
