@@ -465,7 +465,7 @@ const SidebarMenuButton = React.forwardRef<
       data-sidebar='menu-button'
       data-size={size}
       data-active={isActive}
-      className={cn(sidebarMenuButtonVariants({ size, variant }), className)}
+      className={cn(sidebarMenuButtonVariants({ size, variant }), 'hover:bg-blaze-orange-500', className)}
       {...props}
     />
   );

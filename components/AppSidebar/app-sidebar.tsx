@@ -58,8 +58,8 @@ const data = {
     {
       disabled: false,
       icon: Clipboard,
-      key: 'project-details',
-      name: 'Project Details',
+      key: 'project-info',
+      name: 'Project Info',
       url: '/projects/{id}/info',
     },
     {
@@ -74,7 +74,7 @@ const data = {
       icon: ClipboardCheck,
       key: 'financial-assessment',
       name: 'Financial Assessment',
-      url: '/projects/{id}/eligibility',
+      url: '/projects/{id}/financial-assessment',
     },
     {
       disabled: false,
@@ -192,7 +192,6 @@ export const AppSidebar = ({
                   asChild
                   isActive={pathname === item.url}
                   tooltip={item.name}
-                  className="hover:bg-blaze-orange-600"
                 >
                   <Link href={item.url}>
                     <item.icon />
@@ -206,19 +205,18 @@ export const AppSidebar = ({
         <SidebarSeparator className="opacity-50" />
         {!nonProjectPaths.includes(pathname) && (
           <SidebarGroup>
-            <SidebarGroupLabel>Projects</SidebarGroupLabel>
+            <SidebarGroupLabel>Project</SidebarGroupLabel>
             <SidebarMenu>
               {data.projects.map((item) => (
                 <SidebarMenuItem key={item.key} className="pl-2">
                   {item.disabled ? (
-                    <SidebarMenuButton className="cursor-not-allowed text-xs text-disabled/60 hover:bg-disabled/20 hover:text-white/50">
+                    <SidebarMenuButton className="cursor-not-allowed text-xs text-neutral-500 hover:bg-disabled/20 hover:text-white/50">
                       <item.icon /> {item.name}
                     </SidebarMenuButton>
                   ) : (
                     <SidebarMenuButton
                       asChild
                       disabled={item.disabled}
-                      className="hover:bg-blaze-orange-600"
                       isActive={
                         pathname === getProjectPathUrl(item.url, projectId)
                       }

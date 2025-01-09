@@ -228,6 +228,18 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        blaze: {
+          orange: {
+            '50': '#FFF8EC',
+            '100': '#F86501',
+            '100.2': '#FFF0D3',
+            '200': '#FFDDA6',
+            '300': '#FFC36D',
+            '500': '#FF800B',
+            '600': '#F86501',
+            '700': '#CB4A03',
+          },
+        },
         branding: {
           green: {
             '50': '#EDF9F5',

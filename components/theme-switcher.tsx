@@ -19,7 +19,7 @@ export function ThemeSwitcher() {
     }
   };
   return isMounted ? (
-    <Button onClick={() => toggleTheme()} variant="ghost">
+    <Button onClick={() => toggleTheme()} variant="ghost" size="sm">
       {theme === 'light' && <Sun />}
       {theme === 'dark' && <Moon />}
       {theme === 'system' && <SunMoon />}
