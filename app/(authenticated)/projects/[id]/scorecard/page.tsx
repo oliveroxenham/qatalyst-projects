@@ -9,12 +9,10 @@ export default function ScorecardPage() {
     <div>
       <TopBar title="Scorecard">
         <div className="flex justify-end items-center w-full gap-2">
-          <Link href="/new">
-            <Button variant="primary" size="small">
-              <Copy className="w-6 h-6" />
-              Compare
-            </Button>
-          </Link>
+          <Button variant="primary" size="small">
+            <Copy className="w-6 h-6" />
+            Compare
+          </Button>
           <ThemeSwitcher />
         </div>
       </TopBar>
