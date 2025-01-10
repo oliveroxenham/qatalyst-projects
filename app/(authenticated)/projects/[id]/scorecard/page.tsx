@@ -2,7 +2,6 @@ import { Button } from '@/components/qbutton';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { Copy } from 'lucide-react';
-import Link from 'next/link';
 
 export default function ScorecardPage() {
   return (
