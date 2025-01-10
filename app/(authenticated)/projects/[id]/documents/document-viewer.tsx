@@ -19,7 +19,7 @@ export default function DocumentViewer({
     <SidebarProvider
       open={documentUrl ? true : false}
       style={{
-        // @ts-ignore
+        // @ts-expect-error : necessary for custom width in secondary sidebar
         '--sidebar-width': '50%',
         '--sidebar-mobile-width:': '100%',
       }}
