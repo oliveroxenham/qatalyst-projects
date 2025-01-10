@@ -26,11 +26,11 @@ export default function ProjectInfoPage() {
             <div className="flex p-4 gap-3">
               <div className="flex flex-col gap-1 grow">
                 <span>Registry Project ID</span>
-                <p className="text-sm p-2 border rounded bg-slate-100">1650</p>
+                <p className="text-sm p-2 border rounded bg-muted">1650</p>
               </div>
               <div className="flex flex-col gap-1 grow">
                 <span>Qatalyst Project Type</span>
-                <p className="text-sm p-2 border rounded bg-slate-100">
+                <p className="text-sm p-2 border rounded bg-muted">
                   Nature-Based
                 </p>
               </div>
@@ -38,7 +38,7 @@ export default function ProjectInfoPage() {
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Name</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 Family Forest Carbon Project
               </p>
             </div>
@@ -46,30 +46,30 @@ export default function ProjectInfoPage() {
             <div className="flex p-4 gap-3">
               <div className="flex flex-col gap-1 grow">
                 <span>Country</span>
-                <p className="text-sm p-2 border rounded bg-slate-100">
+                <p className="text-sm p-2 border rounded bg-muted">
                   United States
                 </p>
               </div>
               <div className="flex flex-col gap-1 grow">
                 <span>State / Province</span>
-                <p className="text-sm p-2 border rounded bg-slate-100">WA</p>
+                <p className="text-sm p-2 border rounded bg-muted">WA</p>
               </div>
             </div>
 
-            <div className="flex m-4 gap-3 h-[220px] bg-slate-100 border justify-center items-center">
+            <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center">
               <span>Map</span>
             </div>
 
             <div className="flex p-4 gap-3">
               <div className="flex flex-col gap-1 grow">
                 <span>Latitude</span>
-                <p className="text-sm p-2 border rounded bg-slate-100">
+                <p className="text-sm p-2 border rounded bg-muted">
                   47.7511
                 </p>
               </div>
               <div className="flex flex-col gap-1 grow">
                 <span>Longitude</span>
-                <p className="text-sm p-2 border rounded bg-slate-100">
+                <p className="text-sm p-2 border rounded bg-muted">
                   -120.7401
                 </p>
               </div>
@@ -77,14 +77,14 @@ export default function ProjectInfoPage() {
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Background</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 Background info
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Proponent</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 Forest Carbon Works PBC
                 <br />
                 MN, United States
@@ -97,42 +97,42 @@ export default function ProjectInfoPage() {
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Status</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 Registered
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Type</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 Reforestation
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Estimated Annual Credits</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 13,000 Tons
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Methodology</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 Methodology
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Area</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 1,300 Hectares
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Sustainable Development Goals</span>
-              <p className="text-sm p-2 border rounded bg-slate-100">
+              <p className="text-sm p-2 border rounded bg-muted">
                 1, 2, 3, 4
               </p>
             </div>
