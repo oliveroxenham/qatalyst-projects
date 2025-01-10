@@ -1,11 +1,11 @@
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from './ui/skeleton';
 import { Tag } from '@/components/tag';
 import ReactCountryFlag from 'react-country-flag';
-import { Separator } from '../ui/separator';
+import { Separator } from './ui/separator';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Project } from '@/types/project';
-import { Progress } from '../ui/progress';
+import { Progress } from './ui/progress';
 
 export function ProjectCard({
   loading,
@@ -25,7 +25,7 @@ export function ProjectCard({
   return (
     <Link
       className="group border rounded-lg shadow bg-white w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg"
-      href={`/projects/${data.id}/info`}
+      href={`/projects/${data.id}/details`}
     >
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>
         <Image

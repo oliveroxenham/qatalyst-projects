@@ -1,6 +1,6 @@
 import { Button } from '@/components/qbutton';
 import { ThemeSwitcher } from '@/components/theme-switcher';
-import { TopBar } from '@/components/TopBar/TopBar';
+import { TopBar } from '@/components/topbar';
 import { Upload } from 'lucide-react';
 import Link from 'next/link';
 

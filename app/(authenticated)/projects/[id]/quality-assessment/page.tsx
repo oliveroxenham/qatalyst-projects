@@ -1,5 +1,5 @@
 import { ThemeSwitcher } from '@/components/theme-switcher';
-import { TopBar } from '@/components/TopBar/TopBar';
+import { TopBar } from '@/components/topbar';
 
 export default function FinancialAssessmentPage() {
   return (

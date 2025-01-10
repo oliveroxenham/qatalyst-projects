@@ -2,8 +2,8 @@ import { Button } from '@/components/qbutton';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeSwitcher } from '@/components/theme-switcher';
-import { ProjectCard } from '@/components/ProjectCard/ProjectCard';
-import { TopBar } from '@/components/TopBar/TopBar';
+import { ProjectCard } from '@/components/project-card';
+import { TopBar } from '@/components/topbar';
 
 export default function ProjectsLoadingPage() {
   return (

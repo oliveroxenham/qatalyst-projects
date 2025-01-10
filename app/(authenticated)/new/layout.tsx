@@ -1,4 +1,4 @@
-import { TopBar } from '@/components/TopBar/TopBar';
+import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
 import { X } from 'lucide-react';
 import Link from 'next/link';

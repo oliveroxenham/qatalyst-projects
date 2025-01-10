@@ -1,5 +1,5 @@
 'use client';
-import { NavUser } from '@/components/AppSidebar/nav-user';
+import { NavUser } from '@/components/app-sidebar/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -58,9 +58,9 @@ const data = {
     {
       disabled: false,
       icon: Clipboard,
-      key: 'project-info',
-      name: 'Project Info',
-      url: '/projects/{id}/info',
+      key: 'project-details',
+      name: 'Project Details',
+      url: '/projects/{id}/details',
     },
     {
       disabled: false,

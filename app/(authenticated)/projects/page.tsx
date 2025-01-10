@@ -3,7 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { TopBar } from '@/components/TopBar/TopBar';
+import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';

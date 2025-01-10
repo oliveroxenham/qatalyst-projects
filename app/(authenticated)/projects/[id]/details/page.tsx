@@ -1,10 +1,10 @@
 import { ThemeSwitcher } from '@/components/theme-switcher';
-import { TopBar } from '@/components/TopBar/TopBar';
+import { TopBar } from '@/components/topbar';
 
 export default function ProjectInfoPage() {
   return (
     <div>
-      <TopBar title="Project Info">
+      <TopBar title="Project Details">
         <div className="flex justify-end items-center w-full gap-2">
           <ThemeSwitcher />
         </div>

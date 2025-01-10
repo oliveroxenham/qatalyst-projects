@@ -1,4 +1,4 @@
-import { TopBar } from '@/components/TopBar/TopBar';
+import { TopBar } from '@/components/topbar';
 import { WorldMap } from '@/components/WorldMap/world-map';
 
 export default function DashboardPage() {

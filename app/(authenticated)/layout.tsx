@@ -1,4 +1,4 @@
-import { AppSidebar } from '@/components/AppSidebar/app-sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
 import { SidebarInset } from '@/components/ui/sidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { currentUser } from '@clerk/nextjs/server';
