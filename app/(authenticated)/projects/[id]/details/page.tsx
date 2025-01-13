@@ -12,8 +12,8 @@ export default function ProjectInfoPage() {
           <ThemeSwitcher />
         </div>
       </TopBar>
-      <div className="p-4 flex justify-center w-full gap-4">
-        <div className="bg-background w-[60%] rounded-lg border border-neutral-200">
+      <div className="p-4 grid lg:grid-cols-5 gap-4">
+        <div className="col-span-1 lg:col-span-3 bg-background rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between py-2 px-4">
             <span className="font-semibold">Details</span>
             <Button variant="outline" size="small">
@@ -138,7 +138,7 @@ export default function ProjectInfoPage() {
             </div>
           </div>
         </div>
-        <div className="bg-background w-[40%] rounded-lg border border-neutral-200">
+        <div className="col-span-1 lg:col-span-2 bg-background rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between py-2 px-4">
             <span className="font-semibold">Task Manager</span>
             <Button size="sm" variant="ghost">

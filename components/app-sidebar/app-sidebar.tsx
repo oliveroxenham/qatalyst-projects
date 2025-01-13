@@ -174,7 +174,7 @@ export const AppSidebar = ({
             {open ? (
               <Qatalyst className="ml-2 max-w-full fill-slate-50" />
             ) : (
-              <Logo className="ml-2 fill-slate-50" />
+              <Logo className="ml-2 fill-slate-50 w-8 h-8" />
             )}
           </Link>
           <div className={open ? 'text-left ml-3' : 'text-center'}>

@@ -14,7 +14,7 @@ import { File } from 'lucide-react';
 import type { Document } from '@/types/document';
 import { getDocumentsClient } from '@/server/db';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import DocumentViewer from './document-viewer';
+import DocumentViewer from './document-viewer-drawer';
 
 export default function DocumentList() {
   const [documentUrl, setDocumentUrl] = useState<string>();
@@ -25,6 +25,10 @@ export default function DocumentList() {
 
   return (
     <>
+      <DocumentViewer
+        documentUrl={documentUrl}
+        setDocumentUrl={setDocumentUrl}
+      />
       <Table>
         <TableHeader>
           <TableRow>
@@ -71,7 +75,6 @@ export default function DocumentList() {
           ))}
         </TableBody>
       </Table>
-      <DocumentViewer documentUrl={documentUrl} setDocumentUrl={setDocumentUrl} />
     </>
   );
 }
