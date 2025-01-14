@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import IconGoal1 from '@/public/icons/goal-01.svg';
 import IconGoal2 from '@/public/icons/goal-02.svg';
 import IconGoal3 from '@/public/icons/goal-03.svg';
@@ -34,7 +33,6 @@ function SdgSummary({ project = 1 }: { project?: number }) {
           </div>
         ) : (
           <div className="flex flex-row gap-1">
-            {/* <Image src={IconGoal1} alt="SDG Goal 1" width={56} height={56} /> */}
             <div className="w-[56px] h-[56px] bg-[#e5e5e5] flex justify-center items-center rounded">
               <span className="text-neutral-400">N/A</span>
             </div>
