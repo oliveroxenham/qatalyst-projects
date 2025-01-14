@@ -26,11 +26,11 @@ function SdgSummary({ project = 1 }: { project?: number }) {
         </span>
         {project === 1 ? (
           <div className="flex flex-row gap-1">
-            <Image src={IconGoal1} alt="SDG Goal 1" width={56} height={56} />
-            <Image src={IconGoal2} alt="SDG Goal 2" width={56} height={56} />
-            <Image src={IconGoal3} alt="SDG Goal 3" width={56} height={56} />
-            <Image src={IconGoal4} alt="SDG Goal 4" width={56} height={56} />
-            <Image src={IconGoal5} alt="SDG Goal 5" width={56} height={56} />
+            <IconGoal1 />
+            <IconGoal2 />
+            <IconGoal3 />
+            <IconGoal4 />
+            <IconGoal5 />
           </div>
         ) : (
           <div className="flex flex-row gap-1">

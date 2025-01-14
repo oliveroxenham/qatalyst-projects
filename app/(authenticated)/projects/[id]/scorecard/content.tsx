@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 // import useProject from '@/app/hooks/useProject';
 import Map from './map';
@@ -15,14 +15,13 @@ import SdgSummary from './SdgSummary';
 import { Button } from '@/components/ui/button';
 // import { Loading } from '@/components/Loading';
 import { clsx } from 'clsx';
-import { useState } from 'react';
-import SideBar from '@/components/SideBar';
-import Link from 'next/link';
+// import { useState } from 'react';
+// import Link from 'next/link';
 
-export default function ScoreCardPage() {
+export default function ScoreCardPage({ benchmarkLayoutVisible }: {benchmarkLayoutVisible: boolean}) {
   // const [isOpenSideBarMobile, setIsOpenSideBarMobile] =
   //   useState<boolean>(false);
-  const [benchmarkLayoutVisible, setBenchmarkLayoutVisible] = useState(false);
+  // const [benchmarkLayoutVisible, setBenchmarkLayoutVisible] = useState(true);
   // const { data, error, isPending } = useProject(id);
 
   // if (isPending) {
@@ -41,24 +40,8 @@ export default function ScoreCardPage() {
 
   return (
     <div className="flex flex-row bg-neutral-100">
-      <SideBar
-        // isOpenSideBarMobile={isOpenSideBarMobile}
-        // setIsOpenSideBarMobile={setIsOpenSideBarMobile}
-      />
       <div className="wrapper w-full overflow-scroll">
         <div className="h-full w-full overflow-auto">
-          <div className="flex w-full items-center justify-between border-b border-border-default bg-white p-2">
-            <div className="text-sm font-medium text-neutral-900">
-              Scorecard
-            </div>
-            <Link href="/projects">Back</Link>
-            <Button
-              variant="outline"
-              onClick={() => setBenchmarkLayoutVisible(!benchmarkLayoutVisible)}
-            >
-              Compare
-            </Button>
-          </div>
           <div className="flex flex-row gap-0">
             <main
               className={clsx('h-[calc(100%-84px)] bg-neutral-100', {
