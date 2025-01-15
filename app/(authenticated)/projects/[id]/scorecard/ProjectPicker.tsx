@@ -7,7 +7,7 @@ import FinancialAssessment from './FinancialAssessment';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
 import RevenueForecast from './RevenueForecast';
-import SdgSummary from './SdgSummary';
+import SdgSummary from '../../../../../components/sdg-summary';
 import { Button } from '@/components/ui/button';
 import {
   Command,

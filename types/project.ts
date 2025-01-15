@@ -4,18 +4,47 @@ export type Tag = {
 };
 
 export type Project = {
-  id: number,
+  id: string,
   imgUrl: string,
-  title: string,
+  name: string,
   country: string,
   countryName: string,
-  tags: Tag[],
-  owner: string
+  state?: string;
   lastUpdated: string,
-  financialStatus: string,
-  financialProgress: number,
-  esgStatus: string,
-  esgProgress: number,
-  kycStatus: string,
-  kycProgress: number
+  tags: Tag[],
+  creditingStartDate: string,
+  creditingEndDate: string,
+  proponent: string,
+  background: string,
+  latitude: string,
+  longitude: string,
+  createdBy: string,
+  owner: string,
+  collaborators: string[],
+  registryStatus: string,
+  projectType: string,
+  estimatedAnnualCredits: {
+    formatted: string,
+    value: number,
+    unit: string,
+  },
+  methodology: string,
+  projectArea: {
+    formatted: string,
+    value: number,
+    unit: string,
+  },
+  financialAssessment: {
+    status: string,
+    progress: number,
+  },
+  esgAssessment: {
+    status: string,
+    progress: number,
+  },
+  kycAssessment: {
+    status: string,
+    progress: number,
+  },
+  sdgs?: number[],
 };

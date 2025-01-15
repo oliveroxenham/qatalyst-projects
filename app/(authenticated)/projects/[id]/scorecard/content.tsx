@@ -7,7 +7,7 @@ import ProjectPicker from './ProjectPicker';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
 import RevenueForecast from './RevenueForecast';
-import SdgSummary from './SdgSummary';
+import SdgSummary from '../../../../../components/sdg-summary';
 import { clsx } from 'clsx';
 
 export default function ScoreCardPage({ benchmarkLayoutVisible }: {benchmarkLayoutVisible: boolean}) {

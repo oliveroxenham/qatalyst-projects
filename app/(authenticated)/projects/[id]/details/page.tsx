@@ -3,8 +3,16 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { Separator } from '@/components/ui/separator';
 import { ChevronDown, Edit } from 'lucide-react';
+import { SdgSummary } from '@/components/sdg-summary';
+import { getProjectId } from '@/mock/data';
 
-export default function ProjectInfoPage() {
+export default async function ProjectInfoPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const projectId = (await params).id;
+  const projectData = getProjectId(projectId);
   return (
     <div>
       <TopBar title="Project Details">
@@ -26,12 +34,14 @@ export default function ProjectInfoPage() {
             <div className="flex p-4 gap-3">
               <div className="flex flex-col gap-1 grow">
                 <span>Registry Project ID</span>
-                <p className="text-sm p-2 border rounded bg-muted">1650</p>
+                <p className="text-sm p-2 border rounded bg-muted">
+                  {projectId}
+                </p>
               </div>
               <div className="flex flex-col gap-1 grow">
                 <span>Qatalyst Project Type</span>
                 <p className="text-sm p-2 border rounded bg-muted">
-                  Nature-Based
+                  {projectData?.projectType}
                 </p>
               </div>
             </div>
@@ -39,7 +49,7 @@ export default function ProjectInfoPage() {
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Name</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                Family Forest Carbon Project
+                {projectData?.name}
               </p>
             </div>
 
@@ -47,13 +57,17 @@ export default function ProjectInfoPage() {
               <div className="flex flex-col gap-1 grow">
                 <span>Country</span>
                 <p className="text-sm p-2 border rounded bg-muted">
-                  United States
+                  {projectData?.countryName}
                 </p>
               </div>
-              <div className="flex flex-col gap-1 grow">
-                <span>State / Province</span>
-                <p className="text-sm p-2 border rounded bg-muted">WA</p>
-              </div>
+              {projectData?.state ? (
+                <div className="flex flex-col gap-1 grow">
+                  <span>State / Province</span>
+                  <p className="text-sm p-2 border rounded bg-muted">
+                    {projectData.state}
+                  </p>
+                </div>
+              ) : null}
             </div>
 
             <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center">
@@ -64,13 +78,13 @@ export default function ProjectInfoPage() {
               <div className="flex flex-col gap-1 grow">
                 <span>Latitude</span>
                 <p className="text-sm p-2 border rounded bg-muted">
-                  47.7511
+                  {projectData?.latitude}
                 </p>
               </div>
               <div className="flex flex-col gap-1 grow">
                 <span>Longitude</span>
                 <p className="text-sm p-2 border rounded bg-muted">
-                  -120.7401
+                  {projectData?.longitude}
                 </p>
               </div>
             </div>
@@ -78,75 +92,222 @@ export default function ProjectInfoPage() {
             <div className="flex flex-col gap-1 grow p-4">
               <span>Background</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                Background info
+                {projectData?.background}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Proponent</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                Forest Carbon Works PBC
-                <br />
-                MN, United States
-                <br />
-                1 (800) 399-5246
-                <br />
-                julian@forestcarbonworks.com
+                {projectData?.proponent}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Status</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                Registered
+                {projectData?.registryStatus}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Type</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                Reforestation
+                {projectData?.projectType}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Estimated Annual Credits</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                13,000 Tons
+                {projectData?.estimatedAnnualCredits.formatted}{' '}
+                {projectData?.estimatedAnnualCredits.unit}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Methodology</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                Methodology
+                {projectData?.methodology}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Project Area</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                1,300 Hectares
+                {projectData?.projectArea.formatted}{' '}
+                {projectData?.projectArea.unit}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>Sustainable Development Goals</span>
-              <p className="text-sm p-2 border rounded bg-muted">
-                1, 2, 3, 4
-              </p>
+              <div className="text-sm p-2 border rounded bg-muted">
+                <SdgSummary sdgs={projectData?.sdgs} />
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-span-1 lg:col-span-2 bg-background rounded-lg border border-neutral-200">
-          <div className="flex items-center justify-between py-2 px-4">
-            <span className="font-semibold">Task Manager</span>
-            <Button size="sm" variant="ghost">
-              <ChevronDown />
-            </Button>
+        <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
+          <div className="bg-background rounded-lg border border-neutral-200">
+            <div className="flex items-center justify-between py-2 px-4">
+              <span className="font-semibold">Task Manager</span>
+              <Button size="sm" variant="ghost">
+                <ChevronDown />
+              </Button>
+            </div>
+            <Separator />
+            <div className="flex flex-col gap-8 p-4">
+              <div className="flex flex-row justify-between">
+                <div className="w-1/4">
+                  <span className="text-neutral-500">Creator</span>
+                </div>
+                <div className="w-3/4">{projectData?.owner}</div>
+              </div>
+
+              <div className="flex flex-row justify-between">
+                <div className="w-1/4">
+                  <span className="text-neutral-500">Collaborators</span>
+                </div>
+                <div className="w-3/4">{projectData?.collaborators}</div>
+              </div>
+
+              <div>
+                <span className="font-semibold">Financial Assessment</span>
+                <div className="flex flex-col gap-4 mt-2 border rounded p-4">
+                  <div className="flex flex-row items-center">
+                    <div className="flex flex-row w-1/4">
+                      <span className="text-neutral-500">Assign to</span>
+                    </div>
+                    <div className="w-3/4">
+                      <div className="border rounded-sm p-2">
+                        <span>Unassigned</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row">
+                    <div className="flex flex-row w-1/4">
+                      <span className="text-neutral-500">Final Rating</span>
+                    </div>
+                    <div className="w-3/4">
+                      <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
+                        <span className="text-white">Not started</span>
+                      </div>
+                      <div className="mt-2">
+                        <Button disabled className="w-full">
+                          Generate Assessment
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <span className="font-semibold">ESG Assessment</span>
+                <div className="flex flex-col gap-4 mt-2 border rounded p-4">
+                  <div className="flex flex-row items-center">
+                    <div className="flex flex-row w-1/4">
+                      <span className="text-neutral-500">Assign to</span>
+                    </div>
+                    <div className="w-3/4">
+                      <div className="border rounded-sm p-2">
+                        <span>Unassigned</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row">
+                    <div className="flex flex-row w-1/4">
+                      <span className="text-neutral-500">Final Rating</span>
+                    </div>
+                    <div className="w-3/4">
+                      <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
+                        <span className="text-white">Not started</span>
+                      </div>
+                      <div className="mt-2">
+                        <Button disabled className="w-full">
+                          Generate Assessment
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <Separator />
-          <div></div>
+
+          <div className="bg-background rounded-lg border border-neutral-200">
+            <div className="flex items-center justify-between py-2 px-4">
+              <span className="font-semibold">Activity</span>
+              <Button size="sm" variant="ghost">
+                <ChevronDown />
+              </Button>
+            </div>
+            <Separator />
+            <div className="flex flex-col p-4 gap-4">
+              <div className="flex flex-row border-b pb-4">
+                <div className="w-1/12">
+                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                </div>
+                <div className="w-11/12 flex flex-col gap-2">
+                  <span className="text-sm">
+                    John commented on project-development-document.pdf
+                  </span>
+                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
+                </div>
+              </div>
+
+              <div className="flex flex-row border-b pb-4">
+                <div className="w-1/12">
+                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                </div>
+                <div className="w-11/12 flex flex-col gap-2">
+                  <span className="text-sm">
+                    John commented on project-development-document.pdf
+                  </span>
+                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
+                </div>
+              </div>
+
+              <div className="flex flex-row border-b pb-4">
+                <div className="w-1/12">
+                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                </div>
+                <div className="w-11/12 flex flex-col gap-2">
+                  <span className="text-sm">
+                    John commented on project-development-document.pdf
+                  </span>
+                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
+                </div>
+              </div>
+
+              <div className="flex flex-row border-b pb-4">
+                <div className="w-1/12">
+                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                </div>
+                <div className="w-11/12 flex flex-col gap-2">
+                  <span className="text-sm">
+                    John commented on project-development-document.pdf
+                  </span>
+                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
+                </div>
+              </div>
+
+              <div className="flex flex-row border-b pb-4">
+                <div className="w-1/12">
+                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                </div>
+                <div className="w-11/12 flex flex-col gap-2">
+                  <span className="text-sm">
+                    John commented on project-development-document.pdf
+                  </span>
+                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -30,15 +30,15 @@ export function ProjectCard({
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>
         <Image
           src={data.imgUrl}
-          alt={data.title}
+          alt={data.name}
           width={344}
           height={161}
           className="rounded-t-lg"
         />
       </div>
       <div className="p-4">
-        <div className="">
-          <span className="line-clamp-2">{data.title}</span>
+        <div className="h-12">
+          <span className="line-clamp-2">{data.name}</span>
         </div>
         <div className="flex flex-row gap-2 flex-wrap my-4">
           {data.tags.map((tag, index) => (
@@ -82,10 +82,10 @@ export function ProjectCard({
               className="flex flex-row items-center gap-1 w-1/2"
             >
               <div className="h-1 w-1 rounded-full bg-orange-500" />
-              {data.financialStatus}
+              <span className="capitalize">{data.financialAssessment.status}</span>
             </Tag>
             <Progress
-              value={data.financialProgress ? data.financialProgress : 0}
+              value={data.financialAssessment ? data.financialAssessment.progress : 0}
               className="w-1/2"
             />{' '}
           </div>
@@ -99,10 +99,10 @@ export function ProjectCard({
               className="flex flex-row items-center gap-1 w-1/2"
             >
               <div className="h-1 w-1 rounded-full bg-neutral-500" />
-              {data.esgStatus}
+              <span className="capitalize">{data.esgAssessment.status}</span>
             </Tag>
             <Progress
-              value={data.esgProgress ? data.esgProgress : 0}
+              value={data.esgAssessment ? data.esgAssessment.progress : 0}
               className="w-1/2"
             />
           </div>
@@ -117,10 +117,10 @@ export function ProjectCard({
               className="flex flex-row items-center gap-1 w-1/2"
             >
               <div className="h-1 w-1 rounded-full bg-orange-500" />
-              {data.kycStatus}
+              <span className="capitalize">{data.kycAssessment.status}</span>
             </Tag>
             <Progress
-              value={data.kycProgress ? data.kycProgress : 0}
+              value={data.kycAssessment.progress ? data.kycAssessment.progress : 0}
               className="w-1/2"
             />
           </div>
