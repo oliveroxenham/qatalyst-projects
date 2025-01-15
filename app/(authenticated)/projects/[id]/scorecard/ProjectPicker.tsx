@@ -7,7 +7,7 @@ import FinancialAssessment from './FinancialAssessment';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
 import RevenueForecast from './RevenueForecast';
-import SdgSummary from '../../../../../components/sdg-summary';
+import { SdgSummary } from '../../../../../components/sdg-summary';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -133,7 +133,7 @@ const ProjectPicker = () => {
           status: 'Registered',
         }}
       />
-      <SdgSummary project={2} />
+      <SdgSummary sdgs={[2]} />
       {/* <CreditForecast project={2} /> */}
       <div
         className={clsx('m-2 grid grid-cols-1 gap-4', {
