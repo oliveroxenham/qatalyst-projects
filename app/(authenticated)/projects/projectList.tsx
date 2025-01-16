@@ -1,12 +1,12 @@
 'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import type { Project } from '@/types/project';
 import { getProjectsClient } from '@/server/db';
 import { ProjectCard } from '@/components/project-card';
 
 export function ProjectList() {
-  const { data: projectsData } = useSuspenseQuery<Project[]>({
+  const { data: projectsData } = useQuery<Project[]>({
     queryKey: ['projects'],
     queryFn: getProjectsClient,
   });

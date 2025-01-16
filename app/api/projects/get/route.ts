@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server';
 const redis = Redis.fromEnv();
 
 export async function GET() {
-  const projects = await redis.get('projects');
+  let projects = await redis.get('projects');
+  console.log('redis: projects=', projects);
   return NextResponse.json(projects);
 }
 

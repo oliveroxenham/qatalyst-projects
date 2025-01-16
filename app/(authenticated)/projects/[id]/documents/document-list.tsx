@@ -12,15 +12,15 @@ import {
 import Image from 'next/image';
 import { File } from 'lucide-react';
 import type { Document } from '@/types/document';
-import { getDocumentsClient } from '@/server/db';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { getDocumentsByProjectIdClient } from '@/server/db';
+import { useQuery } from '@tanstack/react-query';
 import DocumentViewer from './document-viewer-drawer';
 
-export default function DocumentList() {
+export default function DocumentList({ projectId }: { projectId: string }) {
   const [documentUrl, setDocumentUrl] = useState<string>();
-  const { data: documentList } = useSuspenseQuery<Document[]>({
-    queryKey: ['documents'],
-    queryFn: getDocumentsClient,
+  const { data: documentList } = useQuery<Document[]>({
+    queryKey: ['documents', projectId],
+    queryFn: () => getDocumentsByProjectIdClient({ id: projectId }),
   });
 
   return (
