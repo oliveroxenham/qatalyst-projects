@@ -20,7 +20,7 @@ export default async function ProjectInfoPage({
           <ThemeSwitcher />
         </div>
       </TopBar>
-      <div className="p-4 grid lg:grid-cols-5 gap-4">
+      <div className="p-4 grid lg:grid-cols-5 gap-2">
         <div className="col-span-1 lg:col-span-3 bg-background rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between py-2 px-4">
             <span className="font-semibold">Details</span>
@@ -181,7 +181,10 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <div className="border rounded-sm p-2">
-                        <span>Unassigned</span>
+                        <span>
+                          {projectData?.financialAssessment.assignedTo ??
+                            'Unassigned'}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -192,7 +195,10 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
-                        <span className="text-white">Not started</span>
+                        <span className="text-white capitalize">
+                          {projectData?.financialAssessment.status ??
+                            'Not Started'}
+                        </span>
                       </div>
                       <div className="mt-2">
                         <Button disabled className="w-full">
@@ -213,7 +219,10 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <div className="border rounded-sm p-2">
-                        <span>Unassigned</span>
+                        <span>
+                          {projectData?.esgAssessment.assignedTo ??
+                            'Unassigned'}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -224,7 +233,10 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
-                        <span className="text-white">Not started</span>
+                        <span className="text-white capitalize">
+                          {projectData?.financialAssessment.status ??
+                            'Not Started'}
+                        </span>
                       </div>
                       <div className="mt-2">
                         <Button disabled className="w-full">
@@ -247,65 +259,19 @@ export default async function ProjectInfoPage({
             </div>
             <Separator />
             <div className="flex flex-col p-4 gap-4">
-              <div className="flex flex-row border-b pb-4">
-                <div className="w-1/12">
-                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+              {projectData?.activities?.map((activity) => (
+                <div key={activity.id} className="flex flex-row border-b pb-4">
+                  <div className="w-1/12">
+                    <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                  </div>
+                  <div className="w-11/12 ml-2 flex flex-col gap-2">
+                    <span className="text-sm">{activity.description}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {activity.date}
+                    </span>
+                  </div>
                 </div>
-                <div className="w-11/12 flex flex-col gap-2">
-                  <span className="text-sm">
-                    John commented on project-development-document.pdf
-                  </span>
-                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
-                </div>
-              </div>
-
-              <div className="flex flex-row border-b pb-4">
-                <div className="w-1/12">
-                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
-                </div>
-                <div className="w-11/12 flex flex-col gap-2">
-                  <span className="text-sm">
-                    John commented on project-development-document.pdf
-                  </span>
-                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
-                </div>
-              </div>
-
-              <div className="flex flex-row border-b pb-4">
-                <div className="w-1/12">
-                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
-                </div>
-                <div className="w-11/12 flex flex-col gap-2">
-                  <span className="text-sm">
-                    John commented on project-development-document.pdf
-                  </span>
-                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
-                </div>
-              </div>
-
-              <div className="flex flex-row border-b pb-4">
-                <div className="w-1/12">
-                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
-                </div>
-                <div className="w-11/12 flex flex-col gap-2">
-                  <span className="text-sm">
-                    John commented on project-development-document.pdf
-                  </span>
-                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
-                </div>
-              </div>
-
-              <div className="flex flex-row border-b pb-4">
-                <div className="w-1/12">
-                  <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
-                </div>
-                <div className="w-11/12 flex flex-col gap-2">
-                  <span className="text-sm">
-                    John commented on project-development-document.pdf
-                  </span>
-                  <span className="text-xs text-muted-foreground">Yesterday at 2:20PM</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

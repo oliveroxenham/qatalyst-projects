@@ -1,6 +1,6 @@
 import { Project } from '@/types/project';
 
-const PROJECT_ID_1650:Project = {
+const PROJECT_ID_1650: Project = {
   id: '1650',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img2-Pesg4thDgdnsXKVZ2eMbgqK6e5jckg.png',
@@ -54,9 +54,21 @@ const PROJECT_ID_1650:Project = {
     status: 'not started',
     progress: 0,
   },
+  activities: [
+    {
+      id: 0,
+      date: 'Yesterday at 2:20PM',
+      description: 'Wesley commented on project-development-document.pdf',
+    },
+    {
+      id: 1,
+      date: 'Yesterday at 10:10AM',
+      description: 'Kopal commented on project-development-document.pdf',
+    },
+  ],
 };
 
-const PROJECT_ID_2:Project = {
+const PROJECT_ID_2: Project = {
   id: '2',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img1-cR4Tlqih35QOMhPnC8AIH1BYoqRqPC.png',
@@ -134,7 +146,7 @@ const PROJECT_ID_2:Project = {
   },
 };
 
-const PROJECT_ID_3:Project = {
+const PROJECT_ID_3: Project = {
   id: '3',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img3-j6vAiE1rqQszvX6r6CIkvt4vYOIYfq.png',
@@ -212,7 +224,7 @@ const PROJECT_ID_3:Project = {
   },
 };
 
-const PROJECT_ID_4:Project = {
+const PROJECT_ID_4: Project = {
   id: '4',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img4-UrkZ149VDfMIABrNp31VGcI3xAFNqL.png',
@@ -290,7 +302,7 @@ const PROJECT_ID_4:Project = {
   },
 };
 
-export const getProjectId = (id: string):Project | null => {
+export const getProjectId = (id: string): Project | null => {
   switch (id) {
     case '1650':
       return PROJECT_ID_1650;
@@ -322,7 +334,7 @@ export const getDocuments = () => [
     size: '4MB',
     source: 'Verra',
     date: 'November 24, 2024',
-    lastActivity: 'Wesley uploaded this file.'
+    lastActivity: 'Wesley uploaded this file.',
   },
   {
     id: 1,
