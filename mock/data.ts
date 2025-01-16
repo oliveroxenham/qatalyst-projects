@@ -315,6 +315,16 @@ export const importProject = () => PROJECT_ID_4;
 
 export const getDocuments = () => [
   {
+    id: 0,
+    type: 'pdf',
+    name: 'KSWS REDD+_VCS CCB MR_2020-2021_v1.9_final.pdf',
+    status: 'Ready',
+    size: '4MB',
+    source: 'Verra',
+    date: 'November 24, 2024',
+    lastActivity: 'Wesley uploaded this file.'
+  },
+  {
     id: 1,
     type: 'pdf',
     name: 'PROJ_DESC_1650_29DEC2014.pdf',
@@ -322,6 +332,6 @@ export const getDocuments = () => [
     size: '8MB',
     source: 'Verra',
     date: 'October 16, 2024',
-    lastActivity: 'Kopal imported file',
+    lastActivity: 'Kopal imported this file.',
   },
 ];

@@ -52,7 +52,7 @@ export default function DocumentList({ projectId }: { projectId: string }) {
                 setDocumentUrl(
                   documentUrl
                     ? undefined
-                    : 'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/PROJ_DESC_1650_29DEC2014-VyhmiOgjaRAEF7vDr2tPD435gFrLw1.pdf'
+                    : document.id.toString()
                 )
               }
             >
