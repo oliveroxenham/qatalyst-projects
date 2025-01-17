@@ -99,7 +99,7 @@ function CreditForecast({ project = 1 }: { project?: number }) {
             //     width={180}
             //     transform="rotate(-90)"
             //   >
-            //     tCO2e
+            //     tCO₂e
             //   </Text>
             // }
           />

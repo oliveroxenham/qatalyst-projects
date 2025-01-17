@@ -6,9 +6,62 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Plus } from 'lucide-react';
+import { Project, Source } from '@/types/project';
+import { Plus, Sigma } from 'lucide-react';
+import Logo from '@/public/icons/logo.svg';
 
-export function Content() {
+const QatalystIcon = () => (
+  <div className="w-5 h-5 rounded-full flex items-center justify-center bg-blaze-orange-600 ml-2">
+    <Logo className="w-[12px] h-[12px] fill-white" />
+  </div>
+);
+
+const TableCellWithValue = ({
+  children,
+  icon,
+  disabled,
+}: {
+  children: React.ReactNode;
+  icon?: React.ReactElement | null;
+  disabled?: boolean;
+}) => (
+  <TableCell>
+    <div
+      className={`border flex items-center justify-between w-full rounded-sm h-9 p-2 ${
+        disabled ? 'bg-muted' : 'bg-background'
+      }`}
+    >
+      {children}
+      {icon}
+    </div>
+  </TableCell>
+);
+
+const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => (
+  <TableCell>
+    <div className="border flex items-center justify-center bg-background w-full rounded-sm h-9 p-2">
+      {sources.length === 0 ? (
+        <span className="flex flex-row gap-2 items-center text-muted-foreground">
+          <Plus className="h-4 w-4" /> source
+        </span>
+      ) : (
+        <span>
+          {sources.length} {sources.length > 1 ? 'sources' : 'source'}
+        </span>
+      )}
+    </div>
+  </TableCell>
+);
+
+export function Content({ projectData }: { projectData: Project | null }) {
+  if (!projectData) {
+    return (
+      <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">
+        <span>No financial assessment data is available for this project.</span>
+      </div>
+    );
+  }
+  const data = projectData.financialAssessment;
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
       <div className="p-4">
@@ -17,10 +70,10 @@ export function Content() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Value</TableHead>
-            <TableHead>Unit</TableHead>
-            <TableHead>Source</TableHead>
+            <TableHead className="w-1/2">Name</TableHead>
+            <TableHead className="w-[17%]">Value</TableHead>
+            <TableHead className="w-[17%]">Unit</TableHead>
+            <TableHead className="w-[17%]">Source</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -28,9 +81,17 @@ export function Content() {
             <TableCell>
               <span className="">Project Value (Investment Amount)</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.projectValue.qatalystGenerated ? <QatalystIcon /> : null
+              }
+            >
+              <span>{data.projectValue.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.projectValue.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.projectValue.sources} />
           </TableRow>
           <TableRow>
             <TableCell>
@@ -38,33 +99,73 @@ export function Content() {
                 Estimated Reductions (over Project Duration)
               </span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.estimatedReductions.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>{data.estimatedReductions.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.estimatedReductions.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.estimatedReductions.sources}
+            />
           </TableRow>
           <TableRow>
             <TableCell>
               <span className="">Total Estimated Reductions</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.totalEstimatedReductions.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>{data.totalEstimatedReductions.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.totalEstimatedReductions.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.totalEstimatedReductions.sources}
+            />
           </TableRow>
           <TableRow>
             <TableCell>
               <span className="">Project Duration</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.projectDuration.qatalystGenerated ? <QatalystIcon /> : null
+              }
+            >
+              <span>{data.projectDuration.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.projectDuration.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.projectDuration.sources} />
           </TableRow>
           <TableRow>
             <TableCell>
               <span className="">Project Area</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.projectArea.qatalystGenerated ? <QatalystIcon /> : null
+              }
+            >
+              <span>{data.projectArea.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.projectArea.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.projectArea.sources} />
           </TableRow>
           <TableRow>
             <TableCell>
@@ -72,9 +173,23 @@ export function Content() {
                 Estimated Reduction Per Unit of Area Per Year
               </span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.estimatedReductionsPerUnitAreaPerYear.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>
+                {data.estimatedReductionsPerUnitAreaPerYear.formatted}
+              </span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.estimatedReductionsPerUnitAreaPerYear.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.estimatedReductionsPerUnitAreaPerYear.sources}
+            />
           </TableRow>
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
@@ -94,10 +209,10 @@ export function Content() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Value</TableHead>
-            <TableHead>Unit</TableHead>
-            <TableHead>Source</TableHead>
+            <TableHead className="w-1/2">Name</TableHead>
+            <TableHead className="w-[17%]">Value</TableHead>
+            <TableHead className="w-[17%]">Unit</TableHead>
+            <TableHead className="w-[17%]">Source</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -105,17 +220,41 @@ export function Content() {
             <TableCell>
               <span className="">Land Acquisition Cost</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.landAcquisitionCost.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>{data.landAcquisitionCost.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.landAcquisitionCost.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.landAcquisitionCost.sources}
+            />
           </TableRow>
           <TableRow>
             <TableCell>
               <span className="">Land Per Unit Area Cost</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.landPerUnitAreaCost.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>{data.landPerUnitAreaCost.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.landPerUnitAreaCost.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.landPerUnitAreaCost.sources}
+            />
           </TableRow>
 
           <TableRow>
@@ -124,89 +263,164 @@ export function Content() {
                 Plantation Establishment and Maintenance Cost
               </span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.plantationEstablishmentMaintenanceCost
+                  .qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>
+                {data.plantationEstablishmentMaintenanceCost.formatted}
+              </span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.plantationEstablishmentMaintenanceCost.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.plantationEstablishmentMaintenanceCost.sources}
+            />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Cost of Goods Sold (COGS)</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.costOfGoodsSold.qatalystGenerated ? <QatalystIcon /> : null
+              }
+            >
+              <span>{data.costOfGoodsSold.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.costOfGoodsSold.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.costOfGoodsSold.sources} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Overheads</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={data.overheads.qatalystGenerated ? <QatalystIcon /> : null}
+            >
+              <span>{data.overheads.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.overheads.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.overheads.sources} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Total Gross Costs</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.totalGrossCosts.qatalystGenerated ? <QatalystIcon /> : null
+              }
+            >
+              <span>{data.totalGrossCosts.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.totalGrossCosts.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.totalGrossCosts.sources} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Alternate Revenue Sources (Non-carbon)</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.alternateRevenueSources.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>{data.alternateRevenueSources.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.alternateRevenueSources.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.alternateRevenueSources.sources}
+            />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Cost of Financing</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={
+                data.costOfFinancing.qatalystGenerated ? <QatalystIcon /> : null
+              }
+            >
+              <span>{data.costOfFinancing.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.costOfFinancing.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.costOfFinancing.sources} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Tax</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue
+              icon={data.tax.qatalystGenerated ? <QatalystIcon /> : null}
+            >
+              <span>{data.tax.formatted}</span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.tax.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={data.tax.sources} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Capital Expense Intensity</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>USD/tCO₂e</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
           <TableRow>
             <TableCell>
               <span className="">Operating Expense Intensity</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>USD/tCO₂e</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Total Expense Intensity</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>USD/tCO₂e</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
           <TableRow>
             <TableCell>
@@ -214,18 +428,26 @@ export function Content() {
                 Cost of Production (Including Non Carbon Revenues)
               </span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>USD</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
 
           <TableRow>
             <TableCell>
               <span className="">Total Net Costs</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>kUSD</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
 
           <TableRow>
@@ -234,18 +456,26 @@ export function Content() {
                 Cost of Production (Net - including Financing)
               </span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>USD/tCO₂e</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
               <Plus className="w-4 h-4" />
               <span className="text-xs">Add criteria</span>
             </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
+            <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
+              <span>Auto</span>
+            </TableCellWithValue>
+            <TableCellWithValue disabled>
+              <span>USD/tCO₂e</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource sources={[]} />
           </TableRow>
         </TableBody>
       </Table>

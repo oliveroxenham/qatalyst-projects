@@ -9,6 +9,11 @@ export type Activity = {
   description: string;
 };
 
+export type Source = {
+  name: string;
+  url: string;
+};
+
 export type Project = {
   id: string;
   imgUrl: string;
@@ -44,6 +49,119 @@ export type Project = {
     assignedTo?: string;
     status: string;
     progress: number;
+    projectValue: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[];
+      qatalystGenerated: boolean;
+    },
+    estimatedReductions: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    totalEstimatedReductions: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    projectDuration: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    }
+    projectArea: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    estimatedReductionsPerUnitAreaPerYear: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    estimatedReductionsPerUnitArea: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    landAcquisitionCost: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    landPerUnitAreaCost: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    plantationEstablishmentMaintenanceCost: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    costOfGoodsSold: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    overheads: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    totalGrossCosts: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    alternateRevenueSources: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    costOfFinancing: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    },
+    tax: {
+      formatted: string;
+      value: number | null;
+      unit: string;
+      sources: Source[],
+      qatalystGenerated: boolean;
+    }
+
   };
   esgAssessment: {
     assignedTo?: string;
