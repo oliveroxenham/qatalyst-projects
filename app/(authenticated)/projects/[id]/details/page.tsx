@@ -71,8 +71,7 @@ export default async function ProjectInfoPage({
               ) : null}
             </div>
 
-            <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center">
-              <span>Map</span>
+            <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center bg-[url(https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/map_1650-rBewjDh2xpJzP0V53DzRndrO1fBZwz.png)] bg-center">
             </div>
 
             <div className="flex p-4 gap-3">

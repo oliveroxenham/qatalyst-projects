@@ -14,7 +14,7 @@ import { Button } from '@/components/qbutton';
 import QuestionMark from '@/public/icons/question-mark.svg';
 
 const QatalystResponseBoxed = ({ response }: { response: number }) => (
-  <div className="border rounded-sm px-2 flex flex-row justify-between bg-white h-10 items-center">
+  <div className="border rounded-sm px-2 flex flex-row justify-between bg-white h-[46px] items-center">
     <QatalystResponse response={response} />
     <div className="rounded-full bg-blaze-orange-500 flex items-center justify-center w-[17px] h-[17px] ml-2">
       <Logo className="w-[10px] h-[10px]" />
@@ -23,21 +23,21 @@ const QatalystResponseBoxed = ({ response }: { response: number }) => (
 );
 
 const UserRatingBoxed = () => (
-  <div className="border rounded-sm flex flex-row w-36 items-center justify-center h-10 bg-white">
-    <Button variant="ghost" size="sm">
+  <div className="border rounded-sm bg-white w-[146px]">
+    <Button variant="ghost">
       <Check />
     </Button>
-    <Button variant="ghost" size="sm">
+    <Button variant="ghost">
       <X />
     </Button>
-    <Button variant="ghost" size="sm">
+    <Button variant="ghost">
       <QuestionMark />
     </Button>
   </div>
 );
 
 const SourcesBoxed = ({ num = 0 }: { num: number }) => (
-  <div className="border rounded-sm flex items-center justify-center bg-white min-w-20 h-10">
+  <div className="border rounded-sm flex items-center justify-center bg-white min-w-20 h-[46px]">
     <span className="text-xs">{num} sources</span>
   </div>
 );
