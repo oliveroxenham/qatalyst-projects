@@ -5,8 +5,17 @@ import { ChevronDown, Info, Lock } from 'lucide-react';
 import Logo from '@/public/icons/logo.svg';
 import { QatalystAi } from '@/components/qatalyst-ai';
 import { Content } from './content';
+import { getProjectId } from '@/mock/data';
 
-export default function EsgAssessmentPage() {
+export default async function EsgAssessmentPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const projectId = (await params).id;
+  const projectData = getProjectId(projectId);
+  console.log('projectData=', projectData);
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <TopBar title="ESG Assessment">
@@ -41,7 +50,7 @@ export default function EsgAssessmentPage() {
         </div>
       </TopBar>
       <div className="w-full flex justify-center p-2 pb-[53px] h-full">
-        <Content />
+        <Content projectData={projectData} />
         <QatalystAi />
       </div>
     </div>

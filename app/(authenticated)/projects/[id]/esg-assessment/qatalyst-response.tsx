@@ -1,7 +1,6 @@
 import { QATALYST_RESPONSE } from '@/lib/constants';
 
-export function QatalystResponse({ response }: { response: number }) {
-  console.log('response=', response);
+export function QatalystResponse({ response }: { response?: number }) {
   if (response === QATALYST_RESPONSE.SATISFACTORY) {
     return (
       <div className="flex flex-row gap-1 items-center">

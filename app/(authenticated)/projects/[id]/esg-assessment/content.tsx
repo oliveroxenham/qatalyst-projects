@@ -6,14 +6,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Check, Plus, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import Logo from '@/public/icons/logo.svg';
 import { QatalystResponse } from './qatalyst-response';
-import { QATALYST_RESPONSE } from '@/lib/constants';
 import { Button } from '@/components/qbutton';
 import QuestionMark from '@/public/icons/question-mark.svg';
+import { Project } from '@/types/project';
 
-const QatalystResponseBoxed = ({ response }: { response: number }) => (
+const QatalystResponseBoxed = ({ response }: { response?: number }) => (
   <div className="border rounded-sm px-2 flex flex-row justify-between bg-white h-[46px] items-center">
     <QatalystResponse response={response} />
     <div className="rounded-full bg-blaze-orange-500 flex items-center justify-center w-[17px] h-[17px] ml-2">
@@ -42,7 +42,8 @@ const SourcesBoxed = ({ num = 0 }: { num: number }) => (
   </div>
 );
 
-export function Content() {
+export function Content({ projectData }: { projectData: Project | null }) {
+  const esgAssessment = projectData?.esgAssessment;
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
       <div className="p-4">
@@ -58,165 +59,26 @@ export function Content() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>
-              <span className="">Risk 1: Human Rights</span>
-            </TableCell>
-            <TableCell>
-              <QatalystResponseBoxed
-                response={QATALYST_RESPONSE.SATISFACTORY}
-              />
-            </TableCell>
-            <TableCell>
-              <UserRatingBoxed />
-            </TableCell>
-            <TableCell>
-              <SourcesBoxed num={6} />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <span className="">Risk 2: Gender Equality</span>
-            </TableCell>
-            <TableCell>
-              <QatalystResponseBoxed response={QATALYST_RESPONSE.INVESTIGATE} />
-            </TableCell>
-            <TableCell>
-              <UserRatingBoxed />
-            </TableCell>
-            <TableCell>
-              <SourcesBoxed num={7} />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 3: Community health, safety and security
-              </span>
-            </TableCell>
-            <TableCell>
-              <QatalystResponseBoxed
-                response={QATALYST_RESPONSE.UNSATISFACTORY}
-              />
-            </TableCell>
-            <TableCell>
-              <UserRatingBoxed />
-            </TableCell>
-            <TableCell>
-              <SourcesBoxed num={3} />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 4: Labour rights of working conditions
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <span className="">Risk 5: Cultural Heritage</span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 6: Indigenous People and Local Communities (IPLCs)
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 7: Land acquisition, displacement and resettlement
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell>
-              <span className="">Risk 8: Corruption</span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 9: Economic impact and community welfare
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 10: Climate change and disaster risks
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 11: Resource efficiency and pollution prevention ; Energy
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell>
-              <span className="">Risk 12: Water</span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell>
-              <span className="">
-                Risk 13: Biodiversity conservation and sustainable natural
-                resource management
-              </span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
-
-          <TableRow>
-            <TableCell className="flex flex-row gap-1 items-center">
-              <Plus className="w-4 h-4" />
-              <span className="text-xs">Add risk</span>
-            </TableCell>
-            <TableCell />
-            <TableCell />
-            <TableCell />
-          </TableRow>
+          {esgAssessment?.risks?.map((risk) => {
+            return (
+              <TableRow key={risk.id}>
+                <TableCell>
+                  <span className="font-semibold">{risk.name}</span>
+                </TableCell>
+                <TableCell>
+                  {typeof risk.qatalystResponse !== 'undefined' ? (
+                    <QatalystResponseBoxed response={risk.qatalystResponse} />
+                  ) : null}
+                </TableCell>
+                <TableCell>
+                  <UserRatingBoxed />
+                </TableCell>
+                <TableCell>
+                  <SourcesBoxed num={risk.sources?.length ?? 0} />
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

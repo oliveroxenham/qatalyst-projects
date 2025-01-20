@@ -1,3 +1,4 @@
+import { QATALYST_RESPONSE } from '@/lib/constants';
 import { Project } from '@/types/project';
 
 const PROJECT_ID_1650: Project = {
@@ -183,6 +184,380 @@ const PROJECT_ID_1650: Project = {
   esgAssessment: {
     status: 'not started',
     progress: 0,
+    risks: [
+      {
+        id: 0,
+        name: 'Risk 1: Human Rights	',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+      },
+      {
+        id: 1,
+        name: 'Risk 2: Gender Equality',
+      },
+      {
+        id: 2,
+        name: 'Risk 3: Community health, safety and security',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+          {
+            name: 'source 5',
+            url: '#source-5',
+          },
+          {
+            name: 'source 6',
+            url: '#source-6',
+          },
+          {
+            name: 'source 7',
+            url: '#source-7',
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: 'Risk 4: Labour rights of working conditions',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: 'Risk 5: Cultural Heritage',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: 'Risk 6: Indigenous People and Local Communities (IPLCs)',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 6,
+        name: 'Risk 7: Land acquisition, displacement and resettlement',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 7,
+        name: 'Risk 8: Corruption',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 8,
+        name: 'Risk 9: Economic impact and community welfare',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 9,
+        name: 'Risk 10: Climate change and disaster risks',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 10,
+        name: 'Risk 11: Resource efficiency and pollution prevention ; Energy',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 11,
+        name: 'Risk 12: Water',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 12,
+        name: 'Risk 13: Biodiversity conservation and sustainable natural resource management',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 13,
+        name: 'Risk 14: Additionality',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 14,
+        name: 'Risk 15: Permanence',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 15,
+        name: 'Risk 16: Robust quantification of emission reductions and removals',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 16,
+        name: 'Risk 17: Sustainable development benefits and safeguards',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+    ],
   },
   kycAssessment: {
     status: 'not started',
@@ -491,8 +866,7 @@ const PROJECT_ID_3: Project = {
       formatted: '',
       value: null,
       unit: 'Hectares',
-      sources: [
-      ],
+      sources: [],
       qatalystGenerated: false,
     },
     estimatedReductionsPerUnitAreaPerYear: {
@@ -569,8 +943,7 @@ const PROJECT_ID_3: Project = {
       formatted: '',
       value: null,
       unit: 'kUSD',
-      sources: [
-      ],
+      sources: [],
       qatalystGenerated: true,
     },
   },
@@ -683,8 +1056,7 @@ const PROJECT_ID_4: Project = {
       formatted: '',
       value: null,
       unit: 'Hectares',
-      sources: [
-      ],
+      sources: [],
       qatalystGenerated: false,
     },
     estimatedReductionsPerUnitAreaPerYear: {
@@ -761,14 +1133,385 @@ const PROJECT_ID_4: Project = {
       formatted: '',
       value: null,
       unit: 'kUSD',
-      sources: [
-      ],
+      sources: [],
       qatalystGenerated: true,
     },
   },
   esgAssessment: {
     status: 'not started',
     progress: 0,
+    risks: [
+      {
+        id: 0,
+        name: 'Risk 1: Human Rights	',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+      },
+      {
+        id: 1,
+        name: 'Risk 2: Gender Equality',
+      },
+      {
+        id: 2,
+        name: 'Risk 3: Community health, safety and security',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+          {
+            name: 'source 5',
+            url: '#source-5',
+          },
+          {
+            name: 'source 6',
+            url: '#source-6',
+          },
+          {
+            name: 'source 7',
+            url: '#source-7',
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: 'Risk 4: Labour rights of working conditions',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: 'Risk 5: Cultural Heritage',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: 'Risk 6: Indigenous People and Local Communities (IPLCs)',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 6,
+        name: 'Risk 7: Land acquisition, displacement and resettlement',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 7,
+        name: 'Risk 8: Corruption',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 8,
+        name: 'Risk 9: Economic impact and community welfare',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 9,
+        name: 'Risk 10: Climate change and disaster risks',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 10,
+        name: 'Risk 11: Resource efficiency and pollution prevention ; Energy',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 11,
+        name: 'Risk 12: Water',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 12,
+        name: 'Risk 13: Biodiversity conservation and sustainable natural resource management',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 13,
+        name: 'Risk 14: Additionality',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 14,
+        name: 'Risk 15: Permanence',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 15,
+        name: 'Risk 16: Robust quantification of emission reductions and removals',
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 16,
+        name: 'Risk 17: Sustainable development benefits and safeguards',
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+    ],
   },
   kycAssessment: {
     status: 'not started',

@@ -14,6 +14,14 @@ export type Source = {
   url: string;
 };
 
+export type EsgRisk = {
+  id: number;
+  name: string;
+  qatalystResponse?: number;
+  userRating?: number;
+  sources?: Source[];
+}
+
 export type Project = {
   id: string;
   imgUrl: string;
@@ -167,6 +175,7 @@ export type Project = {
     assignedTo?: string;
     status: string;
     progress: number;
+    risks?: EsgRisk[];
   };
   kycAssessment: {
     assignedTo?: string;
