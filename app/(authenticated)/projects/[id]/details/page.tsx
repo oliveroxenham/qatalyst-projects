@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { ChevronDown, Edit } from 'lucide-react';
 import { SdgSummary } from '@/components/sdg-summary';
 import { getProjectId } from '@/mock/data';
+import { CollaboratorTag } from '@/components/collaborator-tag';
 
 export default async function ProjectInfoPage({
   params,
@@ -169,7 +170,14 @@ export default async function ProjectInfoPage({
                 <div className="w-1/4">
                   <span className="text-neutral-500">Collaborators</span>
                 </div>
-                <div className="w-3/4">{projectData?.collaborators}</div>
+                <div className="w-3/4 flex flex-wrap gap-1">
+                  {projectData?.collaborators.map((collaborator) => (
+                    <CollaboratorTag
+                      key={collaborator}
+                      collaborator={collaborator}
+                    />
+                  ))}
+                </div>
               </div>
 
               <div>
