@@ -30,7 +30,7 @@ const PROJECT_ID_1650: Project = {
   owner: 'Kopal Agarwal',
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
   registryStatus: 'Registered',
-  projectType: 'Agriculture Forestry and other Land use',
+  projectType: 'Nature-based',
   estimatedAnnualCredits: {
     formatted: '1,426,648',
     value: 1426648,
@@ -628,7 +628,7 @@ const PROJECT_ID_2: Project = {
   // owner: 'Kopal Agarwal',
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
   registryStatus: 'Registered',
-  projectType: 'Agriculture Forestry and other Land use',
+  projectType: 'Nature-based',
   estimatedAnnualCredits: {
     formatted: '1,426,648',
     value: 1426648,
@@ -818,7 +818,7 @@ const PROJECT_ID_3: Project = {
   // owner: 'Kopal Agarwal',
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
   registryStatus: 'Registered',
-  projectType: 'Agriculture Forestry and other Land use',
+  projectType: 'Nature-based',
   estimatedAnnualCredits: {
     formatted: '1,426,648',
     value: 1426648,
@@ -1008,7 +1008,7 @@ const PROJECT_ID_4: Project = {
   // owner: 'Kopal Agarwal',
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
   registryStatus: 'Registered',
-  projectType: 'Agriculture Forestry and other Land use',
+  projectType: 'Cookstove',
   estimatedAnnualCredits: {
     formatted: '1,426,648',
     value: 1426648,

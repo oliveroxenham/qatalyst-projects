@@ -38,6 +38,8 @@ import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import pkgjson from '@/package.json';
 import type { User } from '@/types/user';
+import { getProjectId } from '@/mock/data';
+import { useEffect, useState } from 'react';
 
 const data = {
   overview: [
@@ -88,6 +90,7 @@ const data = {
       icon: ShieldCheck,
       key: 'quality-assessment',
       name: 'Quality Assessment',
+      cookstoveOnly: true,
       url: '/projects/{id}/quality-assessment',
     },
     {
@@ -163,9 +166,23 @@ export const AppSidebar = ({
 }: React.ComponentProps<typeof Sidebar> & { user: User }) => {
   const pathname = usePathname();
   const { open } = useSidebar();
+  const [isCookstove, setIsCookstove] = useState(false);
   const nonProjectPaths = data.overview.map((item) => item.url).join('/new');
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
+
+  const isProjectTypeCookstove = () => {
+    if (!projectId) {
+      return false;
+    }
+    let projectData = getProjectId(projectId);
+    return projectData?.projectType.toLowerCase() === 'cookstove';
+  };
+
+  useEffect(() => {
+    setIsCookstove(isProjectTypeCookstove());
+  }, []);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -209,11 +226,27 @@ export const AppSidebar = ({
             <SidebarMenu>
               {data.projects.map((item) => (
                 <SidebarMenuItem key={item.key} className="pl-2">
-                  {item.disabled ? (
+                  {item.cookstoveOnly && isCookstove && (
+                    <SidebarMenuButton
+                      asChild
+                      disabled={item.disabled}
+                      isActive={
+                        pathname === getProjectPathUrl(item.url, projectId)
+                      }
+                      tooltip={item.name}
+                    >
+                      <Link href={getProjectPathUrl(item.url, projectId)}>
+                        <item.icon />
+                        <span className="text-xs">{item.name}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  )}
+                  {item.disabled && (
                     <SidebarMenuButton className="cursor-not-allowed text-xs text-neutral-500 hover:bg-disabled/20 hover:text-white/50">
                       <item.icon /> {item.name}
                     </SidebarMenuButton>
-                  ) : (
+                  )}
+                  {!item.cookstoveOnly && !item.disabled && (
                     <SidebarMenuButton
                       asChild
                       disabled={item.disabled}
@@ -235,9 +268,7 @@ export const AppSidebar = ({
         )}
       </SidebarContent>
       <div className="flex w-full items-center justify-center">
-        <SidebarFooter>
-          {user ? <NavUser user={user} /> : null}
-        </SidebarFooter>
+        <SidebarFooter>{user ? <NavUser user={user} /> : null}</SidebarFooter>
       </div>
       <SidebarRail />
     </Sidebar>
