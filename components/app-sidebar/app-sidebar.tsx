@@ -171,17 +171,17 @@ export const AppSidebar = ({
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
 
-  const isProjectTypeCookstove = () => {
-    if (!projectId) {
-      return false;
-    }
-    let projectData = getProjectId(projectId);
-    return projectData?.projectType.toLowerCase() === 'cookstove';
-  };
 
   useEffect(() => {
-    setIsCookstove(isProjectTypeCookstove());
-  }, []);
+    const isProjectTypeCookstove = () => {
+      if (!projectId) {
+        return false;
+      }
+      const projectData = getProjectId(projectId);
+      return projectData?.projectType.toLowerCase() === 'cookstove';
+    };
+      setIsCookstove(isProjectTypeCookstove());
+  }, [projectId]);
 
   return (
     <Sidebar collapsible="icon" {...props}>
