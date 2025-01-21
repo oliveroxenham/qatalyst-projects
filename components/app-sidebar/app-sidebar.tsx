@@ -171,7 +171,6 @@ export const AppSidebar = ({
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
 
-
   useEffect(() => {
     const isProjectTypeCookstove = () => {
       if (!projectId) {
@@ -267,9 +266,9 @@ export const AppSidebar = ({
           </SidebarGroup>
         )}
       </SidebarContent>
-      <div className="flex w-full items-center justify-center">
-        <SidebarFooter>{user ? <NavUser user={user} /> : null}</SidebarFooter>
-      </div>
+      {/* <div className="flex w-full items-center justify-center"> */}
+        <SidebarFooter className="w-full">{user ? <NavUser user={user} /> : null}</SidebarFooter>
+      {/* </div> */}
       <SidebarRail />
     </Sidebar>
   );

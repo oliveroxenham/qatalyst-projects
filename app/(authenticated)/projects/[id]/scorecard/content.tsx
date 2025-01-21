@@ -9,8 +9,18 @@ import ProjectTitle from './ProjectTitle';
 import RevenueForecast from './RevenueForecast';
 import { SdgSummary } from '../../../../../components/sdg-summary';
 import { clsx } from 'clsx';
+import { Project } from '@/types/project';
 
-export default function ScoreCardPage({ benchmarkLayoutVisible }: {benchmarkLayoutVisible: boolean}) {
+export default function ScoreCardPage({
+  benchmarkLayoutVisible,
+  projectData,
+}: {
+  benchmarkLayoutVisible: boolean;
+  projectData: Project | null;
+}) {
+  if (!projectData) {
+    return null;
+  }
   return (
     <div className="flex flex-row bg-neutral-100">
       <div className="wrapper w-full overflow-scroll">
@@ -23,23 +33,20 @@ export default function ScoreCardPage({ benchmarkLayoutVisible }: {benchmarkLayo
               })}
             >
               <ProjectTitle
-                projectId="1650"
-                title="Reduced Emissions From Deforestation And Degradation In Keo Seima Wildlife Sanctuary"
-                countryCode="KH"
+                projectId={projectData.id}
+                title={projectData.name}
+                countryCode={projectData.country}
               />
               <ProjectSummary
                 benchmarkLayoutVisible={benchmarkLayoutVisible}
-                data={{
-                  value: '8.5M',
-                  carbonCredits: '4,784,566',
-                  lifetime: '60',
-                  area: '384,566',
-                  status: 'Verified',
-                }}
+                projectData={projectData}
               />
-              <SdgSummary />
+              <div className="m-2 flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-6">
+                <span className="text-muted-foreground text-sm">Sustainable Development Goals</span>
+                <SdgSummary sdgs={projectData.sdgs} />
+              </div>
               <div
-                className={clsx('m-2 grid grid-cols-1 gap-4', {
+                className={clsx('m-2 grid grid-cols-1 gap-2', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
@@ -47,7 +54,7 @@ export default function ScoreCardPage({ benchmarkLayoutVisible }: {benchmarkLayo
                 <Map project={1} />
               </div>
               <div
-                className={clsx('m-2 grid grid-cols-1 gap-4', {
+                className={clsx('m-2 grid grid-cols-1 gap-2', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
@@ -186,7 +193,7 @@ export default function ScoreCardPage({ benchmarkLayoutVisible }: {benchmarkLayo
                 />
               </div>
               <div
-                className={clsx('m-2 grid grid-cols-1 gap-4', {
+                className={clsx('m-2 grid grid-cols-1 gap-2', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >

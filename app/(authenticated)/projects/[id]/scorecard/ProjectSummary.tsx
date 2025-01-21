@@ -1,30 +1,41 @@
+import { Project } from '@/types/project';
 import { clsx } from 'clsx';
 
-const ProjectSummary = ({ benchmarkLayoutVisible, data }: { readonly benchmarkLayoutVisible: boolean, data: {
-  value: string;
-  carbonCredits: string;
-  lifetime: string;
-  area: string;
-  status: string;
-} }) => {
+const ProjectSummary = ({
+  benchmarkLayoutVisible,
+  projectData,
+}: {
+  readonly benchmarkLayoutVisible: boolean;
+  projectData: Project;
+}) => {
   return (
     <div
-      className={clsx('m-2 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-white p-6', {
-        'lg:grid-cols-6': !benchmarkLayoutVisible,
-      })}
+      className={clsx(
+        'm-2 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-white p-6',
+        {
+          'lg:grid-cols-6': !benchmarkLayoutVisible,
+        }
+      )}
     >
-      <div className='border-r border-neutral-200 text-sm'>
-        Project Value
-        <p className='pt-2 text-xl font-medium truncate text-ellipsis'>
-          {data.value} <span className='text-lg'>USD</span>
+      <div className="border-r border-neutral-200 text-sm">
+        <span className="text-muted-foreground">Project Value</span>
+        <p className="pt-2 text-xl font-medium truncate text-ellipsis">
+          {projectData.financialAssessment.projectValue.value
+            ? projectData.financialAssessment.projectValue.formatted
+            : '-'}{' '}
+          {projectData.financialAssessment.projectValue.value ? (
+            <span className="text-lg">
+              {projectData.financialAssessment.projectValue.unit}
+            </span>
+          ) : null}
         </p>
       </div>
-      <div className='border-r border-neutral-200 text-sm'>
-        Carbon Credits
-        <p className='pt-2 text-xl font-medium truncate text-ellipsis'>
-          {data.carbonCredits}{' '}
-          <span className='text-lg'>
-            tCO<sub>2</sub>e
+      <div className="border-r border-neutral-200 text-sm">
+        <span className="text-muted-foreground">Carbon Credits</span>
+        <p className="pt-2 text-xl font-medium truncate text-ellipsis">
+          {projectData.estimatedAnnualCredits.formatted}{' '}
+          <span className="text-lg">
+            {projectData.estimatedAnnualCredits.unit}
           </span>
         </p>
       </div>
@@ -34,24 +45,32 @@ const ProjectSummary = ({ benchmarkLayoutVisible, data }: { readonly benchmarkLa
           'lg:border-r': !benchmarkLayoutVisible,
         })}
       >
-        Project Lifetime
-        <p className='pt-2 text-xl font-medium truncate text-ellipsis'>
-          {data.lifetime} <span className='text-lg'>Years</span>
+        <span className="text-muted-foreground">Project Lifetime</span>
+        <p className="pt-2 text-xl font-medium truncate text-ellipsis">
+          {projectData.financialAssessment.projectDuration.formatted}{' '}
+          <span className="text-lg">
+            {projectData.financialAssessment.projectDuration.unit}
+          </span>
         </p>
       </div>
-      <div className='border-r border-neutral-200 text-sm'>
-        Project Area
-        <p className='pt-2 text-xl font-medium truncate text-ellipsis'>
-          {data.area} <span className='text-lg'>ha</span>
+      <div className="border-r border-neutral-200 text-sm">
+        <span className="text-muted-foreground">Project Area</span>
+        <p className="pt-2 text-xl font-medium truncate text-ellipsis">
+          {projectData.projectArea.formatted}{' '}
+          <span className="text-lg">{projectData.projectArea.unit}</span>
         </p>
       </div>
-      <div className='border-r border-neutral-200 text-sm'>
-        Registry status
-        <p className='pt-2 text-xl font-medium truncate text-ellipsis'>{data.status}</p>
+      <div className="border-r border-neutral-200 text-sm">
+        <span className="text-muted-foreground">Registry status</span>
+        <p className="pt-2 text-xl font-medium truncate text-ellipsis">
+          {projectData.registryStatus}
+        </p>
       </div>
-      <div className='text-sm '>
-        Project type
-        <p className='pt-2 text-xl font-medium truncate text-ellipsis'>Nature-Based</p>
+      <div className="text-sm ">
+        <span className="text-muted-foreground">Project type</span>
+        <p className="pt-2 text-xl font-medium truncate text-ellipsis">
+          {projectData.projectType}
+        </p>
       </div>
     </div>
   );

@@ -47,8 +47,8 @@ const PROJECT_ID_1650: Project = {
     status: 'not started',
     progress: 0,
     projectValue: {
-      formatted: '',
-      value: null,
+      formatted: '123,456',
+      value: 123456,
       unit: 'USD',
       sources: [],
       qatalystGenerated: false,
