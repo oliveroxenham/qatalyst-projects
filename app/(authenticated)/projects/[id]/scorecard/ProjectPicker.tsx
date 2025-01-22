@@ -1,13 +1,10 @@
-import CountryBilateralAgreement from './CountryBilateralAgreement';
 import CreditForecast from './CreditForecast';
 import EsgAssessment from './EsgAssessment';
 import Map from './map';
 import FinancialAssessment from './FinancialAssessment';
-// import ProjectBilateralAgreement from './ProjectBilateralAgreement';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
-import RevenueForecast from './RevenueForecast';
-import { SdgSummary } from '../../../../../components/sdg-summary';
+import { SdgSummary } from '@/components/sdg-summary';
 import { Button } from '@/components/ui/button';
 import {
   Command,
