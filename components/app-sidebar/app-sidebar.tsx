@@ -179,7 +179,7 @@ export const AppSidebar = ({
       const projectData = getProjectId(projectId);
       return projectData?.projectType.toLowerCase() === 'cookstove';
     };
-      setIsCookstove(isProjectTypeCookstove());
+    setIsCookstove(isProjectTypeCookstove());
   }, [projectId]);
 
   return (
@@ -266,9 +266,9 @@ export const AppSidebar = ({
           </SidebarGroup>
         )}
       </SidebarContent>
-      {/* <div className="flex w-full items-center justify-center"> */}
-        <SidebarFooter className="w-full">{user ? <NavUser user={user} /> : null}</SidebarFooter>
-      {/* </div> */}
+      <SidebarFooter>
+        {user ? <NavUser user={user} /> : null}
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

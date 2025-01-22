@@ -588,9 +588,9 @@ const PROJECT_ID_2749: Project = {
   lastUpdated: 'January 6, 2025',
   tags: [
     { value: 'Verra', type: 'VERRA' },
-    { value: '1200', type: 'VERRA' },
+    { value: '2749', type: 'VERRA' },
     { value: '8.2m tCO₂e', type: 'MANUAL' },
-    { value: 'Energy', type: 'MANUAL' },
+    { value: 'Cookstove', type: 'MANUAL' },
     { value: 'Verified', type: 'MANUAL' },
   ],
   creditingStartDate: '04/20/2022',
@@ -620,10 +620,10 @@ const PROJECT_ID_2749: Project = {
   sdgs: [],
   financialAssessment: {
     status: 'in progress',
-    progress: 32,
+    progress: 20,
     projectValue: {
-      formatted: '123,456',
-      value: 123456,
+      formatted: '12,155',
+      value: 12155,
       unit: 'USD',
       sources: [],
       qatalystGenerated: false,

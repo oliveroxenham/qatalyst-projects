@@ -2,10 +2,9 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Check } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/qbutton';
-import { clsx } from 'clsx';
 import { importProject } from '@/server/actions';
+import { Progress } from '@/components/ui/progress';
 const NATURE_BASED = 0,
   COOKSTOVE = 1,
   OTHER = 2,
@@ -56,6 +55,8 @@ export default function NewProjectPage() {
   const [selectedProjectId, setSelectedProjectId] = useState<
     string | undefined
   >();
+  const [progress, setProgress] = useState(0);
+  const [importing, setImporting] = useState(false);
 
   useEffect(() => {
     setSelectedSource(undefined);
@@ -166,24 +167,36 @@ export default function NewProjectPage() {
           <div className="flex flex-col gap-2">
             <span>Available projects to import</span>
             <div className="flex flex-row gap-4 items-center min-h-10">
-              <Badge
-                className={clsx('hover:cursor-pointer', {
-                  'bg-branding-green-600 text-white':
-                    selectedProjectId === '1678',
-                })}
+              <Button
+                size="small"
                 variant="outline"
                 onClick={() => setSelectedProjectId('1678')}
               >
                 1678
-              </Badge>
+              </Button>
               {typeof selectedProjectId !== 'undefined' && (
                 <Button
                   size="small"
                   variant="secondary"
-                  onClick={importProject}
+                  onClick={() => {
+                    setImporting(true);
+                    setProgress(15);
+                    setTimeout(() => setProgress(40), 500);
+                    setTimeout(() => setProgress(75), 900);
+                    setTimeout(() => {
+                      setProgress(100);
+                      importProject();
+                    }, 1500);
+                  }}
                 >
                   Import
                 </Button>
+              )}
+              {importing && (
+                <div className="flex flex-col gap-2 w-full">
+                  <span className="text-sm">Importing project...</span>
+                  <Progress value={progress} />
+                </div>
               )}
             </div>
           </div>

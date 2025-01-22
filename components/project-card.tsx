@@ -25,7 +25,7 @@ export function ProjectCard({
   }
   return (
     <Link
-      className="group border rounded-lg shadow bg-white w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg"
+      className="group border rounded-lg shadow bg-white w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg transition-all"
       href={`/projects/${data.id}/details`}
     >
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>

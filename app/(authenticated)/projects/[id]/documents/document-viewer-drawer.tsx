@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Button } from '@/components/qbutton';
 import { X } from 'lucide-react';
 import {
@@ -10,15 +9,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
 import Image from 'next/image';
 
 export default function DocumentViewer({
@@ -28,43 +18,10 @@ export default function DocumentViewer({
   documentUrl?: string;
   setDocumentUrl: (url?: string) => void;
 }) {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  useEffect(() => {
-    if (documentUrl !== '0') {
-      setDialogOpen(true);
-    } else {
-      setDialogOpen(false);
-    }
-  }, [documentUrl]);
-  if (documentUrl && documentUrl !== '0') {
-    return (
-      <AlertDialog open={dialogOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Unlock More with Qatalyst</AlertDialogTitle>
-            <AlertDialogDescription>
-              This feature is only available in the full Qatalyst app. Please
-              upgrade to unlock it.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction
-              onClick={() => {
-                setDocumentUrl(undefined);
-                setDialogOpen(!dialogOpen);
-              }}
-            >
-              OK
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    );
-  }
   return (
     <div className="mx-auto w-full max-w-sm">
       <Drawer
-        open={documentUrl ? true : false}
+        open={documentUrl === '0'}
         onOpenChange={(open) =>
           open ? setDocumentUrl(documentUrl) : setDocumentUrl(undefined)
         }
