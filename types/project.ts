@@ -45,6 +45,7 @@ export type Project = {
   createdBy: string;
   owner: string;
   collaborators: string[];
+  sourceType: string;
   registryStatus: string;
   projectType: string;
   estimatedAnnualCredits: {

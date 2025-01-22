@@ -6,6 +6,7 @@ import { ChevronDown, Edit } from 'lucide-react';
 import { SdgSummary } from '@/components/sdg-summary';
 import { getProjectId } from '@/mock/data';
 import { CollaboratorTag } from '@/components/collaborator-tag';
+import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 
 export default async function ProjectInfoPage({
   params,
@@ -14,10 +15,19 @@ export default async function ProjectInfoPage({
 }) {
   const projectId = (await params).id;
   const projectData = getProjectId(projectId);
+  console.log({projectData});
   return (
     <div>
       <TopBar title="Project Details">
-        <div className="flex justify-end items-center w-full gap-2">
+        <div className="flex justify-between items-center w-full gap-2">
+          {projectData && (
+            <ProjectInfoTooltip
+              name={projectData.name}
+              sourceType={projectData.sourceType}
+              originalId={projectData.id}
+              projectType={projectData.projectType}
+            />
+          )}
           <ThemeSwitcher />
         </div>
       </TopBar>
@@ -71,8 +81,7 @@ export default async function ProjectInfoPage({
               ) : null}
             </div>
 
-            <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center bg-[url(https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/map_1650-rBewjDh2xpJzP0V53DzRndrO1fBZwz.png)] bg-center">
-            </div>
+            <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center bg-[url(https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/map_1650-rBewjDh2xpJzP0V53DzRndrO1fBZwz.png)] bg-center"></div>
 
             <div className="flex p-4 gap-3">
               <div className="flex flex-col gap-1 grow">

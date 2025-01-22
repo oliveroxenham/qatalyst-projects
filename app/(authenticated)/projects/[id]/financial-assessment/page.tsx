@@ -6,6 +6,7 @@ import Logo from '@/public/icons/logo.svg';
 import { QatalystAi } from '@/components/qatalyst-ai';
 import { Content } from './content';
 import { getProjectId } from '@/mock/data';
+import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 
 export default async function FinancialAssessmentPage({
   params,
@@ -20,9 +21,14 @@ export default async function FinancialAssessmentPage({
       <TopBar title="Financial Assessment">
         <div className="flex justify-between items-center w-full gap-2">
           <div className="flex flex-row items-center gap-1">
-            <Button variant="ghost" size="sm">
-              <Info />
-            </Button>
+            {projectData && (
+              <ProjectInfoTooltip
+                name={projectData.name}
+                sourceType={projectData.sourceType}
+                originalId={projectData.id}
+                projectType={projectData.projectType}
+              />
+            )}
             <Button variant="ghost" size="sm">
               <Lock />
             </Button>

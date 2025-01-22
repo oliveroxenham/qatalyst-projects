@@ -29,6 +29,7 @@ const PROJECT_ID_1650: Project = {
   createdBy: 'Wesley Oxenham',
   owner: 'Kopal Agarwal',
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
+  sourceType: 'Verra',
   registryStatus: 'Registered',
   projectType: 'Nature-based',
   estimatedAnnualCredits: {
@@ -603,6 +604,7 @@ const PROJECT_ID_2749: Project = {
   owner: 'Wesley Oxenham',
   collaborators: ['Wesley Oxenham', 'Kopal Agarwal', 'Poyan Ramajand'],
   registryStatus: 'Registration and verification approval requested',
+  sourceType: 'Verra',
   projectType: 'Cookstove',
   estimatedAnnualCredits: {
     formatted: '37,950',
@@ -1202,6 +1204,7 @@ const PROJECT_ID_3: Project = {
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
   registryStatus: 'Registered',
   projectType: 'Nature-based',
+  sourceType: 'Verra',
   estimatedAnnualCredits: {
     formatted: '1,426,648',
     value: 1426648,
@@ -1392,6 +1395,7 @@ const PROJECT_ID_4: Project = {
   collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
   registryStatus: 'Registered',
   projectType: 'Cookstove',
+  sourceType: 'Verra',
   estimatedAnnualCredits: {
     formatted: '1,426,648',
     value: 1426648,
