@@ -26,6 +26,8 @@ import { cn } from '@/lib/utils';
 import { clsx } from 'clsx';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useState } from 'react';
+import { getProjectId } from '@/mock/data';
+import { CollaboratorTag } from '@/components/collaborator-tag';
 
 const projects = [
   {
@@ -112,113 +114,138 @@ const ProjectPicker = () => {
   const [projectSelected, setProjectSelected] = useState<string | undefined>();
   if (!projectSelected)
     return (
-      <div className="m-2 rounded-lg border border-neutral-200 bg-white p-4">
+      <div className="m-2 rounded-lg border border-neutral-200 bg-background p-4">
         <ProjectListComboBox setProjectSelected={setProjectSelected} />
       </div>
     );
+
+  const projectData = getProjectId('2794');
+  console.log('projectData=', projectData);
+  if (!projectData) return null;
   return (
     <div>
       <ProjectTitle
-        title="The Russas Project"
-        countryCode="BR"
-        projectId="1112"
+        projectId={projectData.id}
+        title={projectData.name}
+        countryCode={projectData.country}
       />
-      <ProjectSummary
-        benchmarkLayoutVisible
-        data={{
-          value: '870,000',
-          carbonCredits: '1,474,189',
-          lifetime: '60',
-          area: '41,976',
-          status: 'Registered',
-        }}
-      />
-      <SdgSummary sdgs={[2]} />
-      {/* <CreditForecast project={2} /> */}
+      <ProjectSummary benchmarkLayoutVisible projectData={projectData} />
       <div
-        className={clsx('m-2 grid grid-cols-1 gap-4', {
+        className={clsx('m-2 grid grid-cols-1 gap-2', {
           'lg:grid-cols-2': false,
         })}
       >
-        <CreditForecast project={2} />
-        <Map project={2} />
-      </div>{' '}
+        <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+          <span className="text-muted-foreground text-sm">
+            Sustainable Development Goals
+          </span>
+          <SdgSummary sdgs={projectData.sdgs} />
+        </div>
+        <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+          <span className="text-muted-foreground text-sm">Collaborators</span>
+          <div className="flex flex-wrap gap-1">
+            {projectData?.collaborators.map((collaborator) => (
+              <CollaboratorTag key={collaborator} collaborator={collaborator} />
+            ))}
+          </div>
+        </div>
+      </div>
       <div
-        className={clsx('m-2 grid grid-cols-1 gap-4', {
+        className={clsx('m-2 grid grid-cols-1 gap-2', {
           'lg:grid-cols-2': false,
         })}
       >
-        <FinancialAssessment data={[
-                    {
-                      id: 1,
-                      title: 'Capital expense intensity',
-                      unit: (
-                        <span>
-                          USD/tCO<sub>2</sub>e
-                        </span>
-                      ),
-                      value: 0.022,
-                    },
-                    {
-                      id: 2,
-                      title: 'Operating expense intensity',
-                      unit: (
-                        <span>
-                          USD/tCO<sub>2</sub>e
-                        </span>
-                      ),
-                      value: 0,
-                    },
-                    {
-                      id: 3,
-                      title: 'Total expense intensity',
-                      unit: (
-                        <span>
-                          USD/tCO<sub>2</sub>e
-                        </span>
-                      ),
-                      value: 0.023,
-                    },
-                    {
-                      id: 4,
-                      title:
-                        'Cost of production (including non carbon revenues)',
-                      unit: (
-                        <span>
-                          USD/tCO<sub>2</sub>e
-                        </span>
-                      ),
-                      value: 0.023,
-                    },
-                    {
-                      id: 5,
-                      title: 'Total net costs',
-                      unit: <span>kUSD</span>,
-                      value: 8.5,
-                    },
-                    {
-                      id: 6,
-                      title: 'Cost of production (net - including financing)',
-                      unit: (
-                        <span>
-                          USD/tCO<sub>2</sub>e
-                        </span>
-                      ),
-                      value: 0.023,
-                    },
-                    {
-                      id: 7,
-                      title: 'Estimated reduction per unit of area per year',
-                      unit: (
-                        <span>
-                          tCO<sub>2</sub>e/ha/yr
-                        </span>
-                      ),
-                      value: 0.654,
-                    },
-                  ]}/>
+        <CreditForecast
+          issuanceRecords={[
+            { totalQuantity: 1804031, year: '2025' },
+            { totalQuantity: 439129, year: '2024' },
+            { totalQuantity: 955477, year: '2023' },
+            { totalQuantity: 1868973, year: '2022' },
+            { totalQuantity: 2437137, year: '2021' },
+          ]}
+          creditingStartDate="2021-01-01"
+          creditingEndDate="2028-12-31"
+          carbonCredits={projectData.estimatedAnnualCredits.value}
+        />
+        <Map project={1} />
+      </div>
+      <div
+        className={clsx('m-2 grid grid-cols-1 gap-2', {
+          'lg:grid-cols-2': false,
+        })}
+      >
+        <FinancialAssessment
+          data={[
+            {
+              id: 1,
+              title: 'Capital expense intensity',
+              unit: (
+                <span>
+                  USD/tCO<sub>2</sub>e
+                </span>
+              ),
+              value: 0.03,
+            },
+            {
+              id: 2,
+              title: 'Operating expense intensity',
+              unit: (
+                <span>
+                  USD/tCO<sub>2</sub>e
+                </span>
+              ),
+              value: 0.1,
+            },
+            {
+              id: 3,
+              title: 'Total expense intensity',
+              unit: (
+                <span>
+                  USD/tCO<sub>2</sub>e
+                </span>
+              ),
+              value: 0.025,
+            },
+            {
+              id: 4,
+              title: 'Cost of production (including non carbon revenues)',
+              unit: (
+                <span>
+                  USD/tCO<sub>2</sub>e
+                </span>
+              ),
+              value: 0.025,
+            },
+            {
+              id: 5,
+              title: 'Total net costs',
+              unit: <span>kUSD</span>,
+              value: 9.5,
+            },
+            {
+              id: 6,
+              title: 'Cost of production (net - including financing)',
+              unit: (
+                <span>
+                  USD/tCO<sub>2</sub>e
+                </span>
+              ),
+              value: 0.025,
+            },
+            {
+              id: 7,
+              title: 'Estimated reduction per unit of area per year',
+              unit: (
+                <span>
+                  tCO<sub>2</sub>e/ha/yr
+                </span>
+              ),
+              value: 0.0754,
+            },
+          ]}
+        />
         <EsgAssessment
-          risk="Medium"
+          risk="Low"
           data={[
             {
               id: 1,
@@ -227,7 +254,7 @@ const ProjectPicker = () => {
             },
             {
               id: 2,
-              satisfactory: false,
+              satisfactory: true,
               title: 'Gender Equality',
             },
             {
@@ -252,7 +279,7 @@ const ProjectPicker = () => {
             },
             {
               id: 7,
-              satisfactory: false,
+              satisfactory: true,
               title: 'Corruption',
             },
             {
@@ -278,14 +305,6 @@ const ProjectPicker = () => {
             },
           ]}
         />
-      </div>
-      <div
-        className={clsx('m-2 grid grid-cols-1 gap-4', {
-          'lg:grid-cols-2': false,
-        })}
-      >
-        <CountryBilateralAgreement project={2} />
-        <RevenueForecast />
       </div>
     </div>
   );

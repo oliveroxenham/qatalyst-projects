@@ -22,6 +22,11 @@ export type EsgRisk = {
   sources?: Source[];
 }
 
+export type IssuanceRecord = {
+  year: string;
+  totalQuantity: number;
+};
+
 export type Project = {
   id: string;
   imgUrl: string;

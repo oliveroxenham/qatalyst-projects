@@ -81,7 +81,7 @@ function FinancialAssessment({
   data: { id: number; title: string; unit: React.ReactElement; value: number }[];
 }) {
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white p-6">
+    <div className="rounded-lg border border-neutral-200 bg-background p-6">
       <div className="pb-4">
         <span className="text-xl font-semibold">Financial Assessment</span>
       </div>

@@ -4,7 +4,7 @@ function Map({ project = 1 }: { project?: number }) {
     project === 1 ? "bg-[url('/cambodia.png')]" : "bg-[url('/brazil.png')]";
   return (
     <div
-      className={`h-[400px] rounded-lg border border-neutral-200 bg-white p-6 pb-20`}
+      className={`h-[500px] rounded-lg border border-neutral-200 bg-background p-6`}
     >
       <div className={`w-full h-full bg-no-repeat ${bgUrl} bg-center bg-contain`}></div>
     </div>

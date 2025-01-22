@@ -1,15 +1,14 @@
 import Map from './map';
-import CountryBilateralAgreement from './CountryBilateralAgreement';
 import CreditForecast from './CreditForecast';
 import EsgAssessment from './EsgAssessment';
 import FinancialAssessment from './FinancialAssessment';
 import ProjectPicker from './ProjectPicker';
 import ProjectSummary from './ProjectSummary';
 import ProjectTitle from './ProjectTitle';
-import RevenueForecast from './RevenueForecast';
-import { SdgSummary } from '../../../../../components/sdg-summary';
+import { SdgSummary } from '@/components/sdg-summary';
 import { clsx } from 'clsx';
 import { Project } from '@/types/project';
+import { CollaboratorTag } from '@/components/collaborator-tag';
 
 export default function ScoreCardPage({
   benchmarkLayoutVisible,
@@ -22,12 +21,12 @@ export default function ScoreCardPage({
     return null;
   }
   return (
-    <div className="flex flex-row bg-neutral-100">
+    <div className="flex flex-row">
       <div className="wrapper w-full overflow-scroll">
         <div className="h-full w-full overflow-auto">
           <div className="flex flex-row gap-0">
             <main
-              className={clsx('h-[calc(100%-84px)] bg-neutral-100', {
+              className={clsx('h-[calc(100%-84px)]', {
                 'w-1/2': benchmarkLayoutVisible,
                 'w-full': !benchmarkLayoutVisible,
               })}
@@ -41,16 +40,48 @@ export default function ScoreCardPage({
                 benchmarkLayoutVisible={benchmarkLayoutVisible}
                 projectData={projectData}
               />
-              <div className="m-2 flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-6">
-                <span className="text-muted-foreground text-sm">Sustainable Development Goals</span>
-                <SdgSummary sdgs={projectData.sdgs} />
+              <div
+                className={clsx('m-2 grid grid-cols-1 gap-2', {
+                  'lg:grid-cols-2': !benchmarkLayoutVisible,
+                })}
+              >
+                <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+                  <span className="text-muted-foreground text-sm">
+                    Sustainable Development Goals
+                  </span>
+                  <SdgSummary sdgs={projectData.sdgs} />
+                </div>
+                <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+                  <span className="text-muted-foreground text-sm">
+                    Collaborators
+                  </span>
+                  <div className="flex flex-wrap gap-1">
+                    {projectData?.collaborators.map((collaborator) => (
+                      <CollaboratorTag
+                        key={collaborator}
+                        collaborator={collaborator}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
               <div
                 className={clsx('m-2 grid grid-cols-1 gap-2', {
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
-                <CreditForecast project={1} />
+                <CreditForecast
+                  issuanceRecords={[
+                    { totalQuantity: 1804031, year: '2025' },
+                    { totalQuantity: 439129, year: '2024' },
+                    { totalQuantity: 955477, year: '2023' },
+                    { totalQuantity: 1868973, year: '2022' },
+                    { totalQuantity: 2437137, year: '2021' },
+                  ]}
+                  creditingStartDate="2021-01-01"
+                  creditingEndDate="2028-12-31"
+                  carbonCredits={projectData.estimatedAnnualCredits.value}
+                />
                 <Map project={1} />
               </div>
               <div
@@ -191,15 +222,6 @@ export default function ScoreCardPage({
                     },
                   ]}
                 />
-              </div>
-              <div
-                className={clsx('m-2 grid grid-cols-1 gap-2', {
-                  'lg:grid-cols-2': !benchmarkLayoutVisible,
-                })}
-              >
-                <CountryBilateralAgreement project={1} />
-                {/* <ProjectBilateralAgreement /> */}
-                <RevenueForecast />
               </div>
             </main>
             {benchmarkLayoutVisible && (

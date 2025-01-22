@@ -95,7 +95,7 @@ function EsgAssessment({
 }) {
   const bgColor = risk === 'Low' ? 'bg-[#00938C]' : 'bg-[#F69339]';
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white p-6">
+    <div className="rounded-lg border border-neutral-200 bg-background p-6">
       <div className="pb-4">
         <span className="text-xl font-semibold">ESG Assessment</span>
       </div>

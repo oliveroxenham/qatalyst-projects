@@ -577,14 +577,14 @@ const PROJECT_ID_1650: Project = {
   ],
 };
 
-const PROJECT_ID_2: Project = {
-  id: '2',
+const PROJECT_ID_2749: Project = {
+  id: '2749',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img1-cR4Tlqih35QOMhPnC8AIH1BYoqRqPC.png',
-  name: 'Renewable Energy Initiative',
-  country: 'CA',
-  countryName: 'Canada',
-  lastUpdated: 'Mar 12, 2023',
+  name: 'Madagascar Improved Cook Stove Project by KCM-Wood#CPA-W-030',
+  country: 'MD',
+  countryName: 'Madagascar',
+  lastUpdated: 'January 6, 2025',
   tags: [
     { value: 'Verra', type: 'VERRA' },
     { value: '1200', type: 'VERRA' },
@@ -592,49 +592,24 @@ const PROJECT_ID_2: Project = {
     { value: 'Energy', type: 'MANUAL' },
     { value: 'Verified', type: 'MANUAL' },
   ],
-  owner: 'John Smith',
-  // financialStatus: 'In Progress',
-  // financialProgress: 50,
-  // esgStatus: 'Not Started',
-  // esgProgress: 25,
-  // kycStatus: 'Eligible',
-  // kycProgress: 100,
-
-  // id: '1650',
-  // imgUrl:
-  //   'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img2-Pesg4thDgdnsXKVZ2eMbgqK6e5jckg.png',
-  // name: 'Reduced Emissions from Deforestation and Degradation in Keo Seima Wildlife Sanctuary',
-  // country: 'KH',
-  // countryName: 'Cambodia',
-  // lastUpdated: 'January 14, 2025',
-  // tags: [
-  //   { value: 'Verra', type: 'VERRA' },
-  //   { value: '1650', type: 'VERRA' },
-  //   { value: '15.3m tCO₂e', type: 'MANUAL' },
-  //   { value: 'Nature-based', type: 'MANUAL' },
-  //   { value: 'Verified', type: 'MANUAL' },
-  // ],
-  creditingStartDate: '12/31/2009',
-  creditingEndDate: '12/30/2069',
-  proponent: 'Royal Government of Cambodia (RGC), Ministry of Environment',
+  creditingStartDate: '04/20/2022',
+  creditingEndDate: '04/19/2032',
+  proponent: 'Korea Carbon Management Ltd, Seoul, South Korea +82234876050 info@korea-carbon.com',
   background:
-    "Nestled in the lush jungles of eastern Cambodia, the Keo Seima Wildlife Sanctuary (KSWS) is a haven for biodiversity and a vast storehouse of forest carbon. Spanning over 290,000 hectares, the protected area is home to a diverse array of wildlife, including 84 globally threatened species and the world's largest population of black-shanked douc and yellow-cheeked crested gibbon. The KSWS also holds a unique cultural significance for the Indigenous Bunong people, who have called this forest home for centuries and whose culture and livelihoods are deeply entwined with the forest. Despite the importance of this area, it faces a high threat of deforestation due to various factors, including forest conversion for agriculture and illegal logging." +
-    'The Keo Seima Wildlife Sanctuary REDD+ Project (KSWS REDD+), launched in 2010 as a collaboration between the Royal Government of Cambodia (RGC) and the Wildlife Conservation Society (WCS), has made impressive strides in reducing deforestation and promoting alternative livelihoods. The project has prevented the release of more than 20 million tons of CO2e emissions and saved 25,000 hectares of forest from destruction. It has also created jobs, supported education and training initiatives, and established an ecotourism venture that supports local communities.' +
-    'The project has also distributed nearly $1 million through its Cash for Communities (C4C) program, a mechanism that shares the revenue of carbon credits sales. These funds go directly to local communities, who decide how they should be spent to support sustainable development activities such as healthcare, education, and infrastructure like wells and bridges.' +
-    "In Cambodia, the Ministry of Environment is at the forefront of protecting the country's protected areas, with a focus on preserving the nation's forests. The WCS is a leading global conservation organization operating in 60+ countries and brings its extensive knowledge and experience in conservation to the project.",
-  latitude: '12.314823',
-  longitude: '106.684903',
+  "The main purpose of this CPA is dissemination of the efficient improved cooking stove woody biomass-based ICS to the rural household of Madagascar. The ICS will burn wood more efficiently thereby improving thermal transfer to pots, which will result in reduced firewood consumption, hence saving fuel. This will not only halt the rapidly progressing deforestation in Madagascar but will also reduce health hazards from indoor smoke pollution and women and children will have to spend less time collecting firewood. Therefore, this will lead to climate change mitigation in a sustainable manner. Overall objectives are reduction of greenhouse gases, conservation of forests and woodlands as well as improved health conditions of ICS users due to improved indoor air quality.",
+  latitude: '-22.41666',
+  longitude: '47.866663',
   createdBy: 'Wesley Oxenham',
-  // owner: 'Kopal Agarwal',
-  collaborators: ['Kopal Agarwal', 'Poyan Ramajand', 'Wesley Oxenham'],
-  registryStatus: 'Registered',
-  projectType: 'Nature-based',
+  owner: 'Wesley Oxenham',
+  collaborators: ['Wesley Oxenham', 'Kopal Agarwal', 'Poyan Ramajand'],
+  registryStatus: 'Registration and verification approval requested',
+  projectType: 'Cookstove',
   estimatedAnnualCredits: {
-    formatted: '1,426,648',
-    value: 1426648,
+    formatted: '37,950',
+    value: 37950,
     unit: 'tons',
   },
-  methodology: 'VM0015',
+  methodology: 'AMS-II.G.',
   projectArea: {
     formatted: '166,983',
     value: 166983,
@@ -645,50 +620,69 @@ const PROJECT_ID_2: Project = {
     status: 'not started',
     progress: 0,
     projectValue: {
-      formatted: '',
-      value: null,
+      formatted: '123,456',
+      value: 123456,
       unit: 'USD',
       sources: [],
       qatalystGenerated: false,
     },
     estimatedReductions: {
-      formatted: '',
-      value: null,
+      formatted: '21,171,578',
+      value: 21171578,
       unit: 'tCO₂e',
-      sources: [],
-      qatalystGenerated: false,
+      sources: [
+        {
+          name: 'test source 1',
+          url: '#test-source-1',
+        },
+        {
+          name: 'test source 2',
+          url: '#test-source-2',
+        },
+      ],
+      qatalystGenerated: true,
     },
     totalEstimatedReductions: {
-      formatted: '',
-      value: null,
+      formatted: '21,171,578',
+      value: 21171578,
       unit: 'tCO₂e',
-      sources: [],
-      qatalystGenerated: false,
+      sources: [
+        {
+          name: 'test source 1',
+          url: '#test-source-1',
+        },
+      ],
+      qatalystGenerated: true,
     },
     projectDuration: {
-      formatted: '',
-      value: null,
+      formatted: '60',
+      value: 60,
       unit: 'Years',
-      sources: [],
-      qatalystGenerated: false,
+      sources: [{ name: 'test-source-1', url: '#test-source-1' }],
+      qatalystGenerated: true,
     },
     projectArea: {
-      formatted: '',
-      value: null,
+      formatted: '166,983',
+      value: 166983,
       unit: 'Hectares',
-      sources: [],
-      qatalystGenerated: false,
+      sources: [
+        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'test-source-1', url: '#test-source-1' },
+      ],
+      qatalystGenerated: true,
     },
     estimatedReductionsPerUnitAreaPerYear: {
-      formatted: '',
-      value: null,
+      formatted: '2.11',
+      value: 2.11,
       unit: 'tCO₂e/Hectare/Year',
       sources: [],
       qatalystGenerated: false,
     },
     estimatedReductionsPerUnitArea: {
-      formatted: '',
-      value: null,
+      formatted: '126.79',
+      value: 126.79,
       unit: 'tCO₂e/Hectare/Year',
       sources: [],
       qatalystGenerated: false,
@@ -750,21 +744,410 @@ const PROJECT_ID_2: Project = {
       qatalystGenerated: false,
     },
     tax: {
-      formatted: '',
-      value: null,
+      formatted: '51,253',
+      value: 51253,
       unit: 'kUSD',
-      sources: [],
+      sources: [
+        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'test-source-1', url: '#test-source-1' },
+      ],
       qatalystGenerated: true,
     },
   },
   esgAssessment: {
     status: 'not started',
     progress: 0,
+    risks: [
+      {
+        id: 0,
+        name: 'Risk 1: Human Rights	',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+      },
+      {
+        id: 1,
+        name: 'Risk 2: Gender Equality',
+      },
+      {
+        id: 2,
+        name: 'Risk 3: Community health, safety and security',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+          {
+            name: 'source 5',
+            url: '#source-5',
+          },
+          {
+            name: 'source 6',
+            url: '#source-6',
+          },
+          {
+            name: 'source 7',
+            url: '#source-7',
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: 'Risk 4: Labour rights of working conditions',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: 'Risk 5: Cultural Heritage',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: 'Risk 6: Indigenous People and Local Communities (IPLCs)',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 6,
+        name: 'Risk 7: Land acquisition, displacement and resettlement',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 7,
+        name: 'Risk 8: Corruption',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 8,
+        name: 'Risk 9: Economic impact and community welfare',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 9,
+        name: 'Risk 10: Climate change and disaster risks',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 10,
+        name: 'Risk 11: Resource efficiency and pollution prevention ; Energy',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 11,
+        name: 'Risk 12: Water',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 12,
+        name: 'Risk 13: Biodiversity conservation and sustainable natural resource management',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 13,
+        name: 'Risk 14: Additionality',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 14,
+        name: 'Risk 15: Permanence',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 15,
+        name: 'Risk 16: Robust quantification of emission reductions and removals',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+      {
+        id: 16,
+        name: 'Risk 17: Sustainable development benefits and safeguards',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+      },
+    ],
   },
   kycAssessment: {
     status: 'not started',
     progress: 0,
   },
+  activities: [
+    {
+      id: 0,
+      date: 'Yesterday at 2:20PM',
+      description: 'Wesley commented on project-development-document.pdf',
+    },
+    {
+      id: 1,
+      date: 'Yesterday at 10:10AM',
+      description: 'Kopal commented on project-development-document.pdf',
+    },
+  ],
 };
 
 const PROJECT_ID_3: Project = {
@@ -1523,8 +1906,8 @@ export const getProjectId = (id: string): Project | null => {
   switch (id) {
     case '1650':
       return PROJECT_ID_1650;
-    case '2':
-      return PROJECT_ID_2;
+    case '2749':
+      return PROJECT_ID_2749;
     case '3':
       return PROJECT_ID_3;
     case '4':
@@ -1536,7 +1919,7 @@ export const getProjectId = (id: string): Project | null => {
 
 export const getInitialMockProjects = () => [
   PROJECT_ID_1650,
-  PROJECT_ID_2,
+  PROJECT_ID_2749,
   PROJECT_ID_3,
 ];
 

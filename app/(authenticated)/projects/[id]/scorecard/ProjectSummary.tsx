@@ -11,7 +11,7 @@ const ProjectSummary = ({
   return (
     <div
       className={clsx(
-        'm-2 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-white p-6',
+        'm-2 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-background p-6',
         {
           'lg:grid-cols-6': !benchmarkLayoutVisible,
         }
