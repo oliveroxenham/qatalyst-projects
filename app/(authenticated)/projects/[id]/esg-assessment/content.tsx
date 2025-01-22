@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -12,9 +14,10 @@ import { QatalystResponse } from './qatalyst-response';
 import { Button } from '@/components/qbutton';
 import QuestionMark from '@/public/icons/question-mark.svg';
 import { Project } from '@/types/project';
+import clsx from 'clsx';
 
 const QatalystResponseBoxed = ({ response }: { response?: number }) => (
-  <div className="border rounded-sm px-2 flex flex-row justify-between bg-white h-[46px] items-center">
+  <div className="border rounded-sm px-2 flex flex-row justify-between bg-white h-[36px] items-center">
     <QatalystResponse response={response} />
     <div className="rounded-full bg-blaze-orange-500 flex items-center justify-center w-[17px] h-[17px] ml-2">
       <Logo className="w-[10px] h-[10px]" />
@@ -22,22 +25,49 @@ const QatalystResponseBoxed = ({ response }: { response?: number }) => (
   </div>
 );
 
-const UserRatingBoxed = () => (
-  <div className="border rounded-sm bg-white w-[146px]">
-    <Button variant="ghost">
-      <Check />
-    </Button>
-    <Button variant="ghost">
-      <X />
-    </Button>
-    <Button variant="ghost">
-      <QuestionMark />
-    </Button>
-  </div>
-);
+const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
+  const [rating, setRating] = useState<number>(currentRating);
+  return (
+    <div className="border rounded-sm bg-white w-[122px]">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setRating(1)}
+        className={clsx({
+          'bg-branding-green-600 text-white': rating === 1,
+          'hover:bg-branding-green-700 hover:text-white': rating == 1,
+        })}
+      >
+        <Check />
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setRating(2)}
+        className={clsx({
+          'bg-[#f34062] text-white': rating === 2,
+          'hover:bg-[#D11C47] hover:text-white': rating === 2,
+        })}
+      >
+        <X />
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setRating(3)}
+        className={clsx({
+          'bg-[#F59E0B] text-white': rating === 3,
+          'hover:bg-[#cc8d20] hover:text-white': rating === 3,
+        })}
+      >
+        <QuestionMark />
+      </Button>
+    </div>
+  );
+};
 
 const SourcesBoxed = ({ num = 0 }: { num: number }) => (
-  <div className="border rounded-sm flex items-center justify-center bg-white min-w-20 h-[46px]">
+  <div className="border rounded-sm flex items-center justify-center bg-white min-w-20 h-[36px]">
     <span className="text-xs">{num} sources</span>
   </div>
 );
@@ -71,7 +101,7 @@ export function Content({ projectData }: { projectData: Project | null }) {
                   ) : null}
                 </TableCell>
                 <TableCell>
-                  <UserRatingBoxed />
+                  <UserRatingBoxed currentRating={0} />
                 </TableCell>
                 <TableCell>
                   <SourcesBoxed num={risk.sources?.length ?? 0} />

@@ -95,7 +95,7 @@ export function Content({ projectData }: { projectData: Project | null }) {
           </TableRow>
           <TableRow>
             <TableCell>
-              <span className="">
+              <span>
                 Estimated Reductions (over Project Duration)
               </span>
             </TableCell>

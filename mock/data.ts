@@ -43,13 +43,13 @@ const PROJECT_ID_1650: Project = {
     value: 166983,
     unit: 'hectares',
   },
-  sdgs: [],
+  sdgs: [1, 2, 6, 8],
   financialAssessment: {
-    status: 'not started',
-    progress: 0,
+    status: 'in progress',
+    progress: 32,
     projectValue: {
-      formatted: '123,456',
-      value: 123456,
+      formatted: '',
+      value: null,
       unit: 'USD',
       sources: [],
       qatalystGenerated: false,
@@ -183,8 +183,8 @@ const PROJECT_ID_1650: Project = {
     },
   },
   esgAssessment: {
-    status: 'not started',
-    progress: 0,
+    status: 'in progress',
+    progress: 95,
     risks: [
       {
         id: 0,
@@ -619,8 +619,8 @@ const PROJECT_ID_2749: Project = {
   },
   sdgs: [],
   financialAssessment: {
-    status: 'not started',
-    progress: 0,
+    status: 'in progress',
+    progress: 32,
     projectValue: {
       formatted: '123,456',
       value: 123456,
@@ -1950,4 +1950,33 @@ export const getDocuments = () => [
     date: 'October 16, 2024',
     lastActivity: 'Kopal imported this file.',
   },
+  {
+    id: 2,
+    type: 'pdf',
+    name: '1650 Keo Seima REDD Project Exemption Letter_02 Aug 2021.pdf',
+    status: 'Ready',
+    size: '2MB',
+    source: 'Verra',
+    date: 'September 21, 2024',
+    lastActivity: 'Poyan uploaded this file.' 
+  },{
+    id: 3,
+    type: 'pdf',
+    size: '5MB',
+    name: 'Verra_response_request_for_exemption_from_template_requirement_19APR2018.pdf',
+    status: 'Ready',
+    source: 'Verra',
+    date: 'September 21, 2024',
+    lastActivity: 'Poyan uploaded this file.'
+  }, 
+  {
+    id: 4,
+    type: 'pdf',
+    size: '2MB',
+    name: 'CCB_MON_REP_SUM_KHM_DRAFT_1650_01JAN2016_01JAN2018.pdf',
+    status: 'Ready',
+    source: 'Verra',
+    date: 'September 21, 2024',
+    lastActivity: 'Poyan uploaded this file.'
+  }
 ];

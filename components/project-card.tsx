@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Project } from '@/types/project';
 import { Progress } from './ui/progress';
+import { clsx } from 'clsx';
 
 export function ProjectCard({
   loading,
@@ -81,13 +82,29 @@ export function ProjectCard({
               type="manual"
               className="flex flex-row items-center gap-1 w-1/2"
             >
-              <div className="h-1 w-1 rounded-full bg-orange-500" />
-              <span className="capitalize">{data.financialAssessment.status}</span>
+              <div
+                className={clsx('h-1 w-1 rounded-full', {
+                  'bg-neutral-500':
+                    data.financialAssessment.status.toLowerCase() ===
+                    'not started',
+                  'bg-orange-500':
+                    data.financialAssessment.status.toLowerCase() ===
+                    'in progress',
+                  'bg-branding-green-600':
+                    data.financialAssessment.status.toLowerCase() ===
+                    'completed',
+                })}
+              />
+              <span className="capitalize">
+                {data.financialAssessment.status}
+              </span>
             </Tag>
             <Progress
-              value={data.financialAssessment ? data.financialAssessment.progress : 0}
+              value={
+                data.financialAssessment ? data.financialAssessment.progress : 0
+              }
               className="w-1/2"
-            />{' '}
+            />
           </div>
           <div>
             <span className="text-xs">ESG</span>
@@ -98,7 +115,16 @@ export function ProjectCard({
               type="manual"
               className="flex flex-row items-center gap-1 w-1/2"
             >
-              <div className="h-1 w-1 rounded-full bg-neutral-500" />
+              <div
+                className={clsx('h-1 w-1 rounded-full', {
+                  'bg-neutral-500':
+                    data.esgAssessment.status.toLowerCase() === 'not started',
+                  'bg-orange-500':
+                    data.esgAssessment.status.toLowerCase() === 'in progress',
+                  'bg-branding-green-600':
+                    data.esgAssessment.status.toLowerCase() === 'completed',
+                })}
+              />
               <span className="capitalize">{data.esgAssessment.status}</span>
             </Tag>
             <Progress
@@ -106,24 +132,41 @@ export function ProjectCard({
               className="w-1/2"
             />
           </div>
-          <div>
-            <span className="text-xs">KYC</span>
-          </div>
+          {data.projectType.toLowerCase() === 'cookstove' && (
+            <>
+              <div>
+                <span className="text-xs">Quality</span>
+              </div>
 
-          <div className="flex gap-2 items-center">
-            <Tag
-              size="small"
-              type="manual"
-              className="flex flex-row items-center gap-1 w-1/2"
-            >
-              <div className="h-1 w-1 rounded-full bg-orange-500" />
-              <span className="capitalize">{data.kycAssessment.status}</span>
-            </Tag>
-            <Progress
-              value={data.kycAssessment.progress ? data.kycAssessment.progress : 0}
-              className="w-1/2"
-            />
-          </div>
+              <div className="flex gap-2 items-center">
+                <Tag
+                  size="small"
+                  type="manual"
+                  className="flex flex-row items-center gap-1 w-1/2"
+                >
+                  <div className={clsx("h-1 w-1 rounded-full", {
+                  'bg-neutral-500':
+                    data.kycAssessment.status.toLowerCase() === 'not started',
+                  'bg-orange-500':
+                    data.kycAssessment.status.toLowerCase() === 'in progress',
+                  'bg-branding-green-600':
+                    data.kycAssessment.status.toLowerCase() === 'completed',
+                })} />
+                  <span className="capitalize">
+                    {data.kycAssessment.status}
+                  </span>
+                </Tag>
+                <Progress
+                  value={
+                    data.kycAssessment.progress
+                      ? data.kycAssessment.progress
+                      : 0
+                  }
+                  className="w-1/2"
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </Link>

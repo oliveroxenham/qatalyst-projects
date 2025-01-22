@@ -7,6 +7,7 @@ import { QatalystAi } from '@/components/qatalyst-ai';
 import { Content } from './content';
 import { getProjectId } from '@/mock/data';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
+import clsx from 'clsx';
 
 export default async function EsgAssessmentPage({
   params,
@@ -21,7 +22,7 @@ export default async function EsgAssessmentPage({
     <div className="flex flex-col h-screen overflow-hidden">
       <TopBar title="ESG Assessment">
         <div className="flex justify-between items-center w-full gap-2">
-          <div className="flex flex-row items-center gap-1">
+          <div className="flex flex-row items-center gap-2">
             {projectData && (
               <ProjectInfoTooltip
                 name={projectData.name}
@@ -41,8 +42,24 @@ export default async function EsgAssessmentPage({
               <span>Kopal</span>
               <ChevronDown />
             </Button>
-            <Button className="bg-neutral-500 text-white" size="sm">
-              <span>Final Rating: Not Started</span>
+            <Button
+              className={clsx('text-white', {
+                'bg-neutral-500':
+                  projectData?.financialAssessment.status.toLowerCase() ===
+                  'not started',
+                'bg-blue-500':
+                  projectData?.financialAssessment.status.toLowerCase() ===
+                  'in progress',
+                'bg-branding-green-600':
+                  projectData?.financialAssessment.status.toLowerCase() ===
+                  'completed',
+                'hover:bg-current/50': true,
+              })}
+              size="sm"
+            >
+              <span className="capitalize">
+                Final Rating: {projectData?.financialAssessment.status}
+              </span>
               <ChevronDown />
             </Button>
           </div>
