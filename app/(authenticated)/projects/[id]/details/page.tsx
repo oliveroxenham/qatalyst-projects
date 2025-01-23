@@ -15,7 +15,7 @@ export default async function ProjectInfoPage({
 }) {
   const projectId = (await params).id;
   const projectData = getProjectId(projectId);
-  console.log({projectData});
+  console.log({ projectData });
   return (
     <div>
       <TopBar title="Project Details">
@@ -80,8 +80,11 @@ export default async function ProjectInfoPage({
                 </div>
               ) : null}
             </div>
-
-            <div className="flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center bg-[url(https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/map_1650-rBewjDh2xpJzP0V53DzRndrO1fBZwz.png)] bg-center"></div>
+            <div
+              // @ts-expect-error - image-url is a custom property
+              style={{ '--image-url': `url(${projectData?.mapUrl})` }}
+              className={`flex m-4 gap-3 h-[220px] bg-muted border justify-center items-center bg-center bg-[image:var(--image-url)]`}
+            />
 
             <div className="flex p-4 gap-3">
               <div className="flex flex-col gap-1 grow">

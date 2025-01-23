@@ -56,8 +56,10 @@ const ProjectSummary = ({
       <div className="border-r border-neutral-200 text-sm">
         <span className="text-muted-foreground">Project Area</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
-          {projectData.projectArea.formatted}{' '}
-          <span className="text-lg">{projectData.projectArea.unit}</span>
+          {projectData.projectArea.value
+            ? projectData.projectArea.formatted
+            : '-'}{' '}
+          {projectData.projectArea.value && <span className="text-lg">{projectData.projectArea.unit}</span>}
         </p>
       </div>
       <div className="border-r border-neutral-200 text-sm">

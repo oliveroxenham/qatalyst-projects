@@ -28,27 +28,9 @@ import { CollaboratorTag } from '@/components/collaborator-tag';
 
 const projects = [
   {
-    label: 'The Russas Project',
-    value: '1',
-  },
-  {
-    label:
-      'Mangrove Restoration Project with Sine Saloum and Casamance communities, Senegal',
-    value: '2',
-  },
-  {
-    label: 'Yambone REDD+ Project',
-    value: '3',
-  },
-  {
-    label:
-      'The Katingan Restoration and Conservation Projecte Forests in Panama',
-    value: '4',
-  },
-  {
-    label: 'Planting Biodiverse Forests in Panama',
-    value: '5',
-  },
+    label: 'DelAgua Clean Cooking Grouped Project',
+    value: '2749',
+  }
 ];
 
 const ProjectListComboBox = ({
@@ -74,7 +56,7 @@ const ProjectListComboBox = ({
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-[500px] p-0">
         <Command>
           <CommandInput placeholder="Search a project..." />
           <CommandList>
@@ -116,7 +98,7 @@ const ProjectPicker = () => {
       </div>
     );
 
-  const projectData = getProjectId('2794');
+  const projectData = getProjectId(projectSelected);
   console.log('projectData=', projectData);
   if (!projectData) return null;
   return (

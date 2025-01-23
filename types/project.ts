@@ -30,6 +30,7 @@ export type IssuanceRecord = {
 export type Project = {
   id: string;
   imgUrl: string;
+  mapUrl?: string;
   name: string;
   country: string;
   countryName: string;
@@ -56,7 +57,7 @@ export type Project = {
   methodology: string;
   projectArea: {
     formatted: string;
-    value: number;
+    value: number | null;
     unit: string;
   };
   financialAssessment: {

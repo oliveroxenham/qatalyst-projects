@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Project } from '@/types/project';
 import { Progress } from './ui/progress';
+import { CollaboratorTag } from './collaborator-tag';
 import { clsx } from 'clsx';
 
 export function ProjectCard({
@@ -64,8 +65,8 @@ export function ProjectCard({
 
         <div className="flex my-4 items-center justify-between">
           <div className="flex gap-2 items-center">
-            <div className="rounded-full w-6 h-6 bg-neutral-300"></div>
-            <span className="text-sm">{data.owner}</span>
+            <span className="text-xs">Owner</span>
+            <CollaboratorTag collaborator={data.owner} />
           </div>
           <span className="text-sm">{data.lastUpdated}</span>
         </div>
@@ -144,14 +145,18 @@ export function ProjectCard({
                   type="manual"
                   className="flex flex-row items-center gap-1 w-1/2"
                 >
-                  <div className={clsx("h-1 w-1 rounded-full", {
-                  'bg-neutral-500':
-                    data.kycAssessment.status.toLowerCase() === 'not started',
-                  'bg-orange-500':
-                    data.kycAssessment.status.toLowerCase() === 'in progress',
-                  'bg-branding-green-600':
-                    data.kycAssessment.status.toLowerCase() === 'completed',
-                })} />
+                  <div
+                    className={clsx('h-1 w-1 rounded-full', {
+                      'bg-neutral-500':
+                        data.kycAssessment.status.toLowerCase() ===
+                        'not started',
+                      'bg-orange-500':
+                        data.kycAssessment.status.toLowerCase() ===
+                        'in progress',
+                      'bg-branding-green-600':
+                        data.kycAssessment.status.toLowerCase() === 'completed',
+                    })}
+                  />
                   <span className="capitalize">
                     {data.kycAssessment.status}
                   </span>
