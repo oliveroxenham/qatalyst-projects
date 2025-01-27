@@ -2361,7 +2361,7 @@ export const getProjectId = (id: string): Project | null => {
     default:
       return null;
   }
-};
+};  
 
 export const getInitialMockProjects = () => [
   PROJECT_ID_1650,

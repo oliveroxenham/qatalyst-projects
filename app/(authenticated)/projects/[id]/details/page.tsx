@@ -7,6 +7,9 @@ import { SdgSummary } from '@/components/sdg-summary';
 import { getProjectId } from '@/mock/data';
 import { CollaboratorTag } from '@/components/collaborator-tag';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
+import { AssigneeSelector } from '@/components/assignee-selector';
+import { currentUser } from '@clerk/nextjs/server';
+import { Badge } from '@/components/ui/badge';
 
 export default async function ProjectInfoPage({
   params,
@@ -15,6 +18,7 @@ export default async function ProjectInfoPage({
 }) {
   const projectId = (await params).id;
   const projectData = getProjectId(projectId);
+  const user = await currentUser();
   console.log({ projectData });
   return (
     <div>
@@ -199,12 +203,10 @@ export default async function ProjectInfoPage({
                       <span className="text-neutral-500">Assign to</span>
                     </div>
                     <div className="w-3/4">
-                      <div className="border rounded-sm p-2">
-                        <span>
-                          {projectData?.financialAssessment.assignedTo ??
-                            'Unassigned'}
-                        </span>
-                      </div>
+                      <AssigneeSelector
+                        currentUser={user?.fullName}
+                        assignedTo={projectData?.financialAssessment.assignedTo}
+                      />
                     </div>
                   </div>
 
@@ -237,12 +239,55 @@ export default async function ProjectInfoPage({
                       <span className="text-neutral-500">Assign to</span>
                     </div>
                     <div className="w-3/4">
-                      <div className="border rounded-sm p-2">
-                        <span>
-                          {projectData?.esgAssessment.assignedTo ??
-                            'Unassigned'}
+                      <AssigneeSelector
+                        currentUser={user?.fullName}
+                        assignedTo={projectData?.financialAssessment.assignedTo}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row">
+                    <div className="flex flex-row w-1/4">
+                      <span className="text-neutral-500">Final Rating</span>
+                    </div>
+                    <div className="w-3/4">
+                      <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
+                        <span className="text-white capitalize">
+                          {projectData?.financialAssessment.status ??
+                            'Not Started'}
                         </span>
                       </div>
+                      <div className="mt-2">
+                        <Button disabled className="w-full">
+                          Generate Assessment
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex flex-row gap-2 items-center">
+                  <span className="font-semibold">KYC Assessment</span>
+                  <Badge
+                    variant="outline"
+                    className="bg-neutral-200 text-neutral-500"
+                  >
+                    Coming Soon
+                  </Badge>
+                </div>
+                <div className="flex flex-col gap-4 mt-2 border rounded p-4">
+                  <div className="flex flex-row items-center">
+                    <div className="flex flex-row w-1/4">
+                      <span className="text-neutral-500">Assign to</span>
+                    </div>
+                    <div className="w-3/4">
+                      <AssigneeSelector
+                        currentUser={user?.fullName}
+                        assignedTo={projectData?.financialAssessment.assignedTo}
+                        disabled
+                      />
                     </div>
                   </div>
 

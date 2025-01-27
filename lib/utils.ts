@@ -15,9 +15,15 @@ export const formattedNumberString = (n: number) => {
   return numberFormatter.format(n);
 };
 
-
 export const abbreviateNumber = (n: number) => {
   if (n >= 1000000) return formattedNumberString(n / 1000000) + 'M';
   if (n >= 1000) return formattedNumberString(n / 1000) + 'K';
   return formattedNumberString(n);
 };
+
+export const getInitialsFromName = (name: string) => {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('');
+}
