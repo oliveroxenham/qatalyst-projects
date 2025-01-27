@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { QATALYST_RESPONSE } from '@/lib/constants';
 import { Project } from '@/types/project';
 
@@ -5,7 +7,8 @@ const PROJECT_ID_1650: Project = {
   id: '1650',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img2-Pesg4thDgdnsXKVZ2eMbgqK6e5jckg.png',
-  mapUrl: 'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/map_1650-rBewjDh2xpJzP0V53DzRndrO1fBZwz.png',
+  mapUrl:
+    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/map_1650-rBewjDh2xpJzP0V53DzRndrO1fBZwz.png',
   name: 'Reduced Emissions from Deforestation and Degradation in Keo Seima Wildlife Sanctuary',
   country: 'KH',
   countryName: 'Cambodia',
@@ -49,6 +52,7 @@ const PROJECT_ID_1650: Project = {
     status: 'in progress',
     progress: 32,
     projectValue: {
+      id: 'projectValue',
       formatted: '',
       value: null,
       unit: 'USD',
@@ -56,6 +60,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     estimatedReductions: {
+      id: 'estimatedReductions',
       formatted: '21,171,578',
       value: 21171578,
       unit: 'tCO₂e',
@@ -70,8 +75,16 @@ const PROJECT_ID_1650: Project = {
         },
       ],
       qatalystGenerated: true,
+      ai: {
+        title: 'Estimated reductions (over project duration)',
+        response: `The estimated reductions over the project duration were determined to be 21,171,578 tCO₂e. This value was extracted from multiple sources: 
+        A table in the project documentation explicitly states the "Net estimated emission reductions in the project area, measured against the without-project scenario" as 21,171,578 for "Achievements during the Project Lifetime" 
+        [1]. This same figure is corroborated in another text source, which presents it in a slightly different format but with the same value 
+        [2]. The determination of this value is likely based on comprehensive calculations and modelling of the project's impact over its entire duration. It represents the total expected reduction in greenhouse gas emissions attributed to the project activities when compared to a baseline scenario without the project. It's important to note that this figure represents the cumulative reductions over the entire project lifetime, not an annual figure. The project is classified as a "large project" due to its significant impact, with annual reductions exceeding 300,000 tonnes of CO₂e [3].`,
+      },
     },
     totalEstimatedReductions: {
+      id: 'totalEstimatedReductions',
       formatted: '21,171,578',
       value: 21171578,
       unit: 'tCO₂e',
@@ -82,15 +95,36 @@ const PROJECT_ID_1650: Project = {
         },
       ],
       qatalystGenerated: true,
+      ai: {
+        title: 'Total estimated reductions',
+        response: `The value for Total estimated reductions was determined based on the following analysis:
+The most relevant information was found in source [1], which provides a table of achievements during the project lifetime.
+The table in [1] lists "Net estimated emission reductions in the project area, measured against the without-project scenario" as 21,171,578.
+This value is the most comprehensive and appears to represent the total estimated reductions for the entire project lifetime.
+The unit tCO₂e is not explicitly stated in the source, but it is the standard unit for GHG emission reductions and is consistent with other sources provided.
+Other sources, such as [2] and [3], provide partial or annual data, but do not give a clear total for the entire project.
+[4] shows a total of 1,641,141, but this appears to be for a shorter period (2018-2019) and not the full project lifetime.
+Therefore, 21,171,578 tCO₂e is the best match for the total estimated reductions over the project's lifetime.`,
+      },
     },
     projectDuration: {
+      id: 'projectDuration',
       formatted: '60',
       value: 60,
       unit: 'Years',
       sources: [{ name: 'test-source-1', url: '#test-source-1' }],
       qatalystGenerated: true,
+      ai: {
+        title: 'Project duration',
+        response: `The project duration was determined to be 10 years based on the following information:
+The fixed baseline period is explicitly stated to be 10 years [1]
+This duration is confirmed in a review of the Project Description (PD) [1]
+The crediting period is described as fixed and 10 years long [2]
+It's important to note that while some sources mention longer crediting periods (e.g., 60 years [3]), the specific question asks for the project duration, which appears to be consistently defined as 10 years across the most relevant sources. The 10-year period likely refers to the fixed baseline period, which is a crucial component of the project's duration for emissions reduction calculations.`,
+      },
     },
     projectArea: {
+      id: 'projectArea',
       formatted: '166,983',
       value: 166983,
       unit: 'Hectares',
@@ -101,8 +135,23 @@ const PROJECT_ID_1650: Project = {
         { name: 'test-source-1', url: '#test-source-1' },
       ],
       qatalystGenerated: true,
+      ai: {
+        title: 'Project area',
+        response: `The Project area value of 166,983 hectares was determined based on the following information and reasoning:
+The Project Area is explicitly stated as comprising 166,983 ha of forested land [1].
+This area is located within the Core Protection Area of the Seima Protection Forest [1].
+The Project Area excludes non-forest land within the boundary [1].
+It includes all forest in the Core Area as designated at the time of the 2009 Sub-decree, with some exceptions [1].
+Exceptions include areas with complex tenure arrangements, such as:
+Areas mapped for issuance of private titles during the national 2012 land amnesty [1].
+The Project Area is part of a larger Project Zone, which is 296,769 ha in size [2].
+The boundary of the Project Area is defined unambiguously using GIS software formats [3].
+The Project Area is named "Seima Protection Forest" [3].
+This value is consistent across multiple sources and is the most specific and detailed measurement provided for the Project Area in hectares.`,
+      },
     },
     estimatedReductionsPerUnitAreaPerYear: {
+      id: 'estimatedReductionsPerUnitAreaPerYear',
       formatted: '2.11',
       value: 2.11,
       unit: 'tCO₂e/Hectare/Year',
@@ -110,6 +159,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     estimatedReductionsPerUnitArea: {
+      id: 'estimatedReductionsPerUnitArea',
       formatted: '126.79',
       value: 126.79,
       unit: 'tCO₂e/Hectare/Year',
@@ -117,6 +167,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     landAcquisitionCost: {
+      id: 'landAcquisitionCost',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -124,6 +175,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     landPerUnitAreaCost: {
+      id: 'landPerUnitAreaCost',
       formatted: '',
       value: null,
       unit: 'kUSD/Hectare',
@@ -131,6 +183,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     plantationEstablishmentMaintenanceCost: {
+      id: 'plantationEstablishmentMaintenanceCost',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -138,6 +191,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     costOfGoodsSold: {
+      id: 'costOfGoodsSold',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -145,6 +199,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     overheads: {
+      id: 'overheads',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -152,6 +207,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     totalGrossCosts: {
+      id: 'totalGrossCosts',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -159,6 +215,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     alternateRevenueSources: {
+      id: 'alternateRevenueSources',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -166,6 +223,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     costOfFinancing: {
+      id: 'costOfFinancing',
       formatted: '',
       value: null,
       unit: 'kUSD',
@@ -173,6 +231,7 @@ const PROJECT_ID_1650: Project = {
       qatalystGenerated: false,
     },
     tax: {
+      id: 'tax',
       formatted: '51,253',
       value: 51253,
       unit: 'kUSD',
@@ -181,6 +240,18 @@ const PROJECT_ID_1650: Project = {
         { name: 'test-source-1', url: '#test-source-1' },
       ],
       qatalystGenerated: true,
+      ai: {
+        title: 'Tax',
+        response: `The value for Tax was determined based on the following analysis:
+  The most relevant source for this information appears to be the table in [1], which shows tax values over multiple years.
+  The highest tax value in this table is 51,253 kUSD, occurring in year t*+5 [1].
+  This value is cumulative, representing the total tax up to that point [1].
+  The unit 'kUSD' is specified in the field description, so the raw number 51,253 is used without the unit.
+  Other sources were considered but did not provide more relevant or comprehensive tax information:
+  [2] shows tax values, but only up to 49,674 kUSD [2].
+  [3] and [4] contain similar tabular data but do not exceed the value found in [1].
+  The value 51,253 kUSD was chosen as it represents the highest cumulative tax amount found in the most relevant source, aligning with the requirement to provide the best matching value for Tax in kUSD units.`,
+      },
     },
   },
   esgAssessment: {
@@ -583,7 +654,8 @@ const PROJECT_ID_2749: Project = {
   id: '2749',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img3-j6vAiE1rqQszvX6r6CIkvt4vYOIYfq.png',
-  mapUrl: 'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/rwanda-b5FqCRhKz4ZNo5c1bP9uVG0bIj8fU6.png',
+  mapUrl:
+    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/rwanda-b5FqCRhKz4ZNo5c1bP9uVG0bIj8fU6.png',
   name: 'DelAgua Clean Cooking Grouped Project',
   country: 'RW',
   countryName: 'Rwanda',
@@ -1022,7 +1094,8 @@ const PROJECT_ID_4811: Project = {
   id: '4811',
   imgUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img1-cR4Tlqih35QOMhPnC8AIH1BYoqRqPC.png',
-  mapUrl: 'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/madagascar-PVcyan3NOgfou1ps9QiKAOXax5VUns.png',
+  mapUrl:
+    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/madagascar-PVcyan3NOgfou1ps9QiKAOXax5VUns.png',
   name: 'Madagascar Improved Cook Stove Project by KCM-Wood#CPA-W-030',
   country: 'MD',
   countryName: 'Madagascar',
@@ -2361,7 +2434,7 @@ export const getProjectId = (id: string): Project | null => {
     default:
       return null;
   }
-};  
+};
 
 export const getInitialMockProjects = () => [
   PROJECT_ID_1650,

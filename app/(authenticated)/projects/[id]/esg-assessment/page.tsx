@@ -74,7 +74,7 @@ export default async function EsgAssessmentPage({
       </TopBar>
       <div className="w-full flex justify-center p-2 pb-[53px] h-full">
         <Content projectData={projectData} />
-        <QatalystAi />
+        <QatalystAi projectData={projectData} />
       </div>
     </div>
   );

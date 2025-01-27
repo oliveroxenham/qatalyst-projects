@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -53,6 +55,16 @@ const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => (
   </TableCell>
 );
 
+const handleRowClick = (elId: string) => {
+  const parentEl = document.getElementById('qatalyst-ai');
+  const childEl = document.getElementById(elId);
+  if (!childEl || !parentEl) return;
+  parentEl.scroll({
+    top: childEl.offsetTop - 78,
+    behavior: 'smooth',
+  });
+};
+
 export function Content({ projectData }: { projectData: Project | null }) {
   if (!projectData) {
     return (
@@ -77,7 +89,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.projectValue.id)}
+          >
             <TableCell>
               <span className="">Project Value (Investment Amount)</span>
             </TableCell>
@@ -93,11 +108,12 @@ export function Content({ projectData }: { projectData: Project | null }) {
             </TableCellWithValue>
             <TableCellWithValueSource sources={data.projectValue.sources} />
           </TableRow>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.estimatedReductions.id)}
+          >
             <TableCell>
-              <span>
-                Estimated Reductions (over Project Duration)
-              </span>
+              <span>Estimated Reductions (over Project Duration)</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -115,7 +131,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
               sources={data.estimatedReductions.sources}
             />
           </TableRow>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.totalEstimatedReductions.id)}
+          >
             <TableCell>
               <span className="">Total Estimated Reductions</span>
             </TableCell>
@@ -135,7 +154,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
               sources={data.totalEstimatedReductions.sources}
             />
           </TableRow>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.projectDuration.id)}
+          >
             <TableCell>
               <span className="">Project Duration</span>
             </TableCell>
@@ -151,7 +173,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             </TableCellWithValue>
             <TableCellWithValueSource sources={data.projectDuration.sources} />
           </TableRow>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.projectArea.id)}
+          >
             <TableCell>
               <span className="">Project Area</span>
             </TableCell>
@@ -167,7 +192,12 @@ export function Content({ projectData }: { projectData: Project | null }) {
             </TableCellWithValue>
             <TableCellWithValueSource sources={data.projectArea.sources} />
           </TableRow>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() =>
+              handleRowClick(data.estimatedReductionsPerUnitArea.id)
+            }
+          >
             <TableCell>
               <span className="">
                 Estimated Reduction Per Unit of Area Per Year
@@ -216,7 +246,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.landAcquisitionCost.id)}
+          >
             <TableCell>
               <span className="">Land Acquisition Cost</span>
             </TableCell>
@@ -236,7 +269,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
               sources={data.landAcquisitionCost.sources}
             />
           </TableRow>
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.landPerUnitAreaCost.id)}
+          >
             <TableCell>
               <span className="">Land Per Unit Area Cost</span>
             </TableCell>
@@ -257,7 +293,12 @@ export function Content({ projectData }: { projectData: Project | null }) {
             />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() =>
+              handleRowClick(data.plantationEstablishmentMaintenanceCost.id)
+            }
+          >
             <TableCell>
               <span className="">
                 Plantation Establishment and Maintenance Cost
@@ -283,7 +324,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.costOfGoodsSold.id)}
+          >
             <TableCell>
               <span className="">Cost of Goods Sold (COGS)</span>
             </TableCell>
@@ -300,7 +344,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             <TableCellWithValueSource sources={data.costOfGoodsSold.sources} />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.overheads.id)}
+          >
             <TableCell>
               <span className="">Overheads</span>
             </TableCell>
@@ -315,7 +362,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             <TableCellWithValueSource sources={data.overheads.sources} />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.totalGrossCosts.id)}
+          >
             <TableCell>
               <span className="">Total Gross Costs</span>
             </TableCell>
@@ -332,7 +382,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             <TableCellWithValueSource sources={data.totalGrossCosts.sources} />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.alternateRevenueSources.id)}
+          >
             <TableCell>
               <span className="">Alternate Revenue Sources (Non-carbon)</span>
             </TableCell>
@@ -353,7 +406,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.costOfFinancing.id)}
+          >
             <TableCell>
               <span className="">Cost of Financing</span>
             </TableCell>
@@ -370,7 +426,10 @@ export function Content({ projectData }: { projectData: Project | null }) {
             <TableCellWithValueSource sources={data.costOfFinancing.sources} />
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() => handleRowClick(data.tax.id)}
+          >
             <TableCell>
               <span className="">Tax</span>
             </TableCell>

@@ -42,7 +42,7 @@ export default function QualityAssessmentPage() {
       </TopBar>
       <div className="w-full flex justify-center p-2 pb-[53px] h-full">
         <Content />
-        <QatalystAi />
+        <QatalystAi projectData={null} />
       </div>
     </div>
   );

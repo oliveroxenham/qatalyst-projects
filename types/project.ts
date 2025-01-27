@@ -27,6 +27,19 @@ export type IssuanceRecord = {
   totalQuantity: number;
 };
 
+export type FAItem = {
+  id: string;
+  formatted: string;
+  value: number | null;
+  unit: string;
+  sources: Source[],
+  qatalystGenerated: boolean;
+  ai?: {
+    title: string;
+    response: string;
+  }
+}
+
 export type Project = {
   id: string;
   imgUrl: string;
@@ -64,118 +77,22 @@ export type Project = {
     assignedTo?: string;
     status: string;
     progress: number;
-    projectValue: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[];
-      qatalystGenerated: boolean;
-    },
-    estimatedReductions: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    totalEstimatedReductions: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    projectDuration: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    }
-    projectArea: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    estimatedReductionsPerUnitAreaPerYear: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    estimatedReductionsPerUnitArea: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    landAcquisitionCost: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    landPerUnitAreaCost: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    plantationEstablishmentMaintenanceCost: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    costOfGoodsSold: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    overheads: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    totalGrossCosts: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    alternateRevenueSources: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    costOfFinancing: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    },
-    tax: {
-      formatted: string;
-      value: number | null;
-      unit: string;
-      sources: Source[],
-      qatalystGenerated: boolean;
-    }
+    projectValue: FAItem;
+    estimatedReductions: FAItem;
+    totalEstimatedReductions: FAItem;
+    projectDuration: FAItem;
+    projectArea: FAItem;
+    estimatedReductionsPerUnitAreaPerYear: FAItem;
+    estimatedReductionsPerUnitArea: FAItem;
+    landAcquisitionCost: FAItem;
+    landPerUnitAreaCost: FAItem;
+    plantationEstablishmentMaintenanceCost: FAItem;
+    costOfGoodsSold: FAItem;
+    overheads: FAItem;
+    totalGrossCosts: FAItem;
+    alternateRevenueSources: FAItem;
+    costOfFinancing: FAItem;
+    tax: FAItem;
 
   };
   esgAssessment: {
