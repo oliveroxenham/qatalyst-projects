@@ -11,6 +11,7 @@ import {
 import { Project, Source } from '@/types/project';
 import { Plus, Sigma } from 'lucide-react';
 import Logo from '@/public/icons/logo.svg';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 const QatalystIcon = () => (
   <div className="w-5 h-5 rounded-full flex items-center justify-center bg-blaze-orange-600 ml-2">
@@ -55,17 +56,37 @@ const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => (
   </TableCell>
 );
 
-const handleRowClick = (elId: string) => {
-  const parentEl = document.getElementById('qatalyst-ai');
-  const childEl = document.getElementById(elId);
-  if (!childEl || !parentEl) return;
-  parentEl.scroll({
-    top: childEl.offsetTop - 78,
-    behavior: 'smooth',
-  });
-};
+export function Content({
+  projectData,
+  setAiSidebarOpen,
+}: {
+  projectData: Project | null;
+  setAiSidebarOpen: Dispatch<SetStateAction<boolean>>;
+}) {
+  const [elId, setElId] = useState<string | undefined>();
+  useEffect(() => {
+    if (!elId) {
+      return;
+    }
+    const parentEl = document.getElementById('qatalyst-ai');
+    const childEl = document.getElementById(elId);
+    if (!childEl || !parentEl) return;
+    parentEl.scroll({
+      top: childEl.offsetTop - 78,
+      behavior: 'smooth',
+    });
+    childEl.classList.add('bg-orange-100');
+    setTimeout(() => {
+      childEl.classList.remove('bg-orange-100');
+    }, 2000);
 
-export function Content({ projectData }: { projectData: Project | null }) {
+  }, [elId])
+  const handleRowClick = (elementId: string) => {
+    if (!elementId) return;
+    setAiSidebarOpen(true);
+    setElId(elementId);
+  };
+
   if (!projectData) {
     return (
       <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">
@@ -326,7 +347,9 @@ export function Content({ projectData }: { projectData: Project | null }) {
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() => handleRowClick(data.costOfGoodsSold.id)}
+            onClick={() =>
+              handleRowClick(data.costOfGoodsSold.id)
+            }
           >
             <TableCell>
               <span className="">Cost of Goods Sold (COGS)</span>
@@ -364,7 +387,9 @@ export function Content({ projectData }: { projectData: Project | null }) {
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() => handleRowClick(data.totalGrossCosts.id)}
+            onClick={() =>
+              handleRowClick(data.totalGrossCosts.id)
+            }
           >
             <TableCell>
               <span className="">Total Gross Costs</span>
@@ -384,7 +409,9 @@ export function Content({ projectData }: { projectData: Project | null }) {
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() => handleRowClick(data.alternateRevenueSources.id)}
+            onClick={() =>
+              handleRowClick(data.alternateRevenueSources.id)
+            }
           >
             <TableCell>
               <span className="">Alternate Revenue Sources (Non-carbon)</span>
@@ -408,7 +435,9 @@ export function Content({ projectData }: { projectData: Project | null }) {
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() => handleRowClick(data.costOfFinancing.id)}
+            onClick={() =>
+              handleRowClick(data.costOfFinancing.id)
+            }
           >
             <TableCell>
               <span className="">Cost of Financing</span>

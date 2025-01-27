@@ -2,14 +2,13 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
 import { ChevronDown, Lock } from 'lucide-react';
-import { QatalystAi } from '@/components/qatalyst-ai';
-import { Content } from './content';
 import { getProjectId } from '@/mock/data';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import clsx from 'clsx';
 import { AssigneeSelector } from '@/components/assignee-selector';
 import { currentUser } from '@clerk/nextjs/server';
 import { GenerateAssessmentButton } from '@/components/generate-assessment-button';
+import { ChildComponents } from './childComponents';
 
 export default async function FinancialAssessmentPage({
   params,
@@ -78,8 +77,7 @@ export default async function FinancialAssessmentPage({
         </div>
       </TopBar>
       <div className="w-full flex justify-center p-2 pb-[53px] h-full">
-        <Content projectData={projectData} />
-        <QatalystAi projectData={projectData} />
+        <ChildComponents projectData={projectData} />
       </div>
     </div>
   );
