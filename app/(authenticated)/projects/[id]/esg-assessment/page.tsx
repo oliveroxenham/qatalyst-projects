@@ -3,10 +3,9 @@ import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
 import { ChevronDown, Lock } from 'lucide-react';
 import Logo from '@/public/icons/logo.svg';
-import { QatalystAi } from '@/components/qatalyst-ai';
-import { Content } from './content';
 import { getProjectId } from '@/mock/data';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
+import { ChildComponents } from './childComponents';
 import clsx from 'clsx';
 
 export default async function EsgAssessmentPage({
@@ -73,8 +72,7 @@ export default async function EsgAssessmentPage({
         </div>
       </TopBar>
       <div className="w-full flex justify-center p-2 pb-[53px] h-full">
-        <Content projectData={projectData} />
-        <QatalystAi projectData={projectData} />
+        <ChildComponents projectData={projectData} />
       </div>
     </div>
   );

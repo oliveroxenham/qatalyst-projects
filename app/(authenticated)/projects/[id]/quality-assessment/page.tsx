@@ -3,7 +3,7 @@ import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
 import { ChevronDown, Info, Lock } from 'lucide-react';
 import Logo from '@/public/icons/logo.svg';
-import { QatalystAi } from '@/components/qatalyst-ai';
+import { QatalystAi } from '@/components/qatalyst-ai-financial';
 import { Content } from './content';
 
 export default function QualityAssessmentPage() {

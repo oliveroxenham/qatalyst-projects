@@ -28,3 +28,14 @@ export const FINANCIAL_ASSESSMENT_ITEMS = [
   'costOfFinancing',
   'tax',
 ];
+
+export const ESG_ASSESSMENT_ITEMS = [
+  'human-rights',
+  'gender-equality',
+  'community-health',
+  'labour-rights',
+  'cultural-heritage',
+  'indigenous-people',
+  'land-acquisition',
+  'corruption'
+]

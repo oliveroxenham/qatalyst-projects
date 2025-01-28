@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   Table,
   TableBody,
@@ -72,8 +72,46 @@ const SourcesBoxed = ({ num = 0 }: { num: number }) => (
   </div>
 );
 
-export function Content({ projectData }: { projectData: Project | null }) {
-  const esgAssessment = projectData?.esgAssessment;
+export function Content({
+  projectData,
+  setAiSidebarOpen,
+}: {
+  projectData: Project | null;
+  setAiSidebarOpen: Dispatch<SetStateAction<boolean>>;
+}) {
+  const [elId, setElId] = useState<string | undefined>();
+  useEffect(() => {
+    if (!elId) {
+      return;
+    }
+    const parentEl = document.getElementById('qatalyst-ai');
+    const childEl = document.getElementById(elId);
+    if (!childEl || !parentEl) return;
+    parentEl.scroll({
+      top: childEl.offsetTop - 78,
+      behavior: 'smooth',
+    });
+    childEl.classList.add('bg-orange-100');
+    setTimeout(() => {
+      childEl.classList.remove('bg-orange-100');
+    }, 2000);
+  }, [elId]);
+
+  const handleRowClick = (elementId: string) => {
+    if (!elementId) return;
+    setAiSidebarOpen(true);
+    setElId(elementId);
+  };
+
+  if (!projectData) {
+    return (
+      <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">
+        <span>No ESG assessment data is available for this project.</span>
+      </div>
+    );
+  }
+
+  const esgAssessment = projectData.esgAssessment;
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
       <div className="p-4">
@@ -89,9 +127,13 @@ export function Content({ projectData }: { projectData: Project | null }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {esgAssessment?.risks?.map((risk) => {
+          {esgAssessment.risks?.map((risk) => {
             return (
-              <TableRow key={risk.id}>
+              <TableRow
+                key={risk.id}
+                className="hover:cursor-pointer"
+                onClick={() => handleRowClick(risk.id)}
+              >
                 <TableCell>
                   <span className="font-semibold">{risk.name}</span>
                 </TableCell>

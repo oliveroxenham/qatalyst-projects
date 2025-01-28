@@ -1,6 +1,6 @@
 'use client';
 
-import { QatalystAi } from '@/components/qatalyst-ai-financial';
+import { QatalystAi } from '@/components/qatalyst-ai-esg';
 import { Content } from './content';
 import { Project } from '@/types/project';
 import { useState } from 'react';

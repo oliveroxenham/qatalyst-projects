@@ -259,7 +259,7 @@ This value is consistent across multiple sources and is the most specific and de
     progress: 95,
     risks: [
       {
-        id: 0,
+        id: 'human-rights',
         name: 'Risk 1: Human Rights	',
         qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
         sources: [
@@ -268,13 +268,17 @@ This value is consistent across multiple sources and is the most specific and de
             url: '#source-1',
           },
         ],
+        ai: {
+          title: 'Human Rights',
+          response: `Based on the provided information and the context of the question, the most appropriate answer is 'Investigate'. The document source provided does not contain sufficient information to fully address the human rights considerations outlined in the question. While the source mentions some aspects related to equal rights and access to resources [1], it does not comprehensively cover the range of human rights issues specified in the question context. The lack of detailed information on human rights analysis, respect for human rights, protection against infringements, non-discrimination, and specific safeguards for vulnerable groups necessitates further investigation to make a definitive assessment.`,
+        },
       },
       {
-        id: 1,
+        id: 'gender-equality',
         name: 'Risk 2: Gender Equality',
       },
       {
-        id: 2,
+        id: 'community-health',
         name: 'Risk 3: Community health, safety and security',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -307,9 +311,35 @@ This value is consistent across multiple sources and is the most specific and de
             url: '#source-7',
           },
         ],
+        ai: {
+          title: 'Community health, safety and security',
+          response: `The answer 'Satisfactory' is based on the following evidence from the document sources:
+
+1. The project provides comprehensive health and safety measures for both staff and local communities:
+
+WCS Health and Safety policies protect all project staff and counterparts [1] [2].
+Health and accident insurance is provided to staff, covering all healthcare expenses in case of work-related incidents or illnesses [1] [2].
+2. Training and capacity building for community safety:
+
+Community members involved in project activities like patrolling and eco-tourism receive safety and security training, typically on an annual basis [3].
+Training on community patrol and SMART reports in Khmer provides information on safety and security for patrol teams [3].
+3. Community infrastructure and health initiatives:
+
+The project supports various community infrastructure projects, including road repair, bridge construction, and installation of road drainage [4].
+Health-related activities include installation of pump wells, piped water systems, construction of toilets, mobile health clinics, and community funds for health emergencies [4].
+4. Monitoring and risk management:
+
+There is a clear plan for monitoring community-related High Conservation Values (HCVs), including demographic and socioeconomic monitoring [5].
+The project has developed specific guidance for managing risks with local communities during the COVID-19 pandemic [6].
+5. Workplace health and safety:
+
+Staff are required to inform project management of unsafe conditions, illnesses, or injuries for prompt remedial action [7].
+WCS is committed to providing a safe working environment for all [2].
+These measures demonstrate a comprehensive approach to community health, safety, and security, justifying the 'Satisfactory' rating.`,
+        },
       },
       {
-        id: 3,
+        id: 'labour-rights',
         name: 'Risk 4: Labour rights of working conditions',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -330,9 +360,29 @@ This value is consistent across multiple sources and is the most specific and de
             url: '#source-4',
           },
         ],
+        ai: {
+          title: 'Labour rights of working conditions',
+          response: `The answer 'Satisfactory' is based on the following evidence from the provided sources:
+
+1. The project adheres to relevant labour laws and regulations. Government employees are covered by their ministries' employment conditions, which are assumed to comply with all relevant laws and policies [1].
+
+2. For NGO partner staff, labour rights and working conditions are governed by the Labor Law (1997), employment contracts, and WCS's Internal Policies and Regulations. These policies meet or exceed legal requirements [2].
+
+3. All staff receive copies of their employment contracts, outlining their rights and referencing other relevant documents such as the WCS Human Resources Manual [2].
+
+4. The project complies with Article 12 of the Labor Law, which prohibits discrimination based on various factors including race, religion, sex, age, and disability [3] [4].
+
+5. The monitoring report confirms that the project is in compliance with relevant labour laws and regulations [5].
+
+6. The verification process included monitoring and interviewing activities, which were found to have a very low level of risk for legal non-compliance [6].
+
+7. During site inspections, the audit team agreed that a system is in place to ensure labour laws are respected during project implementation [6].
+
+These points demonstrate that the project has taken appropriate measures to ensure fair and legal labour practices, justifying a 'Satisfactory' rating for labour rights and working conditions.`,
+        },
       },
       {
-        id: 4,
+        id: 'cultural-heritage',
         name: 'Risk 5: Cultural Heritage',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -353,9 +403,32 @@ This value is consistent across multiple sources and is the most specific and de
             url: '#source-4',
           },
         ],
+        ai: {
+          title: 'Cultural heritage',
+          response: `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
+
+1. Cultural heritage sites have been identified and mapped. [1] [2] [3] [4]
+
+2. The project has implemented interventions to protect cultural heritage:
+
+Village level land-use planning to map and protect spiritual sites [5]
+Law enforcement to protect spiritual sites from outside threats [5] [6]
+Appropriate zoning of the KSWS that recognizes spiritual sites [6]
+3. The project recognizes the importance of cultural heritage to local communities:
+
+19 out of 20 villages are predominantly ethnic Bunong with strong cultural links to the forest [1] [2] [3] [4]
+Culturally important areas such as 'spirit forests', 'spirit pools', and grave forests have been identified [1] [2] [3] [4]
+4. There are ongoing efforts to maintain and protect cultural heritage:
+
+Socio-economic monitoring and involvement of indigenous communities in remote sensing and threats monitoring [7]
+Awareness raising about the cultural and historical importance of these areas with relevant authorities [8]
+5. The project aims to increase security and productivity of natural resources to support local livelihoods, which aligns with preserving cultural heritage [5]
+
+These actions demonstrate a satisfactory approach to identifying, protecting, and managing cultural heritage in the project area, in line with the requirements outlined in the question context.`,
+        },
       },
       {
-        id: 5,
+        id: 'indigenous-people',
         name: 'Risk 6: Indigenous People and Local Communities (IPLCs)',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -376,9 +449,31 @@ This value is consistent across multiple sources and is the most specific and de
             url: '#source-4',
           },
         ],
+        ai: {
+          title: 'Indigenous people and local communities (IPLCs)',
+          response: `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
+
+1. The project actively supports Indigenous Communal Land Titling (ICT) process, which aligns with respecting the rights of Indigenous Peoples to land and territories [1] [2].
+
+2. Free, Prior and Informed Consent (FPIC) is acknowledged as a right for indigenous peoples, as enshrined in the UN Declaration on the Rights of Indigenous Peoples [3].
+
+3. The project involves full participation of indigenous communities in decision-making and implementation [4].
+
+4. Efforts are made to conserve the culture and tradition of indigenous communities within protected areas [5] [6].
+
+5. The project supports sustainable livelihoods for local communities [3] [5].
+
+6. Specific guidance has been produced to protect the rights of Indigenous Peoples and Local Communities during the COVID-19 pandemic [7].
+
+7. The project addresses potential risks and conflicts in the ICT process, ensuring marginalized groups are accounted for [8].
+
+8. There is evidence of ongoing support and successful outcomes in the ICT process, with multiple communities either obtaining or in the process of obtaining ICTs [1] [9] [2].
+
+These points demonstrate that the project is actively working to respect and protect the rights, lands, and cultures of Indigenous Peoples and Local Communities, while ensuring their participation and consent in project activities.`,
+        },
       },
       {
-        id: 6,
+        id: 'land-acquisition',
         name: 'Risk 7: Land acquisition, displacement and resettlement',
         qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
         sources: [
@@ -401,7 +496,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 7,
+        id: '7',
         name: 'Risk 8: Corruption',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -424,7 +519,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 8,
+        id: '8',
         name: 'Risk 9: Economic impact and community welfare',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -447,7 +542,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 9,
+        id: '9',
         name: 'Risk 10: Climate change and disaster risks',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -470,7 +565,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 10,
+        id: '10',
         name: 'Risk 11: Resource efficiency and pollution prevention ; Energy',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -493,7 +588,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 11,
+        id: '11',
         name: 'Risk 12: Water',
         qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
         sources: [
@@ -516,7 +611,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 12,
+        id: '12',
         name: 'Risk 13: Biodiversity conservation and sustainable natural resource management',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -539,7 +634,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 13,
+        id: '13',
         name: 'Risk 14: Additionality',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -562,7 +657,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 14,
+        id: '14',
         name: 'Risk 15: Permanence',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -585,7 +680,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 15,
+        id: '15',
         name: 'Risk 16: Robust quantification of emission reductions and removals',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [
@@ -608,7 +703,7 @@ This value is consistent across multiple sources and is the most specific and de
         ],
       },
       {
-        id: 16,
+        id: '16',
         name: 'Risk 17: Sustainable development benefits and safeguards',
         qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
         sources: [

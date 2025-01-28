@@ -15,11 +15,16 @@ export type Source = {
 };
 
 export type EsgRisk = {
-  id: number;
+  id: string;
   name: string;
   qatalystResponse?: number;
   userRating?: number;
   sources?: Source[];
+  qatalystGenerated?: boolean;
+  ai?: {
+    title: string;
+    response: string;
+  }
 }
 
 export type IssuanceRecord = {
