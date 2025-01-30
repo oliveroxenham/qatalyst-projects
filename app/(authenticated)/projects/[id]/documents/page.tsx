@@ -8,10 +8,9 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getDocumentsByProjectIdServer } from '@/server/db';
+import { getDocumentsByProjectIdServer, getProjectByIdServer } from '@/server/db';
 import DocumentList from './document-list';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
-import { getProjectId } from '@/mock/data';
 
 export default async function DocumentsPage({
   params,
@@ -19,7 +18,7 @@ export default async function DocumentsPage({
   params: Promise<{ id: string }>;
 }) {
   const projectId = (await params).id;
-  const projectData = getProjectId(projectId);
+  const projectData = await getProjectByIdServer({ id: projectId });
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['documents', projectId],

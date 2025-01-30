@@ -2,13 +2,13 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
 import { ChevronDown, Lock } from 'lucide-react';
-import { getProjectId } from '@/mock/data';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
-import clsx from 'clsx';
 import { AssigneeSelector } from '@/components/assignee-selector';
 import { currentUser } from '@clerk/nextjs/server';
 import { GenerateAssessmentButton } from '@/components/generate-assessment-button';
 import { ChildComponents } from './childComponents';
+import { getProjectByIdServer } from '@/server/db';
+import clsx from 'clsx';
 
 export default async function FinancialAssessmentPage({
   params,
@@ -16,7 +16,7 @@ export default async function FinancialAssessmentPage({
   params: Promise<{ id: string }>;
 }) {
   const projectId = (await params).id;
-  const projectData = getProjectId(projectId);
+  const projectData = await getProjectByIdServer({ id: projectId });
   const user = await currentUser();
 
   console.log('projectData=', projectData);
@@ -39,11 +39,10 @@ export default async function FinancialAssessmentPage({
             <div className="flex flex-row items-center gap-1">
               <span className="text-sm">Assignee:</span>
               <AssigneeSelector
+                projectId={projectId}
                 currentUser={user?.fullName}
+                assessment="financial"
                 assignedTo={projectData?.financialAssessment.assignedTo}
-                // onChange={(assignee) => {
-                //   console.log('new assignee=', assignee);
-                // }}
               />
             </div>
             <Button

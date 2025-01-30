@@ -5,11 +5,11 @@ import { getInitialMockProjects, getProjectId } from '@/mock/data';
 const redis = Redis.fromEnv();
 
 export async function POST(req: NextRequest) {
-  const { user, projectId, assessment } = await req.json();
-  console.log('params=', { user, projectId, assessment });
-  if (!user || !projectId || !assessment) {
+  const { assignee, projectId, assessment } = await req.json();
+  console.log('params=', { assignee, projectId, assessment });
+  if (!assignee || !projectId || !assessment) {
     return NextResponse.json(
-      { msg: 'Please provide user, projectId and assessment' },
+      { msg: 'Please provide assignee, projectId and assessment' },
       { status: 400 }
     );
   }
@@ -22,16 +22,22 @@ export async function POST(req: NextRequest) {
     for (let i = 0; i < allProjects.length; i++) {
       if (allProjects[i].id === currentProject.id) {
         if (assessment === 'financial') {
-          allProjects[i].financialAssessment.assignedTo = user;
+          allProjects[i].financialAssessment.assignedTo = assignee;
+          console.log('project=', allProjects[i])
         } else if (assessment === 'esg') {
-          allProjects[i].esgAssessment.assignedTo = user;
+          allProjects[i].esgAssessment.assignedTo = assignee;
+          console.log('project=', allProjects[i])
+        } else {
+          return NextResponse.json({
+            msg: 'Invalid assessment',
+            status: 400,
+          });
         }
         break;
       }
     }
 
     console.log('allProjects=', allProjects);
-
     await redis.set('projects', allProjects);
 
     return NextResponse.json(

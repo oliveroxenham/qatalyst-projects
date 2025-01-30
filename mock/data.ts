@@ -494,6 +494,17 @@ These points demonstrate that the project is actively working to respect and pro
             url: '#source-4',
           },
         ],
+        ai: {
+          title: 'Land acquisition, displacement and resettlement',
+          response: `Based on the provided document sources, there is insufficient information to conclusively determine whether the land acquisition, displacement, and resettlement practices are satisfactory or unsatisfactory. The sources present a mixed picture:
+
+The project claims no involuntary relocations of legitimate occupants are anticipated [1] [2] [3].
+However, there are concerns about potential land alienation, especially for vulnerable indigenous families [4] [5].
+The project acknowledges that illegal settlers may be removed without compensation [1] [2] [3].
+There are mentions of land insecurity, potential dispossession, and conflicts due to land concessions [4].
+Some land allocation policies are mentioned, but their impact on the project area is unclear [6].
+Given these conflicting points and the lack of comprehensive information on how the project addresses all aspects of land acquisition, displacement, and resettlement (especially regarding informed consent, compensation schemes, and livelihood restoration), further investigation is necessary to make a definitive assessment.`
+        }
       },
       {
         id: '7',

@@ -1,5 +1,5 @@
-import { getProjectId } from '@/mock/data';
 import PageClient from './pageClient';
+import { getProjectByIdServer } from '@/server/db';
 
 export default async function ScorecardPage({
   params,
@@ -7,7 +7,7 @@ export default async function ScorecardPage({
   params: Promise<{ id: string }>;
 }) {
   const projectId = (await params).id;
-  const projectData = getProjectId(projectId);
+  const projectData = await getProjectByIdServer({ id: projectId });
   console.log('projectData=', projectData);
 
   return <PageClient projectData={projectData} />;

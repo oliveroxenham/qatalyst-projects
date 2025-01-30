@@ -28,11 +28,14 @@ const QatalystResponseBoxed = ({ response }: { response?: number }) => (
 const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   const [rating, setRating] = useState<number>(currentRating);
   return (
-    <div className="border rounded-sm bg-white w-[122px]">
+    <div className="border rounded-lg bg-white w-[122px]">
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => setRating(1)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setRating(1);
+        }}
         className={clsx({
           'bg-branding-green-600 text-white': rating === 1,
           'hover:bg-branding-green-700 hover:text-white': rating == 1,
@@ -43,7 +46,10 @@ const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => setRating(2)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setRating(2);
+        }}
         className={clsx({
           'bg-[#f34062] text-white': rating === 2,
           'hover:bg-[#D11C47] hover:text-white': rating === 2,
@@ -54,7 +60,10 @@ const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => setRating(3)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setRating(3);
+        }}
         className={clsx({
           'bg-[#F59E0B] text-white': rating === 3,
           'hover:bg-[#cc8d20] hover:text-white': rating === 3,

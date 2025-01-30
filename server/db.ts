@@ -1,10 +1,11 @@
 import { GET_DOCUMENTS_URL, GET_PROJECTS_URL } from '@/lib/constants';
+import { Project } from '@/types/project';
 
 export async function getProjectsServer() {
   const url = new URL(GET_PROJECTS_URL, process.env.BASE_URL);
   console.log('getProjectsServer:', url.toString());
   return fetch(url).then(async (res) => {
-    const resp = await res.json();
+    const resp = (await res.json()) as Project[];
     console.log('resp:', resp);
     return resp;
   });
@@ -13,10 +14,17 @@ export async function getProjectsServer() {
 export async function getProjectsClient() {
   console.log('getProjectsClient:', GET_PROJECTS_URL);
   return fetch(GET_PROJECTS_URL).then(async (res) => {
-    const resp = await res.json();
+    const resp = (await res.json()) as Project[];
     console.log('resp:', resp);
     return resp;
   });
+}
+
+export async function getProjectByIdServer({ id } : { id: string }) {
+  const url = new URL(`${GET_PROJECTS_URL}?id=${id}`, process.env.BASE_URL);
+  console.log('getProjectById:', url.toString());
+  const resp = await fetch(url);
+  return await resp.json() as Project; 
 }
 
 export async function getDocumentsServer() {

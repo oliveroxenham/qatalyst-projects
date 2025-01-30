@@ -4,7 +4,7 @@ import { TopBar } from '@/components/topbar';
 import { Separator } from '@/components/ui/separator';
 import { ChevronDown, Edit } from 'lucide-react';
 import { SdgSummary } from '@/components/sdg-summary';
-import { getProjectId } from '@/mock/data';
+import { getProjectByIdServer } from '@/server/db';
 import { CollaboratorTag } from '@/components/collaborator-tag';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import { AssigneeSelector } from '@/components/assignee-selector';
@@ -17,9 +17,9 @@ export default async function ProjectInfoPage({
   params: Promise<{ id: string }>;
 }) {
   const projectId = (await params).id;
-  const projectData = getProjectId(projectId);
+  const projectData = await getProjectByIdServer({ id: projectId });
   const user = await currentUser();
-  console.log({ projectData });
+  console.log({ user, projectData });
   return (
     <div>
       <TopBar title="Project Details">
@@ -204,6 +204,8 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <AssigneeSelector
+                        projectId={projectId}
+                        assessment="financial"
                         currentUser={user?.fullName}
                         assignedTo={projectData?.financialAssessment.assignedTo}
                       />
@@ -240,6 +242,8 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <AssigneeSelector
+                        projectId={projectId}
+                        assessment="esg"
                         currentUser={user?.fullName}
                         assignedTo={projectData?.financialAssessment.assignedTo}
                       />
@@ -284,6 +288,8 @@ export default async function ProjectInfoPage({
                     </div>
                     <div className="w-3/4">
                       <AssigneeSelector
+                        projectId={projectId}
+                        assessment="financial"
                         currentUser={user?.fullName}
                         assignedTo={projectData?.financialAssessment.assignedTo}
                         disabled

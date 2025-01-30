@@ -10,20 +10,30 @@ import {
 } from '@/components/ui/select';
 import { Avatar } from '@/components/ui/avatar';
 import { getInitialsFromName } from '@/lib/utils';
+import { updateAssignee } from '@/server/actions';
 
 export function AssigneeSelector({
+  projectId,
   currentUser,
+  assessment,
   assignedTo,
   disabled,
-  onChange,
 }: {
+  projectId: string;
   currentUser?: string | null;
+  assessment: 'esg' | 'financial';
   assignedTo?: string | null;
   disabled?: boolean;
-  onChange?: (value: string) => void;
 }) {
+  const handleAssigneeChange = (assignee: string) => {
+    updateAssignee({
+      projectId,
+      assignee,
+      assessment,
+    });
+  };
   return (
-    <Select disabled={disabled} onValueChange={onChange}>
+    <Select disabled={disabled} onValueChange={handleAssigneeChange}>
       <SelectTrigger>
         {assignedTo && <SelectValue placeholder={assignedTo} />}
         {!assignedTo && <SelectValue placeholder="Unassigned" />}
