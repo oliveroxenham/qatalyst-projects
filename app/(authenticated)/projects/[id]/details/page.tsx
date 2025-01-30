@@ -245,7 +245,7 @@ export default async function ProjectInfoPage({
                         projectId={projectId}
                         assessment="esg"
                         currentUser={user?.fullName}
-                        assignedTo={projectData?.financialAssessment.assignedTo}
+                        assignedTo={projectData?.esgAssessment.assignedTo}
                       />
                     </div>
                   </div>

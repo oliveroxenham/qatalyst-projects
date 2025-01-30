@@ -5,64 +5,7 @@ import {
   TableFooter,
   TableRow,
 } from '@/components/ui/table';
-
-// const data = [
-//   {
-//     id: 1,
-//     satisfactory: true,
-//     title: 'Human Rights',
-//   },
-//   {
-//     id: 2,
-//     satisfactory: false,
-//     title: 'Gender Equality',
-//   },
-//   {
-//     id: 3,
-//     satisfactory: true,
-//     title: 'Community health, safety and security',
-//   },
-//   {
-//     id: 4,
-//     satisfactory: true,
-//     title: 'Labour rights of working conditions',
-//   },
-//   {
-//     id: 5,
-//     satisfactory: true,
-//     title: 'Indigenous People and Local Communities (IPLCs)',
-//   },
-//   {
-//     id: 6,
-//     satisfactory: true,
-//     title: 'Land acquisition, displacement and resettlement',
-//   },
-//   {
-//     id: 7,
-//     satisfactory: false,
-//     title: 'Corruption',
-//   },
-//   {
-//     id: 8,
-//     satisfactory: true,
-//     title: 'Climate change and disaster risks',
-//   },
-//   {
-//     id: 9,
-//     satisfactory: true,
-//     title: 'Resource efficiency and pollution prevention; Energy',
-//   },
-//   {
-//     id: 10,
-//     satisfactory: true,
-//     title: 'Water',
-//   },
-//   {
-//     id: 11,
-//     satisfactory: true,
-//     title: 'Biodiversity conservation and sustainable natural resource management',
-//   },
-// ];
+import type { EsgRisk } from '@/types/project';
 
 const Pill = ({
   children,
@@ -91,9 +34,10 @@ function EsgAssessment({
   data,
 }: {
   risk: string;
-  data: { id: number; satisfactory: boolean; title: string }[];
+  data?: EsgRisk[];
 }) {
   const bgColor = risk === 'Low' ? 'bg-[#00938C]' : 'bg-[#F69339]';
+  console.log('risks=', data);
   return (
     <div className="rounded-lg border border-neutral-200 bg-background p-6">
       <div className="pb-4">
@@ -105,15 +49,15 @@ function EsgAssessment({
       <div className="flex flex-col rounded border-neutral-200 p-2">
         <Table>
           <TableBody>
-            {data.map((item) => (
+            {data?.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.title}</TableCell>
+                <TableCell className="font-medium">{item.name}</TableCell>
                 <TableCell>
-                  <Pill
-                    type={item.satisfactory ? 'satisfactory' : 'unsatisfactory'}
-                  >
-                    {item.satisfactory ? 'Satisfactory' : 'Unsatisfactory'}
-                  </Pill>
+                  {Math.round(Math.random()) === 0 ? (
+                    <Pill type="satisfactory">Satisfactory</Pill>
+                  ) : (
+                    <Pill type="unsatisfactory">Unsatisfactory</Pill>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

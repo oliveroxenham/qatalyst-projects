@@ -225,64 +225,7 @@ const ProjectPicker = () => {
         />
         <EsgAssessment
           risk="Low"
-          data={[
-            {
-              id: 1,
-              satisfactory: true,
-              title: 'Human Rights',
-            },
-            {
-              id: 2,
-              satisfactory: true,
-              title: 'Gender Equality',
-            },
-            {
-              id: 3,
-              satisfactory: true,
-              title: 'Community health, safety and security',
-            },
-            {
-              id: 4,
-              satisfactory: true,
-              title: 'Labour rights of working conditions',
-            },
-            {
-              id: 5,
-              satisfactory: true,
-              title: 'Indigenous People and Local Communities (IPLCs)',
-            },
-            {
-              id: 6,
-              satisfactory: true,
-              title: 'Land acquisition, displacement and resettlement',
-            },
-            {
-              id: 7,
-              satisfactory: true,
-              title: 'Corruption',
-            },
-            {
-              id: 8,
-              satisfactory: true,
-              title: 'Climate change and disaster risks',
-            },
-            {
-              id: 9,
-              satisfactory: true,
-              title: 'Resource efficiency and pollution prevention; Energy',
-            },
-            {
-              id: 10,
-              satisfactory: true,
-              title: 'Water',
-            },
-            {
-              id: 11,
-              satisfactory: true,
-              title:
-                'Biodiversity conservation and sustainable natural resource management',
-            },
-          ]}
+          data={projectData.esgAssessment.risks}
         />
       </div>
     </div>
