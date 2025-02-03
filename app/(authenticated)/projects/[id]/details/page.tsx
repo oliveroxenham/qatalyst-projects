@@ -331,7 +331,9 @@ export default async function ProjectInfoPage({
               {projectData?.activities?.map((activity) => (
                 <div key={activity.id} className="flex flex-row border-b pb-4">
                   <div className="w-1/12">
-                    <div className="w-8 h-8 rounded-full bg-neutral-400 text-xs flex items-center justify-center text-primary-foreground">{activity?.name ? getInitialsFromName(activity.name) : ''}</div>
+                    <div className="w-8 h-8 rounded-full bg-neutral-400 text-xs flex items-center justify-center text-primary-foreground">
+                      {activity?.name ? getInitialsFromName(activity.name) : ''}
+                    </div>
                   </div>
                   <div className="w-11/12 ml-2 flex flex-col gap-2">
                     <span className="text-sm">{activity.description}</span>

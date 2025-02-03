@@ -4,15 +4,18 @@ import { clsx } from 'clsx';
 import Logo from '@/public/icons/logo.svg';
 import { FAItem, Project } from '@/types/project';
 import { FINANCIAL_ASSESSMENT_ITEMS } from '@/lib/constants';
+import Link from 'next/link';
 
 export function QatalystAi({
   projectData,
   aiSidebarOpen = false,
   setAiSidebarOpen,
+  openDocumentUrl
 }: {
   projectData: Project | null;
   aiSidebarOpen?: boolean;
   setAiSidebarOpen?: Dispatch<SetStateAction<boolean>>;
+  openDocumentUrl?: Dispatch<SetStateAction<string | undefined>>;
 }) {
   return (
     <div className="flex flex-row max-h-screen">
@@ -48,9 +51,15 @@ export function QatalystAi({
                     <p className="flex flex-row flex-wrap gap-2">
                       {faItem.sources.map((source, index) => {
                         return (
-                          <span key={index} className="text-xs">
-                            [{index + 1}] {source.name}
-                          </span>
+                          <Link href="#" key={index} onClick={() => {
+                            if (openDocumentUrl && source.name === 'KSWS REDD+_VCS CCB MR_2020-2021_v1.9_final.pdf - page 3') {
+                              openDocumentUrl('ok');
+                            }
+                          }}>
+                            <span key={index} className="text-xs hover:underline">
+                              [{index + 1}] {source.name}
+                            </span>
+                          </Link>
                         );
                       })}
                     </p>
@@ -68,7 +77,9 @@ export function QatalystAi({
       <div className="w-[72px] bg-background border-l py-4 flex flex-col gap-2">
         <div
           className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16"
-          onClick={() => setAiSidebarOpen ? setAiSidebarOpen(!aiSidebarOpen) : null}
+          onClick={() =>
+            setAiSidebarOpen ? setAiSidebarOpen(!aiSidebarOpen) : null
+          }
         >
           <div
             className={clsx(
