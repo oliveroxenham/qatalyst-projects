@@ -6,6 +6,7 @@ export type Tag = {
 export type Activity = {
   id: number;
   date: string;
+  name: string;
   description: string;
 };
 

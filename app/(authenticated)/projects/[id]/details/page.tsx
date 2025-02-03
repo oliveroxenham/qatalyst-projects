@@ -10,6 +10,7 @@ import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import { AssigneeSelector } from '@/components/assignee-selector';
 import { currentUser } from '@clerk/nextjs/server';
 import { Badge } from '@/components/ui/badge';
+import { getInitialsFromName } from '@/lib/utils';
 
 export default async function ProjectInfoPage({
   params,
@@ -257,8 +258,7 @@ export default async function ProjectInfoPage({
                     <div className="w-3/4">
                       <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
                         <span className="text-white capitalize">
-                          {projectData?.financialAssessment.status ??
-                            'Not Started'}
+                          {projectData?.esgAssessment.status ?? 'Not Started'}
                         </span>
                       </div>
                       <div className="mt-2">
@@ -291,7 +291,7 @@ export default async function ProjectInfoPage({
                         projectId={projectId}
                         assessment="financial"
                         currentUser={user?.fullName}
-                        assignedTo={projectData?.financialAssessment.assignedTo}
+                        assignedTo={projectData?.kycAssessment.assignedTo}
                         disabled
                       />
                     </div>
@@ -304,8 +304,7 @@ export default async function ProjectInfoPage({
                     <div className="w-3/4">
                       <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
                         <span className="text-white capitalize">
-                          {projectData?.financialAssessment.status ??
-                            'Not Started'}
+                          {projectData?.kycAssessment.status ?? 'Not Started'}
                         </span>
                       </div>
                       <div className="mt-2">
@@ -332,7 +331,7 @@ export default async function ProjectInfoPage({
               {projectData?.activities?.map((activity) => (
                 <div key={activity.id} className="flex flex-row border-b pb-4">
                   <div className="w-1/12">
-                    <div className="w-8 h-8 rounded-full bg-neutral-400"></div>
+                    <div className="w-8 h-8 rounded-full bg-neutral-400 text-xs flex items-center justify-center text-primary-foreground">{activity?.name ? getInitialsFromName(activity.name) : ''}</div>
                   </div>
                   <div className="w-11/12 ml-2 flex flex-col gap-2">
                     <span className="text-sm">{activity.description}</span>

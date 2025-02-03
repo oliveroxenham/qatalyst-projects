@@ -170,9 +170,10 @@ export default function NewProjectPage() {
               <Button
                 size="small"
                 variant="outline"
-                onClick={() => setSelectedProjectId('1678')}
+                onClick={() => setSelectedProjectId('1650')}
               >
-                1678
+                1650 - Reduced Emissions from Deforestation and Degradation in
+                Keo Seima Wildlife Sanctuary
               </Button>
               {typeof selectedProjectId !== 'undefined' && (
                 <Button
@@ -192,13 +193,13 @@ export default function NewProjectPage() {
                   Import
                 </Button>
               )}
-              {importing && (
-                <div className="flex flex-col gap-2 w-full">
-                  <span className="text-sm">Importing project...</span>
-                  <Progress value={progress} />
-                </div>
-              )}
             </div>
+            {importing && (
+              <div className="flex flex-col gap-2 w-full">
+                <span className="text-sm">Importing project...</span>
+                <Progress value={progress} />
+              </div>
+            )}
           </div>
         )}
       </div>

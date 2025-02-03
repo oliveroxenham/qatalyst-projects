@@ -66,12 +66,12 @@ const PROJECT_ID_1650: Project = {
       unit: 'tCO₂e',
       sources: [
         {
-          name: 'test source 1',
-          url: '#test-source-1',
+          name: 'KSWS REDD+_VCS CCB MR_2020-2021_v1.9_final.pdf - page 3',
+          url: '#Source-1',
         },
         {
-          name: 'test source 2',
-          url: '#test-source-2',
+          name: 'Source 2',
+          url: '#Source-2',
         },
       ],
       qatalystGenerated: true,
@@ -90,8 +90,8 @@ const PROJECT_ID_1650: Project = {
       unit: 'tCO₂e',
       sources: [
         {
-          name: 'test source 1',
-          url: '#test-source-1',
+          name: 'KSWS REDD+_VCS CCB MR_2020-2021_v1.9_final.pdf - page 3',
+          url: '#Source-1',
         },
       ],
       qatalystGenerated: true,
@@ -112,7 +112,7 @@ Therefore, 21,171,578 tCO₂e is the best match for the total estimated reductio
       formatted: '60',
       value: 60,
       unit: 'Years',
-      sources: [{ name: 'test-source-1', url: '#test-source-1' }],
+      sources: [{ name: 'Source-1', url: '#Source-1' }],
       qatalystGenerated: true,
       ai: {
         title: 'Project duration',
@@ -129,10 +129,10 @@ It's important to note that while some sources mention longer crediting periods 
       value: 166983,
       unit: 'Hectares',
       sources: [
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
       ],
       qatalystGenerated: true,
       ai: {
@@ -152,8 +152,8 @@ This value is consistent across multiple sources and is the most specific and de
     },
     estimatedReductionsPerUnitAreaPerYear: {
       id: 'estimatedReductionsPerUnitAreaPerYear',
-      formatted: '2.11',
-      value: 2.11,
+      formatted: '12.68',
+      value: 12.68,
       unit: 'tCO₂e/Hectare/Year',
       sources: [],
       qatalystGenerated: false,
@@ -162,7 +162,7 @@ This value is consistent across multiple sources and is the most specific and de
       id: 'estimatedReductionsPerUnitArea',
       formatted: '126.79',
       value: 126.79,
-      unit: 'tCO₂e/Hectare/Year',
+      unit: 'tCO₂e/Hectare',
       sources: [],
       qatalystGenerated: false,
     },
@@ -236,8 +236,8 @@ This value is consistent across multiple sources and is the most specific and de
       value: 51253,
       unit: 'kUSD',
       sources: [
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
       ],
       qatalystGenerated: true,
       ai: {
@@ -745,14 +745,29 @@ Given these conflicting points and the lack of comprehensive information on how 
   activities: [
     {
       id: 0,
+      name: 'Wesley Oxenham',
       date: 'Yesterday at 2:20PM',
       description: 'Wesley commented on project-development-document.pdf',
     },
     {
       id: 1,
+      name: 'Kopal Agarwal',
       date: 'Yesterday at 10:10AM',
-      description: 'Kopal commented on project-development-document.pdf',
+      description: 'Kopal Agarwal added 1 new collaborator',
     },
+    {
+      id: 2,
+      name: 'Kopal Agarwal',
+      date: 'January 24 2025 at 9:00AM',
+      description: 'Kopal Agarwal assigned ESG workflow to Kopal',
+    },
+    {
+      id: 3,
+      name: 'Poyan Rajamand',
+      date: 'January 20 2025 at 2:00PM',
+      description: 'Poyan Rajamand updated projectcreditingEndDate, creditingStartDate, Sustainable Development Goals',
+    },
+
   ],
 };
 
@@ -823,27 +838,27 @@ const PROJECT_ID_2749: Project = {
       sources: [
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
       ],
       qatalystGenerated: true,
@@ -852,7 +867,7 @@ const PROJECT_ID_2749: Project = {
       formatted: '21',
       value: 621,
       unit: 'Years',
-      sources: [{ name: 'test-source-1', url: '#test-source-1' }],
+      sources: [{ name: 'Source-1', url: '#Source-1' }],
       qatalystGenerated: true,
     },
     projectArea: {
@@ -1256,11 +1271,11 @@ const PROJECT_ID_4811: Project = {
       sources: [
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
         {
           name: 'test source 2',
-          url: '#test-source-2',
+          url: '#Source-2',
         },
       ],
       qatalystGenerated: true,
@@ -1272,7 +1287,7 @@ const PROJECT_ID_4811: Project = {
       sources: [
         {
           name: 'test source 1',
-          url: '#test-source-1',
+          url: '#Source-1',
         },
       ],
       qatalystGenerated: true,
@@ -1281,7 +1296,7 @@ const PROJECT_ID_4811: Project = {
       formatted: '60',
       value: 60,
       unit: 'Years',
-      sources: [{ name: 'test-source-1', url: '#test-source-1' }],
+      sources: [{ name: 'Source-1', url: '#Source-1' }],
       qatalystGenerated: true,
     },
     projectArea: {
@@ -1289,10 +1304,10 @@ const PROJECT_ID_4811: Project = {
       value: 166983,
       unit: 'Hectares',
       sources: [
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
       ],
       qatalystGenerated: true,
     },
@@ -1371,8 +1386,8 @@ const PROJECT_ID_4811: Project = {
       value: 51253,
       unit: 'kUSD',
       sources: [
-        { name: 'test-source-1', url: '#test-source-1' },
-        { name: 'test-source-1', url: '#test-source-1' },
+        { name: 'Source-1', url: '#Source-1' },
+        { name: 'Source-1', url: '#Source-1' },
       ],
       qatalystGenerated: true,
     },
@@ -2530,7 +2545,7 @@ const PROJECT_ID_4: Project = {
 export const getProjectId = (id: string): Project | null => {
   switch (id) {
     case '1650':
-      return PROJECT_ID_1650;
+    return PROJECT_ID_1650;
     case '4811':
       return PROJECT_ID_4811;
     case '2749':

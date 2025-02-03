@@ -216,7 +216,7 @@ export function Content({
           <TableRow
             className="hover:cursor-pointer"
             onClick={() =>
-              handleRowClick(data.estimatedReductionsPerUnitArea.id)
+              handleRowClick(data.estimatedReductionsPerUnitAreaPerYear.id)
             }
           >
             <TableCell>
@@ -242,6 +242,35 @@ export function Content({
               sources={data.estimatedReductionsPerUnitAreaPerYear.sources}
             />
           </TableRow>
+          <TableRow
+            className="hover:cursor-pointer"
+            onClick={() =>
+              handleRowClick(data.estimatedReductionsPerUnitAreaPerYear.id)
+            }
+          >
+            <TableCell>
+              <span className="">
+                Estimated Reduction Per Unit of Area
+              </span>
+            </TableCell>
+            <TableCellWithValue
+              icon={
+                data.estimatedReductionsPerUnitArea.qatalystGenerated ? (
+                  <QatalystIcon />
+                ) : null
+              }
+            >
+              <span>
+                {data.estimatedReductionsPerUnitArea.formatted}
+              </span>
+            </TableCellWithValue>
+            <TableCellWithValue>
+              <span>{data.estimatedReductionsPerUnitArea.unit}</span>
+            </TableCellWithValue>
+            <TableCellWithValueSource
+              sources={data.estimatedReductionsPerUnitArea.sources}
+            />
+          </TableRow>          
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
               <Plus className="w-4 h-4" />
