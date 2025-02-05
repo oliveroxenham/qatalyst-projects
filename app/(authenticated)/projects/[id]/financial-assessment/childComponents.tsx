@@ -12,7 +12,7 @@ export function ChildComponents({
   projectData: Project | null;
 }) {
   const [aiSidebarOpen, setAiSidebarOpen] = useState(false);
-  const [documentUrl, setDocumentUrl] = useState<string | undefined>('123');
+  const [documentUrl, setDocumentUrl] = useState<string | undefined>();
   return (
     <>
       <DocumentViewer

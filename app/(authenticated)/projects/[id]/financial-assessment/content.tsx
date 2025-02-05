@@ -79,8 +79,7 @@ export function Content({
     setTimeout(() => {
       childEl.classList.remove('bg-orange-100');
     }, 2000);
-
-  }, [elId])
+  }, [elId]);
   const handleRowClick = (elementId: string) => {
     if (!elementId) return;
     setAiSidebarOpen(true);
@@ -97,8 +96,12 @@ export function Content({
   const data = projectData.financialAssessment;
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
-      <div className="p-4">
+      <div className="p-4 flex flex-row justify-between items-center">
         <span className="text-lg font-semibold">Volumes</span>
+        <span className="text-xs bg-neutral-200 p-1 px-2 rounded-lg text-muted-foreground">
+        Values are not editable in demo app
+      </span>
+
       </div>
       <Table>
         <TableHeader>
@@ -249,9 +252,7 @@ export function Content({
             }
           >
             <TableCell>
-              <span className="">
-                Estimated Reduction Per Unit of Area
-              </span>
+              <span className="">Estimated Reduction Per Unit of Area</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -260,9 +261,7 @@ export function Content({
                 ) : null
               }
             >
-              <span>
-                {data.estimatedReductionsPerUnitArea.formatted}
-              </span>
+              <span>{data.estimatedReductionsPerUnitArea.formatted}</span>
             </TableCellWithValue>
             <TableCellWithValue>
               <span>{data.estimatedReductionsPerUnitArea.unit}</span>
@@ -270,7 +269,7 @@ export function Content({
             <TableCellWithValueSource
               sources={data.estimatedReductionsPerUnitArea.sources}
             />
-          </TableRow>          
+          </TableRow>
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
               <Plus className="w-4 h-4" />
@@ -283,8 +282,11 @@ export function Content({
         </TableBody>
       </Table>
 
-      <div className="p-4">
+      <div className="p-4 flex flex-row justify-between items-center">
         <span className="text-lg font-semibold">Cost of Production</span>
+        <span className="text-xs bg-neutral-200 p-1 px-2 rounded-lg text-muted-foreground">
+          Values are not editable in demo app
+        </span>
       </div>
       <Table>
         <TableHeader>
@@ -376,9 +378,7 @@ export function Content({
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() =>
-              handleRowClick(data.costOfGoodsSold.id)
-            }
+            onClick={() => handleRowClick(data.costOfGoodsSold.id)}
           >
             <TableCell>
               <span className="">Cost of Goods Sold (COGS)</span>
@@ -416,9 +416,7 @@ export function Content({
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() =>
-              handleRowClick(data.totalGrossCosts.id)
-            }
+            onClick={() => handleRowClick(data.totalGrossCosts.id)}
           >
             <TableCell>
               <span className="">Total Gross Costs</span>
@@ -438,9 +436,7 @@ export function Content({
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() =>
-              handleRowClick(data.alternateRevenueSources.id)
-            }
+            onClick={() => handleRowClick(data.alternateRevenueSources.id)}
           >
             <TableCell>
               <span className="">Alternate Revenue Sources (Non-carbon)</span>
@@ -464,9 +460,7 @@ export function Content({
 
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() =>
-              handleRowClick(data.costOfFinancing.id)
-            }
+            onClick={() => handleRowClick(data.costOfFinancing.id)}
           >
             <TableCell>
               <span className="">Cost of Financing</span>

@@ -3,31 +3,13 @@ import {
   TableBody,
   TableCell,
   TableFooter,
+  TableHead,
+  TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import type { EsgRisk } from '@/types/project';
-
-const Pill = ({
-  children,
-  type,
-}: {
-  readonly children: React.ReactNode;
-  readonly type: string;
-}) => {
-  if (type === 'satisfactory') {
-    return (
-      <div className="w-[99px] rounded-sm border border-[#22C55E33] bg-[#DCFCE7] p-1 text-center text-white">
-        <span className="text-xs font-semibold text-[#166534]">{children}</span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-[100px] rounded-sm border border-[#FECDD4] bg-[#FFE4E6] p-1 text-center text-white">
-      <span className="text-xs font-semibold text-[#9F1239]">{children}</span>
-    </div>
-  );
-};
+import { UserRatingBoxed } from '@/components/user-rating';
+import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
 
 function EsgAssessment({
   risk = 'Low',
@@ -48,16 +30,24 @@ function EsgAssessment({
       </div>
       <div className="flex flex-col rounded border-neutral-200 p-2">
         <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead></TableHead>
+              <TableHead>Qatalyst Response</TableHead>
+              <TableHead>User Rating</TableHead>
+            </TableRow>
+          </TableHeader>
           <TableBody>
             {data?.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="font-medium">{item.name}</TableCell>
                 <TableCell>
-                  {Math.round(Math.random()) === 0 ? (
-                    <Pill type="satisfactory">Satisfactory</Pill>
-                  ) : (
-                    <Pill type="unsatisfactory">Unsatisfactory</Pill>
+                  {typeof item.qatalystResponse !== 'undefined' && (
+                    <QatalystResponseBoxed response={item.qatalystResponse} />
                   )}
+                </TableCell>
+                <TableCell>
+                  <UserRatingBoxed currentRating={0} />
                 </TableCell>
               </TableRow>
             ))}

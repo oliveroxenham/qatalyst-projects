@@ -9,21 +9,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Check, X } from 'lucide-react';
-import Logo from '@/public/icons/logo.svg';
-import { QatalystResponse } from './qatalyst-response';
 import { Button } from '@/components/qbutton';
 import QuestionMark from '@/public/icons/question-mark.svg';
 import { Project } from '@/types/project';
 import clsx from 'clsx';
-
-const QatalystResponseBoxed = ({ response }: { response?: number }) => (
-  <div className="border rounded-sm px-2 flex flex-row justify-between bg-white h-[36px] items-center">
-    <QatalystResponse response={response} />
-    <div className="rounded-full bg-blaze-orange-500 flex items-center justify-center w-[17px] h-[17px] ml-2">
-      <Logo className="w-[10px] h-[10px]" />
-    </div>
-  </div>
-);
+import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
 
 const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   const [rating, setRating] = useState<number>(currentRating);

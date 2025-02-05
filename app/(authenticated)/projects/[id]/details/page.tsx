@@ -2,7 +2,7 @@ import { Button } from '@/components/qbutton';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { Separator } from '@/components/ui/separator';
-import { ChevronDown, Edit } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { SdgSummary } from '@/components/sdg-summary';
 import { getProjectByIdServer } from '@/server/db';
 import { CollaboratorTag } from '@/components/collaborator-tag';
@@ -11,6 +11,7 @@ import { AssigneeSelector } from '@/components/assignee-selector';
 import { currentUser } from '@clerk/nextjs/server';
 import { Badge } from '@/components/ui/badge';
 import { getInitialsFromName } from '@/lib/utils';
+import { EditButton } from './edit-button';
 
 export default async function ProjectInfoPage({
   params,
@@ -40,10 +41,7 @@ export default async function ProjectInfoPage({
         <div className="col-span-1 lg:col-span-3 bg-background rounded-lg border border-neutral-200">
           <div className="flex items-center justify-between py-2 px-4">
             <span className="font-semibold">Details</span>
-            <Button variant="outline" size="small">
-              <Edit />
-              Edit
-            </Button>
+            <EditButton />
           </div>
           <Separator />
           <div>

@@ -10,7 +10,7 @@ export function QatalystAi({
   projectData,
   aiSidebarOpen = false,
   setAiSidebarOpen,
-  openDocumentUrl
+  openDocumentUrl,
 }: {
   projectData: Project | null;
   aiSidebarOpen?: boolean;
@@ -50,16 +50,33 @@ export function QatalystAi({
                     <p className="text-sm px-1">{faItem.ai.response}</p>
                     <p className="flex flex-row flex-wrap gap-2">
                       {faItem.sources.map((source, index) => {
+                        if (
+                          openDocumentUrl &&
+                          source.name ===
+                            'KSWS REDD+_VCS CCB MR_2020-2021_v1.9_final.pdf - page 3'
+                        ) {
+                          return (
+                            <Link
+                              href="#"
+                              key={index}
+                              onClick={() => openDocumentUrl('ok')}
+                            >
+                              <span
+                                key={index}
+                                className="text-xs hover:underline"
+                              >
+                                [{index + 1}] {source.name}
+                              </span>
+                            </Link>
+                          );
+                        }
                         return (
-                          <Link href="#" key={index} onClick={() => {
-                            if (openDocumentUrl && source.name === 'KSWS REDD+_VCS CCB MR_2020-2021_v1.9_final.pdf - page 3') {
-                              openDocumentUrl('ok');
-                            }
-                          }}>
-                            <span key={index} className="text-xs hover:underline">
+                          <div key={index}>
+                            <span className="text-xs">
                               [{index + 1}] {source.name}
                             </span>
-                          </Link>
+                            <span className="text-[10px] bg-neutral-200 text-muted-foreground rounded-lg p-1 ml-1">N/A in Demo</span>
+                          </div>
                         );
                       })}
                     </p>
