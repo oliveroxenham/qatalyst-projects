@@ -7,26 +7,40 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import type { EsgRisk } from '@/types/project';
+import { clsx } from 'clsx';
+import type { Project } from '@/types/project';
 import { UserRatingBoxed } from '@/components/user-rating';
 import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
 
 function EsgAssessment({
-  risk = 'Low',
-  data,
+  projectData,
 }: {
-  risk: string;
-  data?: EsgRisk[];
+  projectData: Project;
 }) {
-  const bgColor = risk === 'Low' ? 'bg-[#00938C]' : 'bg-[#F69339]';
-  console.log('risks=', data);
   return (
     <div className="rounded-lg border border-neutral-200 bg-background p-6">
       <div className="pb-4">
         <span className="text-xl font-semibold">ESG Assessment</span>
       </div>
-      <div className={`flex w-full items-center rounded ${bgColor} p-2`}>
-        <span className="text-sm text-white">{risk} Risk</span>
+      <div
+        className={clsx(
+          'flex items-center border rounded-sm p-2 h-10 text-white',
+          {
+            'bg-neutral-500':
+              projectData?.esgAssessment.status.toLowerCase() === 'not started',
+            'bg-blue-500':
+              projectData?.esgAssessment.status.toLowerCase() === 'in progress',
+            'bg-branding-green-600':
+              projectData?.esgAssessment.status.toLowerCase() === 'eligible',
+            'bg-destructive':
+              projectData?.esgAssessment.status.toLowerCase() ===
+              'not eligible',
+          }
+        )}
+      >
+        <span className="text-white capitalize text-sm">
+          {projectData?.esgAssessment.status ?? 'Not Started'}
+        </span>
       </div>
       <div className="flex flex-col rounded border-neutral-200 p-2">
         <Table>
@@ -38,7 +52,7 @@ function EsgAssessment({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.map((item) => (
+            {projectData.esgAssessment.risks?.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="font-medium">{item.name}</TableCell>
                 <TableCell>

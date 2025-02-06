@@ -75,7 +75,9 @@ export function QatalystAi({
                             <span className="text-xs">
                               [{index + 1}] {source.name}
                             </span>
-                            <span className="text-[10px] bg-neutral-200 text-muted-foreground rounded-lg p-1 ml-1">N/A in Demo</span>
+                            <span className="text-[10px] bg-neutral-200 text-muted-foreground rounded-lg p-1 ml-1">
+                              N/A in Demo
+                            </span>
                           </div>
                         );
                       })}

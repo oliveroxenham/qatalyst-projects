@@ -5,88 +5,40 @@ import {
   TableRow,
   TableFooter,
 } from '@/components/ui/table';
-
-// const data = [
-//   {
-//     id: 1,
-//     title: 'Capital expense intensity',
-//     unit: (
-//       <span>
-//         USD/tCO<sub>2</sub>e
-//       </span>
-//     ),
-//     value: 0.03,
-//   },
-//   {
-//     id: 2,
-//     title: 'Operating expense intensity',
-//     unit: (
-//       <span>
-//         USD/tCO<sub>2</sub>e
-//       </span>
-//     ),
-//     value: 0.1,
-//   },
-//   {
-//     id: 3,
-//     title: 'Total expense intensity',
-//     unit: (
-//       <span>
-//         USD/tCO<sub>2</sub>e
-//       </span>
-//     ),
-//     value: 0.025,
-//   },
-//   {
-//     id: 4,
-//     title: 'Cost of production (including non carbon revenues)',
-//     unit: (
-//       <span>
-//         USD/tCO<sub>2</sub>e
-//       </span>
-//     ),
-//     value: 0.025,
-//   },
-//   {
-//     id: 5,
-//     title: 'Total net costs',
-//     unit: <span>kUSD</span>,
-//     value: 9.5,
-//   },
-//   {
-//     id: 6,
-//     title: 'Cost of production (net - including financing)',
-//     unit: (
-//       <span>
-//         USD/tCO<sub>2</sub>e
-//       </span>
-//     ),
-//     value: 0.025,
-//   },
-//   {
-//     id: 7,
-//     title: 'Estimated reduction per unit of area per year',
-//     unit: (
-//       <span>
-//         tCO<sub>2</sub>e/ha/yr
-//       </span>
-//     ),
-//     value: 0.0754,
-//   },
-// ];
+import { Project } from '@/types/project';
+import { clsx } from 'clsx'; 
 
 function FinancialAssessment({
   data,
+  projectData
 }: {
   data: { id: number; title: string; unit: React.ReactElement; value: number }[];
+  projectData: Project
 }) {
   return (
     <div className="rounded-lg border border-neutral-200 bg-background p-6">
       <div className="pb-4">
         <span className="text-xl font-semibold">Financial Assessment</span>
       </div>
-      <div className="flex w-full items-center rounded bg-[#00938C] p-2">
-        <span className="text-sm text-white">Eligible</span>
+      <div
+        className={clsx(
+          'flex items-center border rounded-sm p-2 h-10 text-white',
+          {
+            'bg-neutral-500':
+              projectData?.financialAssessment.status.toLowerCase() === 'not started',
+            'bg-blue-500':
+              projectData?.financialAssessment.status.toLowerCase() === 'in progress',
+            'bg-branding-green-600':
+              projectData?.financialAssessment.status.toLowerCase() === 'eligible',
+            'bg-destructive':
+              projectData?.financialAssessment.status.toLowerCase() ===
+              'not eligible',
+          }
+        )}
+      >
+        <span className="text-white capitalize text-sm">
+          {projectData?.financialAssessment.status ?? 'Not Started'}
+        </span>
       </div>
       <div className="flex flex-col rounded border-neutral-200 p-2">
         <Table>

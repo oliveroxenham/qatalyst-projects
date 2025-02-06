@@ -90,6 +90,7 @@ export default function ScoreCardPage({
                 })}
               >
                 <FinancialAssessment
+                  projectData={projectData}
                   data={[
                     {
                       id: 1,
@@ -160,10 +161,7 @@ export default function ScoreCardPage({
                     },
                   ]}
                 />
-                <EsgAssessment
-                  risk="Low"
-                  data={projectData.esgAssessment.risks}
-                />
+                <EsgAssessment projectData={projectData} />
               </div>
             </main>
             {benchmarkLayoutVisible && (

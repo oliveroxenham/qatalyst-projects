@@ -12,6 +12,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { Badge } from '@/components/ui/badge';
 import { getInitialsFromName } from '@/lib/utils';
 import { EditButton } from './edit-button';
+import { clsx } from 'clsx';
 
 export default async function ProjectInfoPage({
   params,
@@ -216,7 +217,25 @@ export default async function ProjectInfoPage({
                       <span className="text-neutral-500">Final Rating</span>
                     </div>
                     <div className="w-3/4">
-                      <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
+                      <div
+                        className={clsx(
+                          'flex items-center border rounded-sm p-2 h-10 text-white',
+                          {
+                            'bg-neutral-500':
+                              projectData?.financialAssessment.status.toLowerCase() ===
+                              'not started',
+                            'bg-blue-500':
+                              projectData?.financialAssessment.status.toLowerCase() ===
+                              'in progress',
+                            'bg-branding-green-600':
+                              projectData?.financialAssessment.status.toLowerCase() ===
+                              'eligible',
+                            'bg-destructive':
+                              projectData?.financialAssessment.status.toLowerCase() ===
+                              'not eligible',
+                          }
+                        )}
+                      >
                         <span className="text-white capitalize">
                           {projectData?.financialAssessment.status ??
                             'Not Started'}
@@ -254,7 +273,23 @@ export default async function ProjectInfoPage({
                       <span className="text-neutral-500">Final Rating</span>
                     </div>
                     <div className="w-3/4">
-                      <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
+                      <div className={clsx(
+                          'flex items-center border rounded-sm p-2 h-10 text-white',
+                          {
+                            'bg-neutral-500':
+                              projectData?.esgAssessment.status.toLowerCase() ===
+                              'not started',
+                            'bg-blue-500':
+                              projectData?.esgAssessment.status.toLowerCase() ===
+                              'in progress',
+                            'bg-branding-green-600':
+                              projectData?.esgAssessment.status.toLowerCase() ===
+                              'eligible',
+                            'bg-destructive':
+                              projectData?.esgAssessment.status.toLowerCase() ===
+                              'not eligible',
+                          }
+                        )}>
                         <span className="text-white capitalize">
                           {projectData?.esgAssessment.status ?? 'Not Started'}
                         </span>
@@ -274,7 +309,7 @@ export default async function ProjectInfoPage({
                   <span className="font-semibold">KYC Assessment</span>
                   <Badge
                     variant="outline"
-                    className="bg-neutral-200 text-neutral-500"
+                    className="bg-neutral-200 text-neutral-500 text-[10px]"
                   >
                     Coming Soon
                   </Badge>

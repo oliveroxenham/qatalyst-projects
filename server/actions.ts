@@ -46,3 +46,34 @@ export async function updateAssignee({
   }
   return await resp.json();
 }
+
+export async function updateFinalRating({
+  projectId,
+  assessment,
+  rating,
+}: {
+  projectId: string;
+  assessment: 'esg' | 'financial';
+  rating: string;
+}) {
+  const resp = await fetch(
+    `${process.env.BASE_URL}/api/projects/updateRating`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        projectId,
+        assessment,
+        rating,
+      }),
+    }
+  );
+  if (assessment === 'esg') {
+    revalidatePath(`/projects/${projectId}/esg-assessment`);
+  } else if (assessment === 'financial') {
+    revalidatePath(`/projects/${projectId}/financial-assessment`);
+  }
+  return await resp.json();
+}

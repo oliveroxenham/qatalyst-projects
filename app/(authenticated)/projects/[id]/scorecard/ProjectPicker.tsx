@@ -30,7 +30,7 @@ const projects = [
   {
     label: 'DelAgua Clean Cooking Grouped Project',
     value: '2749',
-  }
+  },
 ];
 
 const ProjectListComboBox = ({
@@ -154,6 +154,7 @@ const ProjectPicker = () => {
         })}
       >
         <FinancialAssessment
+          projectData={projectData}
           data={[
             {
               id: 1,
@@ -223,10 +224,7 @@ const ProjectPicker = () => {
             },
           ]}
         />
-        <EsgAssessment
-          risk="Low"
-          data={projectData.esgAssessment.risks}
-        />
+        <EsgAssessment projectData={projectData} />
       </div>
     </div>
   );

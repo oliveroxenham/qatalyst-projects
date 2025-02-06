@@ -1,14 +1,14 @@
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { Button } from '@/components/qbutton';
-import { ChevronDown, Lock } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import { AssigneeSelector } from '@/components/assignee-selector';
 import { currentUser } from '@clerk/nextjs/server';
 import { GenerateAssessmentButton } from '@/components/generate-assessment-button';
 import { ChildComponents } from './childComponents';
 import { getProjectByIdServer } from '@/server/db';
-import clsx from 'clsx';
+import { FinalRatingSelector } from '@/components/final-rating-selector';
 
 export default async function FinancialAssessmentPage({
   params,
@@ -45,26 +45,11 @@ export default async function FinancialAssessmentPage({
                 assignedTo={projectData?.esgAssessment.assignedTo}
               />
             </div>
-            <Button
-              className={clsx('text-white', {
-                'bg-neutral-500':
-                  projectData?.esgAssessment.status.toLowerCase() ===
-                  'not started',
-                'bg-blue-500':
-                  projectData?.esgAssessment.status.toLowerCase() ===
-                  'in progress',
-                'bg-branding-green-600':
-                  projectData?.esgAssessment.status.toLowerCase() ===
-                  'completed',
-                'hover:bg-current/50': true,
-              })}
-              size="sm"
-            >
-              <span className="capitalize">
-                Final Rating: {projectData?.esgAssessment.status}
-              </span>
-              <ChevronDown />
-            </Button>
+            <FinalRatingSelector
+              projectData={projectData}
+              assessment="esg"
+              currentUser={user?.fullName}
+            />
           </div>
           <div className="flex items-center">
             <GenerateAssessmentButton
