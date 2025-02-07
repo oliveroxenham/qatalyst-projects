@@ -503,8 +503,8 @@ However, there are concerns about potential land alienation, especially for vuln
 The project acknowledges that illegal settlers may be removed without compensation [1] [2] [3].
 There are mentions of land insecurity, potential dispossession, and conflicts due to land concessions [4].
 Some land allocation policies are mentioned, but their impact on the project area is unclear [6].
-Given these conflicting points and the lack of comprehensive information on how the project addresses all aspects of land acquisition, displacement, and resettlement (especially regarding informed consent, compensation schemes, and livelihood restoration), further investigation is necessary to make a definitive assessment.`
-        }
+Given these conflicting points and the lack of comprehensive information on how the project addresses all aspects of land acquisition, displacement, and resettlement (especially regarding informed consent, compensation schemes, and livelihood restoration), further investigation is necessary to make a definitive assessment.`,
+        },
       },
       {
         id: '7',
@@ -765,16 +765,16 @@ Given these conflicting points and the lack of comprehensive information on how 
       id: 3,
       name: 'Poyan Rajamand',
       date: 'January 20 2025 at 2:00PM',
-      description: 'Poyan Rajamand updated projectcreditingEndDate, creditingStartDate, Sustainable Development Goals',
+      description:
+        'Poyan Rajamand updated projectcreditingEndDate, creditingStartDate, Sustainable Development Goals',
     },
-
   ],
 };
 
 const PROJECT_ID_2749: Project = {
   id: '2749',
   imgUrl:
-    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img3-j6vAiE1rqQszvX6r6CIkvt4vYOIYfq.png',
+    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img4-UrkZ149VDfMIABrNp31VGcI3xAFNqL.png',
   mapUrl:
     'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/rwanda-b5FqCRhKz4ZNo5c1bP9uVG0bIj8fU6.png',
   name: 'DelAgua Clean Cooking Grouped Project',
@@ -1982,7 +1982,9 @@ const PROJECT_ID_3: Project = {
 const PROJECT_ID_4: Project = {
   id: '4',
   imgUrl:
-    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img4-UrkZ149VDfMIABrNp31VGcI3xAFNqL.png',
+    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/ocean-cleanup-FhzOYjUWrAeSk6Dp0TldJMPU0Mo1xW.jpeg',
+  mapUrl:
+    'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/japan-DmvMxQoxpVeevVq7WskUa1QnQueygN.png',
   name: 'Ocean Cleanup Initiative',
   country: 'JP',
   countryName: 'Japan',
@@ -1994,56 +1996,32 @@ const PROJECT_ID_4: Project = {
     { value: 'Marine', type: 'MANUAL' },
     { value: 'Verified', type: 'MANUAL' },
   ],
-  owner: 'Yuki Tanaka',
-  // financialStatus: 'In Progress',
-  // financialProgress: 50,
-  // esgStatus: 'Not Started',
-  // esgProgress: 25,
-  // kycStatus: 'In Progress',
-  // kycProgress: 85,
-
-  // id: '1650',
-  // imgUrl:
-  //   'https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/img2-Pesg4thDgdnsXKVZ2eMbgqK6e5jckg.png',
-  // name: 'Reduced Emissions from Deforestation and Degradation in Keo Seima Wildlife Sanctuary',
-  // country: 'KH',
-  // countryName: 'Cambodia',
-  // lastUpdated: 'January 14, 2025',
-  // tags: [
-  //   { value: 'Verra', type: 'VERRA' },
-  //   { value: '1650', type: 'VERRA' },
-  //   { value: '15.3m tCO₂e', type: 'MANUAL' },
-  //   { value: 'Nature-based', type: 'MANUAL' },
-  //   { value: 'Verified', type: 'MANUAL' },
-  // ],
-  creditingStartDate: '12/31/2009',
-  creditingEndDate: '12/30/2069',
-  proponent: 'Royal Government of Cambodia (RGC), Ministry of Environment',
+  owner: 'Jane Smith',
+  creditingStartDate: '01/01/2020',
+  creditingEndDate: '12/31/2030',
+  proponent: 'Department of Energy, Japan',
   background:
-    "Nestled in the lush jungles of eastern Cambodia, the Keo Seima Wildlife Sanctuary (KSWS) is a haven for biodiversity and a vast storehouse of forest carbon. Spanning over 290,000 hectares, the protected area is home to a diverse array of wildlife, including 84 globally threatened species and the world's largest population of black-shanked douc and yellow-cheeked crested gibbon. The KSWS also holds a unique cultural significance for the Indigenous Bunong people, who have called this forest home for centuries and whose culture and livelihoods are deeply entwined with the forest. Despite the importance of this area, it faces a high threat of deforestation due to various factors, including forest conversion for agriculture and illegal logging." +
-    'The Keo Seima Wildlife Sanctuary REDD+ Project (KSWS REDD+), launched in 2010 as a collaboration between the Royal Government of Cambodia (RGC) and the Wildlife Conservation Society (WCS), has made impressive strides in reducing deforestation and promoting alternative livelihoods. The project has prevented the release of more than 20 million tons of CO2e emissions and saved 25,000 hectares of forest from destruction. It has also created jobs, supported education and training initiatives, and established an ecotourism venture that supports local communities.' +
-    'The project has also distributed nearly $1 million through its Cash for Communities (C4C) program, a mechanism that shares the revenue of carbon credits sales. These funds go directly to local communities, who decide how they should be spent to support sustainable development activities such as healthcare, education, and infrastructure like wells and bridges.' +
-    "In Cambodia, the Ministry of Environment is at the forefront of protecting the country's protected areas, with a focus on preserving the nation's forests. The WCS is a leading global conservation organization operating in 60+ countries and brings its extensive knowledge and experience in conservation to the project.",
-  latitude: '12.314823',
-  longitude: '106.684903',
-  createdBy: 'Wesley Oxenham',
-  // owner: 'Kopal Agarwal',
-  collaborators: ['Kopal Agarwal', 'Poyan Rajamand', 'Wesley Oxenham'],
+    'The Renewable Energy Project aims to reduce greenhouse gas emissions by promoting the use of clean energy sources. Located in Japan, this project focuses on the development and implementation of solar and wind power technologies. By investing in renewable energy, we can decrease our reliance on fossil fuels and mitigate the impact of climate change.' +
+    "This project has already made significant strides in reducing carbon emissions, with a total of 1 million tons of CO2e saved to date. The project's success is attributed to the collaborative efforts of the Department of Energy, Japan, and Green Energy Corporation, ensuring a sustainable future for generations to come.",
+  latitude: '37.7749',
+  longitude: '-122.4194',
+  createdBy: 'John Doe',
+  collaborators: ['Jane Smith', 'Bob Johnson', 'John Doe'],
   registryStatus: 'Registered',
-  projectType: 'Cookstove',
+  projectType: 'Nature-based',
   sourceType: 'Verra',
   estimatedAnnualCredits: {
-    formatted: '1,426,648',
-    value: 1426648,
+    formatted: '1,000,000',
+    value: 1000000,
     unit: 'tons',
   },
-  methodology: 'VM0015',
+  methodology: 'VM0001',
   projectArea: {
-    formatted: '166,983',
-    value: 166983,
+    formatted: '100,000',
+    value: 100000,
     unit: 'hectares',
   },
-  sdgs: [],
+  sdgs: [7, 13],
   financialAssessment: {
     status: 'not started',
     progress: 0,
@@ -2545,7 +2523,7 @@ const PROJECT_ID_4: Project = {
 export const getProjectId = (id: string): Project | null => {
   switch (id) {
     case '1650':
-    return PROJECT_ID_1650;
+      return PROJECT_ID_1650;
     case '4811':
       return PROJECT_ID_4811;
     case '2749':
@@ -2558,12 +2536,12 @@ export const getProjectId = (id: string): Project | null => {
 };
 
 export const getInitialMockProjects = () => [
-  PROJECT_ID_1650,
-  PROJECT_ID_4811,
   PROJECT_ID_2749,
+  PROJECT_ID_4811,
+  PROJECT_ID_4,
 ];
 
-export const importProject = () => PROJECT_ID_4;
+export const importProject = () => PROJECT_ID_1650;
 
 export const getDocuments = () => [
   {

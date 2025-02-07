@@ -22,7 +22,17 @@ export function QatalystAi({
       {aiSidebarOpen && (
         <div className="w-[560px] bg-background border-l p-4 flex flex-col justify-between">
           <div className="h-full border overflow-scroll" id="qatalyst-ai">
-            {!projectData || (!projectData.financialAssessment && null)}
+            {!projectData ||
+              (!projectData.financialAssessment && (
+                <span className="text-xs p-2 text-neutral-500">
+                  Qatalyst AI is not available for this project in demo app.
+                </span>
+              ))}
+            {projectData && ['1650'].indexOf(projectData?.id) < 0 && (
+              <span className="text-xs p-2 text-neutral-500">
+                Qatalyst AI is not available for this project in demo app.
+              </span>
+            )}
             {projectData &&
               projectData.financialAssessment &&
               FINANCIAL_ASSESSMENT_ITEMS.map((item) => {
@@ -48,7 +58,7 @@ export function QatalystAi({
                       </p>
                     </div>
                     <p className="text-sm px-1">{faItem.ai.response}</p>
-                    <p className="flex flex-row flex-wrap gap-2">
+                    <div className="flex flex-row flex-wrap gap-2">
                       {faItem.sources.map((source, index) => {
                         if (
                           openDocumentUrl &&
@@ -81,7 +91,7 @@ export function QatalystAi({
                           </div>
                         );
                       })}
-                    </p>
+                    </div>
                   </div>
                 );
               })}

@@ -15,12 +15,27 @@ const NATURE_BASED = 0,
 function BoxSelection({
   children,
   selected,
+  disabled,
   onClickHandle,
 }: {
   children?: React.ReactNode;
   selected?: boolean;
+  disabled?: boolean;
   onClickHandle?: () => void;
 }) {
+  if (disabled) {
+    return (
+      <div
+        className="w-[230px] h-[140px] bg-neutral-200 flex flex-col gap-2 items-center p-2 border border-neutral-300 rounded-sm hover:cursor-not-allowed opacity-60"
+        onClick={() => {}}
+      >
+        <div className="absolute -mr-44 p-[2px] flex items-center justify-center bg-branding-green-600 rounded-full opacity-0">
+          <Check className="text-white w-4 h-4" />
+        </div>
+        {children}
+      </div>
+    );
+  }
   if (!selected) {
     return (
       <div
@@ -87,6 +102,7 @@ export default function NewProjectPage() {
               <span>Nature-based</span>
             </BoxSelection>
             <BoxSelection
+              disabled={true}
               selected={selectedProjectType === COOKSTOVE}
               onClickHandle={() => setSelectedProjectType(COOKSTOVE)}
             >
@@ -101,6 +117,7 @@ export default function NewProjectPage() {
               <span>Cookstove</span>
             </BoxSelection>
             <BoxSelection
+              disabled
               selected={selectedProjectType === OTHER}
               onClickHandle={() => setSelectedProjectType(OTHER)}
             >
@@ -121,6 +138,7 @@ export default function NewProjectPage() {
             <span>Choose method to create new project</span>
             <div className="flex flex-row gap-4 items-center justify-between">
               <BoxSelection
+                disabled
                 selected={selectedSource === MANUAL}
                 onClickHandle={() => setSelectedSource(MANUAL)}
               >
@@ -147,6 +165,7 @@ export default function NewProjectPage() {
                 <span>Import from Verra</span>
               </BoxSelection>
               <BoxSelection
+                disabled
                 selected={selectedSource === GS}
                 onClickHandle={() => setSelectedSource(GS)}
               >

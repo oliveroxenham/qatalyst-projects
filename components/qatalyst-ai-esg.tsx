@@ -23,6 +23,11 @@ export function QatalystAi({
         <div className="w-[560px] bg-background border-l p-4 flex flex-col justify-between">
           <div className="h-full border overflow-scroll" id="qatalyst-ai">
             {!projectData || (!projectData.esgAssessment && null)}
+            {projectData && ['1650'].indexOf(projectData?.id) < 0 && (
+              <span className="text-xs p-2 text-neutral-500">
+                Qatalyst AI is not available for this project in demo app.
+              </span>
+            )}
             {projectData &&
               projectData.esgAssessment &&
               risks.map((riskItem:EsgRisk) => {

@@ -29,12 +29,14 @@ export function ProjectCard({
       className="group border rounded-lg shadow bg-white w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg transition-all"
       href={`/projects/${data.id}/details`}
     >
+      {(data.id === '1650' || data.id === '2749') && <span className="absolute bg-blaze-orange-300 text-[10px] mt-1 ml-1 px-1 rounded-xl font-semibold">SAMPLE</span>}
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>
         <Image
           src={data.imgUrl}
           alt={data.name}
           width={344}
           height={161}
+          style={{ height: 161 }}
           className="rounded-t-lg"
         />
       </div>
