@@ -69,11 +69,12 @@ export function QatalystAi({
                             <Link
                               href="#"
                               key={index}
+                              className="underline text-blaze-orange-600"
                               onClick={() => openDocumentUrl('ok')}
                             >
                               <span
                                 key={index}
-                                className="text-xs hover:underline"
+                                className="text-xs"
                               >
                                 [{index + 1}] {source.name}
                               </span>

@@ -146,7 +146,7 @@ const ProjectPicker = () => {
           creditingEndDate="2028-12-31"
           carbonCredits={projectData.estimatedAnnualCredits.value}
         />
-        <Map project={1} />
+        <Map projectData={projectData} />
       </div>
       <div
         className={clsx('m-2 grid grid-cols-1 gap-2', {

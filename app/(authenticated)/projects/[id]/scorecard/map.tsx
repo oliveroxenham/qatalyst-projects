@@ -1,12 +1,15 @@
-// import Image from 'next/image';
-function Map({ project = 1 }: { project?: number }) {
-  const bgUrl =
-    project === 1 ? "bg-[url('/cambodia.png')]" : "bg-[url('/brazil.png')]";
+import { Project } from '@/types/project';
+
+function Map({ projectData }: { projectData: Project }) {
   return (
     <div
       className={`h-[500px] rounded-lg border border-neutral-200 bg-background p-6`}
     >
-      <div className={`w-full h-full bg-no-repeat ${bgUrl} bg-center bg-contain`}></div>
+      <div
+        // @ts-expect-error - image-url is a custom property
+        style={{ '--image-url': `url(${projectData?.mapUrl})` }}
+        className={`flex gap-3 h-full bg-muted border justify-center items-center bg-center bg-[image:var(--image-url)]`}
+      />
     </div>
   );
 }
