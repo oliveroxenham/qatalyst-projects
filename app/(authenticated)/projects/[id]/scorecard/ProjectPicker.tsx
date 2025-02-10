@@ -31,6 +31,11 @@ const projects = [
     label: 'DelAgua Clean Cooking Grouped Project',
     value: '2749',
   },
+  {
+    label:
+      'Reduced Emissions from Deforestation and Degradation in Keo Seima Wildlife Sanctuary',
+    value: '1650',
+  },
 ];
 
 const ProjectListComboBox = ({
@@ -78,7 +83,10 @@ const ProjectListComboBox = ({
                       value === framework.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
-                  {framework.label}
+                  <span className="bg-neutral-200 p-1 rounded-lg text-xs">
+                    {framework.value}
+                  </span>
+                  <span>{framework.label}</span>
                 </CommandItem>
               ))}
             </CommandGroup>
