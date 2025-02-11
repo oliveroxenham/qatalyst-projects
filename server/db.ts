@@ -22,9 +22,11 @@ export async function getProjectsClient() {
 
 export async function getProjectByIdServer({ id } : { id: string }) {
   const url = new URL(`${GET_PROJECTS_URL}?id=${id}`, process.env.BASE_URL);
-  console.log('getProjectById:', url.toString());
+  console.log('getProjectByIdServer:', url.toString());
   const resp = await fetch(url);
-  return await resp.json() as Project; 
+  const json = await resp.json();
+  console.log('getProjectByIdServer json:', json);
+  return json as Project; 
 }
 
 export async function getDocumentsServer() {

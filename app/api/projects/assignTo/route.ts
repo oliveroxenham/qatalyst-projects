@@ -1,6 +1,7 @@
 import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from 'next/server';
-import { getInitialMockProjects, getProjectId } from '@/mock/data';
+import { getProjectsServer } from '@/server/db';
+import { getProjectId } from '@/mock/data';
 
 const redis = Redis.fromEnv();
 
@@ -15,7 +16,8 @@ export async function POST(req: NextRequest) {
   }
   try {
     const currentProject = getProjectId(projectId);
-    const allProjects = getInitialMockProjects();
+    const allProjects = await getProjectsServer();
+    console.log({ currentProject, allProjects });
     if (!currentProject) {
       return NextResponse.json({ msg: 'Project not found' }, { status: 404 });
     }
