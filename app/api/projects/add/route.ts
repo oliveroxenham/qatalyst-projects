@@ -10,7 +10,7 @@ export async function POST() {
     const newProject: Project = importProject();
 
     await redis.del('projects');
-    await redis.set('projects', [...getInitialMockProjects(), newProject]);
+    await redis.set('projects', [newProject, ...getInitialMockProjects()]);
 
     return NextResponse.json(
       { message: 'Project added successfully' },
