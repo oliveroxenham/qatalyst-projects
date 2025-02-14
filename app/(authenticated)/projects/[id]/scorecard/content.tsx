@@ -166,7 +166,7 @@ export default function ScoreCardPage({
             </main>
             {benchmarkLayoutVisible && (
               <div className="h-[calc(100%-84px)] w-1/2">
-                <ProjectPicker />
+                <ProjectPicker currentProjectId={projectData.id} />
               </div>
             )}
           </div>

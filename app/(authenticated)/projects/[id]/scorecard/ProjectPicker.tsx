@@ -26,25 +26,26 @@ import { useState } from 'react';
 import { getProjectId } from '@/mock/data';
 import { CollaboratorTag } from '@/components/collaborator-tag';
 
-const projects = [
-  {
-    label: 'DelAgua Clean Cooking Grouped Project',
-    value: '2749',
-  },
-  {
-    label:
-      'Reduced Emissions from Deforestation and Degradation in Keo Seima Wildlife Sanctuary',
-    value: '1650',
-  },
-];
-
 const ProjectListComboBox = ({
   setProjectSelected,
+  currentProjectId,
 }: {
   readonly setProjectSelected: (project: string) => void;
+  currentProjectId: string;
 }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
+  const projects = [
+    {
+      label: 'DelAgua Clean Cooking Grouped Project',
+      value: '2749',
+    },
+    {
+      label:
+        'Reduced Emissions from Deforestation and Degradation in Keo Seima Wildlife Sanctuary',
+      value: '1650',
+    },
+  ].filter((p) => p.value !== currentProjectId);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -97,12 +98,15 @@ const ProjectListComboBox = ({
   );
 };
 
-const ProjectPicker = () => {
+const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
   const [projectSelected, setProjectSelected] = useState<string | undefined>();
   if (!projectSelected)
     return (
       <div className="m-2 rounded-lg border border-neutral-200 bg-background p-4">
-        <ProjectListComboBox setProjectSelected={setProjectSelected} />
+        <ProjectListComboBox
+          setProjectSelected={setProjectSelected}
+          currentProjectId={currentProjectId}
+        />
       </div>
     );
 

@@ -28,7 +28,7 @@ export default function DocumentList({ projectId }: { projectId: string }) {
   });
 
   useEffect(() => {
-    if (typeof documentUrl !== 'undefined' && documentUrl !== '0') {
+    if (typeof documentUrl !== 'undefined' && documentUrl !== '0' && documentUrl !== '5') {
       setDialogOpen(true);
     }
   }, [documentUrl])

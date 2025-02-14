@@ -3,11 +3,18 @@
 import { Button } from '@/components/qbutton';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
-import { Copy } from 'lucide-react';
+import { Copy, Download } from 'lucide-react';
 import Content from './content';
 import { useState } from 'react';
 import { Project } from '@/types/project';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
+import Link from 'next/link';
 
 export default function PageClient({
   projectData,
@@ -28,6 +35,35 @@ export default function PageClient({
             />
           )}
           <div className="flex flex-row gap-2">
+            {projectData?.id === '1650' && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="secondary" size="small">
+                    <Download className="w-6 h-6" />
+                    Export
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <Link
+                      href="https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/Reduced%20Emissions%20Deforestation%20Keo%20Seima-GanpsWvKb5zX3d7zXrRTnXnRlK9mdT.docx"
+                      download="Reduced Emissions Deforestation Keo Seima.doc"
+                    >
+                      Word Document
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link
+                      target="_blank"
+                      href="https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/Reduced%20Emissions%20Deforestation%20Keo%20Seima-T37dnRlThffccheE1qE4gfI751usqq.pdf"
+                      download="Reduced Emissions Deforestation Keo Seima.pdf"
+                    >
+                      PDF Document
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
             <Button
               variant="primary"
               size="small"

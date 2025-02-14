@@ -2553,6 +2553,7 @@ export const getDocuments = () => [
     source: 'Verra',
     date: 'November 24, 2024',
     lastActivity: 'Wesley uploaded this file.',
+    projectId: '1650'
   },
   {
     id: 1,
@@ -2563,6 +2564,7 @@ export const getDocuments = () => [
     source: 'Verra',
     date: 'October 16, 2024',
     lastActivity: 'Kopal imported this file.',
+    projectId: '1650'
   },
   {
     id: 2,
@@ -2573,6 +2575,7 @@ export const getDocuments = () => [
     source: 'Verra',
     date: 'September 21, 2024',
     lastActivity: 'Poyan uploaded this file.',
+    projectId: '1650'
   },
   {
     id: 3,
@@ -2583,6 +2586,7 @@ export const getDocuments = () => [
     source: 'Verra',
     date: 'September 21, 2024',
     lastActivity: 'Poyan uploaded this file.',
+    projectId: '1650'
   },
   {
     id: 4,
@@ -2593,5 +2597,18 @@ export const getDocuments = () => [
     source: 'Verra',
     date: 'September 21, 2024',
     lastActivity: 'Poyan uploaded this file.',
+    projectId: '1650'
   },
+  {
+    id: 5,
+    type: 'pdf',
+    size: '2MB',
+    name: 'VCS_CPR_V_PRR_2749_19_March_2024.pdf',
+    status: 'Ready',
+    source: 'Verra',
+    date: 'October 2, 2024',
+    lastActivity: 'Kopal uploaded this file.',
+    projectId: '2749'
+  },
+
 ];
