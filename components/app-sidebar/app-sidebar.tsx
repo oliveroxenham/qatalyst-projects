@@ -101,18 +101,18 @@ const data = {
       url: '/projects/{id}/scorecard',
     },
     {
+      disabled: false,
+      icon: SquareSigma,
+      key: 'ai-estimator',
+      name: 'AI Estimator',
+      url: '/projects/{id}/estimator',
+    },
+    {
       disabled: true,
       icon: Fingerprint,
       key: 'kyc-assessment',
       name: 'KYC Assessment',
       url: '/projects/{id}/kyc',
-    },
-    {
-      disabled: true,
-      icon: SquareSigma,
-      key: 'ai-estimator',
-      name: 'AI Estimator',
-      url: '/projects/{id}/ai',
     },
     {
       disabled: true,
