@@ -266,7 +266,7 @@ export const AppSidebar = ({
           </SidebarGroup>
         )}
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="mx-auto w-full">
         {user ? <NavUser user={user} /> : null}
       </SidebarFooter>
       <SidebarRail />
