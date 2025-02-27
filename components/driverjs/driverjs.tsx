@@ -15,13 +15,13 @@ export function DriverJs({ children }: { children: React.ReactNode }) {
             description: 'Store and manage your sustainability projects.',
           },
         },
-        {
-          element: '#my-dashboard',
-          popover: {
-            title: 'My Dashboard',
-            description: 'View insights from your project portfolio.'
-          }
-        },
+        // {
+        //   element: '#my-dashboard',
+        //   popover: {
+        //     title: 'My Dashboard',
+        //     description: 'View insights from your project portfolio.'
+        //   }
+        // },
         {
           element: '#create-button',
           popover: {
