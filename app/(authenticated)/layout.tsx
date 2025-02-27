@@ -2,6 +2,7 @@ import { AppSidebar } from '@/components/app-sidebar';
 import { SidebarInset } from '@/components/ui/sidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { currentUser } from '@clerk/nextjs/server';
+import { DriverJs } from '@/components/driverjs/driverjs';
 
 export default async function AuthenticatedLayout({
   children,
@@ -17,7 +18,9 @@ export default async function AuthenticatedLayout({
             : '',
         }}
       />
-      <SidebarInset className="bg-neutral-100">{children}</SidebarInset>
+      <SidebarInset className="bg-neutral-100">
+        <DriverJs>{children}</DriverJs>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

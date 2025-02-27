@@ -23,7 +23,7 @@ export default async function ProjectsPage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <TopBar title="My Workspace">
         <div className="flex justify-end items-center w-full gap-2">
-          <Link href="/new">
+          <Link href="/new" id="create-button">
             <Button variant="primary" size="small">
               <Plus className="w-6 h-6" />
               Create

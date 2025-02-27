@@ -1,4 +1,5 @@
 'use client';
+
 import { NavUser } from '@/components/app-sidebar/nav-user';
 import {
   Sidebar,
@@ -183,7 +184,7 @@ export const AppSidebar = ({
   }, [projectId]);
 
   return (
-    <Sidebar collapsible="icon" {...props} className='z-50'>
+    <Sidebar collapsible="icon" {...props} className="z-50">
       <SidebarHeader>
         <div className="py-2">
           <Link href="/projects">
@@ -203,18 +204,23 @@ export const AppSidebar = ({
           <SidebarGroupLabel>Overview</SidebarGroupLabel>
           <SidebarMenu>
             {data.overview.map((item) => (
-              <SidebarMenuItem key={item.key} className="pl-2">
-                <SidebarMenuButton
-                  asChild
-                  isActive={pathname === item.url}
-                  tooltip={item.name}
-                >
-                  <Link href={item.url}>
-                    <item.icon />
-                    <span className="text-xs">{item.name}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <div
+                id={item.key}
+                key={item.key}
+              >
+                <SidebarMenuItem className="pl-2">
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.url}
+                    tooltip={item.name}
+                  >
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span className="text-xs">{item.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </div>
             ))}
           </SidebarMenu>
         </SidebarGroup>
