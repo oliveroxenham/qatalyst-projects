@@ -204,10 +204,7 @@ export const AppSidebar = ({
           <SidebarGroupLabel>Overview</SidebarGroupLabel>
           <SidebarMenu>
             {data.overview.map((item) => (
-              <div
-                id={item.key}
-                key={item.key}
-              >
+              <div id={item.key} key={item.key}>
                 <SidebarMenuItem className="pl-2">
                   <SidebarMenuButton
                     asChild
@@ -230,43 +227,45 @@ export const AppSidebar = ({
             <SidebarGroupLabel>Project</SidebarGroupLabel>
             <SidebarMenu>
               {data.projects.map((item) => (
-                <SidebarMenuItem key={item.key} className="pl-2">
-                  {item.cookstoveOnly && isCookstove && (
-                    <SidebarMenuButton
-                      asChild
-                      disabled={item.disabled}
-                      isActive={
-                        pathname === getProjectPathUrl(item.url, projectId)
-                      }
-                      tooltip={item.name}
-                    >
-                      <Link href={getProjectPathUrl(item.url, projectId)}>
-                        <item.icon />
-                        <span className="text-xs">{item.name}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  )}
-                  {item.disabled && (
-                    <SidebarMenuButton className="cursor-not-allowed text-xs text-neutral-500 hover:bg-disabled/20 hover:text-white/50">
-                      <item.icon /> {item.name}
-                    </SidebarMenuButton>
-                  )}
-                  {!item.cookstoveOnly && !item.disabled && (
-                    <SidebarMenuButton
-                      asChild
-                      disabled={item.disabled}
-                      isActive={
-                        pathname === getProjectPathUrl(item.url, projectId)
-                      }
-                      tooltip={item.name}
-                    >
-                      <Link href={getProjectPathUrl(item.url, projectId)}>
-                        <item.icon />
-                        <span className="text-xs">{item.name}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  )}
-                </SidebarMenuItem>
+                <div id={item.key} key={item.key}>
+                  <SidebarMenuItem className="pl-2">
+                    {item.cookstoveOnly && isCookstove && (
+                      <SidebarMenuButton
+                        asChild
+                        disabled={item.disabled}
+                        isActive={
+                          pathname === getProjectPathUrl(item.url, projectId)
+                        }
+                        tooltip={item.name}
+                      >
+                        <Link href={getProjectPathUrl(item.url, projectId)}>
+                          <item.icon />
+                          <span className="text-xs">{item.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    )}
+                    {item.disabled && (
+                      <SidebarMenuButton className="cursor-not-allowed text-xs text-neutral-500 hover:bg-disabled/20 hover:text-white/50">
+                        <item.icon /> {item.name}
+                      </SidebarMenuButton>
+                    )}
+                    {!item.cookstoveOnly && !item.disabled && (
+                      <SidebarMenuButton
+                        asChild
+                        disabled={item.disabled}
+                        isActive={
+                          pathname === getProjectPathUrl(item.url, projectId)
+                        }
+                        tooltip={item.name}
+                      >
+                        <Link href={getProjectPathUrl(item.url, projectId)}>
+                          <item.icon />
+                          <span className="text-xs">{item.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    )}
+                  </SidebarMenuItem>
+                </div>
               ))}
             </SidebarMenu>
           </SidebarGroup>
