@@ -9,6 +9,7 @@ import { GenerateAssessmentButton } from '@/components/generate-assessment-butto
 import { ChildComponents } from './childComponents';
 import { getProjectByIdServer } from '@/server/db';
 import { FinalRatingSelector } from '@/components/final-rating-selector';
+import { DriverJs } from '@/components/driverjs/driverjs';
 
 export default async function FinancialAssessmentPage({
   params,
@@ -63,6 +64,7 @@ export default async function FinancialAssessmentPage({
       <div className="w-full flex justify-center p-2 pb-[53px] h-full">
         <ChildComponents projectData={projectData} />
       </div>
+      <DriverJs />
     </div>
   );
 }

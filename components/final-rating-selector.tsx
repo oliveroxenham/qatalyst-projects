@@ -44,6 +44,7 @@ export function FinalRatingSelector({
         asChild
       >
         <Button
+          id="final-rating-button"
           className={clsx('text-white', {
             'bg-neutral-500': finalRating.toLowerCase() === 'not started',
             'bg-blue-500': finalRating.toLowerCase() === 'in progress',

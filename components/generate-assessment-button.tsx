@@ -17,6 +17,7 @@ export function GenerateAssessmentButton({
     <div>
       <Button
         size="sm"
+        id="generate-assessment-button"
         className="bg-orange-500 hover:bg-orange-400"
         onClick={() => setDialogOpen(true)}
         disabled={assignee?.toLowerCase() !== currentUser?.toLowerCase()}

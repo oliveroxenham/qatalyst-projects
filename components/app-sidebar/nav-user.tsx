@@ -19,7 +19,7 @@ import {
 import { useClerk } from '@clerk/nextjs';
 import type { User } from '@/types/user';
 import { resetAppState } from '@/server/actions';
-import { Bell, ChevronsUpDown, LogOut, RotateCcw } from 'lucide-react';
+import { Bell, ChevronsUpDown, LogOut, RotateCcw, MessageCircleQuestion } from 'lucide-react';
 
 export const NavUser = ({ user }: { readonly user: User }) => {
   const { isMobile } = useSidebar();
@@ -82,6 +82,20 @@ export const NavUser = ({ user }: { readonly user: User }) => {
               <DropdownMenuItem onClick={resetAppState}>
                 <RotateCcw />
                 Reset App State
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {
+                window.localStorage.removeItem('driverjs.projects');
+                window.localStorage.removeItem('driverjs.details');
+                window.localStorage.removeItem('driverjs.documents');
+                window.localStorage.removeItem('driverjs.scorecard');
+                window.localStorage.removeItem('driverjs.financial-assessment');
+                window.localStorage.removeItem('driverjs.esg-assessment');
+                window.setTimeout(() => {
+                  window.location.reload();
+                }, 500)
+              }}>
+                <MessageCircleQuestion />
+                Reset Onboarding
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

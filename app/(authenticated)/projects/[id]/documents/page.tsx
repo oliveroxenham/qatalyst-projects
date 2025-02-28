@@ -11,6 +11,7 @@ import {
 import { getDocumentsByProjectIdServer, getProjectByIdServer } from '@/server/db';
 import DocumentList from './document-list';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
+import { DriverJs } from '@/components/driverjs/driverjs';
 
 export default async function DocumentsPage({
   params,
@@ -39,7 +40,7 @@ export default async function DocumentsPage({
           )}
           <div className="flex flex-row gap-2">
             <Link href="#">
-              <Button variant="primary" size="small">
+              <Button variant="primary" size="small" disabled>
                 <Upload className="w-6 h-6" />
                 Upload
               </Button>
@@ -53,6 +54,7 @@ export default async function DocumentsPage({
           <DocumentList projectId={projectId} />
         </div>
       </div>
+      <DriverJs />
     </HydrationBoundary>
   );
 }

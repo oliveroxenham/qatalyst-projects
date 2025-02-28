@@ -14,7 +14,7 @@ export function ThemeSwitcher() {
   }, []);
   const toggleTheme = () => {
     if (theme === 'light') {
-      setTheme('dark');
+      setTheme('light');
     } else {
       setTheme('light');
     }

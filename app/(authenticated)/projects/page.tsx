@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { ProjectList } from './projectList';
 import { getProjectsServer } from '@/server/db';
+import { DriverJs } from '@/components/driverjs/driverjs';
 
 export default async function ProjectsPage() {
   const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ export default async function ProjectsPage() {
       <div className="p-4 flex justify-center">
         <ProjectList />
       </div>
+      <DriverJs />
     </HydrationBoundary>
   );
 }

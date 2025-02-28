@@ -34,7 +34,7 @@ export function AssigneeSelector({
   };
   return (
     <Select disabled={disabled} onValueChange={handleAssigneeChange}>
-      <SelectTrigger>
+      <SelectTrigger id="assignee-selector">
         {assignedTo && <SelectValue placeholder={assignedTo} />}
         {!assignedTo && <SelectValue placeholder="Unassigned" />}
       </SelectTrigger>

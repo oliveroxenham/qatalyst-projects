@@ -106,6 +106,7 @@ export function QatalystAi({
       )}
       <div className="w-[72px] bg-background border-l py-4 flex flex-col gap-2">
         <div
+          id="qatalyst-ai-button"
           className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16"
           onClick={() =>
             setAiSidebarOpen ? setAiSidebarOpen(!aiSidebarOpen) : null

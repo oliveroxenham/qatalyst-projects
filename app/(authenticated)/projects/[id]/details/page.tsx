@@ -12,6 +12,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { Badge } from '@/components/ui/badge';
 import { getInitialsFromName } from '@/lib/utils';
 import { EditButton } from './edit-button';
+import { DriverJs } from '@/components/driverjs/driverjs';
 import { clsx } from 'clsx';
 
 export default async function ProjectInfoPage({
@@ -380,6 +381,7 @@ export default async function ProjectInfoPage({
           </div>
         </div>
       </div>
+      <DriverJs />
     </div>
   );
 }

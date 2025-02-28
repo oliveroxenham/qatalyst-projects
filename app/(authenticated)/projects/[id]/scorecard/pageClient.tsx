@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import Link from 'next/link';
+import { DriverJs } from '@/components/driverjs/driverjs';
 
 export default function PageClient({
   projectData,
@@ -37,7 +38,7 @@ export default function PageClient({
           <div className="flex flex-row gap-2">
             {projectData?.id === '1650' && (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild id="export-button">
                   <Button variant="secondary" size="small">
                     <Download className="w-6 h-6" />
                     Export
@@ -65,6 +66,7 @@ export default function PageClient({
               </DropdownMenu>
             )}
             <Button
+              id="compare-button"
               variant="primary"
               size="small"
               onClick={() => setIsCompare(!isCompare)}
@@ -77,6 +79,7 @@ export default function PageClient({
         </div>
       </TopBar>
       <Content benchmarkLayoutVisible={isCompare} projectData={projectData} />
+      <DriverJs />
     </div>
   );
 }

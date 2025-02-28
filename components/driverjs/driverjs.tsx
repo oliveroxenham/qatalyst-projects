@@ -12,7 +12,7 @@ type DriverStep = {
   };
 };
 
-const steps: { [key: string]: DriverStep[] } = {
+export const steps: { [key: string]: DriverStep[] } = {
   projects: [
     {
       element: '#my-workspace',
@@ -21,13 +21,13 @@ const steps: { [key: string]: DriverStep[] } = {
         description: 'Store and manage your sustainability projects.',
       },
     },
-    // {
-    //   element: '#my-dashboard',
-    //   popover: {
-    //     title: 'My Dashboard',
-    //     description: 'View insights from your project portfolio.'
-    //   }
-    // },
+    {
+      element: '#my-dashboard',
+      popover: {
+        title: 'My Dashboard',
+        description: 'View insights from your project portfolio.',
+      },
+    },
     {
       element: '#create-button',
       popover: {
@@ -57,16 +57,14 @@ const steps: { [key: string]: DriverStep[] } = {
       element: '#financial-assessment',
       popover: {
         title: 'Financial Assessment',
-        description:
-          'Evaluate project financials to ensure sustainability.',
+        description: 'Evaluate project financials to ensure sustainability.',
       },
     },
     {
       element: '#esg-assessment',
       popover: {
         title: 'ESG Assessment',
-        description:
-          'Evaluate project ESG to ensure sustainability.',
+        description: 'Evaluate project ESG to ensure sustainability.',
       },
     },
     {
@@ -78,9 +76,100 @@ const steps: { [key: string]: DriverStep[] } = {
       },
     },
   ],
+  'financial-assessment': [
+    {
+      element: '#generate-assessment-button',
+      popover: {
+        title: 'Generate Full Assessment',
+        description:
+          'Use Qatalyst to generate all answers from project documents. Only the project assignee can generate an assessment.',
+      },
+    },
+    {
+      element: '#final-rating-button',
+      popover: {
+        title: 'Final Rating',
+        description:
+          'Provide a final project rating based on your assessment results. Only the project assignee can update the final rating.',
+      },
+    },
+    {
+      element: '#assignee-selector',
+      popover: {
+        title: 'Project Assignee',
+        description: 'Update the project assignee.',
+      },
+    },
+    {
+      element: '#qatalyst-ai-button',
+      popover: {
+        title: 'Qatalyst Chat',
+        description:
+          'Engage with Qatalyst to get personalized project insights and support.',
+      },
+    },
+  ],
+  'esg-assessment': [
+    {
+      element: '#generate-assessment-button',
+      popover: {
+        title: 'Generate Full Assessment',
+        description:
+          'Use Qatalyst to generate all answers from project documents. Only the project assignee can generate an assessment.',
+      },
+    },
+    {
+      element: '#final-rating-button',
+      popover: {
+        title: 'Final Rating',
+        description:
+          'Provide a final project rating based on your assessment results. Only the project assignee can update the final rating.',
+      },
+    },
+    {
+      element: '#assignee-selector',
+      popover: {
+        title: 'Project Assignee',
+        description: 'Update the project assignee.',
+      },
+    },
+    {
+      element: '#qatalyst-ai-button',
+      popover: {
+        title: 'Qatalyst Chat',
+        description:
+          'Engage with Qatalyst to get personalized project insights and support.',
+      },
+    },
+  ],
+  scorecard: [
+    {
+      element: '#export-button',
+      popover: {
+        title: 'Export Project',
+        description: 'Easily export project to Word or PDF document.',
+      },
+    },
+    {
+      element: '#compare-button',
+      popover: {
+        title: 'Compare Projects',
+        description: 'Easily compare two projects scorecard side-by-side.',
+      },
+    },
+  ],
+  documents: [
+    {
+      element: '#document-row',
+      popover: {
+        title: 'View Document',
+        description: 'Open and review documents thoroughly.',
+      },
+    },
+  ],
 };
 
-export function DriverJs({ children }: { children: React.ReactNode }) {
+export function DriverJs({ children }: { children?: React.ReactNode }) {
   const pathname = usePathname();
   console.log('driverjs: pathname=', pathname);
   const pageName: string | undefined = pathname.split('/').at(-1);
@@ -90,7 +179,15 @@ export function DriverJs({ children }: { children: React.ReactNode }) {
       overlayColor: '#cccccc',
       steps: pageName && steps[pageName] ? steps[pageName] : [],
     });
-    driverObj.drive();
+    const runDriver = !window.localStorage.getItem(`driverjs.${pageName}`);
+    console.log('runDriver?', runDriver);
+    if (!runDriver) {
+      return;
+    }
+    window.setTimeout(() => {
+      driverObj.drive();
+      window.localStorage.setItem(`driverjs.${pageName}`, 'true');
+    }, 1000);
   }, []);
 
   return <>{children}</>;

@@ -61,7 +61,7 @@ export default function DocumentList({ projectId }: { projectId: string }) {
               key={document.id}
               onClick={() => setDocumentUrl(document.id.toString())}
             >
-              <TableCell className="flex items-center gap-1">
+              <TableCell className="flex items-center gap-1" id="document-row">
                 <Image
                   src={`/icons/${document.type}.svg`}
                   alt={document.type}
