@@ -67,15 +67,11 @@ export default function NewProjectPage() {
     number | undefined
   >();
   const [selectedSource, setSelectedSource] = useState<number | undefined>();
-  const [selectedProjectId, setSelectedProjectId] = useState<
-    string | undefined
-  >();
   const [progress, setProgress] = useState(0);
   const [importing, setImporting] = useState(false);
 
   useEffect(() => {
     setSelectedSource(undefined);
-    setSelectedProjectId(undefined);
   }, [selectedProjectType]);
 
   return (
@@ -186,14 +182,10 @@ export default function NewProjectPage() {
           <div className="flex flex-col gap-2">
             <span>Available projects to import</span>
             <div className="flex flex-row gap-4 items-center min-h-10">
-              <Button
-                size="small"
-                variant="outline"
-                onClick={() => setSelectedProjectId('1650')}
-              >
+              <span className='text-sm border p-2 rounded-sm'>
                 1650 - Reduced Emissions from Deforestation and Degradation in
                 Keo Seima Wildlife Sanctuary
-              </Button>
+              </span>
 
               <Button
                 size="small"
