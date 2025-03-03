@@ -194,24 +194,23 @@ export default function NewProjectPage() {
                 1650 - Reduced Emissions from Deforestation and Degradation in
                 Keo Seima Wildlife Sanctuary
               </Button>
-              {typeof selectedProjectId !== 'undefined' && (
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={() => {
-                    setImporting(true);
-                    setProgress(15);
-                    setTimeout(() => setProgress(40), 500);
-                    setTimeout(() => setProgress(75), 900);
-                    setTimeout(() => {
-                      setProgress(100);
-                      importProject();
-                    }, 1500);
-                  }}
-                >
-                  Import
-                </Button>
-              )}
+
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={() => {
+                  setImporting(true);
+                  setProgress(15);
+                  setTimeout(() => setProgress(40), 500);
+                  setTimeout(() => setProgress(75), 900);
+                  setTimeout(() => {
+                    setProgress(100);
+                    importProject();
+                  }, 1500);
+                }}
+              >
+                Import
+              </Button>
             </div>
             {importing && (
               <div className="flex flex-col gap-2 w-full">
