@@ -1,3 +1,5 @@
+'use client';
+
 import Map from './map';
 import CreditForecast from './CreditForecast';
 import EsgAssessment from './EsgAssessment';
@@ -9,6 +11,7 @@ import { SdgSummary } from '@/components/sdg-summary';
 import { clsx } from 'clsx';
 import { Project } from '@/types/project';
 import { CollaboratorTag } from '@/components/collaborator-tag';
+import { useTranslation } from 'react-i18next';
 
 export default function ScoreCardPage({
   benchmarkLayoutVisible,
@@ -17,6 +20,8 @@ export default function ScoreCardPage({
   benchmarkLayoutVisible: boolean;
   projectData: Project | null;
 }) {
+  const { t } = useTranslation();
+  
   if (!projectData) {
     return null;
   }
@@ -47,13 +52,13 @@ export default function ScoreCardPage({
               >
                 <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
                   <span className="text-muted-foreground text-sm">
-                    Sustainable Development Goals
+                    {t('scorecard.sustainableDevelopmentGoals')}
                   </span>
                   <SdgSummary sdgs={projectData.sdgs} />
                 </div>
                 <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
                   <span className="text-muted-foreground text-sm">
-                    Collaborators
+                    {t('scorecard.collaborators')}
                   </span>
                   <div className="flex flex-wrap gap-1">
                     {projectData?.collaborators.map((collaborator) => (
@@ -94,7 +99,7 @@ export default function ScoreCardPage({
                   data={[
                     {
                       id: 1,
-                      title: 'Capital expense intensity',
+                      title: t('scorecard.capitalExpenseIntensity'),
                       unit: (
                         <span>
                           USD/tCO<sub>2</sub>e
@@ -104,7 +109,7 @@ export default function ScoreCardPage({
                     },
                     {
                       id: 2,
-                      title: 'Operating expense intensity',
+                      title: t('scorecard.operatingExpenseIntensity'),
                       unit: (
                         <span>
                           USD/tCO<sub>2</sub>e
@@ -114,7 +119,7 @@ export default function ScoreCardPage({
                     },
                     {
                       id: 3,
-                      title: 'Total expense intensity',
+                      title: t('scorecard.totalExpenseIntensity'),
                       unit: (
                         <span>
                           USD/tCO<sub>2</sub>e
@@ -124,8 +129,7 @@ export default function ScoreCardPage({
                     },
                     {
                       id: 4,
-                      title:
-                        'Cost of production (including non carbon revenues)',
+                      title: t('scorecard.costOfProduction'),
                       unit: (
                         <span>
                           USD/tCO<sub>2</sub>e
@@ -135,13 +139,13 @@ export default function ScoreCardPage({
                     },
                     {
                       id: 5,
-                      title: 'Total net costs',
+                      title: t('scorecard.totalNetCosts'),
                       unit: <span>kUSD</span>,
                       value: 9.5,
                     },
                     {
                       id: 6,
-                      title: 'Cost of production (net - including financing)',
+                      title: t('scorecard.costOfProductionNet'),
                       unit: (
                         <span>
                           USD/tCO<sub>2</sub>e
@@ -151,7 +155,7 @@ export default function ScoreCardPage({
                     },
                     {
                       id: 7,
-                      title: 'Estimated reduction per unit of area per year',
+                      title: t('scorecard.estimatedReductionPerUnit'),
                       unit: (
                         <span>
                           tCO<sub>2</sub>e/ha/yr

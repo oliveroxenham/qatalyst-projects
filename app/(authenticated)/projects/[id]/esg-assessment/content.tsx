@@ -14,6 +14,7 @@ import QuestionMark from '@/public/icons/question-mark.svg';
 import { Project } from '@/types/project';
 import clsx from 'clsx';
 import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
+import { useTranslation } from 'react-i18next';
 
 const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   const [rating, setRating] = useState<number>(currentRating);
@@ -65,11 +66,14 @@ const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   );
 };
 
-const SourcesBoxed = ({ num = 0 }: { num: number }) => (
-  <div className="border rounded-sm flex items-center justify-center bg-background min-w-20 h-[36px]">
-    <span className="text-xs">{num} sources</span>
-  </div>
-);
+const SourcesBoxed = ({ num = 0 }: { num: number }) => {
+  const { t } = useTranslation();
+  return (
+    <div className="border rounded-sm flex items-center justify-center bg-background min-w-20 h-[36px]">
+      <span className="text-xs">{num} {t('common.sources')}</span>
+    </div>
+  );
+};
 
 export function Content({
   projectData,
@@ -78,7 +82,9 @@ export function Content({
   projectData: Project | null;
   setAiSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const [elId, setElId] = useState<string | undefined>();
+  
   useEffect(() => {
     if (!elId) {
       return;
@@ -91,12 +97,11 @@ export function Content({
       behavior: 'smooth',
     });
     childEl.classList.add('bg-orange-100');
-    childEl.classList.add('dark:bg-orange-800')
+    childEl.classList.add('dark:bg-orange-800');
     setTimeout(() => {
       childEl.classList.remove('bg-orange-100');
-      childEl.classList.remove('dark:bg-orange-800')
+      childEl.classList.remove('dark:bg-orange-800');
     }, 2000);
-
   }, [elId]);
 
   const handleRowClick = (elementId: string) => {
@@ -108,7 +113,7 @@ export function Content({
   if (!projectData) {
     return (
       <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">
-        <span>No ESG assessment data is available for this project.</span>
+        <span>{t('esgAssessment.noData')}</span>
       </div>
     );
   }
@@ -117,15 +122,15 @@ export function Content({
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
       <div className="p-4">
-        <span className="text-lg font-semibold">Categories</span>
+        <span className="text-lg font-semibold">{t('esgAssessment.categories')}</span>
       </div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Qatalyst Responses</TableHead>
-            <TableHead>User Rating</TableHead>
-            <TableHead>Source</TableHead>
+            <TableHead>{t('esgAssessment.name')}</TableHead>
+            <TableHead>{t('esgAssessment.qatalystResponses')}</TableHead>
+            <TableHead>{t('esgAssessment.userRating')}</TableHead>
+            <TableHead>{t('common.source')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ChartConfig,
   ChartContainer,
@@ -9,6 +11,7 @@ import Image from 'next/image';
 import { IssuanceRecord } from '@/types/project';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { abbreviateNumber } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const CreditForecast = ({
   carbonCredits = 0,
@@ -21,6 +24,8 @@ const CreditForecast = ({
   readonly creditingStartDate?: string;
   readonly creditingEndDate?: string;
 }) => {
+  const { t } = useTranslation();
+  
   const forecastStartYear = creditingStartDate
     ? new Date(creditingStartDate).getFullYear()
     : 0;
@@ -89,11 +94,11 @@ const CreditForecast = ({
   const chartConfig = {
     forecast: {
       color: 'hsl(var(--chart-2))',
-      label: 'Forecast',
+      label: t('scorecard.annualCreditIssuance'),
     },
     issued: {
       color: 'hsl(var(--chart-1))',
-      label: 'Issued',
+      label: t('scorecard.totalCredits'),
     },
   } satisfies ChartConfig;
 
@@ -103,7 +108,7 @@ const CreditForecast = ({
         {chartData && chartData.length > 0 && (
           <div>
             <span className="text-xl font-semibold">
-              Issued vs Forecast Credits
+              {t('scorecard.annualCreditIssuance')}
             </span>{' '}
             (
             <span className="text-md font-normal">
@@ -207,7 +212,7 @@ const CreditForecast = ({
                 alt="Data coming soon."
               />
               <span className="text-xs text-neutral-500">
-                Revenue forecast data coming soon.
+                {t('scorecard.annualCreditIssuance')}
               </span>
             </div>
           ))}

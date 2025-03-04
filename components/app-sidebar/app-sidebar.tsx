@@ -41,19 +41,20 @@ import pkgjson from '@/package.json';
 import type { User } from '@/types/user';
 import { getProjectId } from '@/mock/data';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const data = {
+const getMenuData = (t: (key: string) => string) => ({
   overview: [
     {
       icon: LayoutList,
       key: 'my-workspace',
-      name: 'My Workspace',
+      name: t('sidebar.myWorkspace'),
       url: '/projects',
     },
     {
       icon: ChartNoAxesCombined,
       key: 'my-dashboard',
-      name: 'My Dashboard',
+      name: t('sidebar.myDashboard'),
       url: '/dashboard',
     },
   ],
@@ -62,35 +63,35 @@ const data = {
       disabled: false,
       icon: Clipboard,
       key: 'project-details',
-      name: 'Project Details',
+      name: t('sidebar.projectDetails'),
       url: '/projects/{id}/details',
     },
     {
       disabled: false,
       icon: Files,
       key: 'documents',
-      name: 'Documents',
+      name: t('sidebar.documents'),
       url: '/projects/{id}/documents',
     },
     {
       disabled: false,
       icon: ClipboardCheck,
       key: 'financial-assessment',
-      name: 'Financial Assessment',
+      name: t('sidebar.financialAssessment'),
       url: '/projects/{id}/financial-assessment',
     },
     {
       disabled: false,
       icon: Earth,
       key: 'esg-assessment',
-      name: 'ESG Assessment',
+      name: t('sidebar.esgAssessment'),
       url: '/projects/{id}/esg-assessment',
     },
     {
       disabled: false,
       icon: ShieldCheck,
       key: 'quality-assessment',
-      name: 'Quality Assessment',
+      name: t('sidebar.qualityAssessment'),
       cookstoveOnly: true,
       url: '/projects/{id}/quality-assessment',
     },
@@ -98,60 +99,60 @@ const data = {
       disabled: false,
       icon: Star,
       key: 'scorecard',
-      name: 'Scorecard',
+      name: t('sidebar.scorecard'),
       url: '/projects/{id}/scorecard',
     },
     {
       disabled: true,
       icon: Fingerprint,
       key: 'kyc-assessment',
-      name: 'KYC Assessment',
+      name: t('sidebar.kycAssessment'),
       url: '/projects/{id}/kyc',
     },
     {
       disabled: true,
       icon: SquareSigma,
       key: 'ai-estimator',
-      name: 'AI Estimator',
+      name: t('sidebar.aiEstimator'),
       url: '/projects/{id}/ai',
     },
     {
       disabled: true,
       icon: BookCopy,
       key: 'benchmark',
-      name: 'Benchmark',
+      name: t('sidebar.benchmark'),
       url: '/projects/{id}/benchmark',
     },
     {
       disabled: true,
       icon: ShieldAlert,
       key: 'insurance',
-      name: 'Insurance',
+      name: t('sidebar.insurance'),
       url: '/projects/{id}/insurance',
     },
     {
       disabled: true,
       icon: FilePen,
       key: 'contract',
-      name: 'Contract',
+      name: t('sidebar.contract'),
       url: '/projects/{id}/contract',
     },
     {
       disabled: true,
       icon: NotebookText,
       key: 'pdd',
-      name: 'PDD',
+      name: t('sidebar.pdd'),
       url: '/projects/{id}/pdd',
     },
     {
       disabled: true,
       icon: ListChecks,
       key: 'verification',
-      name: 'Verification',
+      name: t('sidebar.verification'),
       url: '/projects/{id}/verification',
     },
   ],
-};
+});
 
 const getProjectPathUrl = (url: string, projectId?: string) => {
   if (projectId) {
@@ -168,6 +169,8 @@ export const AppSidebar = ({
   const pathname = usePathname();
   const { open } = useSidebar();
   const [isCookstove, setIsCookstove] = useState(false);
+  const { t } = useTranslation();
+  const data = getMenuData(t);
   const nonProjectPaths = data.overview.map((item) => item.url).join('/new');
   const splitPathname = pathname.split('/');
   const projectId = splitPathname.length > 2 ? splitPathname[2] : undefined;
@@ -201,7 +204,7 @@ export const AppSidebar = ({
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Overview</SidebarGroupLabel>
+          <SidebarGroupLabel>{t('sidebar.overview')}</SidebarGroupLabel>
           <SidebarMenu>
             {data.overview.map((item) => (
               <div id={item.key} key={item.key}>
@@ -224,7 +227,7 @@ export const AppSidebar = ({
         <SidebarSeparator className="opacity-50" />
         {!nonProjectPaths.includes(pathname) && (
           <SidebarGroup>
-            <SidebarGroupLabel>Project</SidebarGroupLabel>
+            <SidebarGroupLabel>{t('sidebar.project')}</SidebarGroupLabel>
             <SidebarMenu>
               {data.projects.map((item) => (
                 <div id={item.key} key={item.key}>

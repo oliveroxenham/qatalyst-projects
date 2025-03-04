@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -11,16 +13,19 @@ import { clsx } from 'clsx';
 import type { Project } from '@/types/project';
 import { UserRatingBoxed } from '@/components/user-rating';
 import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
+import { useTranslation } from 'react-i18next';
 
 function EsgAssessment({
   projectData,
 }: {
   projectData: Project;
 }) {
+  const { t } = useTranslation();
+  
   return (
     <div className="rounded-lg border bg-background p-6">
       <div className="pb-4">
-        <span className="text-xl font-semibold">ESG Assessment</span>
+        <span className="text-xl font-semibold">{t('esgAssessment.title')}</span>
       </div>
       <div
         className={clsx(
@@ -39,7 +44,7 @@ function EsgAssessment({
         )}
       >
         <span className="text-white capitalize text-sm">
-          {projectData?.esgAssessment.status ?? 'Not Started'}
+          {projectData?.esgAssessment.status ?? t('projectDetails.status.not_started')}
         </span>
       </div>
       <div className="flex flex-col rounded p-2">
@@ -47,8 +52,8 @@ function EsgAssessment({
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>
-              <TableHead>Qatalyst Response</TableHead>
-              <TableHead>User Rating</TableHead>
+              <TableHead>{t('esgAssessment.qatalystResponses')}</TableHead>
+              <TableHead>{t('esgAssessment.userRating')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

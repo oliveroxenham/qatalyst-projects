@@ -20,10 +20,12 @@ import { useClerk } from '@clerk/nextjs';
 import type { User } from '@/types/user';
 import { resetAppState } from '@/server/actions';
 import { Bell, ChevronsUpDown, LogOut, RotateCcw, MessageCircleQuestion } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const NavUser = ({ user }: { readonly user: User }) => {
   const { isMobile } = useSidebar();
   const { signOut } = useClerk();
+  const { t } = useTranslation();
 
   const initials = user.name
     ? user.name
@@ -77,11 +79,11 @@ export const NavUser = ({ user }: { readonly user: User }) => {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Bell />
-                Notifications
+                {t('user.notifications')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={resetAppState}>
                 <RotateCcw />
-                Reset App State
+                {t('user.resetAppState')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => {
                 window.localStorage.removeItem('driverjs.projects');
@@ -95,13 +97,13 @@ export const NavUser = ({ user }: { readonly user: User }) => {
                 }, 500)
               }}>
                 <MessageCircleQuestion />
-                Reset Onboarding
+                {t('user.resetOnboarding')}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => signOut()}>
               <LogOut />
-              Sign out
+              {t('user.signOut')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

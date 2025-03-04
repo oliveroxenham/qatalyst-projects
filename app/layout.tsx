@@ -2,15 +2,21 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/nextjs';
 import Providers from '@/providers/providers';
 import './globals.css';
+import { headers } from 'next/headers';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = headers();
+  const cookieHeader = headersList.get('cookie') || '';
+  const languageCookie = cookieHeader.split('; ').find(row => row.startsWith('i18nextLng='));
+  const language = languageCookie ? languageCookie.split('=')[1] : 'en';
+
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang={language} suppressHydrationWarning>
         <body className="w-full min-h-screen">
           <Providers
             attribute="class"

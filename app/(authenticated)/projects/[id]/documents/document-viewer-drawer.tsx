@@ -10,6 +10,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 export default function DocumentViewer({
   documentUrl,
@@ -18,6 +19,7 @@ export default function DocumentViewer({
   documentUrl?: string;
   setDocumentUrl: (url?: string) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="mx-auto w-full max-w-sm">
       <Drawer
