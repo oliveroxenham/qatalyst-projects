@@ -29,9 +29,13 @@ interface ProjectDetailsClientProps {
   user: SerializedUser | null;
 }
 
-export default function ProjectDetailsClient({ projectData, projectId, user }: ProjectDetailsClientProps) {
+export default function ProjectDetailsClient({
+  projectData,
+  projectId,
+  user,
+}: ProjectDetailsClientProps) {
   const { t } = useTranslation();
-  
+
   return (
     <div>
       <TopBar title={t('projectDetails.title')}>
@@ -176,7 +180,9 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
         <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
           <div className="bg-background rounded-lg border">
             <div className="flex items-center justify-between py-2 px-4">
-              <span className="font-semibold">{t('projectDetails.taskManager')}</span>
+              <span className="font-semibold">
+                {t('projectDetails.taskManager')}
+              </span>
               <Button size="sm" variant="ghost">
                 <ChevronDown />
               </Button>
@@ -185,14 +191,18 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
             <div className="flex flex-col gap-8 p-4">
               <div className="flex flex-row justify-between">
                 <div className="w-1/4">
-                  <span className="text-neutral-500">{t('projectDetails.creator')}</span>
+                  <span className="text-neutral-500">
+                    {t('projectDetails.creator')}
+                  </span>
                 </div>
                 <div className="w-3/4">{projectData?.owner}</div>
               </div>
 
               <div className="flex flex-row justify-between">
                 <div className="w-1/4">
-                  <span className="text-neutral-500">{t('projectDetails.collaborators')}</span>
+                  <span className="text-neutral-500">
+                    {t('projectDetails.collaborators')}
+                  </span>
                 </div>
                 <div className="w-3/4 flex flex-wrap gap-1">
                   {projectData?.collaborators.map((collaborator) => (
@@ -205,11 +215,15 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
               </div>
 
               <div>
-                <span className="font-semibold">{t('projectDetails.financialAssessment')}</span>
+                <span className="font-semibold">
+                  {t('projectDetails.financialAssessment')}
+                </span>
                 <div className="flex flex-col gap-4 mt-2 border rounded p-4">
                   <div className="flex flex-row items-center">
                     <div className="flex flex-row w-1/4">
-                      <span className="text-neutral-500">{t('projectDetails.assignTo')}</span>
+                      <span className="text-neutral-500">
+                        {t('projectDetails.assignTo')}
+                      </span>
                     </div>
                     <div className="w-3/4">
                       <AssigneeSelector
@@ -223,7 +237,9 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
 
                   <div className="flex flex-row">
                     <div className="flex flex-row w-1/4">
-                      <span className="text-neutral-500">{t('projectDetails.finalRating')}</span>
+                      <span className="text-neutral-500">
+                        {t('projectDetails.finalRating')}
+                      </span>
                     </div>
                     <div className="w-3/4">
                       <div
@@ -246,7 +262,16 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
                         )}
                       >
                         <span className="text-white capitalize">
-                          {t(`projectDetails.status.${projectData?.financialAssessment.status.toLowerCase().replace(/\s+/g, '_')}` as any, { defaultValue: t('projectDetails.status.not_started') })}
+                          {t(
+                            `projectDetails.status.${projectData?.financialAssessment.status
+                              .toLowerCase()
+                              .replace(/\s+/g, '_')}` as string,
+                            {
+                              defaultValue: t(
+                                'projectDetails.status.not_started'
+                              ),
+                            }
+                          )}
                         </span>
                       </div>
                       <div className="mt-2">
@@ -262,11 +287,15 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
               </div>
 
               <div>
-                <span className="font-semibold">{t('projectDetails.esgAssessment')}</span>
+                <span className="font-semibold">
+                  {t('projectDetails.esgAssessment')}
+                </span>
                 <div className="flex flex-col gap-4 mt-2 border rounded p-4">
                   <div className="flex flex-row items-center">
                     <div className="flex flex-row w-1/4">
-                      <span className="text-neutral-500">{t('projectDetails.assignTo')}</span>
+                      <span className="text-neutral-500">
+                        {t('projectDetails.assignTo')}
+                      </span>
                     </div>
                     <div className="w-3/4">
                       <AssigneeSelector
@@ -280,7 +309,9 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
 
                   <div className="flex flex-row">
                     <div className="flex flex-row w-1/4">
-                      <span className="text-neutral-500">{t('projectDetails.finalRating')}</span>
+                      <span className="text-neutral-500">
+                        {t('projectDetails.finalRating')}
+                      </span>
                     </div>
                     <div className="w-3/4">
                       <div
@@ -303,7 +334,16 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
                         )}
                       >
                         <span className="text-white capitalize">
-                          {t(`projectDetails.status.${projectData?.esgAssessment.status.toLowerCase().replace(/\s+/g, '_')}` as any, { defaultValue: t('projectDetails.status.not_started') })}
+                          {t(
+                            `projectDetails.status.${projectData?.esgAssessment.status
+                              .toLowerCase()
+                              .replace(/\s+/g, '_')}` as string,
+                            {
+                              defaultValue: t(
+                                'projectDetails.status.not_started'
+                              ),
+                            }
+                          )}
                         </span>
                       </div>
                       <div className="mt-2">
@@ -320,7 +360,9 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
 
               <div>
                 <div className="flex flex-row gap-2 items-center">
-                  <span className="font-semibold">{t('projectDetails.kycAssessment')}</span>
+                  <span className="font-semibold">
+                    {t('projectDetails.kycAssessment')}
+                  </span>
                   <Badge
                     variant="outline"
                     className="bg-neutral-200 text-neutral-500 text-[10px]"
@@ -331,7 +373,9 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
                 <div className="flex flex-col gap-4 mt-2 border rounded p-4">
                   <div className="flex flex-row items-center">
                     <div className="flex flex-row w-1/4">
-                      <span className="text-neutral-500">{t('projectDetails.assignTo')}</span>
+                      <span className="text-neutral-500">
+                        {t('projectDetails.assignTo')}
+                      </span>
                     </div>
                     <div className="w-3/4">
                       <AssigneeSelector
@@ -346,12 +390,23 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
 
                   <div className="flex flex-row">
                     <div className="flex flex-row w-1/4">
-                      <span className="text-neutral-500">{t('projectDetails.finalRating')}</span>
+                      <span className="text-neutral-500">
+                        {t('projectDetails.finalRating')}
+                      </span>
                     </div>
                     <div className="w-3/4">
                       <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
                         <span className="text-white capitalize">
-                          {t(`projectDetails.status.${projectData?.kycAssessment.status.toLowerCase().replace(/\s+/g, '_')}` as any, { defaultValue: t('projectDetails.status.not_started') })}
+                          {t(
+                            `projectDetails.status.${projectData?.kycAssessment.status
+                              .toLowerCase()
+                              .replace(/\s+/g, '_')}` as string,
+                            {
+                              defaultValue: t(
+                                'projectDetails.status.not_started'
+                              ),
+                            }
+                          )}
                         </span>
                       </div>
                       <div className="mt-2">
@@ -370,7 +425,9 @@ export default function ProjectDetailsClient({ projectData, projectId, user }: P
 
           <div className="bg-background rounded-lg border">
             <div className="flex items-center justify-between py-2 px-4">
-              <span className="font-semibold">{t('projectDetails.activity')}</span>
+              <span className="font-semibold">
+                {t('projectDetails.activity')}
+              </span>
               <Button size="sm" variant="ghost">
                 <ChevronDown />
               </Button>

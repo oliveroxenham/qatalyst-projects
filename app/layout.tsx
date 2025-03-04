@@ -4,12 +4,12 @@ import Providers from '@/providers/providers';
 import './globals.css';
 import { headers } from 'next/headers';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = headers();
+  const headersList = await headers();
   const cookieHeader = headersList.get('cookie') || '';
   const languageCookie = cookieHeader.split('; ').find(row => row.startsWith('i18nextLng='));
   const language = languageCookie ? languageCookie.split('=')[1] : 'en';

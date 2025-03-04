@@ -24,10 +24,10 @@ interface FinancialAssessmentClientProps {
   user: SerializedUser | null;
 }
 
-export default function FinancialAssessmentClient({ 
-  projectData, 
-  projectId, 
-  user 
+export default function FinancialAssessmentClient({
+  projectData,
+  projectId,
+  user,
 }: FinancialAssessmentClientProps) {
   const { t } = useTranslation();
 
@@ -48,7 +48,9 @@ export default function FinancialAssessmentClient({
               <Lock />
             </Button>
             <div className="flex flex-row items-center gap-1">
-              <span className="text-sm">{t('financialAssessment.assignee')}:</span>
+              <span className="text-sm">
+                {t('financialAssessment.assignee')}:
+              </span>
               <AssigneeSelector
                 projectId={projectId}
                 currentUser={user?.fullName}
@@ -56,11 +58,13 @@ export default function FinancialAssessmentClient({
                 assignedTo={projectData?.financialAssessment.assignedTo}
               />
             </div>
-            <FinalRatingSelector
-              projectData={projectData}
-              assessment="financial"
-              currentUser={user?.fullName}
-            />
+            {projectData && (
+              <FinalRatingSelector
+                projectData={projectData}
+                assessment="financial"
+                currentUser={user?.fullName}
+              />
+            )}
           </div>
           <div className="flex items-center">
             <GenerateAssessmentButton
