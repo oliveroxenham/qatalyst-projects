@@ -45,13 +45,13 @@ export default function ScoreCardPage({
                   'lg:grid-cols-2': !benchmarkLayoutVisible,
                 })}
               >
-                <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+                <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
                   <span className="text-muted-foreground text-sm">
                     Sustainable Development Goals
                   </span>
                   <SdgSummary sdgs={projectData.sdgs} />
                 </div>
-                <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+                <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
                   <span className="text-muted-foreground text-sm">
                     Collaborators
                   </span>

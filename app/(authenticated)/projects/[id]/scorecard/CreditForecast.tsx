@@ -98,7 +98,7 @@ const CreditForecast = ({
   } satisfies ChartConfig;
 
   return (
-    <div className="rounded-lg border border-neutral-200 bg-background p-4">
+    <div className="rounded-lg border bg-background p-4">
       <div className="h-[400px]">
         {chartData && chartData.length > 0 && (
           <div>
@@ -137,7 +137,7 @@ const CreditForecast = ({
                 iconSize={8}
                 // eslint-disable-next-line react/no-unstable-nested-components
                 formatter={(value) => (
-                  <span className="capitalize text-black">{value}</span>
+                  <span className="capitalize text-foreground">{value}</span>
                 )}
               />
               <defs>

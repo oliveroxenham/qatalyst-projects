@@ -50,7 +50,7 @@ export default async function DocumentsPage({
         </div>
       </TopBar>
       <div className="p-4 flex justify-center">
-        <div className="w-full bg-white border border-neutral-200 rounded-sm">
+        <div className="w-full bg-background border rounded-sm">
           <DocumentList projectId={projectId} />
         </div>
       </div>

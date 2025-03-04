@@ -84,7 +84,7 @@ const ProjectListComboBox = ({
                       value === framework.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
-                  <span className="bg-neutral-200 p-1 rounded-lg text-xs">
+                  <span className="bg-background p-1 rounded-lg text-xs">
                     {framework.value}
                   </span>
                   <span>{framework.label}</span>
@@ -102,7 +102,7 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
   const [projectSelected, setProjectSelected] = useState<string | undefined>();
   if (!projectSelected)
     return (
-      <div className="m-2 rounded-lg border border-neutral-200 bg-background p-4">
+      <div className="m-2 rounded-lg border bg-background p-4">
         <ProjectListComboBox
           setProjectSelected={setProjectSelected}
           currentProjectId={currentProjectId}
@@ -126,13 +126,13 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
           'lg:grid-cols-2': false,
         })}
       >
-        <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+        <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
           <span className="text-muted-foreground text-sm">
             Sustainable Development Goals
           </span>
           <SdgSummary sdgs={projectData.sdgs} />
         </div>
-        <div className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+        <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
           <span className="text-muted-foreground text-sm">Collaborators</span>
           <div className="flex flex-wrap gap-1">
             {projectData?.collaborators.map((collaborator) => (
@@ -148,11 +148,13 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
       >
         <CreditForecast
           issuanceRecords={[
-            { totalQuantity: 1804031, year: '2025' },
-            { totalQuantity: 439129, year: '2024' },
-            { totalQuantity: 955477, year: '2023' },
-            { totalQuantity: 1868973, year: '2022' },
-            { totalQuantity: 2437137, year: '2021' },
+            { totalQuantity: 2000000, year: '2025' },
+            { totalQuantity: 500000, year: '2024' },
+            { totalQuantity: 1000000, year: '2023' },
+            { totalQuantity: 1900000, year: '2022' },
+            { totalQuantity: 2500000, year: '2021' },
+            { totalQuantity: 1500000, year: '2020' },
+            { totalQuantity: 1200000, year: '2019' },
           ]}
           creditingStartDate="2021-01-01"
           creditingEndDate="2028-12-31"

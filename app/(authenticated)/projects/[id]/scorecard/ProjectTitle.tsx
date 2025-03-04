@@ -10,7 +10,7 @@ const ProjectTitle = ({
   projectId: string;
 }) => {
   return (
-    <div className="m-2 flex flex-row items-center gap-2 rounded-lg border border-neutral-200 bg-background p-6">
+    <div className="m-2 flex flex-row items-center gap-2 rounded-lg border bg-background p-6">
       <ReactCountryFlag
         countryCode={countryCode}
         svg

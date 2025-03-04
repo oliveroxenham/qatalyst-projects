@@ -16,7 +16,7 @@ function FinancialAssessment({
   projectData: Project
 }) {
   return (
-    <div className="rounded-lg border border-neutral-200 bg-background p-6">
+    <div className="rounded-lg border bg-background p-6">
       <div className="pb-4">
         <span className="text-xl font-semibold">Financial Assessment</span>
       </div>
@@ -40,7 +40,7 @@ function FinancialAssessment({
           {projectData?.financialAssessment.status ?? 'Not Started'}
         </span>
       </div>
-      <div className="flex flex-col rounded border-neutral-200 p-2">
+      <div className="flex flex-col rounded p-2">
         <Table>
           <TableBody>
             {data.map((item) => (

@@ -3,7 +3,7 @@ import { Project } from '@/types/project';
 function Map({ projectData }: { projectData: Project }) {
   return (
     <div
-      className={`h-[500px] rounded-lg border border-neutral-200 bg-background p-6`}
+      className={`h-[500px] rounded-lg border bg-background p-6`}
     >
       <div
         // @ts-expect-error - image-url is a custom property

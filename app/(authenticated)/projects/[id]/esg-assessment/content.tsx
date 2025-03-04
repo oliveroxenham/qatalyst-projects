@@ -18,7 +18,7 @@ import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
 const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   const [rating, setRating] = useState<number>(currentRating);
   return (
-    <div className="border rounded-lg bg-white w-[122px]">
+    <div className="border rounded-lg bg-background w-[122px]">
       <Button
         variant="ghost"
         size="sm"
@@ -66,7 +66,7 @@ const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
 };
 
 const SourcesBoxed = ({ num = 0 }: { num: number }) => (
-  <div className="border rounded-sm flex items-center justify-center bg-white min-w-20 h-[36px]">
+  <div className="border rounded-sm flex items-center justify-center bg-background min-w-20 h-[36px]">
     <span className="text-xs">{num} sources</span>
   </div>
 );
@@ -91,9 +91,12 @@ export function Content({
       behavior: 'smooth',
     });
     childEl.classList.add('bg-orange-100');
+    childEl.classList.add('dark:bg-orange-800')
     setTimeout(() => {
       childEl.classList.remove('bg-orange-100');
+      childEl.classList.remove('dark:bg-orange-800')
     }, 2000);
+
   }, [elId]);
 
   const handleRowClick = (elementId: string) => {

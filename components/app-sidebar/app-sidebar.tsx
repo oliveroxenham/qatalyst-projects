@@ -184,7 +184,7 @@ export const AppSidebar = ({
   }, [projectId]);
 
   return (
-    <Sidebar collapsible="icon" {...props} className="z-50">
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <div className="py-2">
           <Link href="/projects">

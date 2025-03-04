@@ -9,7 +9,7 @@ export function QatalystResponse({ response }: { response?: number }) {
           <div className="w-1 h-3 rounded bg-branding-green-500" />
           <div className="w-1 h-3 rounded bg-branding-green-500" />
         </div>
-        <span className="text-xs text-neutral-600">Satisfactory</span>
+        <span className="text-xs text-foreground">Satisfactory</span>
       </div>
     );
   } else if (response === QATALYST_RESPONSE.INVESTIGATE) {
@@ -20,7 +20,7 @@ export function QatalystResponse({ response }: { response?: number }) {
           <div className="w-1 h-3 rounded bg-blaze-orange-300" />
           <div className="w-1 h-3 rounded bg-neutral-300" />
         </div>
-        <span className="text-xs text-neutral-600">Investigate</span>
+        <span className="text-xs text-foreground">Investigate</span>
       </div>
     );
   } else if (response === QATALYST_RESPONSE.UNSATISFACTORY) {
@@ -31,7 +31,7 @@ export function QatalystResponse({ response }: { response?: number }) {
           <div className="w-1 h-3 rounded bg-neutral-300" />
           <div className="w-1 h-3 rounded bg-neutral-300" />
         </div>
-        <span className="text-xs text-neutral-600">Unsatisfactory</span>
+        <span className="text-xs text-foreground">Unsatisfactory</span>
       </div>
     );
   } else {

@@ -18,7 +18,7 @@ export function ProjectCard({
 }) {
   if (loading || !data) {
     return (
-      <div className="flex flex-col border rounded-lg p-4 bg-white w-[344px] h-[490px] gap-2 shadow-md">
+      <div className="flex flex-col border rounded-lg p-4 bg-card w-[344px] h-[490px] gap-2 shadow-md">
         <Skeleton className="h-[145px] rounded-sm" />
         <Skeleton className="flex-grow h-[210px] rounded-sm" />
       </div>
@@ -26,10 +26,10 @@ export function ProjectCard({
   }
   return (
     <Link
-      className="group border rounded-lg shadow bg-white w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg transition-all"
+      className="group border rounded-lg bg-card dark:bg-muted shadow w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg transition-all"
       href={`/projects/${data.id}/details`}
     >
-      {(data.id === '1650' || data.id === '2749') && <span className="absolute bg-blaze-orange-300 text-[10px] mt-1 ml-1 px-1 rounded-xl font-semibold">SAMPLE</span>}
+      {(data.id === '1650' || data.id === '2749') && <span className="absolute bg-blaze-orange-300 dark:bg-muted text-[10px] mt-1 ml-1 px-1 rounded-xl font-semibold">SAMPLE</span>}
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>
         <Image
           src={data.imgUrl}

@@ -8,6 +8,7 @@ import { getProjectByIdServer } from '@/server/db';
 import { CollaboratorTag } from '@/components/collaborator-tag';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import { AssigneeSelector } from '@/components/assignee-selector';
+import { GenerateAssessmentButton } from '@/components/generate-assessment-button';
 import { currentUser } from '@clerk/nextjs/server';
 import { Badge } from '@/components/ui/badge';
 import { getInitialsFromName } from '@/lib/utils';
@@ -40,7 +41,7 @@ export default async function ProjectInfoPage({
         </div>
       </TopBar>
       <div className="p-4 grid lg:grid-cols-5 gap-2">
-        <div className="col-span-1 lg:col-span-3 bg-background rounded-lg border border-neutral-200">
+        <div className="col-span-1 lg:col-span-3 bg-background rounded-lg border">
           <div className="flex items-center justify-between py-2 px-4">
             <span className="font-semibold">Details</span>
             <EditButton />
@@ -166,7 +167,7 @@ export default async function ProjectInfoPage({
           </div>
         </div>
         <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
-          <div className="bg-background rounded-lg border border-neutral-200">
+          <div className="bg-background rounded-lg border">
             <div className="flex items-center justify-between py-2 px-4">
               <span className="font-semibold">Task Manager</span>
               <Button size="sm" variant="ghost">
@@ -243,9 +244,11 @@ export default async function ProjectInfoPage({
                         </span>
                       </div>
                       <div className="mt-2">
-                        <Button disabled className="w-full">
-                          Generate Assessment
-                        </Button>
+                        <GenerateAssessmentButton
+                          size="lg"
+                          currentUser={user?.fullName}
+                          assignee={projectData?.financialAssessment.assignedTo}
+                        />
                       </div>
                     </div>
                   </div>
@@ -274,7 +277,8 @@ export default async function ProjectInfoPage({
                       <span className="text-neutral-500">Final Rating</span>
                     </div>
                     <div className="w-3/4">
-                      <div className={clsx(
+                      <div
+                        className={clsx(
                           'flex items-center border rounded-sm p-2 h-10 text-white',
                           {
                             'bg-neutral-500':
@@ -290,15 +294,18 @@ export default async function ProjectInfoPage({
                               projectData?.esgAssessment.status.toLowerCase() ===
                               'not eligible',
                           }
-                        )}>
+                        )}
+                      >
                         <span className="text-white capitalize">
                           {projectData?.esgAssessment.status ?? 'Not Started'}
                         </span>
                       </div>
                       <div className="mt-2">
-                        <Button disabled className="w-full">
-                          Generate Assessment
-                        </Button>
+                        <GenerateAssessmentButton
+                          size="lg"
+                          currentUser={user?.fullName}
+                          assignee={projectData?.esgAssessment.assignedTo}
+                        />
                       </div>
                     </div>
                   </div>
@@ -342,9 +349,11 @@ export default async function ProjectInfoPage({
                         </span>
                       </div>
                       <div className="mt-2">
-                        <Button disabled className="w-full">
-                          Generate Assessment
-                        </Button>
+                        <GenerateAssessmentButton
+                          size="lg"
+                          currentUser={user?.fullName}
+                          assignee={'anonymous'}
+                        />
                       </div>
                     </div>
                   </div>
@@ -353,7 +362,7 @@ export default async function ProjectInfoPage({
             </div>
           </div>
 
-          <div className="bg-background rounded-lg border border-neutral-200">
+          <div className="bg-background rounded-lg border">
             <div className="flex items-center justify-between py-2 px-4">
               <span className="font-semibold">Activity</span>
               <Button size="sm" variant="ghost">

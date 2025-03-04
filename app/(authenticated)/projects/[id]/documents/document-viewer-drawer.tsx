@@ -32,12 +32,12 @@ export default function DocumentViewer({
           <DrawerHeader className="bg-neutral-100 h-[88px] flex flex-row items-center justify-between px-4">
             <DrawerTitle>
               {documentUrl === '0' && (
-                <span className="text-lg text-foreground font-bold">
+                <span className="text-lg text-foreground dark:text-gray-800 font-bold">
                   1650 - Keo Seima REDD Project
                 </span>
               )}
               {documentUrl === '5' && (
-                <span className="text-lg text-foreground font-bold">
+                <span className="text-lg text-foreground dark:text-gray-800 font-bold">
                   2749 - DelAgua Clean Cooking Grouped Project
                 </span>
               )}

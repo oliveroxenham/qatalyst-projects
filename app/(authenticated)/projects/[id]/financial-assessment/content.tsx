@@ -76,8 +76,10 @@ export function Content({
       behavior: 'smooth',
     });
     childEl.classList.add('bg-orange-100');
+    childEl.classList.add('dark:bg-orange-800')
     setTimeout(() => {
       childEl.classList.remove('bg-orange-100');
+      childEl.classList.remove('dark:bg-orange-800')
     }, 2000);
   }, [elId]);
   const handleRowClick = (elementId: string) => {

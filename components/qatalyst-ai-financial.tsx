@@ -20,7 +20,7 @@ export function QatalystAi({
   return (
     <div className="flex flex-row max-h-screen">
       {aiSidebarOpen && (
-        <div className="w-[560px] bg-background border-l p-4 flex flex-col justify-between">
+        <div className="w-[560px] bg-muted border-l p-4 flex flex-col justify-between">
           <div className="h-full border overflow-scroll" id="qatalyst-ai">
             {!projectData ||
               (!projectData.financialAssessment && (
@@ -97,7 +97,7 @@ export function QatalystAi({
                 );
               })}
           </div>
-          <div className="bg-neutral-100 w-full h-14 border rounded-lg flex items-center p-2 mt-2">
+          <div className="bg-background w-full h-14 border rounded-lg flex items-center p-2 mt-2">
             <span className="text-muted-foreground text-xs">
               Ask Qatalyst AI something...
             </span>

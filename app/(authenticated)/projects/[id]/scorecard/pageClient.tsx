@@ -39,7 +39,7 @@ export default function PageClient({
             {projectData?.id === '1650' && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild id="export-button">
-                  <Button variant="secondary" size="small">
+                  <Button variant="outline" size="small">
                     <Download className="w-6 h-6" />
                     Export
                   </Button>

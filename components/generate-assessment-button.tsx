@@ -7,18 +7,20 @@ import { UnlockMoreDialog } from '@/components/unlock-more-dialog';
 
 export function GenerateAssessmentButton({
   assignee,
+  size = 'sm',
   currentUser,
 }: {
   assignee?: string;
+  size?: string;
   currentUser?: string | null;
 }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   return (
     <div>
       <Button
-        size="sm"
+        size={size as 'sm' | 'big' | 'small' | 'medium' | 'default' | 'icon' | 'lg' | null | undefined}
         id="generate-assessment-button"
-        className="bg-orange-500 hover:bg-orange-400"
+        className="bg-orange-500 hover:bg-orange-400 w-full"
         onClick={() => setDialogOpen(true)}
         disabled={assignee?.toLowerCase() !== currentUser?.toLowerCase()}
       >

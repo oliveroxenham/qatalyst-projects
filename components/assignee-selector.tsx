@@ -43,7 +43,7 @@ export function AssigneeSelector({
           {currentUser && (
             <SelectItem value={currentUser}>
               <div className="flex flex-row items-center justify-center gap-2">
-                <Avatar className="bg-branding-green-100 flex items-center justify-center">
+                <Avatar className="bg-branding-green-100 flex items-center justify-center text-black">
                   {getInitialsFromName(currentUser)}
                 </Avatar>
                 <span>{currentUser}</span>
@@ -52,7 +52,7 @@ export function AssigneeSelector({
           )}
           <SelectItem value="John Doe">
             <div className="flex flex-row items-center justify-center gap-2">
-              <Avatar className="bg-branding-green-100 flex items-center justify-center">
+              <Avatar className="bg-branding-green-100 flex items-center justify-center text-black">
                 {getInitialsFromName('John Doe')}
               </Avatar>
               <span>John Doe</span>
@@ -60,7 +60,7 @@ export function AssigneeSelector({
           </SelectItem>
           <SelectItem value="Jane Doe">
             <div className="flex flex-row items-center justify-center gap-2">
-              <Avatar className="bg-branding-green-100 flex items-center justify-center">
+              <Avatar className="bg-branding-green-100 flex items-center justify-center text-black">
                 {getInitialsFromName('Jane Doe')}
               </Avatar>
               <span>Jane Doe</span>

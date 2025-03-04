@@ -11,13 +11,13 @@ const ProjectSummary = ({
   return (
     <div
       className={clsx(
-        'm-2 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-background p-6',
+        'm-2 grid grid-cols-3 gap-x-8 gap-y-4 rounded-lg border bg-background p-6',
         {
           'lg:grid-cols-6': !benchmarkLayoutVisible,
         }
       )}
     >
-      <div className="border-r border-neutral-200 text-sm">
+      <div className="border-r text-sm">
         <span className="text-muted-foreground">Project Value</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.financialAssessment.projectValue.value
@@ -30,7 +30,7 @@ const ProjectSummary = ({
           ) : null}
         </p>
       </div>
-      <div className="border-r border-neutral-200 text-sm">
+      <div className="border-r text-sm">
         <span className="text-muted-foreground">Carbon Credits</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.estimatedAnnualCredits.formatted}{' '}
@@ -40,7 +40,7 @@ const ProjectSummary = ({
         </p>
       </div>
       <div
-        className={clsx('border-neutral-200 text-sm', {
+        className={clsx('text-sm', {
           'border-r-0': benchmarkLayoutVisible,
           'lg:border-r': !benchmarkLayoutVisible,
         })}
@@ -53,7 +53,7 @@ const ProjectSummary = ({
           </span>
         </p>
       </div>
-      <div className="border-r border-neutral-200 text-sm">
+      <div className="border-r text-sm">
         <span className="text-muted-foreground">Project Area</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.projectArea.value
@@ -62,7 +62,7 @@ const ProjectSummary = ({
           {projectData.projectArea.value && <span className="text-lg">{projectData.projectArea.unit}</span>}
         </p>
       </div>
-      <div className="border-r border-neutral-200 text-sm">
+      <div className="border-r text-sm">
         <span className="text-muted-foreground">Registry status</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.registryStatus}

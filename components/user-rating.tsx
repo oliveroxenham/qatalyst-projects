@@ -7,7 +7,7 @@ import QuestionMark from '@/public/icons/question-mark.svg';
 export const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   const [rating, setRating] = useState<number>(currentRating);
   return (
-    <div className="border rounded-lg bg-white w-[122px]">
+    <div className="border rounded-lg bg-background w-[122px]">
       <Button
         variant="ghost"
         size="sm"

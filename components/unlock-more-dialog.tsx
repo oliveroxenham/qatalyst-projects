@@ -17,7 +17,7 @@ export function UnlockMoreDialog({
 }) {
   return (
     <AlertDialog open={isOpen}>
-      <AlertDialogContent>
+      <AlertDialogContent className='bg-muted'>
         <AlertDialogHeader>
           <AlertDialogTitle>Unlock More with Qatalyst</AlertDialogTitle>
           <AlertDialogDescription>
