@@ -203,6 +203,18 @@
     "projectType": "Jenis Proyek",
     "completedBy": "Diselesaikan oleh {{name}} pada {{date}}"
   },
+  "projectCard": {
+    "owner": "Pemilik",
+    "financial": "Keuangan",
+    "esg": "ESG",
+    "quality": "Kualitas",
+    "status": {
+      "notStarted": "Belum Dimulai",
+      "inProgress": "Sedang Berlangsung",
+      "completed": "Selesai",
+      "eligible": "Memenuhi Syarat"
+    }
+  },
   "qatalystAi": {
     "title": "Qatalyst AI",
     "notAvailable": "Qatalyst AI tidak tersedia untuk proyek ini di aplikasi demo.",

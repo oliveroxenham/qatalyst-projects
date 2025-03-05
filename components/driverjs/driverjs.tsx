@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import './driver.css';
 
 type DriverStep = {
-  element: string;
+  element?: string;
   popover: {
     title: string;
     description: string;
@@ -15,7 +15,6 @@ type DriverStep = {
 export const steps: { [key: string]: DriverStep[] } = {
   projects: [
     {
-      element: '#none',
       popover: {
         title: 'Welcome to Qatalyst',
         description:

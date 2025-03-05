@@ -1,3 +1,5 @@
+'use client';
+
 import { Skeleton } from './ui/skeleton';
 import { Tag } from '@/components/tag';
 import ReactCountryFlag from 'react-country-flag';
@@ -8,6 +10,7 @@ import type { Project } from '@/types/project';
 import { Progress } from './ui/progress';
 import { CollaboratorTag } from './collaborator-tag';
 import { clsx } from 'clsx';
+import { useTranslation } from '@/i18n/i18n';
 
 export function ProjectCard({
   loading,
@@ -16,6 +19,8 @@ export function ProjectCard({
   loading?: boolean;
   data?: Project;
 }) {
+  const { t } = useTranslation();
+
   if (loading || !data) {
     return (
       <div className="flex flex-col border rounded-lg p-4 bg-card w-[344px] h-[490px] gap-2 shadow-md">
@@ -24,6 +29,21 @@ export function ProjectCard({
       </div>
     );
   }
+
+  const getStatusTranslation = (status: string) => {
+    const lowerStatus = status.toLowerCase();
+    if (lowerStatus === 'not started') {
+      return t('projectCard.status.notStarted');
+    } else if (lowerStatus === 'in progress') {
+      return t('projectCard.status.inProgress');
+    } else if (lowerStatus === 'completed') {
+      return t('projectCard.status.completed');
+    } else if (lowerStatus === 'eligible') {
+      return t('projectCard.status.eligible');
+    }
+    return status;
+  };
+  
   return (
     <Link
       className="group border rounded-lg bg-card dark:bg-muted shadow w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg transition-all"
@@ -67,7 +87,7 @@ export function ProjectCard({
 
         <div className="flex my-4 items-center justify-between">
           <div className="flex gap-2 items-center">
-            <span className="text-xs">Owner</span>
+            <span className="text-xs">{t('projectCard.owner')}</span>
             <CollaboratorTag collaborator={data.owner} />
           </div>
           <span className="text-sm">{data.lastUpdated}</span>
@@ -77,7 +97,7 @@ export function ProjectCard({
 
         <div className="my-4 grid grid-cols-[60px_auto] gap-1">
           <div>
-            <span className="text-xs">Financial</span>
+            <span className="text-xs">{t('projectCard.financial')}</span>
           </div>
           <div className="flex gap-2 items-center">
             <Tag
@@ -94,12 +114,12 @@ export function ProjectCard({
                     data.financialAssessment.status.toLowerCase() ===
                     'in progress',
                   'bg-branding-green-600':
-                    data.financialAssessment.status.toLowerCase() ===
-                    'completed',
+                    data.financialAssessment.status.toLowerCase() === 'completed' ||
+                    data.financialAssessment.status.toLowerCase() === 'eligible',
                 })}
               />
               <span className="capitalize">
-                {data.financialAssessment.status}
+                {getStatusTranslation(data.financialAssessment.status)}
               </span>
             </Tag>
             <Progress
@@ -110,7 +130,7 @@ export function ProjectCard({
             />
           </div>
           <div>
-            <span className="text-xs">ESG</span>
+            <span className="text-xs">{t('projectCard.esg')}</span>
           </div>
           <div className="flex gap-2 items-center">
             <Tag
@@ -125,10 +145,13 @@ export function ProjectCard({
                   'bg-orange-500':
                     data.esgAssessment.status.toLowerCase() === 'in progress',
                   'bg-branding-green-600':
-                    data.esgAssessment.status.toLowerCase() === 'completed',
+                    data.esgAssessment.status.toLowerCase() === 'completed' ||
+                    data.esgAssessment.status.toLowerCase() === 'eligible',
                 })}
               />
-              <span className="capitalize">{data.esgAssessment.status}</span>
+              <span className="capitalize">
+                {getStatusTranslation(data.esgAssessment.status)}
+              </span>
             </Tag>
             <Progress
               value={data.esgAssessment ? data.esgAssessment.progress : 0}
@@ -138,7 +161,7 @@ export function ProjectCard({
           {data.projectType.toLowerCase() === 'cookstove' && (
             <>
               <div>
-                <span className="text-xs">Quality</span>
+                <span className="text-xs">{t('projectCard.quality')}</span>
               </div>
 
               <div className="flex gap-2 items-center">
@@ -156,11 +179,12 @@ export function ProjectCard({
                         data.kycAssessment.status.toLowerCase() ===
                         'in progress',
                       'bg-branding-green-600':
-                        data.kycAssessment.status.toLowerCase() === 'completed',
+                        data.kycAssessment.status.toLowerCase() === 'completed' ||
+                        data.kycAssessment.status.toLowerCase() === 'eligible',
                     })}
                   />
                   <span className="capitalize">
-                    {data.kycAssessment.status}
+                    {getStatusTranslation(data.kycAssessment.status)}
                   </span>
                 </Tag>
                 <Progress

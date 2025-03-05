@@ -203,6 +203,18 @@
     "projectType": "Project type",
     "completedBy": "Completed by {{name}} on {{date}}"
   },
+  "projectCard": {
+    "owner": "Owner",
+    "financial": "Financial",
+    "esg": "ESG",
+    "quality": "Quality",
+    "status": {
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "eligible": "Eligible"
+    }
+  },
   "qatalystAi": {
     "title": "Qatalyst AI",
     "notAvailable": "Qatalyst AI is not available for this project in demo app.",

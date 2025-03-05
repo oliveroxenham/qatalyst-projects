@@ -203,6 +203,18 @@
     "projectType": "プロジェクトタイプ",
     "completedBy": "{{date}}に{{name}}により完了"
   },
+  "projectCard": {
+    "owner": "所有者",
+    "financial": "財務",
+    "esg": "ESG",
+    "quality": "品質",
+    "status": {
+      "notStarted": "未開始",
+      "inProgress": "進行中",
+      "completed": "完了",
+      "eligible": "適格"
+    }
+  },
   "qatalystAi": {
     "title": "Qatalyst AI",
     "notAvailable": "このプロジェクトのQatalyst AIはデモアプリでは利用できません。",
