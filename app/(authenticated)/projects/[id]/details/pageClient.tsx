@@ -17,6 +17,7 @@ import { DriverJs } from '@/components/driverjs/driverjs';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { Project } from '@/types/project';
+import { translateProjectBackground, translateProjectProponent, translateProjectName, translateCountryName } from '@/mock/translations';
 
 interface SerializedUser {
   id: string;
@@ -42,7 +43,7 @@ export default function ProjectDetailsClient({
         <div className="flex justify-between items-center w-full gap-2">
           {projectData && (
             <ProjectInfoTooltip
-              name={projectData.name}
+              name={translateProjectName(projectData.id, projectData.name)}
               sourceType={projectData.sourceType}
               originalId={projectData.id}
               projectType={projectData.projectType}
@@ -77,7 +78,7 @@ export default function ProjectDetailsClient({
             <div className="flex flex-col gap-1 grow p-4">
               <span>{t('projectDetails.projectName')}</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                {projectData?.name}
+                {projectData?.id && projectData?.name ? translateProjectName(projectData.id, projectData.name) : ''}
               </p>
             </div>
 
@@ -85,7 +86,7 @@ export default function ProjectDetailsClient({
               <div className="flex flex-col gap-1 grow">
                 <span>{t('projectDetails.country')}</span>
                 <p className="text-sm p-2 border rounded bg-muted">
-                  {projectData?.countryName}
+                  {projectData?.countryName ? translateCountryName(projectData.countryName) : ''}
                 </p>
               </div>
               {projectData?.state ? (
@@ -121,14 +122,14 @@ export default function ProjectDetailsClient({
             <div className="flex flex-col gap-1 grow p-4">
               <span>{t('projectDetails.background')}</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                {projectData?.background}
+                {projectData?.id && projectData?.background ? translateProjectBackground(projectData.id, projectData.background) : ''}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>{t('projectDetails.proponent')}</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                {projectData?.proponent}
+                {projectData?.id && projectData?.proponent ? translateProjectProponent(projectData.id, projectData.proponent) : ''}
               </p>
             </div>
 

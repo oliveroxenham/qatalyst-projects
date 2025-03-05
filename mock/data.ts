@@ -335,7 +335,7 @@ The project has developed specific guidance for managing risks with local commun
 
 Staff are required to inform project management of unsafe conditions, illnesses, or injuries for prompt remedial action [7].
 WCS is committed to providing a safe working environment for all [2].
-These measures demonstrate a comprehensive approach to community health, safety, and security, justifying the 'Satisfactory' rating.`),
+These measures demonstrate a comprehensive approach to community health, safety, and security, justifying the 'Satisfactory' rating.`,
         },
       },
       {
@@ -378,7 +378,7 @@ These measures demonstrate a comprehensive approach to community health, safety,
 
 7. During site inspections, the audit team agreed that a system is in place to ensure labour laws are respected during project implementation [6].
 
-These points demonstrate that the project has taken appropriate measures to ensure fair and legal labour practices, justifying a 'Satisfactory' rating for labour rights and working conditions.`),
+These points demonstrate that the project has taken appropriate measures to ensure fair and legal labour practices, justifying a 'Satisfactory' rating for labour rights and working conditions.`,
         },
       },
       {
@@ -424,7 +424,7 @@ Socio-economic monitoring and involvement of indigenous communities in remote se
 Awareness raising about the cultural and historical importance of these areas with relevant authorities [8]
 5. The project aims to increase security and productivity of natural resources to support local livelihoods, which aligns with preserving cultural heritage [5]
 
-These actions demonstrate a satisfactory approach to identifying, protecting, and managing cultural heritage in the project area, in line with the requirements outlined in the question context.`),
+These actions demonstrate a satisfactory approach to identifying, protecting, and managing cultural heritage in the project area, in line with the requirements outlined in the question context.`,
         },
       },
       {
@@ -469,7 +469,7 @@ These actions demonstrate a satisfactory approach to identifying, protecting, an
 
 8. There is evidence of ongoing support and successful outcomes in the ICT process, with multiple communities either obtaining or in the process of obtaining ICTs [1] [9] [2].
 
-These points demonstrate that the project is actively working to respect and protect the rights, lands, and cultures of Indigenous Peoples and Local Communities, while ensuring their participation and consent in project activities.`),
+These points demonstrate that the project is actively working to respect and protect the rights, lands, and cultures of Indigenous Peoples and Local Communities, while ensuring their participation and consent in project activities.`,
         },
       },
       {

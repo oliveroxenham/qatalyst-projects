@@ -15,6 +15,7 @@ import { Project } from '@/types/project';
 import clsx from 'clsx';
 import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
 import { useTranslation } from 'react-i18next';
+import { translateRiskName } from '@/mock/translations';
 
 const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   const [rating, setRating] = useState<number>(currentRating);
@@ -142,7 +143,7 @@ export function Content({
                 onClick={() => handleRowClick(risk.id)}
               >
                 <TableCell>
-                  <span className="font-semibold">{risk.name}</span>
+                  <span className="font-semibold">{translateRiskName(risk.name)}</span>
                 </TableCell>
                 <TableCell>
                   {typeof risk.qatalystResponse !== 'undefined' ? (

@@ -14,6 +14,7 @@ import type { Project } from '@/types/project';
 import { UserRatingBoxed } from '@/components/user-rating';
 import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
 import { useTranslation } from 'react-i18next';
+import { translateRiskName } from '@/mock/translations';
 
 function EsgAssessment({
   projectData,
@@ -59,7 +60,7 @@ function EsgAssessment({
           <TableBody>
             {projectData.esgAssessment.risks?.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.name}</TableCell>
+                <TableCell className="font-medium">{translateRiskName(item.name)}</TableCell>
                 <TableCell>
                   {typeof item.qatalystResponse !== 'undefined' && (
                     <QatalystResponseBoxed response={item.qatalystResponse} />
