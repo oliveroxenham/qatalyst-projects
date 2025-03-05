@@ -7,10 +7,11 @@ export default async function ProjectInfoPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const projectId = (await params).id;
-  const language = typeof searchParams?.lang === 'string' ? searchParams.lang : undefined;
+  const sp = await searchParams;
+  const language = typeof sp?.lang === 'string' ? sp.lang : undefined;
   
   const projectData = await getProjectByIdServer({ id: projectId, language });
   const user = await currentUser();
