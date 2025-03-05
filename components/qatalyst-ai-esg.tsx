@@ -4,7 +4,6 @@ import { clsx } from 'clsx';
 import Logo from '@/public/icons/logo.svg';
 import { EsgRisk, Project } from '@/types/project';
 import { translateRiskName, translateAiResponse } from '@/mock/translations';
-import { useTranslation } from 'react-i18next';
 
 export function QatalystAi({
   projectData,
@@ -15,7 +14,6 @@ export function QatalystAi({
   aiSidebarOpen?: boolean;
   setAiSidebarOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { t } = useTranslation();
   const risks = projectData?.esgAssessment.risks;
   if (!risks || risks.length === 0) {
     return null;
