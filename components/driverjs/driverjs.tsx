@@ -15,6 +15,14 @@ type DriverStep = {
 export const steps: { [key: string]: DriverStep[] } = {
   projects: [
     {
+      element: '#none',
+      popover: {
+        title: 'Welcome to Qatalyst',
+        description:
+          "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>You're now inside Qatalyst!<br/>Please follow the guided tour tooltip to learn how to navigate the app and import your first project.</p>",
+      },
+    },
+    {
       element: '#my-workspace',
       popover: {
         title: 'My Workspace',

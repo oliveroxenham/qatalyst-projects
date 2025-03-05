@@ -209,5 +209,19 @@
     "foundFollowing": "Qatalyst found the following for",
     "naInDemo": "N/A in Demo",
     "askSomething": "Ask Qatalyst AI something..."
+  },
+  "api": {
+    "projectNotFound": "Project not found",
+    "projectAdded": "Project added successfully",
+    "failedToAddProject": "Failed to add project",
+    "dataResetSuccess": "Data reset successful",
+    "failedToResetData": "Failed to reset data",
+    "missingAssigneeData": "Please provide assignee, projectId and assessment",
+    "invalidAssessment": "Invalid assessment",
+    "projectUpdated": "Project updated successfully",
+    "failedToUpdateProject": "Failed to update project",
+    "missingRatingData": "Please provide rating, projectId and assessment",
+    "ratingUpdated": "Project rating updated successfully",
+    "failedToUpdateRating": "Failed to update project rating"
   }
 }

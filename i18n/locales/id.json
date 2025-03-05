@@ -209,5 +209,19 @@
     "foundFollowing": "Qatalyst menemukan hal berikut untuk",
     "naInDemo": "Tidak tersedia di Demo",
     "askSomething": "Tanyakan sesuatu ke Qatalyst AI..."
+  },
+  "api": {
+    "projectNotFound": "Proyek tidak ditemukan",
+    "projectAdded": "Proyek berhasil ditambahkan",
+    "failedToAddProject": "Gagal menambahkan proyek",
+    "dataResetSuccess": "Reset data berhasil",
+    "failedToResetData": "Gagal mereset data",
+    "missingAssigneeData": "Harap berikan assignee, projectId dan assessment",
+    "invalidAssessment": "Assessment tidak valid",
+    "projectUpdated": "Proyek berhasil diperbarui",
+    "failedToUpdateProject": "Gagal memperbarui proyek",
+    "missingRatingData": "Harap berikan rating, projectId dan assessment",
+    "ratingUpdated": "Rating proyek berhasil diperbarui",
+    "failedToUpdateRating": "Gagal memperbarui rating proyek"
   }
 }

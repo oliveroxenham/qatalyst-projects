@@ -20,8 +20,14 @@ export async function getProjectsClient() {
   });
 }
 
-export async function getProjectByIdServer({ id } : { id: string }) {
-  const url = new URL(`${GET_PROJECTS_URL}?id=${id}`, process.env.BASE_URL);
+export async function getProjectByIdServer({ id, language } : { id: string, language?: string }) {
+  let url = new URL(`${GET_PROJECTS_URL}?id=${id}`, process.env.BASE_URL);
+  
+  // Add language parameter if provided
+  if (language) {
+    url.searchParams.append('lang', language);
+  }
+  
   console.log('getProjectByIdServer:', url.toString());
   const resp = await fetch(url);
   const json = await resp.json();
@@ -39,9 +45,15 @@ export async function getDocumentsServer() {
   });
 }
 
-export async function getDocumentsByProjectIdServer({ id }: { id: string }) {
+export async function getDocumentsByProjectIdServer({ id, language }: { id: string, language?: string }) {
   const url = new URL(GET_DOCUMENTS_URL, process.env.BASE_URL);
   url.searchParams.set('id', id);
+  
+  // Add language parameter if provided
+  if (language) {
+    url.searchParams.append('lang', language);
+  }
+  
   console.log('getDocumentsByProjectIdServer', url.toString());
   return fetch(url).then(async (res) => {
     const resp = await res.json();

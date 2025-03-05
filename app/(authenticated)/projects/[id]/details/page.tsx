@@ -4,11 +4,15 @@ import ProjectDetailsClient from './pageClient';
 
 export default async function ProjectInfoPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const projectId = (await params).id;
-  const projectData = await getProjectByIdServer({ id: projectId });
+  const language = typeof searchParams?.lang === 'string' ? searchParams.lang : undefined;
+  
+  const projectData = await getProjectByIdServer({ id: projectId, language });
   const user = await currentUser();
   
   // Extract only the needed user properties to avoid serialization issues

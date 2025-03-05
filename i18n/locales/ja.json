@@ -209,5 +209,19 @@
     "foundFollowing": "Qatalystが以下を見つけました：",
     "naInDemo": "デモでは利用不可",
     "askSomething": "Qatalyst AIに質問してみてください..."
+  },
+  "api": {
+    "projectNotFound": "プロジェクトが見つかりません",
+    "projectAdded": "プロジェクトが正常に追加されました",
+    "failedToAddProject": "プロジェクトの追加に失敗しました",
+    "dataResetSuccess": "データのリセットに成功しました",
+    "failedToResetData": "データのリセットに失敗しました",
+    "missingAssigneeData": "担当者、プロジェクトID、評価を提供してください",
+    "invalidAssessment": "無効な評価",
+    "projectUpdated": "プロジェクトが正常に更新されました",
+    "failedToUpdateProject": "プロジェクトの更新に失敗しました",
+    "missingRatingData": "評価、プロジェクトID、評価タイプを提供してください",
+    "ratingUpdated": "プロジェクト評価が正常に更新されました",
+    "failedToUpdateRating": "プロジェクト評価の更新に失敗しました"
   }
 }

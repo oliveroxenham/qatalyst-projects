@@ -14,8 +14,8 @@ export const TopBar = ({ children, title }: { readonly title: string; readonly c
       <Separator orientation='vertical' className='h-4' />
       <div className='text-nowrap text-sm font-medium text-foreground'>{title}</div>
       <div className="flex-1"></div>
-      <LanguageSwitcher />
       {children}
+      <LanguageSwitcher />
     </div>
   );
 };
