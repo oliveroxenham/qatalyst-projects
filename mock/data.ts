@@ -1,19 +1,13 @@
 // @ts-nocheck
 
 import { QATALYST_RESPONSE } from '@/lib/constants';
-import { Project } from '@/types/project'; 
+import { Project } from '@/types/project';
 import i18next from 'i18next';
+import { translateRiskName, translateAiResponse } from './translations';
 
 // Translation wrapper function to handle AI responses
 const t = (key: string, defaultText: string): string => {
-  const currentLanguage = i18next.language;
-  // Only translate if we have translations for this language
-  if (currentLanguage && currentLanguage !== 'en') {
-    const translated = i18next.t(`aiResponses.${key}`, { defaultValue: defaultText });
-    // Return the translation if it's not the same as the key (which would indicate no translation found)
-    return translated !== `aiResponses.${key}` ? translated : defaultText;
-  }
-  return defaultText;
+  return translateAiResponse(key, defaultText);
 };
 
 const PROJECT_ID_1650: Project = {
@@ -89,11 +83,11 @@ const PROJECT_ID_1650: Project = {
       ],
       qatalystGenerated: true,
       ai: {
-        title: t('estimatedReductions.title', 'Estimated reductions (over project duration)'),
-        response: t('estimatedReductions.response', `The estimated reductions over the project duration were determined to be 21,171,578 tCO₂e. This value was extracted from multiple sources: 
+        title: 'Estimated reductions (over project duration)',
+        response: `The estimated reductions over the project duration were determined to be 21,171,578 tCO₂e. This value was extracted from multiple sources: 
         A table in the project documentation explicitly states the "Net estimated emission reductions in the project area, measured against the without-project scenario" as 21,171,578 for "Achievements during the Project Lifetime" 
         [1]. This same figure is corroborated in another text source, which presents it in a slightly different format but with the same value 
-        [2]. The determination of this value is likely based on comprehensive calculations and modelling of the project's impact over its entire duration. It represents the total expected reduction in greenhouse gas emissions attributed to the project activities when compared to a baseline scenario without the project. It's important to note that this figure represents the cumulative reductions over the entire project lifetime, not an annual figure. The project is classified as a "large project" due to its significant impact, with annual reductions exceeding 300,000 tonnes of CO₂e [3].`),
+        [2]. The determination of this value is likely based on comprehensive calculations and modelling of the project's impact over its entire duration. It represents the total expected reduction in greenhouse gas emissions attributed to the project activities when compared to a baseline scenario without the project. It's important to note that this figure represents the cumulative reductions over the entire project lifetime, not an annual figure. The project is classified as a "large project" due to its significant impact, with annual reductions exceeding 300,000 tonnes of CO₂e [3].`,
       },
     },
     totalEstimatedReductions: {
@@ -109,15 +103,15 @@ const PROJECT_ID_1650: Project = {
       ],
       qatalystGenerated: true,
       ai: {
-        title: t('totalEstimatedReductions.title', 'Total estimated reductions'),
-        response: t('totalEstimatedReductions.response', `The value for Total estimated reductions was determined based on the following analysis:
+        title: 'Total estimated reductions',
+        response: `The value for Total estimated reductions was determined based on the following analysis:
 The most relevant information was found in source [1], which provides a table of achievements during the project lifetime.
 The table in [1] lists "Net estimated emission reductions in the project area, measured against the without-project scenario" as 21,171,578.
 This value is the most comprehensive and appears to represent the total estimated reductions for the entire project lifetime.
 The unit tCO₂e is not explicitly stated in the source, but it is the standard unit for GHG emission reductions and is consistent with other sources provided.
 Other sources, such as [2] and [3], provide partial or annual data, but do not give a clear total for the entire project.
 [4] shows a total of 1,641,141, but this appears to be for a shorter period (2018-2019) and not the full project lifetime.
-Therefore, 21,171,578 tCO₂e is the best match for the total estimated reductions over the project's lifetime.`),
+Therefore, 21,171,578 tCO₂e is the best match for the total estimated reductions over the project's lifetime.`,
       },
     },
     projectDuration: {
@@ -282,8 +276,8 @@ This value is consistent across multiple sources and is the most specific and de
           },
         ],
         ai: {
-          title: 'Human Rights',
-          response: `Based on the provided information and the context of the question, the most appropriate answer is 'Investigate'. The document source provided does not contain sufficient information to fully address the human rights considerations outlined in the question. While the source mentions some aspects related to equal rights and access to resources [1], it does not comprehensively cover the range of human rights issues specified in the question context. The lack of detailed information on human rights analysis, respect for human rights, protection against infringements, non-discrimination, and specific safeguards for vulnerable groups necessitates further investigation to make a definitive assessment.`,
+          title: t('humanRights.title', 'Human Rights'),
+          response: t('humanRights.response', `Based on the provided information and the context of the question, the most appropriate answer is 'Investigate'. The document source provided does not contain sufficient information to fully address the human rights considerations outlined in the question. While the source mentions some aspects related to equal rights and access to resources [1], it does not comprehensively cover the range of human rights issues specified in the question context. The lack of detailed information on human rights analysis, respect for human rights, protection against infringements, non-discrimination, and specific safeguards for vulnerable groups necessitates further investigation to make a definitive assessment.`),
         },
       },
       {
@@ -374,8 +368,8 @@ These measures demonstrate a comprehensive approach to community health, safety,
           },
         ],
         ai: {
-          title: 'Labour rights of working conditions',
-          response: `The answer 'Satisfactory' is based on the following evidence from the provided sources:
+          title: t('labourRights.title', 'Labour rights of working conditions'),
+          response: t('labourRights.response', `The answer 'Satisfactory' is based on the following evidence from the provided sources:
 
 1. The project adheres to relevant labour laws and regulations. Government employees are covered by their ministries' employment conditions, which are assumed to comply with all relevant laws and policies [1].
 
@@ -391,7 +385,7 @@ These measures demonstrate a comprehensive approach to community health, safety,
 
 7. During site inspections, the audit team agreed that a system is in place to ensure labour laws are respected during project implementation [6].
 
-These points demonstrate that the project has taken appropriate measures to ensure fair and legal labour practices, justifying a 'Satisfactory' rating for labour rights and working conditions.`,
+These points demonstrate that the project has taken appropriate measures to ensure fair and legal labour practices, justifying a 'Satisfactory' rating for labour rights and working conditions.`),
         },
       },
       {
@@ -417,8 +411,8 @@ These points demonstrate that the project has taken appropriate measures to ensu
           },
         ],
         ai: {
-          title: 'Cultural heritage',
-          response: `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
+          title: t('culturalHeritage.title', 'Cultural heritage'),
+          response: t('culturalHeritage.response', `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
 
 1. Cultural heritage sites have been identified and mapped. [1] [2] [3] [4]
 
@@ -437,7 +431,7 @@ Socio-economic monitoring and involvement of indigenous communities in remote se
 Awareness raising about the cultural and historical importance of these areas with relevant authorities [8]
 5. The project aims to increase security and productivity of natural resources to support local livelihoods, which aligns with preserving cultural heritage [5]
 
-These actions demonstrate a satisfactory approach to identifying, protecting, and managing cultural heritage in the project area, in line with the requirements outlined in the question context.`,
+These actions demonstrate a satisfactory approach to identifying, protecting, and managing cultural heritage in the project area, in line with the requirements outlined in the question context.`),
         },
       },
       {
@@ -463,8 +457,8 @@ These actions demonstrate a satisfactory approach to identifying, protecting, an
           },
         ],
         ai: {
-          title: 'Indigenous people and local communities (IPLCs)',
-          response: `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
+          title: t('indigenousPeople.title', 'Indigenous people and local communities (IPLCs)'),
+          response: t('indigenousPeople.response', `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
 
 1. The project actively supports Indigenous Communal Land Titling (ICT) process, which aligns with respecting the rights of Indigenous Peoples to land and territories [1] [2].
 
@@ -482,7 +476,7 @@ These actions demonstrate a satisfactory approach to identifying, protecting, an
 
 8. There is evidence of ongoing support and successful outcomes in the ICT process, with multiple communities either obtaining or in the process of obtaining ICTs [1] [9] [2].
 
-These points demonstrate that the project is actively working to respect and protect the rights, lands, and cultures of Indigenous Peoples and Local Communities, while ensuring their participation and consent in project activities.`,
+These points demonstrate that the project is actively working to respect and protect the rights, lands, and cultures of Indigenous Peoples and Local Communities, while ensuring their participation and consent in project activities.`),
         },
       },
       {
