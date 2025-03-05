@@ -240,5 +240,99 @@
     "title": "Qatalystでさらに機能を解除",
     "description": "この機能は完全版のQatalystアプリでのみ利用可能です。アップグレードして解除してください。",
     "ok": "OK"
+  },
+  "driverjs": {
+    "projects": {
+      "welcome": {
+        "title": "Qatalystへようこそ",
+        "description": "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>あなたは今Qatalyst内にいます！<br/>ガイドツアーのツールチップに従って、アプリの操作方法と最初のプロジェクトのインポート方法を学びましょう。</p>"
+      },
+      "workspace": {
+        "title": "マイワークスペース",
+        "description": "持続可能性プロジェクトを保存・管理します。"
+      },
+      "dashboard": {
+        "title": "マイダッシュボード",
+        "description": "プロジェクトポートフォリオからの洞察を表示します。"
+      },
+      "create": {
+        "title": "新規プロジェクト / グループ作成",
+        "description": "新しいプロジェクトまたはグループを開始します。"
+      }
+    },
+    "details": {
+      "projectDetails": {
+        "title": "プロジェクト詳細",
+        "description": "持続可能性プロジェクトに関する包括的な情報を表示します。"
+      },
+      "documents": {
+        "title": "書類",
+        "description": "関連するすべてのプロジェクト文書を一箇所に保存してアクセスします。"
+      },
+      "financialAssessment": {
+        "title": "財務評価",
+        "description": "持続可能性を確保するためにプロジェクトの財務を評価します。"
+      },
+      "esgAssessment": {
+        "title": "ESG評価",
+        "description": "持続可能性を確保するためにプロジェクトのESGを評価します。"
+      },
+      "scorecard": {
+        "title": "スコアカード",
+        "description": "プロジェクトの洞察、価値をまとめ、他との性能を比較します。"
+      }
+    },
+    "financialAssessment": {
+      "generateAssessment": {
+        "title": "完全評価を生成",
+        "description": "Qatalystを使用してプロジェクト文書からすべての回答を生成します。プロジェクト担当者のみが評価を生成できます。"
+      },
+      "finalRating": {
+        "title": "最終評価",
+        "description": "評価結果に基づいて最終的なプロジェクト評価を提供します。プロジェクト担当者のみが最終評価を更新できます。"
+      },
+      "assignee": {
+        "title": "プロジェクト担当者",
+        "description": "プロジェクト担当者を更新します。"
+      },
+      "qatalystChat": {
+        "title": "Qatalystチャット",
+        "description": "Qatalystと対話して、パーソナライズされたプロジェクトの洞察とサポートを得ます。"
+      }
+    },
+    "esgAssessment": {
+      "generateAssessment": {
+        "title": "完全評価を生成",
+        "description": "Qatalystを使用してプロジェクト文書からすべての回答を生成します。プロジェクト担当者のみが評価を生成できます。"
+      },
+      "finalRating": {
+        "title": "最終評価",
+        "description": "評価結果に基づいて最終的なプロジェクト評価を提供します。プロジェクト担当者のみが最終評価を更新できます。"
+      },
+      "assignee": {
+        "title": "プロジェクト担当者",
+        "description": "プロジェクト担当者を更新します。"
+      },
+      "qatalystChat": {
+        "title": "Qatalystチャット",
+        "description": "Qatalystと対話して、パーソナライズされたプロジェクトの洞察とサポートを得ます。"
+      }
+    },
+    "scorecard": {
+      "export": {
+        "title": "プロジェクトのエクスポート",
+        "description": "プロジェクトをWordまたはPDF文書に簡単にエクスポートします。"
+      },
+      "compare": {
+        "title": "プロジェクトの比較",
+        "description": "2つのプロジェクトのスコアカードを簡単に並べて比較します。"
+      }
+    },
+    "documents": {
+      "viewDocument": {
+        "title": "文書を表示",
+        "description": "文書を開いて詳細にレビューします。"
+      }
+    }
   }
 }

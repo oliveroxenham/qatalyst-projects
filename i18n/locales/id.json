@@ -240,5 +240,99 @@
     "title": "Buka Lebih Banyak dengan Qatalyst",
     "description": "Fitur ini hanya tersedia dalam aplikasi Qatalyst lengkap. Silakan upgrade untuk membukanya.",
     "ok": "OK"
+  },
+  "driverjs": {
+    "projects": {
+      "welcome": {
+        "title": "Selamat Datang di Qatalyst",
+        "description": "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>Anda sekarang berada di dalam Qatalyst!<br/>Silakan ikuti tur pemandu tooltip untuk mempelajari cara menavigasi aplikasi dan mengimpor proyek pertama Anda.</p>"
+      },
+      "workspace": {
+        "title": "Ruang Kerja Saya",
+        "description": "Simpan dan kelola proyek keberlanjutan Anda."
+      },
+      "dashboard": {
+        "title": "Dasbor Saya",
+        "description": "Lihat wawasan dari portofolio proyek Anda."
+      },
+      "create": {
+        "title": "Buat Proyek / Grup Baru",
+        "description": "Mulai proyek atau grup baru."
+      }
+    },
+    "details": {
+      "projectDetails": {
+        "title": "Detail Proyek",
+        "description": "Lihat informasi komprehensif tentang proyek keberlanjutan Anda."
+      },
+      "documents": {
+        "title": "Dokumen",
+        "description": "Simpan dan akses semua dokumen proyek yang relevan di satu tempat."
+      },
+      "financialAssessment": {
+        "title": "Penilaian Keuangan",
+        "description": "Evaluasi keuangan proyek untuk memastikan keberlanjutan."
+      },
+      "esgAssessment": {
+        "title": "Penilaian ESG",
+        "description": "Evaluasi ESG proyek untuk memastikan keberlanjutan."
+      },
+      "scorecard": {
+        "title": "Kartu Skor",
+        "description": "Rangkum wawasan proyek, nilai, dan bandingkan kinerja dengan yang lain."
+      }
+    },
+    "financialAssessment": {
+      "generateAssessment": {
+        "title": "Hasilkan Penilaian Lengkap",
+        "description": "Gunakan Qatalyst untuk menghasilkan semua jawaban dari dokumen proyek. Hanya petugas proyek yang dapat menghasilkan penilaian."
+      },
+      "finalRating": {
+        "title": "Penilaian Akhir",
+        "description": "Berikan penilaian akhir proyek berdasarkan hasil penilaian Anda. Hanya petugas proyek yang dapat memperbarui penilaian akhir."
+      },
+      "assignee": {
+        "title": "Petugas Proyek",
+        "description": "Perbarui petugas proyek."
+      },
+      "qatalystChat": {
+        "title": "Obrolan Qatalyst",
+        "description": "Berinteraksi dengan Qatalyst untuk mendapatkan wawasan proyek dan dukungan yang dipersonalisasi."
+      }
+    },
+    "esgAssessment": {
+      "generateAssessment": {
+        "title": "Hasilkan Penilaian Lengkap",
+        "description": "Gunakan Qatalyst untuk menghasilkan semua jawaban dari dokumen proyek. Hanya petugas proyek yang dapat menghasilkan penilaian."
+      },
+      "finalRating": {
+        "title": "Penilaian Akhir",
+        "description": "Berikan penilaian akhir proyek berdasarkan hasil penilaian Anda. Hanya petugas proyek yang dapat memperbarui penilaian akhir."
+      },
+      "assignee": {
+        "title": "Petugas Proyek",
+        "description": "Perbarui petugas proyek."
+      },
+      "qatalystChat": {
+        "title": "Obrolan Qatalyst",
+        "description": "Berinteraksi dengan Qatalyst untuk mendapatkan wawasan proyek dan dukungan yang dipersonalisasi."
+      }
+    },
+    "scorecard": {
+      "export": {
+        "title": "Ekspor Proyek",
+        "description": "Ekspor proyek dengan mudah ke dokumen Word atau PDF."
+      },
+      "compare": {
+        "title": "Bandingkan Proyek",
+        "description": "Bandingkan kartu skor dua proyek secara berdampingan dengan mudah."
+      }
+    },
+    "documents": {
+      "viewDocument": {
+        "title": "Lihat Dokumen",
+        "description": "Buka dan tinjau dokumen secara menyeluruh."
+      }
+    }
   }
 }

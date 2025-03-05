@@ -240,5 +240,99 @@
     "title": "Unlock More with Qatalyst",
     "description": "This feature is only available in the full Qatalyst app. Please upgrade to unlock it.",
     "ok": "OK"
+  },
+  "driverjs": {
+    "projects": {
+      "welcome": {
+        "title": "Welcome to Qatalyst",
+        "description": "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>You're now inside Qatalyst!<br/>Please follow the guided tour tooltip to learn how to navigate the app and import your first project.</p>"
+      },
+      "workspace": {
+        "title": "My Workspace",
+        "description": "Store and manage your sustainability projects."
+      },
+      "dashboard": {
+        "title": "My Dashboard",
+        "description": "View insights from your project portfolio."
+      },
+      "create": {
+        "title": "Create New Project / Group",
+        "description": "Start a new project or group."
+      }
+    },
+    "details": {
+      "projectDetails": {
+        "title": "Project Details",
+        "description": "View comprehensive information about your sustainability project."
+      },
+      "documents": {
+        "title": "Documents",
+        "description": "Store and access all relevant project documents in one place."
+      },
+      "financialAssessment": {
+        "title": "Financial Assessment",
+        "description": "Evaluate project financials to ensure sustainability."
+      },
+      "esgAssessment": {
+        "title": "ESG Assessment",
+        "description": "Evaluate project ESG to ensure sustainability."
+      },
+      "scorecard": {
+        "title": "Scorecard",
+        "description": "Summarize project insights, value, and compare performance with others."
+      }
+    },
+    "financialAssessment": {
+      "generateAssessment": {
+        "title": "Generate Full Assessment",
+        "description": "Use Qatalyst to generate all answers from project documents. Only the project assignee can generate an assessment."
+      },
+      "finalRating": {
+        "title": "Final Rating",
+        "description": "Provide a final project rating based on your assessment results. Only the project assignee can update the final rating."
+      },
+      "assignee": {
+        "title": "Project Assignee",
+        "description": "Update the project assignee."
+      },
+      "qatalystChat": {
+        "title": "Qatalyst Chat",
+        "description": "Engage with Qatalyst to get personalized project insights and support."
+      }
+    },
+    "esgAssessment": {
+      "generateAssessment": {
+        "title": "Generate Full Assessment",
+        "description": "Use Qatalyst to generate all answers from project documents. Only the project assignee can generate an assessment."
+      },
+      "finalRating": {
+        "title": "Final Rating",
+        "description": "Provide a final project rating based on your assessment results. Only the project assignee can update the final rating."
+      },
+      "assignee": {
+        "title": "Project Assignee",
+        "description": "Update the project assignee."
+      },
+      "qatalystChat": {
+        "title": "Qatalyst Chat",
+        "description": "Engage with Qatalyst to get personalized project insights and support."
+      }
+    },
+    "scorecard": {
+      "export": {
+        "title": "Export Project",
+        "description": "Easily export project to Word or PDF document."
+      },
+      "compare": {
+        "title": "Compare Projects",
+        "description": "Easily compare two projects scorecard side-by-side."
+      }
+    },
+    "documents": {
+      "viewDocument": {
+        "title": "View Document",
+        "description": "Open and review documents thoroughly."
+      }
+    }
   }
 }

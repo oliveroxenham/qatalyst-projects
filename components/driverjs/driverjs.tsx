@@ -3,6 +3,7 @@ import { driver } from 'driver.js';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import './driver.css';
+import { useTranslation } from '@/i18n/i18n';
 
 type DriverStep = {
   element?: string;
@@ -12,174 +13,167 @@ type DriverStep = {
   };
 };
 
-export const steps: { [key: string]: DriverStep[] } = {
-  projects: [
-    {
-      popover: {
-        title: 'Welcome to Qatalyst',
-        description:
-          "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>You're now inside Qatalyst!<br/>Please follow the guided tour tooltip to learn how to navigate the app and import your first project.</p>",
-      },
-    },
-    {
-      element: '#my-workspace',
-      popover: {
-        title: 'My Workspace',
-        description: 'Store and manage your sustainability projects.',
-      },
-    },
-    {
-      element: '#my-dashboard',
-      popover: {
-        title: 'My Dashboard',
-        description: 'View insights from your project portfolio.',
-      },
-    },
-    {
-      element: '#create-button',
-      popover: {
-        title: 'Create New Project / Group',
-        description: 'Start a new project or group.',
-      },
-    },
-  ],
-  details: [
-    {
-      element: '#project-details',
-      popover: {
-        title: 'Project Details',
-        description:
-          'View comprehensive information about your sustainability project.',
-      },
-    },
-    {
-      element: '#documents',
-      popover: {
-        title: 'Documents',
-        description:
-          'Store and access all relevant project documents in one place.',
-      },
-    },
-    {
-      element: '#financial-assessment',
-      popover: {
-        title: 'Financial Assessment',
-        description: 'Evaluate project financials to ensure sustainability.',
-      },
-    },
-    {
-      element: '#esg-assessment',
-      popover: {
-        title: 'ESG Assessment',
-        description: 'Evaluate project ESG to ensure sustainability.',
-      },
-    },
-    {
-      element: '#scorecard',
-      popover: {
-        title: 'Scorecard',
-        description:
-          'Summarize project insights, value, and compare performance with others.',
-      },
-    },
-  ],
-  'financial-assessment': [
-    {
-      element: '#generate-assessment-button',
-      popover: {
-        title: 'Generate Full Assessment',
-        description:
-          'Use Qatalyst to generate all answers from project documents. Only the project assignee can generate an assessment.',
-      },
-    },
-    {
-      element: '#final-rating-button',
-      popover: {
-        title: 'Final Rating',
-        description:
-          'Provide a final project rating based on your assessment results. Only the project assignee can update the final rating.',
-      },
-    },
-    {
-      element: '#assignee-selector',
-      popover: {
-        title: 'Project Assignee',
-        description: 'Update the project assignee.',
-      },
-    },
-    {
-      element: '#qatalyst-ai-button',
-      popover: {
-        title: 'Qatalyst Chat',
-        description:
-          'Engage with Qatalyst to get personalized project insights and support.',
-      },
-    },
-  ],
-  'esg-assessment': [
-    {
-      element: '#generate-assessment-button',
-      popover: {
-        title: 'Generate Full Assessment',
-        description:
-          'Use Qatalyst to generate all answers from project documents. Only the project assignee can generate an assessment.',
-      },
-    },
-    {
-      element: '#final-rating-button',
-      popover: {
-        title: 'Final Rating',
-        description:
-          'Provide a final project rating based on your assessment results. Only the project assignee can update the final rating.',
-      },
-    },
-    {
-      element: '#assignee-selector',
-      popover: {
-        title: 'Project Assignee',
-        description: 'Update the project assignee.',
-      },
-    },
-    {
-      element: '#qatalyst-ai-button',
-      popover: {
-        title: 'Qatalyst Chat',
-        description:
-          'Engage with Qatalyst to get personalized project insights and support.',
-      },
-    },
-  ],
-  scorecard: [
-    {
-      element: '#export-button',
-      popover: {
-        title: 'Export Project',
-        description: 'Easily export project to Word or PDF document.',
-      },
-    },
-    {
-      element: '#compare-button',
-      popover: {
-        title: 'Compare Projects',
-        description: 'Easily compare two projects scorecard side-by-side.',
-      },
-    },
-  ],
-  documents: [
-    {
-      element: '#document-row',
-      popover: {
-        title: 'View Document',
-        description: 'Open and review documents thoroughly.',
-      },
-    },
-  ],
-};
-
 export function DriverJs({ children }: { children?: React.ReactNode }) {
+  const { t } = useTranslation();
   const pathname = usePathname();
   console.log('driverjs: pathname=', pathname);
   const pageName: string | undefined = pathname.split('/').at(-1);
+  
+  // Define steps with translations
+  const steps: { [key: string]: DriverStep[] } = {
+    projects: [
+      {
+        popover: {
+          title: t('driverjs.projects.welcome.title'),
+          description: t('driverjs.projects.welcome.description'),
+        },
+      },
+      {
+        element: '#my-workspace',
+        popover: {
+          title: t('driverjs.projects.workspace.title'),
+          description: t('driverjs.projects.workspace.description'),
+        },
+      },
+      {
+        element: '#my-dashboard',
+        popover: {
+          title: t('driverjs.projects.dashboard.title'),
+          description: t('driverjs.projects.dashboard.description'),
+        },
+      },
+      {
+        element: '#create-button',
+        popover: {
+          title: t('driverjs.projects.create.title'),
+          description: t('driverjs.projects.create.description'),
+        },
+      },
+    ],
+    details: [
+      {
+        element: '#project-details',
+        popover: {
+          title: t('driverjs.details.projectDetails.title'),
+          description: t('driverjs.details.projectDetails.description'),
+        },
+      },
+      {
+        element: '#documents',
+        popover: {
+          title: t('driverjs.details.documents.title'),
+          description: t('driverjs.details.documents.description'),
+        },
+      },
+      {
+        element: '#financial-assessment',
+        popover: {
+          title: t('driverjs.details.financialAssessment.title'),
+          description: t('driverjs.details.financialAssessment.description'),
+        },
+      },
+      {
+        element: '#esg-assessment',
+        popover: {
+          title: t('driverjs.details.esgAssessment.title'),
+          description: t('driverjs.details.esgAssessment.description'),
+        },
+      },
+      {
+        element: '#scorecard',
+        popover: {
+          title: t('driverjs.details.scorecard.title'),
+          description: t('driverjs.details.scorecard.description'),
+        },
+      },
+    ],
+    'financial-assessment': [
+      {
+        element: '#generate-assessment-button',
+        popover: {
+          title: t('driverjs.financialAssessment.generateAssessment.title'),
+          description: t('driverjs.financialAssessment.generateAssessment.description'),
+        },
+      },
+      {
+        element: '#final-rating-button',
+        popover: {
+          title: t('driverjs.financialAssessment.finalRating.title'),
+          description: t('driverjs.financialAssessment.finalRating.description'),
+        },
+      },
+      {
+        element: '#assignee-selector',
+        popover: {
+          title: t('driverjs.financialAssessment.assignee.title'),
+          description: t('driverjs.financialAssessment.assignee.description'),
+        },
+      },
+      {
+        element: '#qatalyst-ai-button',
+        popover: {
+          title: t('driverjs.financialAssessment.qatalystChat.title'),
+          description: t('driverjs.financialAssessment.qatalystChat.description'),
+        },
+      },
+    ],
+    'esg-assessment': [
+      {
+        element: '#generate-assessment-button',
+        popover: {
+          title: t('driverjs.esgAssessment.generateAssessment.title'),
+          description: t('driverjs.esgAssessment.generateAssessment.description'),
+        },
+      },
+      {
+        element: '#final-rating-button',
+        popover: {
+          title: t('driverjs.esgAssessment.finalRating.title'),
+          description: t('driverjs.esgAssessment.finalRating.description'),
+        },
+      },
+      {
+        element: '#assignee-selector',
+        popover: {
+          title: t('driverjs.esgAssessment.assignee.title'),
+          description: t('driverjs.esgAssessment.assignee.description'),
+        },
+      },
+      {
+        element: '#qatalyst-ai-button',
+        popover: {
+          title: t('driverjs.esgAssessment.qatalystChat.title'),
+          description: t('driverjs.esgAssessment.qatalystChat.description'),
+        },
+      },
+    ],
+    scorecard: [
+      {
+        element: '#export-button',
+        popover: {
+          title: t('driverjs.scorecard.export.title'),
+          description: t('driverjs.scorecard.export.description'),
+        },
+      },
+      {
+        element: '#compare-button',
+        popover: {
+          title: t('driverjs.scorecard.compare.title'),
+          description: t('driverjs.scorecard.compare.description'),
+        },
+      },
+    ],
+    documents: [
+      {
+        element: '#document-row',
+        popover: {
+          title: t('driverjs.documents.viewDocument.title'),
+          description: t('driverjs.documents.viewDocument.description'),
+        },
+      },
+    ],
+  };
+  
   useEffect(() => {
     const driverObj = driver({
       showProgress: true,
@@ -195,7 +189,7 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
       driverObj.drive();
       window.localStorage.setItem(`driverjs.${pageName}`, 'true');
     }, 1000);
-  }, []);
+  }, [pageName, t]);
 
   return <>{children}</>;
 }
