@@ -6,6 +6,7 @@ import { FAItem, Project } from '@/types/project';
 import { FINANCIAL_ASSESSMENT_ITEMS } from '@/lib/constants';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { translateFinancialResponse } from '@/mock/translations';
 
 export function QatalystAi({
   projectData,
@@ -56,11 +57,13 @@ export function QatalystAi({
                       <p className="text-foreground text-sm font-semibold">
                         {t('qatalystAi.foundFollowing')}{' '}
                         <span className="text-secondary">
-                          {faItem.ai.title}
+                          {translateFinancialResponse(`${item}.title`, faItem.ai.title)}
                         </span>
                       </p>
                     </div>
-                    <p className="text-sm px-1">{faItem.ai.response}</p>
+                    <p className="text-sm px-1">
+                      {translateFinancialResponse(`${item}.response`, faItem.ai.response)}
+                    </p>
                     <div className="flex flex-row flex-wrap gap-2">
                       {faItem.sources.map((source, index) => {
                         if (

@@ -106,6 +106,82 @@ export const projectTranslations = {
   }
 };
 
+// Translation data for financial assessment responses
+export const financialResponseTranslations = {
+  ja: {
+    // Estimated reductions
+    'estimatedReductions.title': '推定削減量（プロジェクト期間中）',
+    'estimatedReductions.response': `プロジェクト期間中の推定削減量は21,171,578 tCO₂eと算出されました。この値は複数の情報源から抽出されています：
+    プロジェクト文書内の表には、「ベースラインシナリオと比較したプロジェクトエリアでの純推定排出削減量」が「プロジェクト期間中の達成」として21,171,578であると明示されています [1]。
+    この同じ数値は、別のテキストソースでも若干異なる形式で提示されていますが、同じ値となっています [2]。
+    この値の算出は、おそらくプロジェクトの影響に関する包括的な計算とモデリングに基づいていると考えられます。`,
+    
+    // Total estimated reductions
+    'totalEstimatedReductions.title': '総推定削減量',
+    'totalEstimatedReductions.response': `総推定削減量の値は、以下の分析に基づいて決定されました：
+    最も関連性の高い情報はソース[1]にあり、プロジェクトの期間中の成果を示す表が提供されています。
+    [1]の表には、「ベースラインシナリオと比較したプロジェクトエリアでの純推定排出削減量」が21,171,578と記載されています。
+    この値は最も包括的であり、プロジェクト全期間の総推定削減量を表していると思われます。`,
+    
+    // Project duration
+    'projectDuration.title': 'プロジェクト期間',
+    'projectDuration.response': `プロジェクト期間は、以下の情報に基づいて10年と決定されました：
+    固定ベースライン期間は10年と明示されています [1]
+    この期間はプロジェクト記述書（PD）のレビューでも確認されています [1]
+    クレジット期間は固定で10年間と記述されています [2]`,
+    
+    // Project area
+    'projectArea.title': 'プロジェクトエリア',
+    'projectArea.response': `プロジェクトエリアの値166,983ヘクタールは、以下の情報と推論に基づいて決定されました：
+    プロジェクトエリアは明示的に森林地166,983ヘクタールで構成されていると記載されています [1]。
+    このエリアはシーマ保護林の中核保護区域内に位置しています [1]。
+    プロジェクトエリアは境界内の非森林地を除外しています [1]。`,
+    
+    // Tax
+    'tax.title': '税金',
+    'tax.response': `税金の値は以下の分析に基づいて決定されました：
+    この情報に関する最も関連性の高いソースは[1]の表であり、複数年にわたる税金の値を示しています。
+    この表の中で最も高い税金の値は、年t*+5で発生する51,253 kUSDです [1]。
+    この値は累積的であり、その時点までの合計税金を表しています [1]。`
+  },
+  
+  id: {
+    // Estimated reductions
+    'estimatedReductions.title': 'Estimasi pengurangan (selama durasi proyek)',
+    'estimatedReductions.response': `Estimasi pengurangan selama durasi proyek ditentukan sebesar 21.171.578 tCO₂e. Nilai ini diekstraksi dari beberapa sumber:
+    Sebuah tabel dalam dokumentasi proyek secara eksplisit menyatakan "Estimasi pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek" sebesar 21.171.578 untuk "Pencapaian selama Masa Proyek" [1].
+    Angka yang sama dikonfirmasi dalam sumber teks lain, yang menyajikannya dalam format yang sedikit berbeda tetapi dengan nilai yang sama [2].`,
+    
+    // Total estimated reductions
+    'totalEstimatedReductions.title': 'Total estimasi pengurangan',
+    'totalEstimatedReductions.response': `Nilai untuk Total estimasi pengurangan ditentukan berdasarkan analisis berikut:
+    Informasi yang paling relevan ditemukan di sumber [1], yang memberikan tabel pencapaian selama masa proyek.
+    Tabel di [1] mencantumkan "Estimasi pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek" sebesar 21.171.578.
+    Nilai ini paling komprehensif dan tampaknya mewakili total estimasi pengurangan untuk seluruh masa proyek.`,
+    
+    // Project duration
+    'projectDuration.title': 'Durasi proyek',
+    'projectDuration.response': `Durasi proyek ditentukan 10 tahun berdasarkan informasi berikut:
+    Periode baseline tetap secara eksplisit dinyatakan sebagai 10 tahun [1]
+    Durasi ini dikonfirmasi dalam peninjauan Deskripsi Proyek (PD) [1]
+    Periode kredit dijelaskan sebagai tetap dan berdurasi 10 tahun [2]`,
+    
+    // Project area
+    'projectArea.title': 'Area proyek',
+    'projectArea.response': `Nilai Area Proyek sebesar 166.983 hektar ditentukan berdasarkan informasi dan penalaran berikut:
+    Area Proyek secara eksplisit dinyatakan terdiri dari 166.983 ha lahan berhutan [1].
+    Area ini terletak dalam Area Perlindungan Inti dari Hutan Perlindungan Seima [1].
+    Area Proyek mengecualikan lahan non-hutan dalam batas [1].`,
+    
+    // Tax
+    'tax.title': 'Pajak',
+    'tax.response': `Nilai untuk Pajak ditentukan berdasarkan analisis berikut:
+    Sumber yang paling relevan untuk informasi ini tampaknya adalah tabel di [1], yang menunjukkan nilai pajak selama beberapa tahun.
+    Nilai pajak tertinggi dalam tabel ini adalah 51.253 kUSD, terjadi pada tahun t*+5 [1].
+    Nilai ini kumulatif, mewakili total pajak hingga titik tersebut [1].`
+  }
+};
+
 // Translation data for AI responses
 export const aiResponseTranslations = {
   ja: {
@@ -224,6 +300,13 @@ WCSはすべての人のための安全な作業環境の提供に取り組ん�
     'communityHealth.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen:`,
     'community-health.title': 'Kesehatan, keselamatan, dan keamanan masyarakat',
     'community-health.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen:
+    
+    // Financial assessment responses
+    'estimatedReductions.title': 'Estimasi pengurangan (selama durasi proyek)',
+    'estimatedReductions.response': `Estimasi pengurangan selama durasi proyek ditentukan sebesar 21.171.578 tCO₂e. Nilai ini diekstraksi dari beberapa sumber:
+    Sebuah tabel dalam dokumentasi proyek secara eksplisit menyatakan "Estimasi pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek" sebesar 21.171.578 untuk "Pencapaian selama Masa Proyek" [1].
+    Angka yang sama dikonfirmasi dalam sumber teks lain, yang menyajikannya dalam format yang sedikit berbeda tetapi dengan nilai yang sama [2].
+    Penentuan nilai ini kemungkinan didasarkan pada perhitungan dan pemodelan komprehensif tentang dampak proyek selama seluruh durasinya.`,
 
 1. Proyek ini menyediakan langkah-langkah kesehatan dan keselamatan yang komprehensif untuk staf dan masyarakat lokal:
 
@@ -411,6 +494,24 @@ export const translateAiResponse = (key: string, defaultText: string): string =>
       // For debugging: log successful translations in development
       if (process.env.NODE_ENV === 'development') {
         console.log(`Translated AI response for "${key}"`);
+      }
+      return translation;
+    }
+  }
+  return defaultText;
+};
+
+// Function to translate financial assessment responses
+export const translateFinancialResponse = (key: string, defaultText: string): string => {
+  const currentLanguage = i18next.language;
+  
+  // Only translate if we have translations for this language and it's not English
+  if (currentLanguage && currentLanguage !== 'en' && financialResponseTranslations[currentLanguage]) {
+    const translation = financialResponseTranslations[currentLanguage][key];
+    if (translation) {
+      // For debugging: log successful translations in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`Translated financial response for "${key}"`);
       }
       return translation;
     }
