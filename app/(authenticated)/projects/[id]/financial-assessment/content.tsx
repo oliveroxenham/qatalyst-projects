@@ -233,7 +233,7 @@ export function Content({
           >
             <TableCell>
               <span className="">
-                Estimated Reduction Per Unit of Area Per Year
+                {t('scorecard.estimatedReductionPerUnit')}
               </span>
             </TableCell>
             <TableCellWithValue
@@ -261,7 +261,7 @@ export function Content({
             }
           >
             <TableCell>
-              <span className="">Estimated Reduction Per Unit of Area</span>
+              <span className="">{t('financialAssessment.estimatedReductionPerUnitArea')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -312,7 +312,7 @@ export function Content({
             onClick={() => handleRowClick(data.landAcquisitionCost.id)}
           >
             <TableCell>
-              <span className="">Land Acquisition Cost</span>
+              <span className="">{t('financialAssessment.landAcquisitionCost')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -335,7 +335,7 @@ export function Content({
             onClick={() => handleRowClick(data.landPerUnitAreaCost.id)}
           >
             <TableCell>
-              <span className="">Land Per Unit Area Cost</span>
+              <span className="">{t('financialAssessment.landPerUnitAreaCost')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -362,7 +362,7 @@ export function Content({
           >
             <TableCell>
               <span className="">
-                Plantation Establishment and Maintenance Cost
+                {t('financialAssessment.plantationEstablishmentMaintenanceCost')}
               </span>
             </TableCell>
             <TableCellWithValue
@@ -390,7 +390,7 @@ export function Content({
             onClick={() => handleRowClick(data.costOfGoodsSold.id)}
           >
             <TableCell>
-              <span className="">Cost of Goods Sold (COGS)</span>
+              <span className="">{t('financialAssessment.costOfGoodsSold')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -410,7 +410,7 @@ export function Content({
             onClick={() => handleRowClick(data.overheads.id)}
           >
             <TableCell>
-              <span className="">Overheads</span>
+              <span className="">{t('financialAssessment.overheads')}</span>
             </TableCell>
             <TableCellWithValue
               icon={data.overheads.qatalystGenerated ? <QatalystIcon /> : null}
@@ -428,7 +428,7 @@ export function Content({
             onClick={() => handleRowClick(data.totalGrossCosts.id)}
           >
             <TableCell>
-              <span className="">Total Gross Costs</span>
+              <span className="">{t('financialAssessment.totalGrossCosts')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -448,7 +448,7 @@ export function Content({
             onClick={() => handleRowClick(data.alternateRevenueSources.id)}
           >
             <TableCell>
-              <span className="">Alternate Revenue Sources (Non-carbon)</span>
+              <span className="">{t('financialAssessment.alternateRevenueSources')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -472,7 +472,7 @@ export function Content({
             onClick={() => handleRowClick(data.costOfFinancing.id)}
           >
             <TableCell>
-              <span className="">Cost of Financing</span>
+              <span className="">{t('financialAssessment.costOfFinancing')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -492,7 +492,7 @@ export function Content({
             onClick={() => handleRowClick(data.tax.id)}
           >
             <TableCell>
-              <span className="">Tax</span>
+              <span className="">{t('financialAssessment.tax')}</span>
             </TableCell>
             <TableCellWithValue
               icon={data.tax.qatalystGenerated ? <QatalystIcon /> : null}
@@ -507,7 +507,7 @@ export function Content({
 
           <TableRow>
             <TableCell>
-              <span className="">Capital Expense Intensity</span>
+              <span className="">{t('scorecard.capitalExpenseIntensity')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -519,7 +519,7 @@ export function Content({
           </TableRow>
           <TableRow>
             <TableCell>
-              <span className="">Operating Expense Intensity</span>
+              <span className="">{t('scorecard.operatingExpenseIntensity')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -532,7 +532,7 @@ export function Content({
 
           <TableRow>
             <TableCell>
-              <span className="">Total Expense Intensity</span>
+              <span className="">{t('scorecard.totalExpenseIntensity')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -545,7 +545,7 @@ export function Content({
           <TableRow>
             <TableCell>
               <span className="">
-                Cost of Production (Including Non Carbon Revenues)
+                {t('scorecard.costOfProduction')}
               </span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
@@ -559,7 +559,7 @@ export function Content({
 
           <TableRow>
             <TableCell>
-              <span className="">Total Net Costs</span>
+              <span className="">{t('scorecard.totalNetCosts')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -573,7 +573,7 @@ export function Content({
           <TableRow>
             <TableCell>
               <span className="">
-                Cost of Production (Net - including Financing)
+                {t('scorecard.costOfProductionNet')}
               </span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>

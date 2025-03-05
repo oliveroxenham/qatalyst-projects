@@ -16,16 +16,18 @@ import {
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import Link from 'next/link';
 import { DriverJs } from '@/components/driverjs/driverjs';
+import { useTranslation } from 'react-i18next';
 
 export default function PageClient({
   projectData,
 }: {
   projectData: Project | null;
 }) {
+  const { t } = useTranslation();
   const [isCompare, setIsCompare] = useState(false);
   return (
     <div>
-      <TopBar title="Scorecard">
+      <TopBar title={t('scorecard.title')}>
         <div className="flex justify-between items-center w-full gap-2">
           {projectData && (
             <ProjectInfoTooltip
@@ -41,7 +43,7 @@ export default function PageClient({
                 <DropdownMenuTrigger asChild id="export-button">
                   <Button variant="outline" size="small">
                     <Download className="w-6 h-6" />
-                    Export
+                    {t('common.export')}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -50,7 +52,7 @@ export default function PageClient({
                       href="https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/Reduced%20Emissions%20Deforestation%20Keo%20Seima-GanpsWvKb5zX3d7zXrRTnXnRlK9mdT.docx"
                       download="Reduced Emissions Deforestation Keo Seima.doc"
                     >
-                      Word Document
+                      {t('common.wordDocument')}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
@@ -59,7 +61,7 @@ export default function PageClient({
                       href="https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/Reduced%20Emissions%20Deforestation%20Keo%20Seima-T37dnRlThffccheE1qE4gfI751usqq.pdf"
                       download="Reduced Emissions Deforestation Keo Seima.pdf"
                     >
-                      PDF Document
+                      {t('common.pdfDocument')}
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -72,7 +74,7 @@ export default function PageClient({
               onClick={() => setIsCompare(!isCompare)}
             >
               <Copy className="w-6 h-6" />
-              Compare
+              {t('common.compare')}
             </Button>
             <ThemeSwitcher />
           </div>

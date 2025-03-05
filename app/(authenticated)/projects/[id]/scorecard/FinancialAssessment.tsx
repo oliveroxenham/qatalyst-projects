@@ -60,7 +60,7 @@ function FinancialAssessment({
             <TableRow>
               <TableCell colSpan={3}>
                 <span className="text-xs text-neutral-400">
-                  Completed by Kopal on 15 Oct 2024
+                  {t('scorecard.completedBy', { name: 'Kopal', date: '15 Oct 2024' })}
                 </span>
               </TableCell>
             </TableRow>

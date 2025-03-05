@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/qbutton';
 import Logo from '@/public/icons/logo.svg';
 import { UnlockMoreDialog } from '@/components/unlock-more-dialog';
+import { useTranslation } from 'react-i18next';
 
 export function GenerateAssessmentButton({
   assignee,
@@ -14,6 +15,7 @@ export function GenerateAssessmentButton({
   size?: string;
   currentUser?: string | null;
 }) {
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   return (
     <div>
@@ -25,7 +27,7 @@ export function GenerateAssessmentButton({
         disabled={assignee?.toLowerCase() !== currentUser?.toLowerCase()}
       >
         <Logo className="w-8 h-8" />
-        <span>Generate Assessment</span>
+        <span>{t('common.generateAssessment')}</span>
       </Button>
       <UnlockMoreDialog isOpen={dialogOpen} setDialogOpen={setDialogOpen} />
     </div>

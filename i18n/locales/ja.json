@@ -22,7 +22,11 @@
     "source": "ソース",
     "sources": "ソース",
     "addCriteria": "基準を追加",
-    "keyinAnswer": "回答を入力してください..."
+    "keyinAnswer": "回答を入力してください...",
+    "generateAssessment": "評価を生成",
+    "satisfactory": "満足",
+    "investigate": "調査",
+    "unsatisfactory": "不満足"
   },
   "dashboard": {
     "totalProjects": "ポートフォリオ内のプロジェクト総数",
@@ -121,6 +125,16 @@
     "totalEstimatedReductions": "総推定削減量",
     "projectDuration": "プロジェクト期間",
     "projectArea": "プロジェクト面積",
+    "estimatedReductionPerUnitArea": "単位面積あたりの推定削減量",
+    "landAcquisitionCost": "土地取得費",
+    "landPerUnitAreaCost": "単位面積あたりの土地費用",
+    "plantationEstablishmentMaintenanceCost": "植林の設立・維持費用",
+    "costOfGoodsSold": "売上原価（COGS）",
+    "overheads": "間接費",
+    "totalGrossCosts": "総粗コスト",
+    "alternateRevenueSources": "代替収入源（非炭素）",
+    "costOfFinancing": "資金調達コスト",
+    "tax": "税金",
     "costOfProduction": "生産コスト"
   },
   "esgAssessment": {
@@ -163,6 +177,16 @@
     "totalNetCosts": "総純コスト",
     "costOfProductionNet": "生産コスト（純額 - 資金調達を含む）",
     "estimatedReductionPerUnit": "単位面積あたりの年間推定削減量",
-    "esgRisk": "ESGリスク"
+    "esgRisk": "ESGリスク",
+    "selectProject": "プロジェクトを選択...",
+    "searchProject": "プロジェクトを検索...",
+    "noProjectFound": "プロジェクトが見つかりません。",
+    "projectValue": "プロジェクト価値",
+    "carbonCredits": "カーボンクレジット",
+    "projectLifetime": "プロジェクト寿命",
+    "projectArea": "プロジェクト面積",
+    "registryStatus": "レジストリ状態",
+    "projectType": "プロジェクトタイプ",
+    "completedBy": "{{date}}に{{name}}により完了"
   }
 }

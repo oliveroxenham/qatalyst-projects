@@ -1,5 +1,6 @@
 import { Project } from '@/types/project';
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 const ProjectSummary = ({
   benchmarkLayoutVisible,
@@ -8,6 +9,8 @@ const ProjectSummary = ({
   readonly benchmarkLayoutVisible: boolean;
   projectData: Project;
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div
       className={clsx(
@@ -18,7 +21,7 @@ const ProjectSummary = ({
       )}
     >
       <div className="border-r text-sm">
-        <span className="text-muted-foreground">Project Value</span>
+        <span className="text-muted-foreground">{t('scorecard.projectValue')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.financialAssessment.projectValue.value
             ? projectData.financialAssessment.projectValue.formatted
@@ -31,7 +34,7 @@ const ProjectSummary = ({
         </p>
       </div>
       <div className="border-r text-sm">
-        <span className="text-muted-foreground">Carbon Credits</span>
+        <span className="text-muted-foreground">{t('scorecard.carbonCredits')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.estimatedAnnualCredits.formatted}{' '}
           <span className="text-lg">
@@ -45,7 +48,7 @@ const ProjectSummary = ({
           'lg:border-r': !benchmarkLayoutVisible,
         })}
       >
-        <span className="text-muted-foreground">Project Lifetime</span>
+        <span className="text-muted-foreground">{t('scorecard.projectLifetime')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.financialAssessment.projectDuration.formatted}{' '}
           <span className="text-lg">
@@ -54,7 +57,7 @@ const ProjectSummary = ({
         </p>
       </div>
       <div className="border-r text-sm">
-        <span className="text-muted-foreground">Project Area</span>
+        <span className="text-muted-foreground">{t('scorecard.projectArea')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.projectArea.value
             ? projectData.projectArea.formatted
@@ -63,13 +66,13 @@ const ProjectSummary = ({
         </p>
       </div>
       <div className="border-r text-sm">
-        <span className="text-muted-foreground">Registry status</span>
+        <span className="text-muted-foreground">{t('scorecard.registryStatus')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.registryStatus}
         </p>
       </div>
       <div className="text-sm ">
-        <span className="text-muted-foreground">Project type</span>
+        <span className="text-muted-foreground">{t('scorecard.projectType')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
           {projectData.projectType}
         </p>

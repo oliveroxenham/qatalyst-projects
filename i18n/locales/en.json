@@ -22,7 +22,11 @@
     "source": "source",
     "sources": "sources",
     "addCriteria": "Add criteria",
-    "keyinAnswer": "Key in your answer..."
+    "keyinAnswer": "Key in your answer...",
+    "generateAssessment": "Generate Assessment",
+    "satisfactory": "Satisfactory",
+    "investigate": "Investigate",
+    "unsatisfactory": "Unsatisfactory"
   },
   "dashboard": {
     "totalProjects": "Total projects in portfolio",
@@ -121,6 +125,16 @@
     "totalEstimatedReductions": "Total Estimated Reductions",
     "projectDuration": "Project Duration",
     "projectArea": "Project Area",
+    "estimatedReductionPerUnitArea": "Estimated Reduction Per Unit of Area",
+    "landAcquisitionCost": "Land Acquisition Cost",
+    "landPerUnitAreaCost": "Land Per Unit Area Cost",
+    "plantationEstablishmentMaintenanceCost": "Plantation Establishment and Maintenance Cost",
+    "costOfGoodsSold": "Cost of Goods Sold (COGS)",
+    "overheads": "Overheads",
+    "totalGrossCosts": "Total Gross Costs",
+    "alternateRevenueSources": "Alternate Revenue Sources (Non-carbon)",
+    "costOfFinancing": "Cost of Financing",
+    "tax": "Tax",
     "costOfProduction": "Cost of Production"
   },
   "esgAssessment": {
@@ -163,6 +177,16 @@
     "totalNetCosts": "Total net costs",
     "costOfProductionNet": "Cost of production (net - including financing)",
     "estimatedReductionPerUnit": "Estimated reduction per unit of area per year",
-    "esgRisk": "ESG Risk"
+    "esgRisk": "ESG Risk",
+    "selectProject": "Select a project...",
+    "searchProject": "Search a project...",
+    "noProjectFound": "No project found.",
+    "projectValue": "Project Value",
+    "carbonCredits": "Carbon Credits",
+    "projectLifetime": "Project Lifetime",
+    "projectArea": "Project Area",
+    "registryStatus": "Registry status",
+    "projectType": "Project type",
+    "completedBy": "Completed by {{name}} on {{date}}"
   }
 }

@@ -22,7 +22,11 @@
     "source": "sumber",
     "sources": "sumber",
     "addCriteria": "Tambah kriteria",
-    "keyinAnswer": "Ketik jawaban Anda..."
+    "keyinAnswer": "Ketik jawaban Anda...",
+    "generateAssessment": "Hasilkan Penilaian",
+    "satisfactory": "Memuaskan",
+    "investigate": "Selidiki",
+    "unsatisfactory": "Tidak Memuaskan"
   },
   "dashboard": {
     "totalProjects": "Total proyek dalam portofolio",
@@ -121,6 +125,16 @@
     "totalEstimatedReductions": "Total Perkiraan Pengurangan",
     "projectDuration": "Durasi Proyek",
     "projectArea": "Area Proyek",
+    "estimatedReductionPerUnitArea": "Perkiraan Pengurangan Per Unit Area",
+    "landAcquisitionCost": "Biaya Akuisisi Lahan",
+    "landPerUnitAreaCost": "Biaya Per Unit Area Lahan",
+    "plantationEstablishmentMaintenanceCost": "Biaya Pembentukan dan Pemeliharaan Perkebunan",
+    "costOfGoodsSold": "Harga Pokok Penjualan (HPP)",
+    "overheads": "Biaya Overhead",
+    "totalGrossCosts": "Total Biaya Kotor",
+    "alternateRevenueSources": "Sumber Pendapatan Alternatif (Non-karbon)",
+    "costOfFinancing": "Biaya Pembiayaan",
+    "tax": "Pajak",
     "costOfProduction": "Biaya Produksi"
   },
   "esgAssessment": {
@@ -163,6 +177,16 @@
     "totalNetCosts": "Total biaya bersih",
     "costOfProductionNet": "Biaya produksi (bersih - termasuk pembiayaan)",
     "estimatedReductionPerUnit": "Perkiraan pengurangan per unit area per tahun",
-    "esgRisk": "Risiko ESG"
+    "esgRisk": "Risiko ESG",
+    "selectProject": "Pilih proyek...",
+    "searchProject": "Cari proyek...",
+    "noProjectFound": "Tidak ada proyek ditemukan.",
+    "projectValue": "Nilai Proyek",
+    "carbonCredits": "Kredit Karbon",
+    "projectLifetime": "Masa Pakai Proyek",
+    "projectArea": "Area Proyek",
+    "registryStatus": "Status Registri",
+    "projectType": "Jenis Proyek",
+    "completedBy": "Diselesaikan oleh {{name}} pada {{date}}"
   }
 }
