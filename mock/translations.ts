@@ -140,11 +140,15 @@ WCSはすべての人のための安全な作業環境の提供に取り組ん�
     'Human Rights': '人権',
     'humanRights.title': '人権',
     'humanRights.response': `提供された情報と質問の文脈に基づくと、最も適切な回答は「調査」です。提供された文書ソースには、質問で概説されている人権の考慮事項を十分に対処するための情報が含まれていません。ソースは平等な権利や資源へのアクセスに関連するいくつかの側面に言及していますが [1]、質問の文脈で指定されている人権問題の範囲を包括的にカバーしていません。人権分析、人権の尊重、侵害からの保護、非差別、脆弱なグループのための特定のセーフガードに関する詳細情報の欠如は、確定的な評価を行うためにはさらなる調査が必要であることを示しています。`,
+    'human-rights.title': '人権',
+    'human-rights.response': `提供された情報と質問の文脈に基づくと、最も適切な回答は「調査」です。提供された文書ソースには、質問で概説されている人権の考慮事項を十分に対処するための情報が含まれていません。ソースは平等な権利や資源へのアクセスに関連するいくつかの側面に言及していますが [1]、質問の文脈で指定されている人権問題の範囲を包括的にカバーしていません。人権分析、人権の尊重、侵害からの保護、非差別、脆弱なグループのための特定のセーフガードに関する詳細情報の欠如は、確定的な評価を行うためにはさらなる調査が必要であることを示しています。`,
     
     // Labour rights response
     'Labour rights of working conditions': '労働条件の権利',
     'labourRights.title': '労働条件の権利',
-    'labourRights.response': `「満足」という回答は、提供されたソースからの以下の証拠に基づいています：
+    'labourRights.response': `「満足」という回答は、提供されたソースからの以下の証拠に基づいています：`,
+    'labour-rights.title': '労働条件の権利',
+    'labour-rights.response': `「満足」という回答は、提供されたソースからの以下の証拠に基づいています：
 
 1. プロジェクトは関連する労働法と規制を遵守しています。政府職員は、関連するすべての法律と政策に準拠していると想定される省庁の雇用条件によってカバーされています [1]。
 
@@ -165,7 +169,9 @@ WCSはすべての人のための安全な作業環境の提供に取り組ん�
     // Cultural Heritage response
     'Cultural heritage': '文化遺産',
     'culturalHeritage.title': '文化遺産',
-    'culturalHeritage.response': `「満足」という回答は、提供された文書ソースからの以下の証拠に基づいています：
+    'culturalHeritage.response': `「満足」という回答は、提供された文書ソースからの以下の証拠に基づいています：`,
+    'cultural-heritage.title': '文化遺産',
+    'cultural-heritage.response': `「満足」という回答は、提供された文書ソースからの以下の証拠に基づいています：
 
 1. 文化遺産サイトが特定され、マッピングされています。[1] [2] [3] [4]
 
@@ -189,7 +195,9 @@ WCSはすべての人のための安全な作業環境の提供に取り組ん�
     // Indigenous People response
     'Indigenous people and local communities (IPLCs)': '先住民族と地域コミュニティ（IPLCs）',
     'indigenousPeople.title': '先住民族と地域コミュニティ（IPLCs）',
-    'indigenousPeople.response': `「満足」という回答は、提供された文書ソースからの以下の証拠に基づいています：
+    'indigenousPeople.response': `「満足」という回答は、提供された文書ソースからの以下の証拠に基づいています：`,
+    'indigenous-people.title': '先住民族と地域コミュニティ（IPLCs）',
+    'indigenous-people.response': `「満足」という回答は、提供された文書ソースからの以下の証拠に基づいています：
 
 1. プロジェクトは、土地と領土に対する先住民族の権利を尊重することと一致する先住民コミュナル土地権利化（ICT）プロセスを積極的にサポートしています [1] [2]。
 
@@ -213,7 +221,9 @@ WCSはすべての人のための安全な作業環境の提供に取り組ん�
     // Community health response
     'Community health, safety and security': 'Kesehatan, keselamatan, dan keamanan masyarakat',
     'communityHealth.title': 'Kesehatan, keselamatan, dan keamanan masyarakat',
-    'communityHealth.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen:
+    'communityHealth.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen:`,
+    'community-health.title': 'Kesehatan, keselamatan, dan keamanan masyarakat',
+    'community-health.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen:
 
 1. Proyek ini menyediakan langkah-langkah kesehatan dan keselamatan yang komprehensif untuk staf dan masyarakat lokal:
 
@@ -241,11 +251,15 @@ Langkah-langkah ini menunjukkan pendekatan komprehensif terhadap kesehatan, kese
     'Human Rights': 'Hak Asasi Manusia',
     'humanRights.title': 'Hak Asasi Manusia',
     'humanRights.response': `Berdasarkan informasi yang diberikan dan konteks pertanyaan, jawaban yang paling tepat adalah 'Investigasi'. Sumber dokumen yang diberikan tidak berisi informasi yang cukup untuk sepenuhnya mengatasi pertimbangan hak asasi manusia yang diuraikan dalam pertanyaan. Meskipun sumber menyebutkan beberapa aspek terkait hak dan akses yang sama ke sumber daya [1], sumber tersebut tidak secara komprehensif mencakup berbagai masalah hak asasi manusia yang ditentukan dalam konteks pertanyaan. Kurangnya informasi detail tentang analisis hak asasi manusia, penghormatan terhadap hak asasi manusia, perlindungan terhadap pelanggaran, non-diskriminasi, dan perlindungan khusus untuk kelompok rentan memerlukan investigasi lebih lanjut untuk membuat penilaian yang pasti.`,
+    'human-rights.title': 'Hak Asasi Manusia',
+    'human-rights.response': `Berdasarkan informasi yang diberikan dan konteks pertanyaan, jawaban yang paling tepat adalah 'Investigasi'. Sumber dokumen yang diberikan tidak berisi informasi yang cukup untuk sepenuhnya mengatasi pertimbangan hak asasi manusia yang diuraikan dalam pertanyaan. Meskipun sumber menyebutkan beberapa aspek terkait hak dan akses yang sama ke sumber daya [1], sumber tersebut tidak secara komprehensif mencakup berbagai masalah hak asasi manusia yang ditentukan dalam konteks pertanyaan. Kurangnya informasi detail tentang analisis hak asasi manusia, penghormatan terhadap hak asasi manusia, perlindungan terhadap pelanggaran, non-diskriminasi, dan perlindungan khusus untuk kelompok rentan memerlukan investigasi lebih lanjut untuk membuat penilaian yang pasti.`,
     
     // Labour rights response
     'Labour rights of working conditions': 'Hak-hak tenaga kerja terkait kondisi kerja',
     'labourRights.title': 'Hak-hak tenaga kerja terkait kondisi kerja',
-    'labourRights.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber yang disediakan:
+    'labourRights.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber yang disediakan:`,
+    'labour-rights.title': 'Hak-hak tenaga kerja terkait kondisi kerja',
+    'labour-rights.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber yang disediakan:
 
 1. Proyek ini mematuhi undang-undang dan peraturan ketenagakerjaan yang relevan. Pegawai pemerintah dilindungi oleh kondisi kerja kementerian mereka, yang diasumsikan mematuhi semua undang-undang dan kebijakan yang relevan [1].
 
@@ -266,7 +280,9 @@ Poin-poin ini menunjukkan bahwa proyek telah mengambil langkah-langkah yang tepa
     // Cultural Heritage response
     'Cultural heritage': 'Warisan Budaya',
     'culturalHeritage.title': 'Warisan Budaya',
-    'culturalHeritage.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen yang disediakan:
+    'culturalHeritage.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen yang disediakan:`,
+    'cultural-heritage.title': 'Warisan Budaya',
+    'cultural-heritage.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen yang disediakan:
 
 1. Situs warisan budaya telah diidentifikasi dan dipetakan. [1] [2] [3] [4]
 
@@ -290,7 +306,9 @@ Tindakan-tindakan ini menunjukkan pendekatan yang memuaskan untuk mengidentifika
     // Indigenous People response
     'Indigenous people and local communities (IPLCs)': 'Masyarakat Adat dan Komunitas Lokal (IPLCs)',
     'indigenousPeople.title': 'Masyarakat Adat dan Komunitas Lokal (IPLCs)',
-    'indigenousPeople.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen yang disediakan:
+    'indigenousPeople.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen yang disediakan:`,
+    'indigenous-people.title': 'Masyarakat Adat dan Komunitas Lokal (IPLCs)',
+    'indigenous-people.response': `Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen yang disediakan:
 
 1. Proyek secara aktif mendukung proses Sertifikasi Tanah Komunal Adat (ICT), yang sejalan dengan menghormati hak Masyarakat Adat atas tanah dan wilayah [1] [2].
 

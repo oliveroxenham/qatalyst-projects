@@ -3,6 +3,8 @@ import { Files } from 'lucide-react';
 import { clsx } from 'clsx';
 import Logo from '@/public/icons/logo.svg';
 import { EsgRisk, Project } from '@/types/project';
+import { translateRiskName, translateAiResponse } from '@/mock/translations';
+import { useTranslation } from 'react-i18next';
 
 export function QatalystAi({
   projectData,
@@ -13,6 +15,7 @@ export function QatalystAi({
   aiSidebarOpen?: boolean;
   setAiSidebarOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const risks = projectData?.esgAssessment.risks;
   if (!risks || risks.length === 0) {
     return null;
@@ -46,11 +49,13 @@ export function QatalystAi({
                       <p className="text-foreground text-sm font-semibold">
                         Qatalyst found the following for{' '}
                         <span className="text-secondary">
-                          {riskItem.ai.title}
+                          {translateRiskName(riskItem.ai.title)}
                         </span>
                       </p>
                     </div>
-                    <p className="text-sm px-1">{riskItem.ai.response}</p>
+                    <p className="text-sm px-1">
+                      {riskItem.ai?.response}
+                    </p>
                     <p className="flex flex-row flex-wrap gap-2">
                       {riskItem.sources?.map((source, index) => {
                         return (
