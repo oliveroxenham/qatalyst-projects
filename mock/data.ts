@@ -2,13 +2,6 @@
 
 import { QATALYST_RESPONSE } from '@/lib/constants';
 import { Project } from '@/types/project';
-import i18next from 'i18next';
-import { translateRiskName, translateAiResponse } from './translations';
-
-// Translation wrapper function to handle AI responses
-const t = (key: string, defaultText: string): string => {
-  return translateAiResponse(key, defaultText);
-};
 
 const PROJECT_ID_1650: Project = {
   id: '1650',
@@ -276,8 +269,8 @@ This value is consistent across multiple sources and is the most specific and de
           },
         ],
         ai: {
-          title: t('human-rights.title', 'Human Rights'),
-          response: t('human-rights.response', `Based on the provided information and the context of the question, the most appropriate answer is 'Investigate'. The document source provided does not contain sufficient information to fully address the human rights considerations outlined in the question. While the source mentions some aspects related to equal rights and access to resources [1], it does not comprehensively cover the range of human rights issues specified in the question context. The lack of detailed information on human rights analysis, respect for human rights, protection against infringements, non-discrimination, and specific safeguards for vulnerable groups necessitates further investigation to make a definitive assessment.`),
+          title: 'Human Rights',
+          response: `Based on the provided information and the context of the question, the most appropriate answer is 'Investigate'. The document source provided does not contain sufficient information to fully address the human rights considerations outlined in the question. While the source mentions some aspects related to equal rights and access to resources [1], it does not comprehensively cover the range of human rights issues specified in the question context. The lack of detailed information on human rights analysis, respect for human rights, protection against infringements, non-discrimination, and specific safeguards for vulnerable groups necessitates further investigation to make a definitive assessment.`,
         },
       },
       {
@@ -319,8 +312,8 @@ This value is consistent across multiple sources and is the most specific and de
           },
         ],
         ai: {
-          title: t('community-health.title', 'Community health, safety and security'),
-          response: t('community-health.response', `The answer 'Satisfactory' is based on the following evidence from the document sources:
+          title: 'Community health, safety and security',
+          response: `The answer 'Satisfactory' is based on the following evidence from the document sources:
 
 1. The project provides comprehensive health and safety measures for both staff and local communities:
 
@@ -368,8 +361,8 @@ These measures demonstrate a comprehensive approach to community health, safety,
           },
         ],
         ai: {
-          title: t('labour-rights.title', 'Labour rights of working conditions'),
-          response: t('labour-rights.response', `The answer 'Satisfactory' is based on the following evidence from the provided sources:
+          title: 'Labour rights of working conditions',
+          response: `The answer 'Satisfactory' is based on the following evidence from the provided sources:
 
 1. The project adheres to relevant labour laws and regulations. Government employees are covered by their ministries' employment conditions, which are assumed to comply with all relevant laws and policies [1].
 
@@ -411,8 +404,8 @@ These points demonstrate that the project has taken appropriate measures to ensu
           },
         ],
         ai: {
-          title: t('cultural-heritage.title', 'Cultural heritage'),
-          response: t('cultural-heritage.response', `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
+          title: 'Cultural heritage',
+          response: `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
 
 1. Cultural heritage sites have been identified and mapped. [1] [2] [3] [4]
 
@@ -457,8 +450,8 @@ These actions demonstrate a satisfactory approach to identifying, protecting, an
           },
         ],
         ai: {
-          title: t('indigenous-people.title', 'Indigenous people and local communities (IPLCs)'),
-          response: t('indigenous-people.response', `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
+          title: 'Indigenous people and local communities (IPLCs)',
+          response: `The answer 'Satisfactory' is based on the following evidence from the provided document sources:
 
 1. The project actively supports Indigenous Communal Land Titling (ICT) process, which aligns with respecting the rights of Indigenous Peoples to land and territories [1] [2].
 

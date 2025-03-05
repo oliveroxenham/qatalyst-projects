@@ -54,7 +54,9 @@ export function QatalystAi({
                       </p>
                     </div>
                     <p className="text-sm px-1">
-                      {riskItem.ai?.response}
+                      {riskItem.id && riskItem.ai?.response && 
+                        translateAiResponse(`${riskItem.id}.response`, riskItem.ai.response)
+                      }
                     </p>
                     <p className="flex flex-row flex-wrap gap-2">
                       {riskItem.sources?.map((source, index) => {
