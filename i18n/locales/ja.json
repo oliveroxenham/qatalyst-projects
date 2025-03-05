@@ -235,5 +235,10 @@
     "missingRatingData": "評価、プロジェクトID、評価タイプを提供してください",
     "ratingUpdated": "プロジェクト評価が正常に更新されました",
     "failedToUpdateRating": "プロジェクト評価の更新に失敗しました"
+  },
+  "unlockMoreDialog": {
+    "title": "Qatalystでさらに機能を解除",
+    "description": "この機能は完全版のQatalystアプリでのみ利用可能です。アップグレードして解除してください。",
+    "ok": "OK"
   }
 }

@@ -235,5 +235,10 @@
     "missingRatingData": "Harap berikan rating, projectId dan assessment",
     "ratingUpdated": "Rating proyek berhasil diperbarui",
     "failedToUpdateRating": "Gagal memperbarui rating proyek"
+  },
+  "unlockMoreDialog": {
+    "title": "Buka Lebih Banyak dengan Qatalyst",
+    "description": "Fitur ini hanya tersedia dalam aplikasi Qatalyst lengkap. Silakan upgrade untuk membukanya.",
+    "ok": "OK"
   }
 }

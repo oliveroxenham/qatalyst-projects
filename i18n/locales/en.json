@@ -235,5 +235,10 @@
     "missingRatingData": "Please provide rating, projectId and assessment",
     "ratingUpdated": "Project rating updated successfully",
     "failedToUpdateRating": "Failed to update project rating"
+  },
+  "unlockMoreDialog": {
+    "title": "Unlock More with Qatalyst",
+    "description": "This feature is only available in the full Qatalyst app. Please upgrade to unlock it.",
+    "ok": "OK"
   }
 }

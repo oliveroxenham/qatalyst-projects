@@ -7,6 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { useTranslation } from '@/i18n/i18n';
 
 export function UnlockMoreDialog({
   isOpen,
@@ -15,14 +16,15 @@ export function UnlockMoreDialog({
   isOpen: boolean;
   setDialogOpen: (open: boolean) => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogContent className='bg-muted'>
         <AlertDialogHeader>
-          <AlertDialogTitle>Unlock More with Qatalyst</AlertDialogTitle>
+          <AlertDialogTitle>{t('unlockMoreDialog.title')}</AlertDialogTitle>
           <AlertDialogDescription>
-            This feature is only available in the full Qatalyst app. Please
-            upgrade to unlock it.
+            {t('unlockMoreDialog.description')}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -31,7 +33,7 @@ export function UnlockMoreDialog({
               setDialogOpen(false);
             }}
           >
-            OK
+            {t('unlockMoreDialog.ok')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
