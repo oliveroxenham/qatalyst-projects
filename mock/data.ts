@@ -1,7 +1,20 @@
 // @ts-nocheck
 
 import { QATALYST_RESPONSE } from '@/lib/constants';
-import { Project } from '@/types/project';
+import { Project } from '@/types/project'; 
+import i18next from 'i18next';
+
+// Translation wrapper function to handle AI responses
+const t = (key: string, defaultText: string): string => {
+  const currentLanguage = i18next.language;
+  // Only translate if we have translations for this language
+  if (currentLanguage && currentLanguage !== 'en') {
+    const translated = i18next.t(`aiResponses.${key}`, { defaultValue: defaultText });
+    // Return the translation if it's not the same as the key (which would indicate no translation found)
+    return translated !== `aiResponses.${key}` ? translated : defaultText;
+  }
+  return defaultText;
+};
 
 const PROJECT_ID_1650: Project = {
   id: '1650',
@@ -76,11 +89,11 @@ const PROJECT_ID_1650: Project = {
       ],
       qatalystGenerated: true,
       ai: {
-        title: 'Estimated reductions (over project duration)',
-        response: `The estimated reductions over the project duration were determined to be 21,171,578 tCO₂e. This value was extracted from multiple sources: 
+        title: t('estimatedReductions.title', 'Estimated reductions (over project duration)'),
+        response: t('estimatedReductions.response', `The estimated reductions over the project duration were determined to be 21,171,578 tCO₂e. This value was extracted from multiple sources: 
         A table in the project documentation explicitly states the "Net estimated emission reductions in the project area, measured against the without-project scenario" as 21,171,578 for "Achievements during the Project Lifetime" 
         [1]. This same figure is corroborated in another text source, which presents it in a slightly different format but with the same value 
-        [2]. The determination of this value is likely based on comprehensive calculations and modelling of the project's impact over its entire duration. It represents the total expected reduction in greenhouse gas emissions attributed to the project activities when compared to a baseline scenario without the project. It's important to note that this figure represents the cumulative reductions over the entire project lifetime, not an annual figure. The project is classified as a "large project" due to its significant impact, with annual reductions exceeding 300,000 tonnes of CO₂e [3].`,
+        [2]. The determination of this value is likely based on comprehensive calculations and modelling of the project's impact over its entire duration. It represents the total expected reduction in greenhouse gas emissions attributed to the project activities when compared to a baseline scenario without the project. It's important to note that this figure represents the cumulative reductions over the entire project lifetime, not an annual figure. The project is classified as a "large project" due to its significant impact, with annual reductions exceeding 300,000 tonnes of CO₂e [3].`),
       },
     },
     totalEstimatedReductions: {
@@ -96,15 +109,15 @@ const PROJECT_ID_1650: Project = {
       ],
       qatalystGenerated: true,
       ai: {
-        title: 'Total estimated reductions',
-        response: `The value for Total estimated reductions was determined based on the following analysis:
+        title: t('totalEstimatedReductions.title', 'Total estimated reductions'),
+        response: t('totalEstimatedReductions.response', `The value for Total estimated reductions was determined based on the following analysis:
 The most relevant information was found in source [1], which provides a table of achievements during the project lifetime.
 The table in [1] lists "Net estimated emission reductions in the project area, measured against the without-project scenario" as 21,171,578.
 This value is the most comprehensive and appears to represent the total estimated reductions for the entire project lifetime.
 The unit tCO₂e is not explicitly stated in the source, but it is the standard unit for GHG emission reductions and is consistent with other sources provided.
 Other sources, such as [2] and [3], provide partial or annual data, but do not give a clear total for the entire project.
 [4] shows a total of 1,641,141, but this appears to be for a shorter period (2018-2019) and not the full project lifetime.
-Therefore, 21,171,578 tCO₂e is the best match for the total estimated reductions over the project's lifetime.`,
+Therefore, 21,171,578 tCO₂e is the best match for the total estimated reductions over the project's lifetime.`),
       },
     },
     projectDuration: {
@@ -312,8 +325,8 @@ This value is consistent across multiple sources and is the most specific and de
           },
         ],
         ai: {
-          title: 'Community health, safety and security',
-          response: `The answer 'Satisfactory' is based on the following evidence from the document sources:
+          title: t('communityHealth.title', 'Community health, safety and security'),
+          response: t('communityHealth.response', `The answer 'Satisfactory' is based on the following evidence from the document sources:
 
 1. The project provides comprehensive health and safety measures for both staff and local communities:
 
@@ -335,7 +348,7 @@ The project has developed specific guidance for managing risks with local commun
 
 Staff are required to inform project management of unsafe conditions, illnesses, or injuries for prompt remedial action [7].
 WCS is committed to providing a safe working environment for all [2].
-These measures demonstrate a comprehensive approach to community health, safety, and security, justifying the 'Satisfactory' rating.`,
+These measures demonstrate a comprehensive approach to community health, safety, and security, justifying the 'Satisfactory' rating.`),
         },
       },
       {

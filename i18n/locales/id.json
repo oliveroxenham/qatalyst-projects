@@ -4,6 +4,20 @@
     "id": "Bahasa",
     "ja": "日本語"
   },
+  "aiResponses": {
+    "estimatedReductions": {
+      "title": "Perkiraan pengurangan (selama durasi proyek)",
+      "response": "Perkiraan pengurangan selama durasi proyek ditetapkan sebesar 21.171.578 tCO₂e. Nilai ini diekstraksi dari beberapa sumber: Tabel dalam dokumentasi proyek secara eksplisit menyatakan \"Perkiraan pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek\" sebesar 21.171.578 untuk \"Pencapaian selama Masa Proyek\" [1]. Angka yang sama dikonfirmasi dalam sumber teks lain, yang disajikan dalam format yang sedikit berbeda tetapi dengan nilai yang sama [2]. Penentuan nilai ini kemungkinan didasarkan pada perhitungan dan pemodelan komprehensif dampak proyek selama seluruh durasinya. Ini mewakili total pengurangan emisi gas rumah kaca yang diharapkan yang disebabkan oleh aktivitas proyek dibandingkan dengan skenario dasar tanpa proyek. Penting untuk dicatat bahwa angka ini mewakili pengurangan kumulatif selama seluruh masa proyek, bukan angka tahunan. Proyek ini diklasifikasikan sebagai \"proyek besar\" karena dampaknya yang signifikan, dengan pengurangan tahunan melebihi 300.000 ton CO₂e [3]."
+    },
+    "totalEstimatedReductions": {
+      "title": "Total perkiraan pengurangan",
+      "response": "Nilai untuk Total perkiraan pengurangan ditentukan berdasarkan analisis berikut: Informasi paling relevan ditemukan di sumber [1], yang menyediakan tabel pencapaian selama masa proyek. Tabel di [1] mencantumkan \"Perkiraan pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek\" sebesar 21.171.578. Nilai ini paling komprehensif dan tampaknya mewakili total perkiraan pengurangan untuk seluruh masa proyek. Unit tCO₂e tidak secara eksplisit dinyatakan dalam sumber, tetapi merupakan unit standar untuk pengurangan emisi GRK dan konsisten dengan sumber lain yang disediakan. Sumber lain, seperti [2] dan [3], memberikan data parsial atau tahunan, tetapi tidak memberikan total yang jelas untuk seluruh proyek. [4] menunjukkan total 1.641.141, tetapi ini tampaknya untuk periode yang lebih pendek (2018-2019) dan bukan untuk seluruh masa proyek. Oleh karena itu, 21.171.578 tCO₂e adalah kecocokan terbaik untuk total perkiraan pengurangan selama masa proyek."
+    },
+    "communityHealth": {
+      "title": "Kesehatan, keselamatan, dan keamanan masyarakat",
+      "response": "Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen: 1. Proyek menyediakan langkah-langkah kesehatan dan keselamatan yang komprehensif untuk staf dan masyarakat lokal: Kebijakan Kesehatan dan Keselamatan WCS melindungi semua staf proyek dan rekan kerja [1] [2]. Asuransi kesehatan dan kecelakaan disediakan untuk staf, mencakup semua biaya perawatan kesehatan dalam kasus insiden atau penyakit terkait pekerjaan [1] [2]. 2. Pelatihan dan pengembangan kapasitas untuk keselamatan masyarakat: Anggota masyarakat yang terlibat dalam kegiatan proyek seperti patroli dan ekowisata menerima pelatihan keselamatan dan keamanan, biasanya setiap tahun [3]. Pelatihan tentang patroli masyarakat dan laporan SMART dalam bahasa Khmer memberikan informasi tentang keselamatan dan keamanan untuk tim patroli [3]. 3. Infrastruktur masyarakat dan inisiatif kesehatan: Proyek mendukung berbagai proyek infrastruktur masyarakat, termasuk perbaikan jalan, pembangunan jembatan, dan pemasangan drainase jalan [4]. Kegiatan terkait kesehatan termasuk pemasangan sumur pompa, sistem pipa air, pembangunan toilet, klinik kesehatan keliling, dan dana masyarakat untuk keadaan darurat kesehatan [4]. 4. Pemantauan dan manajemen risiko: Terdapat rencana yang jelas untuk memantau Nilai Konservasi Tinggi (HCV) terkait masyarakat, termasuk pemantauan demografis dan sosial ekonomi [5]. Proyek telah mengembangkan panduan spesifik untuk mengelola risiko dengan masyarakat lokal selama pandemi COVID-19 [6]. 5. Kesehatan dan keselamatan kerja: Staf diwajibkan untuk menginformasikan manajemen proyek tentang kondisi tidak aman, penyakit, atau cedera untuk tindakan perbaikan segera [7]. WCS berkomitmen untuk menyediakan lingkungan kerja yang aman untuk semua [2]. Langkah-langkah ini menunjukkan pendekatan komprehensif terhadap kesehatan, keselamatan, dan keamanan masyarakat, yang membenarkan peringkat 'Memuaskan'."
+    }
+  },
   "topbar": {
     "dashboard": "Dasbor",
     "projects": "Proyek",
@@ -188,5 +202,12 @@
     "registryStatus": "Status Registri",
     "projectType": "Jenis Proyek",
     "completedBy": "Diselesaikan oleh {{name}} pada {{date}}"
+  },
+  "qatalystAi": {
+    "title": "Qatalyst AI",
+    "notAvailable": "Qatalyst AI tidak tersedia untuk proyek ini di aplikasi demo.",
+    "foundFollowing": "Qatalyst menemukan hal berikut untuk",
+    "naInDemo": "Tidak tersedia di Demo",
+    "askSomething": "Tanyakan sesuatu ke Qatalyst AI..."
   }
 }
