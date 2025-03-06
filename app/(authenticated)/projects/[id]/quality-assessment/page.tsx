@@ -22,7 +22,7 @@ export default async function QualityAssessmentPage({
   console.log('projectData=', projectData);
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <TopBar title="Financial Assessment">
+      <TopBar title="sidebar.qualityAssessment">
         <div className="flex justify-between items-center w-full gap-2">
           <div className="flex flex-row items-center gap-2">
             {projectData && (

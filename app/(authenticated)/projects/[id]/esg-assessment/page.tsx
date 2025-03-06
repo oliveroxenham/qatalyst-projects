@@ -23,7 +23,7 @@ export default async function FinancialAssessmentPage({
   console.log('projectData=', projectData);
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <TopBar title="ESG Assessment">
+      <TopBar title="sidebar.esgAssessment">
         <div className="flex justify-between items-center w-full gap-2">
           <div className="flex flex-row items-center gap-2">
             {projectData && (
