@@ -50,7 +50,10 @@
     "portfolioValue": "ポートフォリオ総額",
     "geographicDistribution": "地理的分布によるプロジェクト",
     "annualIssuance": "年間カーボンクレジット発行量",
-    "customizationMessage": "ダッシュボードは各ユーザーの好みに合わせて調整可能です。"
+    "customizationMessage": "ダッシュボードは各ユーザーの好みに合わせて調整可能です。",
+    "demoTitle": "Qatalystデモ",
+    "demoDescription": "ダッシュボードはあなたのニーズに合わせてカスタマイズでき、組織に最も関連性の高いKPI、チャート、指標でパーソナライズできます。",
+    "goToWorkspace": "マイワークスペースへ"
   },
   "sidebar": {
     "overview": "概要",

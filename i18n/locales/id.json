@@ -50,7 +50,10 @@
     "portfolioValue": "Total nilai portofolio",
     "geographicDistribution": "Proyek berdasarkan Distribusi Geografis",
     "annualIssuance": "Penerbitan Kredit Karbon Tahunan",
-    "customizationMessage": "Dasbor dapat disesuaikan dengan preferensi masing-masing pengguna."
+    "customizationMessage": "Dasbor dapat disesuaikan dengan preferensi masing-masing pengguna.",
+    "demoTitle": "Demo Qatalyst",
+    "demoDescription": "Dasbor dapat disesuaikan dengan kebutuhan Anda, dipersonalisasi dengan KPI, grafik, dan metrik yang paling relevan untuk organisasi Anda.",
+    "goToWorkspace": "Buka Ruang Kerja Saya"
   },
   "sidebar": {
     "overview": "Ikhtisar",

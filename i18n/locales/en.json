@@ -50,7 +50,10 @@
     "portfolioValue": "Total portfolio value",
     "geographicDistribution": "Projects by Geographic Distribution",
     "annualIssuance": "Annual Carbon Credit Issuance",
-    "customizationMessage": "The dashboard can be easily tailored to each user's preferences."
+    "customizationMessage": "The dashboard can be easily tailored to each user's preferences.",
+    "demoTitle": "Qatalyst Demo",
+    "demoDescription": "The dashboard can be tailored to your needs, personalized with KPIs, charts, and metrics that are most relevant to your organization.",
+    "goToWorkspace": "Go to My Workspace"
   },
   "sidebar": {
     "overview": "Overview",
