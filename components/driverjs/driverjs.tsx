@@ -177,7 +177,7 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
   useEffect(() => {
     const driverObj = driver({
       showProgress: true,
-      overlayColor: '#cccccc',
+      overlayColor: '#4A4E51',
       steps: pageName && steps[pageName] ? steps[pageName] : [],
     });
     const runDriver = !window.localStorage.getItem(`driverjs.${pageName}`);
