@@ -5,7 +5,6 @@ import { WorldMap } from '@/components/WorldMap/world-map';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ChartContainer } from '@/components/ui/chart';
 import { Bar, BarChart, Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell } from 'recharts';
 import { CalendarDays, ArrowUpRight, TrendingUp, Briefcase, DollarSign, Globe, Activity, ClipboardList, CheckCircle, AlertCircle } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
