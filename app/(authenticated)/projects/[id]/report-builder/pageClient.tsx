@@ -14,7 +14,6 @@ import {
   GripVertical, 
   FileText, 
   Download, 
-  ChevronsUpDown,
   Brain,
   PenLine
 } from 'lucide-react';
@@ -40,6 +39,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 // Custom QatalystResponse component for report builder
 function QatalystResponse({ 
@@ -125,6 +132,133 @@ const mockEsgAssessmentSources = [
   { id: '3', name: 'Biodiversity Baseline Study.pdf', description: 'Scientific assessment of biodiversity in the project area' },
   { id: '4', name: 'Governance Structure and Compliance.pdf', description: 'Project governance framework and regulatory compliance documentation' },
 ];
+
+// Draggable section component
+const DraggableSection = ({ 
+  section, 
+  index, 
+  moveItem, 
+  toggleSources, 
+  removeSection,
+}: { 
+  section: ReportSection, 
+  index: number, 
+  moveItem: (dragIndex: number, hoverIndex: number) => void, 
+  toggleSources: (id: string) => void,
+  removeSection: (id: string) => void,
+  moveSection: (id: string, direction: 'up' | 'down') => void
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const [{ isDragging }, drag] = useDrag({
+    type: 'REPORT_SECTION',
+    item: { id: section.id, index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+  
+  const [, drop] = useDrop({
+    accept: 'REPORT_SECTION',
+    hover: (item: { id: string, index: number }, monitor) => {
+      if (!ref.current) {
+        return;
+      }
+      
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
+      
+      // Get vertical middle
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      
+      // Get pixels to the top
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
+      
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      
+      // Time to actually perform the action
+      moveItem(dragIndex, hoverIndex);
+      
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex;
+    },
+  });
+  
+  drag(drop(ref));
+  
+  return (
+    <div 
+      ref={ref} 
+      className={`flex items-center p-2 border rounded-md bg-background ${isDragging ? 'opacity-50 border-dashed border-primary' : ''} hover:border-primary transition-colors duration-200`}
+    >
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="mr-2 text-muted-foreground cursor-grab flex hover:text-primary">
+              <GripVertical className="h-5 w-5" />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Drag to reorder</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <div className="flex-1 font-medium">{section.title}</div>
+      <div className="flex items-center space-x-2">
+        {(section.type === 'financialAssessment' || section.type === 'esgAssessment') && (
+          <div className="flex items-center space-x-1">
+            <input 
+              type="checkbox" 
+              id={`sources-${section.id}`}
+              checked={section.includeSources}
+              onChange={() => toggleSources(section.id)}
+              className="rounded border-gray-300 text-primary focus:ring-primary"
+            />
+            <label htmlFor={`sources-${section.id}`} className="text-xs text-muted-foreground">
+              Include Sources
+            </label>
+          </div>
+        )}
+        <div className="flex space-x-1">
+          <Button 
+            size="icon" 
+            variant="ghost" 
+            className="h-8 w-8 text-destructive hover:text-destructive"
+            onClick={() => removeSection(section.id)}
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const mockFinancialAssessmentData = [
   {
@@ -362,6 +496,14 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     const newIndex = direction === 'up' ? index - 1 : index + 1;
     const [removed] = newSections.splice(index, 1);
     newSections.splice(newIndex, 0, removed);
+    setReportSections(newSections);
+  };
+  
+  const moveItem = (dragIndex: number, hoverIndex: number) => {
+    const newSections = [...reportSections];
+    const dragItem = newSections[dragIndex];
+    newSections.splice(dragIndex, 1);
+    newSections.splice(hoverIndex, 0, dragItem);
     setReportSections(newSections);
   };
   
@@ -607,58 +749,19 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 </div>
                 
                 <div className="space-y-2">
-                  {reportSections.map((section, index) => (
-                    <div key={section.id} className="flex items-center p-2 border rounded-md bg-background">
-                      <div className="mr-2 text-muted-foreground cursor-grab flex">
-                        <GripVertical className="h-5 w-5" />
-                      </div>
-                      <div className="flex-1 font-medium">{section.title}</div>
-                      <div className="flex items-center space-x-2">
-                        {(section.type === 'financialAssessment' || section.type === 'esgAssessment') && (
-                          <div className="flex items-center space-x-1">
-                            <input 
-                              type="checkbox" 
-                              id={`sources-${section.id}`}
-                              checked={section.includeSources}
-                              onChange={() => toggleSources(section.id)}
-                              className="rounded border-gray-300 text-primary focus:ring-primary"
-                            />
-                            <label htmlFor={`sources-${section.id}`} className="text-xs text-muted-foreground">
-                              {t('reportBuilder.includeSources')}
-                            </label>
-                          </div>
-                        )}
-                        <div className="flex space-x-1">
-                          <Button 
-                            size="icon" 
-                            variant="ghost" 
-                            className="h-8 w-8"
-                            onClick={() => moveSection(section.id, 'up')}
-                            disabled={index === 0}
-                          >
-                            <ChevronsUpDown className="h-4 w-4 rotate-180" />
-                          </Button>
-                          <Button 
-                            size="icon" 
-                            variant="ghost" 
-                            className="h-8 w-8"
-                            onClick={() => moveSection(section.id, 'down')}
-                            disabled={index === reportSections.length - 1}
-                          >
-                            <ChevronsUpDown className="h-4 w-4" />
-                          </Button>
-                          <Button 
-                            size="icon" 
-                            variant="ghost" 
-                            className="h-8 w-8 text-destructive hover:text-destructive"
-                            onClick={() => removeSection(section.id)}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                  <DndProvider backend={HTML5Backend}>
+                    {reportSections.map((section, index) => (
+                      <DraggableSection
+                        key={section.id}
+                        section={section}
+                        index={index}
+                        moveItem={moveItem}
+                        toggleSources={toggleSources}
+                        removeSection={removeSection}
+                        moveSection={moveSection}
+                      />
+                    ))}
+                  </DndProvider>
                 </div>
               </Card>
             )}

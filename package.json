@@ -1,6 +1,6 @@
 {
   "name": "qatalyst-demo",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -38,6 +38,8 @@
     "posthog-js": "^1.223.3",
     "react": "19.0.0",
     "react-country-flag": "^3.1.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "19.0.0",
     "react-i18next": "^15.4.1",
     "react-simple-maps": "^3.0.0",
