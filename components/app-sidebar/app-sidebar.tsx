@@ -103,6 +103,13 @@ const getMenuData = (t: (key: string) => string) => ({
       url: '/projects/{id}/scorecard',
     },
     {
+      disabled: false,
+      icon: FilePen,
+      key: 'report-builder',
+      name: t('sidebar.reportBuilder'),
+      url: '/projects/{id}/report-builder',
+    },
+    {
       disabled: true,
       icon: Fingerprint,
       key: 'kyc-assessment',

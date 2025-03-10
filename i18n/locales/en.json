@@ -66,6 +66,7 @@
     "esgAssessment": "ESG Assessment",
     "qualityAssessment": "Quality Assessment",
     "scorecard": "Scorecard",
+    "reportBuilder": "Report Builder",
     "kycAssessment": "KYC Assessment",
     "aiEstimator": "AI Estimator",
     "benchmark": "Benchmark",
@@ -205,6 +206,20 @@
     "registryStatus": "Registry status",
     "projectType": "Project type",
     "completedBy": "Completed by {{name}} on {{date}}"
+  },
+  "reportBuilder": {
+    "title": "Report Builder",
+    "description": "Use Qatalyst AI to create custom reports for your project",
+    "inputPlaceholder": "What kind of report would you like to create?",
+    "examples": "Examples",
+    "examplePrompts": [
+      "Create a financial summary report focusing on carbon credit projections",
+      "Build an ESG impact report highlighting community benefits",
+      "Generate an executive summary for investors"
+    ],
+    "generating": "Generating your report...",
+    "downloadReport": "Download Report",
+    "reportPreview": "Report Preview"
   },
   "projectCard": {
     "owner": "Owner",
