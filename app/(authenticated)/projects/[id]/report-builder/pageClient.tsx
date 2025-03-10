@@ -2,17 +2,69 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Avatar } from '@/components/ui/avatar';
+// import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { getProjectId } from '@/mock/data';
 import { FileIcon, Send } from 'lucide-react';
 import QatalystAiIcon from '@/public/icons/AI-icon.svg';
-import { QatalystResponse } from '@/components/qatalyst-response';
+// Create a custom QatalystResponse component for the report builder
+import React from 'react';
+import Logo from '@/public/icons/logo.svg';
+import Image from 'next/image';
+
+// Custom QatalystResponse component for report builder
+function QatalystResponse({ 
+  title, 
+  prompt, 
+  response 
+}: { 
+  title?: string; 
+  prompt: string; 
+  response: string;
+}) {
+  return (
+    <div className="border rounded-md p-4 bg-background">
+      <div className="flex items-start space-x-3 mb-4">
+        <div className="rounded-full bg-blaze-orange-500 flex items-center justify-center p-1.5 mt-1">
+          <Logo className="w-4 h-4 fill-white" />
+        </div>
+        <div>
+          {title && <h3 className="font-semibold mb-1">{title}</h3>}
+          <p className="text-sm text-muted-foreground font-medium">Prompt: {prompt}</p>
+        </div>
+      </div>
+      <div className="pl-10">
+        <p className="text-sm">{response}</p>
+      </div>
+    </div>
+  );
+}
+
+// Define TypeScript interfaces for report data
+interface SdgContribution {
+  sdg: number;
+  name: string;
+  contribution: string;
+}
+
+interface EsgBenefits {
+  environmentalBenefits: string[];
+  socialBenefits: string[];
+  governanceBenefits: string[];
+}
+
+interface ReportData {
+  projectSummary: Record<string, string>;
+  financialOverview: Record<string, string>;
+  esgBenefits: EsgBenefits;
+  sdgContributions: SdgContribution[];
+  executiveSummary: string;
+}
 
 // Mock report data
-const mockReportData = {
+const mockReportData: ReportData = {
   projectSummary: {
     projectName: 'Tonle Sap Flooded Forest Protection',
     country: 'Cambodia',
@@ -75,7 +127,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedReport, setGeneratedReport] = useState<null | any>(null);
+  const [generatedReport, setGeneratedReport] = useState<ReportData | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const project = getProjectId(projectId);
 
@@ -132,7 +184,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
         <div className="space-y-2">
           <p className="text-sm font-medium">{t('reportBuilder.examples')}:</p>
           <div className="flex flex-wrap gap-2">
-            {t<string[]>('reportBuilder.examplePrompts', { returnObjects: true }).map((example, i) => (
+            {(t('reportBuilder.examplePrompts', { returnObjects: true }) as string[]).map((example, i) => (
               <Button
                 key={i}
                 variant="outline"
@@ -185,7 +237,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
             <div className="space-y-2">
               <h2 className="text-xl font-semibold">Project Summary</h2>
               <div className="grid grid-cols-2 gap-4">
-                {Object.entries(generatedReport.projectSummary).map(([key, value]: [string, any]) => (
+                {Object.entries(generatedReport.projectSummary).map(([key, value]: [string, string]) => (
                   <div key={key} className="space-y-1">
                     <p className="text-sm font-medium">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
                     <p className="text-sm">{value}</p>
@@ -198,7 +250,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
             <div className="space-y-2">
               <h2 className="text-xl font-semibold">Financial Overview</h2>
               <div className="grid grid-cols-2 gap-4">
-                {Object.entries(generatedReport.financialOverview).map(([key, value]: [string, any]) => (
+                {Object.entries(generatedReport.financialOverview).map(([key, value]: [string, string]) => (
                   <div key={key} className="space-y-1">
                     <p className="text-sm font-medium">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
                     <p className="text-sm">{value}</p>
@@ -243,12 +295,14 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
             <div className="space-y-2">
               <h2 className="text-xl font-semibold">SDG Contributions</h2>
               <div className="grid grid-cols-2 gap-4">
-                {generatedReport.sdgContributions.map((sdg: any) => (
+                {generatedReport.sdgContributions.map((sdg: SdgContribution) => (
                   <div key={sdg.sdg} className="flex items-center space-x-3">
                     <div className="flex-shrink-0">
-                      <img
+                      <Image
                         src={`/icons/goal-${sdg.sdg.toString().padStart(2, '0')}.svg`}
                         alt={`SDG ${sdg.sdg}`}
+                        width={40}
+                        height={40}
                         className="h-10 w-10"
                       />
                     </div>

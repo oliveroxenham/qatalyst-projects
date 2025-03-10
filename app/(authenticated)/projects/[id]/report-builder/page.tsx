@@ -1,9 +1,10 @@
 import { ReportBuilderClient } from './pageClient';
 
-export default function ReportBuilderPage({
+export default async function ReportBuilderPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  return <ReportBuilderClient projectId={params.id} />;
+  const projectId = (await params).id;
+  return <ReportBuilderClient projectId={projectId} />;
 }
