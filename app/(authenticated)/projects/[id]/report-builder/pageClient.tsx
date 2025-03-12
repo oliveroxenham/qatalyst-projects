@@ -384,18 +384,43 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
   const [newSectionContent, setNewSectionContent] = useState('');
   const [addSectionType, setAddSectionType] = useState<SectionType>('customText');
   const [addSectionDialogOpen, setAddSectionDialogOpen] = useState(false);
+  const [loadedFromStorage, setLoadedFromStorage] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const project = getProjectId(projectId);
   
+  // Generate a unique ID for sections
+  const generateId = () => `section-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+
+  // Load saved report from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedReport = localStorage.getItem(`report-${projectId}`);
+      
+      if (savedReport) {
+        try {
+          const parsedData = JSON.parse(savedReport);
+          setGeneratedReport(parsedData.report);
+          setReportSections(parsedData.sections);
+          setInputValue(parsedData.prompt || '');
+          setLoadedFromStorage(true);
+          
+          // Reset loaded notification after 5 seconds
+          setTimeout(() => {
+            setLoadedFromStorage(false);
+          }, 5000);
+        } catch (error) {
+          console.error('Error parsing saved report:', error);
+        }
+      }
+    }
+  }, [projectId]);
+
   // Log the project data to ensure we have the image URL
   useEffect(() => {
     if (project) {
       console.log('Project data loaded:', project);
     }
   }, [project]);
-
-  // Generate a unique ID for sections
-  const generateId = () => `section-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
   useEffect(() => {
     if (inputRef.current) {
@@ -416,6 +441,32 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
       ]);
     }
   }, [generatedReport]);
+  
+  // Save report to localStorage whenever it changes
+  useEffect(() => {
+    if (generatedReport && reportSections.length > 0 && typeof window !== 'undefined') {
+      localStorage.setItem(`report-${projectId}`, JSON.stringify({
+        report: generatedReport,
+        sections: reportSections,
+        prompt: inputValue
+      }));
+    }
+  }, [generatedReport, reportSections, projectId, inputValue]);
+
+  // Function to delete saved report
+  const handleDeleteReport = () => {
+    // Clear from localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(`report-${projectId}`);
+    }
+    
+    // Reset state
+    setGeneratedReport(null);
+    setReportSections([]);
+    setInputValue('');
+    setIsCustomizing(false);
+    setLoadedFromStorage(false);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -537,6 +588,15 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
           <p className="text-muted-foreground">
             {t('reportBuilder.description')}
           </p>
+          
+          {loadedFromStorage && (
+            <div className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 p-3 rounded-md flex items-center mt-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Saved report loaded from storage
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -592,6 +652,14 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 >
                   <PenLine className="mr-2 h-4 w-4" />
                   {t('reportBuilder.customizeReport')}
+                </Button>
+                
+                <Button 
+                  variant="destructive" 
+                  onClick={handleDeleteReport}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Delete Report
                 </Button>
                 
                 <DropdownMenu>
