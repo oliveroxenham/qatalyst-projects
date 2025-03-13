@@ -738,6 +738,239 @@ Given these conflicting points and the lack of comprehensive information on how 
       },
     ],
   },
+  carbonQualityAssessment: {
+    assignedTo: 'Wesley Oxenham',
+    status: 'in progress',
+    progress: 70,
+    risks: [
+      {
+        id: 'cq1',
+        name: 'Risk 1: Additionality',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'KSWS REDD+ Feasibility Report 2010 - page 28',
+            url: '#source-1',
+          },
+          {
+            name: 'KSWS PD VCS 2020 - page 45-52',
+            url: '#source-2',
+          },
+          {
+            name: 'Validation Report 2021 - section 4.3',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Additionality',
+          response: 'The project demonstrates strong additionality through both investment analysis and barrier analysis. The financial analysis shows that without carbon credit revenue, the project would have a negative NPV of approximately $2.4 million, making it financially unviable. The implementation barriers include institutional barriers related to weak enforcement capacity, financial barriers for sustainable livelihood activities, and technological barriers for proper forest monitoring. These barriers are substantiated by regional data and third-party validation confirms that the project activity would not have occurred in the absence of carbon finance.'
+        }
+      },
+      {
+        id: 'cq2',
+        name: 'Risk 2: Permanence',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'KSWS Risk Analysis and Buffer Determination - page 12',
+            url: '#source-1',
+          },
+          {
+            name: 'KSWS Monitoring Report 2018-2021 - section 5',
+            url: '#source-2',
+          },
+          {
+            name: 'Project Implementation Agreement - Annex C',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Permanence',
+          response: 'The project has robust measures in place to ensure permanence of emissions reductions. A thorough risk assessment was conducted using the VCS AFOLU Non-Permanence Risk Tool, resulting in a buffer allocation of 17% of credits. The project has active monitoring systems and patrol teams that cover over 85% of the project area monthly. Land tenure is secured through government designation as a Wildlife Sanctuary, and the 60-year crediting period with continuous monitoring provides long-term protection. Community agreements include provisions for sharing carbon revenue, which creates ongoing incentives for forest protection.'
+        }
+      },
+      {
+        id: 'cq3',
+        name: 'Risk 3: Robust quantification of emission reductions and removals',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'KSWS VCS Monitoring Report 2020-2021 - pages 18-43',
+            url: '#source-1',
+          },
+          {
+            name: 'Verification Statement 2022 - section 3.2',
+            url: '#source-2',
+          },
+          {
+            name: 'Carbon Stock Assessment 2019 - full report',
+            url: '#source-3',
+          },
+          {
+            name: 'Remote Sensing Analysis - Technical Appendix',
+            url: '#source-4',
+          },
+        ],
+        ai: {
+          title: 'Robust quantification of emission reductions and removals',
+          response: 'The project employs VM0015 methodology with robust quantification procedures. Carbon stocks were determined through extensive field sampling of 308 permanent plots and allometric equations specific to Cambodian forests. Baseline deforestation was modeled using spatial analysis of historical deforestation patterns from 2002-2009, validated against actual deforestation during this period (94.3% accuracy). Emissions monitoring uses high-resolution satellite imagery with ground truthing, and leakage calculations include both activity shifting and market leakage. Uncertainty analysis shows 12.4% uncertainty, well below the 15% threshold, and emissions reductions are calculated conservatively with appropriate deductions for uncertainty and buffer pool.'
+        }
+      },
+      {
+        id: 'cq4',
+        name: 'Risk 4: Sustainable development benefits and safeguards',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'KSWS CCBA Monitoring Report 2021 - section 7',
+            url: '#source-1',
+          },
+          {
+            name: 'Community Benefits Audit 2022 - full report',
+            url: '#source-2',
+          },
+          {
+            name: 'Biodiversity Impact Assessment - pages 45-60',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Sustainable development benefits and safeguards',
+          response: 'The project delivers substantial sustainable development benefits across multiple SDGs. Community benefits include $956,000 distributed through the Cash for Communities program, supporting 20 villages with healthcare, education, and infrastructure improvements. The project has created 116 local jobs and strengthened local governance through community committees. Biodiversity benefits are evidenced by stable or increasing populations of 19 endangered species and 12% less forest degradation compared to surrounding areas. Environmental safeguards include no use of GMOs, no dams, and minimal use of fertilizers. Social safeguards include FPIC principles, grievance mechanisms, and gender-inclusive decision-making processes with 42% female representation in community forestry committees.'
+        }
+      },
+      {
+        id: 'cq5',
+        name: 'Risk 5: Effective Governance',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'KSWS Governance Structure Document - full report',
+            url: '#source-1',
+          },
+          {
+            name: 'Project Implementation Agreement - section 4',
+            url: '#source-2',
+          },
+          {
+            name: 'Stakeholder Engagement Plan 2020-2025',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Effective Governance',
+          response: 'The project has a well-defined governance structure with clear roles and responsibilities. The Royal Government of Cambodia maintains overall jurisdiction with the Ministry of Environment as the executing agency. WCS provides technical support and day-to-day management with a team of 47 staff. A Project Management Committee meets quarterly with representatives from government, WCS, and community delegates from each of the 20 villages. Decision-making processes are transparent with published minutes and annual public forums. Financial governance includes third-party auditing and public reporting of carbon credit sales and revenue allocation.'
+        }
+      },
+      {
+        id: 'cq6',
+        name: 'Risk 6: Tracking',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'Verra Registry Records - project ID 1650',
+            url: '#source-1',
+          },
+          {
+            name: 'Carbon Credit Issuance Report 2022',
+            url: '#source-2',
+          },
+        ],
+        ai: {
+          title: 'Tracking',
+          response: 'The project maintains robust tracking of carbon credits through the Verra Registry (project ID 1650). All credit issuances, transfers, and retirements are transparently recorded with unique serial numbers. To date, 7,245,321 VCUs have been issued across three verification periods, with 1,231,705 credits placed in the buffer pool. The project maintains a credit sales database with buyer information, transaction dates, and retirement purposes. Each credit clearly indicates the vintage year, project location, and applicable methodology. This system prevents any possibility of double counting and enables full traceability throughout the credit lifecycle.'
+        }
+      },
+      {
+        id: 'cq7',
+        name: 'Risk 7: Transparency',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'KSWS Project Website - Public Documents Section',
+            url: '#source-1',
+          },
+          {
+            name: 'Annual Stakeholder Report 2022',
+            url: '#source-2',
+          },
+          {
+            name: 'Verra Registry Public Data',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Transparency',
+          response: 'The project demonstrates excellent transparency with comprehensive public disclosure. All project documentation is publicly available, including the PDD, monitoring reports, verification statements, and methodology details. Technical specifications for baseline setting, monitoring approaches, and carbon accounting are fully disclosed. Financial information is reported annually, showing credit sales volumes, prices, and revenue allocation. Community engagement is documented with meeting minutes, participant lists, and photographs. The project produces annual reports in both English and Khmer, and maintains a public website with regularly updated project information. Local dissemination includes information boards in all 20 villages and quarterly community meetings.'
+        }
+      },
+      {
+        id: 'cq8',
+        name: 'Risk 8: Robust independent third-party validation and verification',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'SCS Validation Report 2016 - full document',
+            url: '#source-1',
+          },
+          {
+            name: 'AENOR Verification Report 2021 - full document',
+            url: '#source-2',
+          },
+          {
+            name: 'VVB Site Visit Documentation 2022',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Robust independent third-party validation and verification',
+          response: 'The project has undergone rigorous validation and verification by accredited third parties. Initial validation was conducted by SCS Global Services (VCS accreditation #0064), with verification by AENOR (VCS accreditation #0069). The verification process included extensive document review, interviews with 42 stakeholders, and physical inspection of 15% of the project area. The verification team included experts in forestry, remote sensing, and social science. Field visits involved random sampling of forest plots, community interviews, and inspection of project activities. Both validation and verification confirmed conformance with all VCS and CCB requirements with no major non-conformities. Verification is conducted every two years, with the most recent completed in November 2022.'
+        }
+      },
+      {
+        id: 'cq9',
+        name: 'Risk 9: No double counting',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'Cambodia NDC Technical Report 2020 - section 5.4',
+            url: '#source-1',
+          },
+          {
+            name: 'Verra Double Counting Assessment - project 1650',
+            url: '#source-2',
+          },
+          {
+            name: 'Project Implementation Agreement - clause 18',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'No double counting',
+          response: 'The project has robust safeguards against double counting. The emission reductions are registered exclusively in the Verra Registry with unique serial numbers for each credit. Cambodia\'s NDC explicitly excludes these voluntary market reductions from national accounting, as confirmed in a formal letter from the Ministry of Environment (2021). The project has a dedicated registry account and all transfers are tracked through the Verra system. The project implementation agreement includes specific clauses prohibiting claims of the same emission reductions by multiple entities. Credit retirement records are publicly accessible, ensuring transparency in final credit use. The project also maintains correspondence with national authorities confirming no overlap with other carbon projects or national REDD+ programs.'
+        }
+      },
+      {
+        id: 'cq10',
+        name: 'Risk 10: Contribution toward net zero transition',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'KSWS Carbon Transition Strategy 2030 - draft',
+            url: '#source-1',
+          },
+          {
+            name: 'Cambodia National REDD+ Strategy - pages 34-39',
+            url: '#source-2',
+          },
+        ],
+        ai: {
+          title: 'Contribution toward net zero transition',
+          response: 'The project\'s contribution to net zero transition shows mixed results. While the project clearly provides immediate emissions reductions through avoided deforestation, its long-term alignment with net zero pathways requires further development. The project does reference Cambodia\'s National REDD+ Strategy and climate goals, but lacks a specific long-term transition plan that extends beyond carbon credits. There is limited evidence of integration with sectoral decarbonization pathways or how the project supports transformational change in land use planning. The project is developing a Carbon Transition Strategy to address these gaps, but this remains in draft form. A positive element is the project\'s work on alternative livelihood development, which could support sustainable economic transformation, though the scale remains limited relative to regional development pressures.'
+        }
+      },
+    ],
+  },
   kycAssessment: {
     status: 'not started',
     progress: 0,
@@ -1175,21 +1408,202 @@ const PROJECT_ID_2749: Project = {
           },
         ],
       },
+    ],
+  },
+  carbonQualityAssessment: {
+    assignedTo: 'Kopal Agarwal',
+    status: 'in progress',
+    progress: 50,
+    risks: [
       {
-        id: 13,
-        name: 'Risk 14: Additionality',
+        id: 'cq1',
+        name: 'Risk 1: Additionality',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Additionality',
+          response: 'The project demonstrates strong additionality. Without the carbon credit revenue, this project would not be financially viable as shown in the investment analysis. The barriers analysis further confirms that the project activities would not have occurred under a business-as-usual scenario.'
+        }
       },
       {
-        id: 14,
-        name: 'Risk 15: Permanence',
+        id: 'cq2',
+        name: 'Risk 2: Permanence',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+        ],
+        ai: {
+          title: 'Permanence',
+          response: 'The project has implemented robust measures to ensure the permanence of emission reductions. The risk of reversal is well-managed through buffer credits and continuous monitoring strategies. The project has a long-term management plan in place.'
+        }
       },
       {
-        id: 15,
-        name: 'Risk 16: Robust quantification of emission reductions and removals',
+        id: 'cq3',
+        name: 'Risk 3: Robust quantification of emission reductions and removals',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+          {
+            name: 'source 4',
+            url: '#source-4',
+          },
+        ],
+        ai: {
+          title: 'Robust quantification of emission reductions and removals',
+          response: 'The emission reductions are quantified using established methodologies with conservative assumptions. The baseline and project emissions are calculated using peer-reviewed methodologies, and uncertainty has been addressed appropriately.'
+        }
       },
       {
-        id: 16,
-        name: 'Risk 17: Sustainable development benefits and safeguards',
+        id: 'cq4',
+        name: 'Risk 4: Sustainable development benefits and safeguards',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+        ],
+        ai: {
+          title: 'Sustainable development benefits and safeguards',
+          response: 'While the project provides some sustainable development benefits, there are concerns about the monitoring and verification of these benefits. Additional documentation is needed to ensure that all safeguards are properly implemented and maintained throughout the project lifetime.'
+        }
+      },
+      {
+        id: 'cq5',
+        name: 'Risk 5: Effective Governance',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+        ai: {
+          title: 'Effective Governance',
+          response: 'The project demonstrates effective governance structures with clear roles and responsibilities. Decision-making processes are transparent, and there is adequate stakeholder engagement in governance activities.'
+        }
+      },
+      {
+        id: 'cq6',
+        name: 'Risk 6: Tracking',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+        ],
+        ai: {
+          title: 'Tracking',
+          response: 'The project utilizes robust tracking systems to monitor carbon credits from issuance through retirement. The registry system used provides transparent tracking and prevents double counting.'
+        }
+      },
+      {
+        id: 'cq7',
+        name: 'Risk 7: Transparency',
+        qatalystResponse: QATALYST_RESPONSE.INVESTIGATE,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+        ai: {
+          title: 'Transparency',
+          response: 'While the project discloses most relevant information, there are some gaps in public reporting. Additional transparency regarding methodological choices and specific implementation details would strengthen the project\'s credibility.'
+        }
+      },
+      {
+        id: 'cq8',
+        name: 'Risk 8: Robust independent third-party validation and verification',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+          {
+            name: 'source 2',
+            url: '#source-2',
+          },
+          {
+            name: 'source 3',
+            url: '#source-3',
+          },
+        ],
+        ai: {
+          title: 'Robust independent third-party validation and verification',
+          response: 'The project has undergone rigorous third-party validation and verification by accredited entities. The verification process follows international standards and includes field visits and comprehensive documentation review.'
+        }
+      },
+      {
+        id: 'cq9',
+        name: 'Risk 9: No double counting',
+        qatalystResponse: QATALYST_RESPONSE.SATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+        ai: {
+          title: 'No double counting',
+          response: 'The project has implemented appropriate measures to prevent double counting, including clear registry tracking and coordination with national accounting systems where applicable.'
+        }
+      },
+      {
+        id: 'cq10',
+        name: 'Risk 10: Contribution toward net zero transition',
+        qatalystResponse: QATALYST_RESPONSE.UNSATISFACTORY,
+        sources: [
+          {
+            name: 'source 1',
+            url: '#source-1',
+          },
+        ],
+        ai: {
+          title: 'Contribution toward net zero transition',
+          response: 'The project does not adequately demonstrate how it contributes to long-term net zero goals. There is insufficient evidence of alignment with sectoral decarbonization pathways and long-term emission reduction strategies.'
+        }
       },
     ],
   },
