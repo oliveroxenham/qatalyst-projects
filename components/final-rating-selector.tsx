@@ -20,15 +20,19 @@ export function FinalRatingSelector({
   currentUser,
 }: {
   projectData: Project;
-  assessment: 'esg' | 'financial';
+  assessment: 'esg' | 'financial' | 'carbonQuality';
   currentUser?: string | null;
 }) {
   const { t } = useTranslation();
-  const assessmentKey =
-    assessment === 'esg' ? 'esgAssessment' : 'financialAssessment';
+  const assessmentKey = 
+    assessment === 'esg' 
+      ? 'esgAssessment' 
+      : assessment === 'carbonQuality'
+        ? 'carbonQualityAssessment'
+        : 'financialAssessment';
 
   const [finalRating, setFinalRating] = useState(
-    projectData?.[assessmentKey].status.toLowerCase()
+    projectData?.[assessmentKey]?.status?.toLowerCase() || 'not started'
   );
 
   const handleUpdateFinalRating = async (newFinalRating: string) => {
@@ -48,7 +52,7 @@ export function FinalRatingSelector({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        disabled={projectData?.[assessmentKey].assignedTo !== currentUser}
+        disabled={projectData?.[assessmentKey]?.assignedTo !== currentUser}
         asChild
       >
         <Button

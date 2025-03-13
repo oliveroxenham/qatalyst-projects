@@ -28,6 +28,18 @@ export async function POST(req: NextRequest) {
         } else if (assessment === 'esg') {
           allProjects[i].esgAssessment.status = rating;
           console.log('project=', allProjects[i])
+        } else if (assessment === 'carbonQuality') {
+          if (!allProjects[i].carbonQualityAssessment) {
+            allProjects[i].carbonQualityAssessment = {
+              status: 'not started',
+              progress: 0,
+              risks: [],
+              assignedTo: ''
+            };
+          }
+          // Use non-null assertion since we just created it if it didn't exist
+          allProjects[i].carbonQualityAssessment!.status = rating;
+          console.log('project=', allProjects[i])
         } else {
           return NextResponse.json({
             msg: 'Invalid assessment',
