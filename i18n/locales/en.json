@@ -65,6 +65,7 @@
     "financialAssessment": "Financial Assessment",
     "esgAssessment": "ESG Assessment",
     "qualityAssessment": "Quality Assessment",
+    "carbonQualityAssessment": "Carbon Quality Assessment",
     "scorecard": "Scorecard",
     "reportBuilder": "Report Builder",
     "kycAssessment": "KYC Assessment",
@@ -180,6 +181,13 @@
       "feedstockAccess": "Access to feedstock",
       "sourceRisks": "What are the key risks of using this source?"
     }
+  },
+  "carbonQualityAssessment": {
+    "title": "Carbon Quality Assessment",
+    "categories": "Categories",
+    "name": "Name",
+    "qatalystResponses": "Qatalyst Responses",
+    "userRating": "User Rating"
   },
   "scorecard": {
     "title": "Scorecard",

@@ -416,7 +416,7 @@ Poin-poin ini menunjukkan bahwa proyek secara aktif bekerja untuk menghormati da
 export const riskTranslations = {
   // Japanese translations
   ja: {
-    // Risk names
+    // ESG Risk names
     'Risk 1: Human Rights	': 'リスク 1: 人権',
     'Risk 2: Gender Equality': 'リスク 2: 男女平等',
     'Risk 3: Community health, safety and security': 'リスク 3: コミュニティの健康、安全、セキュリティ',
@@ -430,15 +430,23 @@ export const riskTranslations = {
     'Risk 11: Resource efficiency and pollution prevention ; Energy': 'リスク 11: 資源効率と汚染防止；エネルギー',
     'Risk 12: Water': 'リスク 12: 水',
     'Risk 13: Biodiversity conservation and sustainable natural resource management': 'リスク 13: 生物多様性保全と持続可能な自然資源管理',
-    'Risk 14: Additionality': 'リスク 14: 追加性',
-    'Risk 15: Permanence': 'リスク 15: 永続性',
-    'Risk 16: Robust quantification of emission reductions and removals': 'リスク 16: 排出削減と除去の堅牢な定量化',
-    'Risk 17: Sustainable development benefits and safeguards': 'リスク 17: 持続可能な開発便益とセーフガード',
+    
+    // Carbon Quality Risk names
+    'Risk 1: Additionality': 'リスク 1: 追加性',
+    'Risk 2: Permanence': 'リスク 2: 永続性',
+    'Risk 3: Robust quantification of emission reductions and removals': 'リスク 3: 排出削減と除去の堅牢な定量化',
+    'Risk 4: Sustainable development benefits and safeguards': 'リスク 4: 持続可能な開発便益とセーフガード',
+    'Risk 5: Effective Governance': 'リスク 5: 効果的なガバナンス',
+    'Risk 6: Tracking': 'リスク 6: 追跡',
+    'Risk 7: Transparency': 'リスク 7: 透明性',
+    'Risk 8: Robust independent third-party validation and verification': 'リスク 8: 堅牢な独立した第三者検証',
+    'Risk 9: No double counting': 'リスク 9: 二重計上なし',
+    'Risk 10: Contribution toward net zero transition': 'リスク 10: ネットゼロ移行への貢献',
   },
   
   // Indonesian (Bahasa) translations
   id: {
-    // Risk names
+    // ESG Risk names
     'Risk 1: Human Rights	': 'Risiko 1: Hak Asasi Manusia',
     'Risk 2: Gender Equality': 'Risiko 2: Kesetaraan Gender',
     'Risk 3: Community health, safety and security': 'Risiko 3: Kesehatan, keselamatan, dan keamanan masyarakat',
@@ -452,10 +460,18 @@ export const riskTranslations = {
     'Risk 11: Resource efficiency and pollution prevention ; Energy': 'Risiko 11: Efisiensi sumber daya dan pencegahan polusi; Energi',
     'Risk 12: Water': 'Risiko 12: Air',
     'Risk 13: Biodiversity conservation and sustainable natural resource management': 'Risiko 13: Konservasi keanekaragaman hayati dan pengelolaan sumber daya alam berkelanjutan',
-    'Risk 14: Additionality': 'Risiko 14: Adicionalitas',
-    'Risk 15: Permanence': 'Risiko 15: Permanensi',
-    'Risk 16: Robust quantification of emission reductions and removals': 'Risiko 16: Kuantifikasi yang kuat atas pengurangan emisi dan penghilangan',
-    'Risk 17: Sustainable development benefits and safeguards': 'Risiko 17: Manfaat dan perlindungan pembangunan berkelanjutan',
+    
+    // Carbon Quality Risk names
+    'Risk 1: Additionality': 'Risiko 1: Adicionalitas',
+    'Risk 2: Permanence': 'Risiko 2: Permanensi',
+    'Risk 3: Robust quantification of emission reductions and removals': 'Risiko 3: Kuantifikasi yang kuat atas pengurangan emisi dan penghilangan',
+    'Risk 4: Sustainable development benefits and safeguards': 'Risiko 4: Manfaat dan perlindungan pembangunan berkelanjutan',
+    'Risk 5: Effective Governance': 'Risiko 5: Tata Kelola yang Efektif',
+    'Risk 6: Tracking': 'Risiko 6: Pelacakan',
+    'Risk 7: Transparency': 'Risiko 7: Transparansi',
+    'Risk 8: Robust independent third-party validation and verification': 'Risiko 8: Validasi dan verifikasi pihak ketiga independen yang kuat',
+    'Risk 9: No double counting': 'Risiko 9: Tidak ada penghitungan ganda',
+    'Risk 10: Contribution toward net zero transition': 'Risiko 10: Kontribusi terhadap transisi net zero',
   }
 };
 

@@ -23,6 +23,7 @@ import {
   Clipboard,
   ClipboardCheck,
   Earth,
+  Wind,
   FilePen,
   Files,
   Fingerprint,
@@ -94,6 +95,13 @@ const getMenuData = (t: (key: string) => string) => ({
       name: t('sidebar.qualityAssessment'),
       cookstoveOnly: true,
       url: '/projects/{id}/quality-assessment',
+    },
+    {
+      disabled: false,
+      icon: Wind,
+      key: 'carbon-quality-assessment',
+      name: t('sidebar.carbonQualityAssessment'),
+      url: '/projects/{id}/carbon-quality-assessment',
     },
     {
       disabled: false,
