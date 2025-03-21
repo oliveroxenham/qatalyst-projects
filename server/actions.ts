@@ -25,7 +25,7 @@ export async function updateAssignee({
   assignee,
 }: {
   projectId: string;
-  assessment: 'esg' | 'financial';
+  assessment: 'esg' | 'financial' | 'carbonQuality';
   assignee: string;
 }) {
   const resp = await fetch(`${process.env.BASE_URL}/api/projects/assignTo`, {
@@ -43,6 +43,8 @@ export async function updateAssignee({
     revalidatePath(`/projects/${projectId}/esg-assessment`);
   } else if (assessment === 'financial') {
     revalidatePath(`/projects/${projectId}/financial-assessment`);
+  } else if (assessment === 'carbonQuality') {
+    revalidatePath(`/projects/${projectId}/carbon-quality-assessment`);
   }
   return await resp.json();
 }
@@ -53,7 +55,7 @@ export async function updateFinalRating({
   rating,
 }: {
   projectId: string;
-  assessment: 'esg' | 'financial';
+  assessment: 'esg' | 'financial' | 'carbonQuality';
   rating: string;
 }) {
   const resp = await fetch(
@@ -74,6 +76,8 @@ export async function updateFinalRating({
     revalidatePath(`/projects/${projectId}/esg-assessment`);
   } else if (assessment === 'financial') {
     revalidatePath(`/projects/${projectId}/financial-assessment`);
+  } else if (assessment === 'carbonQuality') {
+    revalidatePath(`/projects/${projectId}/carbon-quality-assessment`);
   }
   return await resp.json();
 }

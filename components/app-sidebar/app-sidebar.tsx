@@ -126,13 +126,6 @@ const getMenuData = (t: (key: string) => string) => ({
     },
     {
       disabled: true,
-      icon: SquareSigma,
-      key: 'ai-estimator',
-      name: t('sidebar.aiEstimator'),
-      url: '/projects/{id}/ai',
-    },
-    {
-      disabled: true,
       icon: BookCopy,
       key: 'benchmark',
       name: t('sidebar.benchmark'),
@@ -239,7 +232,7 @@ export const AppSidebar = ({
             ))}
           </SidebarMenu>
         </SidebarGroup>
-        <SidebarSeparator className="opacity-50" />
+        <SidebarSeparator />
         {!nonProjectPaths.includes(pathname) && (
           <SidebarGroup>
             <SidebarGroupLabel>{t('sidebar.project')}</SidebarGroupLabel>

@@ -21,7 +21,7 @@ export function AssigneeSelector({
 }: {
   projectId: string;
   currentUser?: string | null;
-  assessment: 'esg' | 'financial';
+  assessment: 'esg' | 'financial' | 'carbonQuality';
   assignedTo?: string | null;
   disabled?: boolean;
 }) {
