@@ -38,11 +38,6 @@ interface GeoJSONCollection {
   features: GeoJSONFeature[];
 }
 
-const geojson = {
-  type: 'FeatureCollection',
-  features: []
-};
-
 const MapboxExample = () => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
