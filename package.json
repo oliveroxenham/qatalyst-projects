@@ -59,7 +59,9 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@clerk/shared"
+      "@clerk/shared",
+      "core-js",
+      "sharp"
     ]
   }
 }
