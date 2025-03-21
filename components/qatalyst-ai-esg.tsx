@@ -3,33 +3,40 @@ import { Files } from 'lucide-react';
 import { clsx } from 'clsx';
 import Logo from '@/public/icons/logo.svg';
 import { EsgRisk, Project } from '@/types/project';
+import { translateRiskName, translateAiResponse } from '@/mock/translations';
 
 export function QatalystAi({
   projectData,
   aiSidebarOpen = false,
   setAiSidebarOpen,
+  assessmentType = 'esg',
 }: {
   projectData: Project | null;
   aiSidebarOpen?: boolean;
   setAiSidebarOpen?: Dispatch<SetStateAction<boolean>>;
+  assessmentType?: 'esg' | 'carbonQuality';
 }) {
-  const risks = projectData?.esgAssessment.risks;
+  const risks = assessmentType === 'esg' 
+    ? projectData?.esgAssessment?.risks 
+    : projectData?.carbonQualityAssessment?.risks;
+  
   if (!risks || risks.length === 0) {
     return null;
   }
   return (
     <div className="flex flex-row max-h-screen">
       {aiSidebarOpen && (
-        <div className="w-[560px] bg-background border-l p-4 flex flex-col justify-between">
+        <div className="w-[560px] bg-muted border-l p-4 flex flex-col justify-between">
           <div className="h-full border overflow-scroll" id="qatalyst-ai">
-            {!projectData || (!projectData.esgAssessment && null)}
+            {!projectData || (assessmentType === 'esg' && !projectData.esgAssessment) || (assessmentType === 'carbonQuality' && !projectData.carbonQualityAssessment) && null}
             {projectData && ['1650'].indexOf(projectData?.id) < 0 && (
               <span className="text-xs p-2 text-neutral-500">
                 Qatalyst AI is not available for this project in demo app.
               </span>
             )}
             {projectData &&
-              projectData.esgAssessment &&
+              ((assessmentType === 'esg' && projectData.esgAssessment) || 
+               (assessmentType === 'carbonQuality' && projectData.carbonQualityAssessment)) &&
               risks.map((riskItem:EsgRisk) => {
                 if (!riskItem.ai) return null;
                 return (
@@ -46,11 +53,15 @@ export function QatalystAi({
                       <p className="text-foreground text-sm font-semibold">
                         Qatalyst found the following for{' '}
                         <span className="text-secondary">
-                          {riskItem.ai.title}
+                          {translateRiskName(riskItem.ai.title)}
                         </span>
                       </p>
                     </div>
-                    <p className="text-sm px-1">{riskItem.ai.response}</p>
+                    <p className="text-sm px-1">
+                      {riskItem.id && riskItem.ai?.response && 
+                        translateAiResponse(`${riskItem.id}.response`, riskItem.ai.response)
+                      }
+                    </p>
                     <p className="flex flex-row flex-wrap gap-2">
                       {riskItem.sources?.map((source, index) => {
                         return (
@@ -64,7 +75,7 @@ export function QatalystAi({
                 );
               })}
           </div>
-          <div className="bg-neutral-100 w-full h-14 border rounded-lg flex items-center p-2 mt-2">
+          <div className="bg-background w-full h-14 border rounded-lg flex items-center p-2 mt-2">
             <span className="text-muted-foreground text-xs">
               Ask Qatalyst AI something...
             </span>
@@ -73,6 +84,7 @@ export function QatalystAi({
       )}
       <div className="w-[72px] bg-background border-l py-4 flex flex-col gap-2">
         <div
+          id="qatalyst-ai-button"
           className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16"
           onClick={() => setAiSidebarOpen ? setAiSidebarOpen(!aiSidebarOpen) : null}
         >

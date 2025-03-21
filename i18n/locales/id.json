@@ -1,0 +1,341 @@
+{
+  "languages": {
+    "en": "English",
+    "id": "Bahasa",
+    "ja": "日本語"
+  },
+  "aiResponses": {
+    "estimatedReductions": {
+      "title": "Perkiraan pengurangan (selama durasi proyek)",
+      "response": "Perkiraan pengurangan selama durasi proyek ditetapkan sebesar 21.171.578 tCO₂e. Nilai ini diekstraksi dari beberapa sumber: Tabel dalam dokumentasi proyek secara eksplisit menyatakan \"Perkiraan pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek\" sebesar 21.171.578 untuk \"Pencapaian selama Masa Proyek\" [1]. Angka yang sama dikonfirmasi dalam sumber teks lain, yang disajikan dalam format yang sedikit berbeda tetapi dengan nilai yang sama [2]. Penentuan nilai ini kemungkinan didasarkan pada perhitungan dan pemodelan komprehensif dampak proyek selama seluruh durasinya. Ini mewakili total pengurangan emisi gas rumah kaca yang diharapkan yang disebabkan oleh aktivitas proyek dibandingkan dengan skenario dasar tanpa proyek. Penting untuk dicatat bahwa angka ini mewakili pengurangan kumulatif selama seluruh masa proyek, bukan angka tahunan. Proyek ini diklasifikasikan sebagai \"proyek besar\" karena dampaknya yang signifikan, dengan pengurangan tahunan melebihi 300.000 ton CO₂e [3]."
+    },
+    "totalEstimatedReductions": {
+      "title": "Total perkiraan pengurangan",
+      "response": "Nilai untuk Total perkiraan pengurangan ditentukan berdasarkan analisis berikut: Informasi paling relevan ditemukan di sumber [1], yang menyediakan tabel pencapaian selama masa proyek. Tabel di [1] mencantumkan \"Perkiraan pengurangan emisi bersih di area proyek, diukur terhadap skenario tanpa proyek\" sebesar 21.171.578. Nilai ini paling komprehensif dan tampaknya mewakili total perkiraan pengurangan untuk seluruh masa proyek. Unit tCO₂e tidak secara eksplisit dinyatakan dalam sumber, tetapi merupakan unit standar untuk pengurangan emisi GRK dan konsisten dengan sumber lain yang disediakan. Sumber lain, seperti [2] dan [3], memberikan data parsial atau tahunan, tetapi tidak memberikan total yang jelas untuk seluruh proyek. [4] menunjukkan total 1.641.141, tetapi ini tampaknya untuk periode yang lebih pendek (2018-2019) dan bukan untuk seluruh masa proyek. Oleh karena itu, 21.171.578 tCO₂e adalah kecocokan terbaik untuk total perkiraan pengurangan selama masa proyek."
+    },
+    "communityHealth": {
+      "title": "Kesehatan, keselamatan, dan keamanan masyarakat",
+      "response": "Jawaban 'Memuaskan' didasarkan pada bukti berikut dari sumber dokumen: 1. Proyek menyediakan langkah-langkah kesehatan dan keselamatan yang komprehensif untuk staf dan masyarakat lokal: Kebijakan Kesehatan dan Keselamatan WCS melindungi semua staf proyek dan rekan kerja [1] [2]. Asuransi kesehatan dan kecelakaan disediakan untuk staf, mencakup semua biaya perawatan kesehatan dalam kasus insiden atau penyakit terkait pekerjaan [1] [2]. 2. Pelatihan dan pengembangan kapasitas untuk keselamatan masyarakat: Anggota masyarakat yang terlibat dalam kegiatan proyek seperti patroli dan ekowisata menerima pelatihan keselamatan dan keamanan, biasanya setiap tahun [3]. Pelatihan tentang patroli masyarakat dan laporan SMART dalam bahasa Khmer memberikan informasi tentang keselamatan dan keamanan untuk tim patroli [3]. 3. Infrastruktur masyarakat dan inisiatif kesehatan: Proyek mendukung berbagai proyek infrastruktur masyarakat, termasuk perbaikan jalan, pembangunan jembatan, dan pemasangan drainase jalan [4]. Kegiatan terkait kesehatan termasuk pemasangan sumur pompa, sistem pipa air, pembangunan toilet, klinik kesehatan keliling, dan dana masyarakat untuk keadaan darurat kesehatan [4]. 4. Pemantauan dan manajemen risiko: Terdapat rencana yang jelas untuk memantau Nilai Konservasi Tinggi (HCV) terkait masyarakat, termasuk pemantauan demografis dan sosial ekonomi [5]. Proyek telah mengembangkan panduan spesifik untuk mengelola risiko dengan masyarakat lokal selama pandemi COVID-19 [6]. 5. Kesehatan dan keselamatan kerja: Staf diwajibkan untuk menginformasikan manajemen proyek tentang kondisi tidak aman, penyakit, atau cedera untuk tindakan perbaikan segera [7]. WCS berkomitmen untuk menyediakan lingkungan kerja yang aman untuk semua [2]. Langkah-langkah ini menunjukkan pendekatan komprehensif terhadap kesehatan, keselamatan, dan keamanan masyarakat, yang membenarkan peringkat 'Memuaskan'."
+    }
+  },
+  "topbar": {
+    "dashboard": "Dasbor",
+    "projects": "Proyek",
+    "newProject": "Proyek Baru"
+  },
+  "common": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "edit": "Edit",
+    "delete": "Hapus",
+    "loading": "Memuat...",
+    "export": "Ekspor",
+    "compare": "Bandingkan",
+    "wordDocument": "Dokumen Word",
+    "pdfDocument": "Dokumen PDF",
+    "source": "sumber",
+    "sources": "sumber",
+    "addCriteria": "Tambah kriteria",
+    "keyinAnswer": "Ketik jawaban Anda...",
+    "generateAssessment": "Hasilkan Penilaian",
+    "satisfactory": "Memuaskan",
+    "investigate": "Selidiki",
+    "unsatisfactory": "Tidak Memuaskan"
+  },
+  "dashboard": {
+    "totalProjects": "Total proyek dalam portofolio",
+    "projectsUnderReview": "Proyek dalam tinjauan",
+    "amountContracted": "Jumlah yang dikontrak",
+    "amountDisbursed": "Jumlah yang dicairkan",
+    "portfolioValue": "Total nilai portofolio",
+    "geographicDistribution": "Proyek berdasarkan Distribusi Geografis",
+    "annualIssuance": "Penerbitan Kredit Karbon Tahunan",
+    "customizationMessage": "Dasbor dapat disesuaikan dengan preferensi masing-masing pengguna.",
+    "demoTitle": "Demo Qatalyst",
+    "demoDescription": "Dasbor dapat disesuaikan dengan kebutuhan Anda, dipersonalisasi dengan KPI, grafik, dan metrik yang paling relevan untuk organisasi Anda.",
+    "goToWorkspace": "Buka Ruang Kerja Saya"
+  },
+  "sidebar": {
+    "overview": "Ikhtisar",
+    "project": "Proyek",
+    "myWorkspace": "Ruang Kerja Saya",
+    "myDashboard": "Dasbor Saya",
+    "projectDetails": "Detail Proyek",
+    "documents": "Dokumen",
+    "financialAssessment": "Penilaian Keuangan",
+    "esgAssessment": "Penilaian ESG",
+    "qualityAssessment": "Penilaian Kualitas",
+    "scorecard": "Kartu Skor",
+    "kycAssessment": "Penilaian KYC",
+    "aiEstimator": "Estimator AI",
+    "benchmark": "Tolok Ukur",
+    "insurance": "Asuransi",
+    "contract": "Kontrak",
+    "pdd": "PDD",
+    "verification": "Verifikasi"
+  },
+  "user": {
+    "notifications": "Notifikasi",
+    "resetAppState": "Atur Ulang Keadaan Aplikasi",
+    "resetOnboarding": "Atur Ulang Pengenalan",
+    "signOut": "Keluar"
+  },
+  "projectDetails": {
+    "title": "Detail Proyek",
+    "details": "Detail",
+    "registryId": "ID Proyek Registry",
+    "projectType": "Jenis Proyek Qatalyst",
+    "projectName": "Nama Proyek",
+    "country": "Negara",
+    "state": "Negara Bagian / Provinsi",
+    "latitude": "Garis Lintang",
+    "longitude": "Garis Bujur",
+    "background": "Latar Belakang",
+    "proponent": "Pengusul",
+    "projectStatus": "Status Proyek",
+    "estimatedAnnualCredits": "Perkiraan Kredit Tahunan",
+    "methodology": "Metodologi",
+    "projectArea": "Area Proyek",
+    "sdgs": "Tujuan Pembangunan Berkelanjutan",
+    "taskManager": "Manajer Tugas",
+    "creator": "Pembuat",
+    "collaborators": "Kolaborator",
+    "financialAssessment": "Penilaian Keuangan",
+    "esgAssessment": "Penilaian ESG",
+    "kycAssessment": "Penilaian KYC",
+    "comingSoon": "Segera Hadir",
+    "assignTo": "Tetapkan kepada",
+    "finalRating": "Penilaian Akhir",
+    "activity": "Aktivitas",
+    "status": {
+      "not_started": "Belum Dimulai",
+      "in_progress": "Sedang Berlangsung",
+      "eligible": "Memenuhi Syarat",
+      "not_eligible": "Tidak Memenuhi Syarat"
+    }
+  },
+  "documents": {
+    "title": "Dokumen",
+    "upload": "Unggah",
+    "filename": "Nama File",
+    "status": "Status",
+    "size": "Ukuran",
+    "source": "Sumber",
+    "date": "Tanggal",
+    "lastActivity": "Aktivitas Terakhir"
+  },
+  "financialAssessment": {
+    "title": "Penilaian Keuangan",
+    "assignee": "Petugas",
+    "noData": "Tidak ada data penilaian keuangan untuk proyek ini.",
+    "volumes": "Volume",
+    "demoNotice": "Nilai tidak dapat diedit di aplikasi demo",
+    "name": "Nama",
+    "value": "Nilai",
+    "unit": "Satuan",
+    "source": "Sumber",
+    "sources": "sumber",
+    "addCriteria": "Tambah kriteria",
+    "auto": "Otomatis",
+    "projectValue": "Nilai Proyek (Jumlah Investasi)",
+    "estimatedReductions": "Perkiraan Pengurangan (selama Durasi Proyek)",
+    "totalEstimatedReductions": "Total Perkiraan Pengurangan",
+    "projectDuration": "Durasi Proyek",
+    "projectArea": "Area Proyek",
+    "estimatedReductionPerUnitArea": "Perkiraan Pengurangan Per Unit Area",
+    "landAcquisitionCost": "Biaya Akuisisi Lahan",
+    "landPerUnitAreaCost": "Biaya Per Unit Area Lahan",
+    "plantationEstablishmentMaintenanceCost": "Biaya Pembentukan dan Pemeliharaan Perkebunan",
+    "costOfGoodsSold": "Harga Pokok Penjualan (HPP)",
+    "overheads": "Biaya Overhead",
+    "totalGrossCosts": "Total Biaya Kotor",
+    "alternateRevenueSources": "Sumber Pendapatan Alternatif (Non-karbon)",
+    "costOfFinancing": "Biaya Pembiayaan",
+    "tax": "Pajak",
+    "costOfProduction": "Biaya Produksi"
+  },
+  "esgAssessment": {
+    "title": "Penilaian ESG",
+    "noData": "Tidak ada data penilaian ESG untuk proyek ini.",
+    "categories": "Kategori",
+    "name": "Nama",
+    "qatalystResponses": "Tanggapan Qatalyst",
+    "userRating": "Peringkat Pengguna"
+  },
+  "qualityAssessment": {
+    "title": "Penilaian Kualitas",
+    "criterias": "Kriteria Penilaian Kualitas",
+    "questions": {
+      "stoveWork": "Bagaimana cara kerja kompor?",
+      "manufacturer": "Siapa produsen kompor?",
+      "stoveType": "Apa jenis kompor?",
+      "deliveryRisks": "Apakah ada risiko terkait dengan pengiriman kompor?",
+      "lifeExpectancy": "Berapa perkiraan umur kompor?",
+      "sourcedFrom": "Dari mana kompor bersumber?",
+      "energySource": "Apa sumber energi yang digunakan?",
+      "monitoringFrequency": "Seberapa sering penggunaan kompor dipantau?",
+      "monitoringMethod": "Bagaimana penggunaan dipantau?",
+      "rawMaterial": "Apa bahan baku yang digunakan sebagai bahan bakar untuk kompor dan bagaimana cara mendapatkannya?",
+      "feedstockAccess": "Akses ke bahan baku",
+      "sourceRisks": "Apa risiko utama menggunakan sumber ini?"
+    }
+  },
+  "scorecard": {
+    "title": "Kartu Skor",
+    "sustainableDevelopmentGoals": "Tujuan Pembangunan Berkelanjutan",
+    "collaborators": "Kolaborator",
+    "annualCreditIssuance": "Penerbitan Kredit Tahunan",
+    "creditingPeriod": "Periode Kredit",
+    "totalCredits": "Total Kredit",
+    "capitalExpenseIntensity": "Intensitas biaya modal",
+    "operatingExpenseIntensity": "Intensitas biaya operasional",
+    "totalExpenseIntensity": "Intensitas biaya total",
+    "costOfProduction": "Biaya produksi (termasuk pendapatan non-karbon)",
+    "totalNetCosts": "Total biaya bersih",
+    "costOfProductionNet": "Biaya produksi (bersih - termasuk pembiayaan)",
+    "estimatedReductionPerUnit": "Perkiraan pengurangan per unit area per tahun",
+    "esgRisk": "Risiko ESG",
+    "selectProject": "Pilih proyek...",
+    "searchProject": "Cari proyek...",
+    "noProjectFound": "Tidak ada proyek ditemukan.",
+    "projectValue": "Nilai Proyek",
+    "carbonCredits": "Kredit Karbon",
+    "projectLifetime": "Masa Pakai Proyek",
+    "projectArea": "Area Proyek",
+    "registryStatus": "Status Registri",
+    "projectType": "Jenis Proyek",
+    "completedBy": "Diselesaikan oleh {{name}} pada {{date}}"
+  },
+  "projectCard": {
+    "owner": "Pemilik",
+    "financial": "Keuangan",
+    "esg": "ESG",
+    "quality": "Kualitas",
+    "status": {
+      "notStarted": "Belum Dimulai",
+      "inProgress": "Sedang Berlangsung",
+      "completed": "Selesai",
+      "eligible": "Memenuhi Syarat"
+    }
+  },
+  "qatalystAi": {
+    "title": "Qatalyst AI",
+    "notAvailable": "Qatalyst AI tidak tersedia untuk proyek ini di aplikasi demo.",
+    "foundFollowing": "Qatalyst menemukan hal berikut untuk",
+    "naInDemo": "Tidak tersedia di Demo",
+    "askSomething": "Tanyakan sesuatu ke Qatalyst AI..."
+  },
+  "api": {
+    "projectNotFound": "Proyek tidak ditemukan",
+    "projectAdded": "Proyek berhasil ditambahkan",
+    "failedToAddProject": "Gagal menambahkan proyek",
+    "dataResetSuccess": "Reset data berhasil",
+    "failedToResetData": "Gagal mereset data",
+    "missingAssigneeData": "Harap berikan assignee, projectId dan assessment",
+    "invalidAssessment": "Assessment tidak valid",
+    "projectUpdated": "Proyek berhasil diperbarui",
+    "failedToUpdateProject": "Gagal memperbarui proyek",
+    "missingRatingData": "Harap berikan rating, projectId dan assessment",
+    "ratingUpdated": "Rating proyek berhasil diperbarui",
+    "failedToUpdateRating": "Gagal memperbarui rating proyek"
+  },
+  "unlockMoreDialog": {
+    "title": "Buka Lebih Banyak dengan Qatalyst",
+    "description": "Fitur ini hanya tersedia dalam aplikasi Qatalyst lengkap. Silakan upgrade untuk membukanya.",
+    "ok": "OK"
+  },
+  "driverjs": {
+    "projects": {
+      "welcome": {
+        "title": "Selamat Datang di Qatalyst",
+        "description": "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>Anda sekarang berada di dalam Qatalyst!<br/>Silakan ikuti tur pemandu tooltip untuk mempelajari cara menavigasi aplikasi dan mengimpor proyek pertama Anda.</p>"
+      },
+      "workspace": {
+        "title": "Ruang Kerja Saya",
+        "description": "Simpan dan kelola proyek keberlanjutan Anda."
+      },
+      "dashboard": {
+        "title": "Dasbor Saya",
+        "description": "Lihat wawasan dari portofolio proyek Anda."
+      },
+      "create": {
+        "title": "Buat Proyek / Grup Baru",
+        "description": "Mulai proyek atau grup baru."
+      }
+    },
+    "details": {
+      "projectDetails": {
+        "title": "Detail Proyek",
+        "description": "Lihat informasi komprehensif tentang proyek keberlanjutan Anda."
+      },
+      "documents": {
+        "title": "Dokumen",
+        "description": "Simpan dan akses semua dokumen proyek yang relevan di satu tempat."
+      },
+      "financialAssessment": {
+        "title": "Penilaian Keuangan",
+        "description": "Evaluasi keuangan proyek untuk memastikan keberlanjutan."
+      },
+      "esgAssessment": {
+        "title": "Penilaian ESG",
+        "description": "Evaluasi ESG proyek untuk memastikan keberlanjutan."
+      },
+      "scorecard": {
+        "title": "Kartu Skor",
+        "description": "Rangkum wawasan proyek, nilai, dan bandingkan kinerja dengan yang lain."
+      }
+    },
+    "financialAssessment": {
+      "generateAssessment": {
+        "title": "Hasilkan Penilaian Lengkap",
+        "description": "Gunakan Qatalyst untuk menghasilkan semua jawaban dari dokumen proyek. Hanya petugas proyek yang dapat menghasilkan penilaian."
+      },
+      "finalRating": {
+        "title": "Penilaian Akhir",
+        "description": "Berikan penilaian akhir proyek berdasarkan hasil penilaian Anda. Hanya petugas proyek yang dapat memperbarui penilaian akhir."
+      },
+      "assignee": {
+        "title": "Petugas Proyek",
+        "description": "Perbarui petugas proyek."
+      },
+      "qatalystChat": {
+        "title": "Obrolan Qatalyst",
+        "description": "Berinteraksi dengan Qatalyst untuk mendapatkan wawasan proyek dan dukungan yang dipersonalisasi."
+      }
+    },
+    "esgAssessment": {
+      "generateAssessment": {
+        "title": "Hasilkan Penilaian Lengkap",
+        "description": "Gunakan Qatalyst untuk menghasilkan semua jawaban dari dokumen proyek. Hanya petugas proyek yang dapat menghasilkan penilaian."
+      },
+      "finalRating": {
+        "title": "Penilaian Akhir",
+        "description": "Berikan penilaian akhir proyek berdasarkan hasil penilaian Anda. Hanya petugas proyek yang dapat memperbarui penilaian akhir."
+      },
+      "assignee": {
+        "title": "Petugas Proyek",
+        "description": "Perbarui petugas proyek."
+      },
+      "qatalystChat": {
+        "title": "Obrolan Qatalyst",
+        "description": "Berinteraksi dengan Qatalyst untuk mendapatkan wawasan proyek dan dukungan yang dipersonalisasi."
+      }
+    },
+    "scorecard": {
+      "export": {
+        "title": "Ekspor Proyek",
+        "description": "Ekspor proyek dengan mudah ke dokumen Word atau PDF."
+      },
+      "compare": {
+        "title": "Bandingkan Proyek",
+        "description": "Bandingkan kartu skor dua proyek secara berdampingan dengan mudah."
+      }
+    },
+    "documents": {
+      "viewDocument": {
+        "title": "Lihat Dokumen",
+        "description": "Buka dan tinjau dokumen secara menyeluruh."
+      }
+    }
+  }
+}

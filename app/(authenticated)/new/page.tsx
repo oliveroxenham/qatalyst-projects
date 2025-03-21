@@ -30,7 +30,7 @@ function BoxSelection({
         onClick={() => {}}
       >
         <div className="absolute -mr-44 p-[2px] flex items-center justify-center bg-branding-green-600 rounded-full opacity-0">
-          <Check className="text-white w-4 h-4" />
+          <Check className="w-4 h-4" />
         </div>
         {children}
       </div>
@@ -39,11 +39,11 @@ function BoxSelection({
   if (!selected) {
     return (
       <div
-        className="w-[230px] h-[140px] bg-white flex flex-col gap-2 items-center p-2 border border-neutral-300 rounded-sm hover:bg-[#F4FEFA] hover:border-branding-green-600 hover:cursor-pointer"
+        className="w-[230px] h-[140px] dark:bg-gray-200 flex flex-col gap-2 items-center p-2 border border-neutral-300 rounded-sm hover:border-branding-green-600 hover:cursor-pointer"
         onClick={onClickHandle}
       >
         <div className="absolute -mr-44 p-[2px] flex items-center justify-center bg-branding-green-600 rounded-full opacity-0">
-          <Check className="text-white w-4 h-4" />
+          <Check className=" w-4 h-4" />
         </div>
         {children}
       </div>
@@ -55,7 +55,7 @@ function BoxSelection({
       onClick={onClickHandle}
     >
       <div className="absolute -mr-44 p-[2px] flex items-center justify-center bg-branding-green-600 rounded-full">
-        <Check className="text-white w-4 h-4" />
+        <Check className="w-4 h-4" />
       </div>
       {children}
     </div>
@@ -67,20 +67,16 @@ export default function NewProjectPage() {
     number | undefined
   >();
   const [selectedSource, setSelectedSource] = useState<number | undefined>();
-  const [selectedProjectId, setSelectedProjectId] = useState<
-    string | undefined
-  >();
   const [progress, setProgress] = useState(0);
   const [importing, setImporting] = useState(false);
 
   useEffect(() => {
     setSelectedSource(undefined);
-    setSelectedProjectId(undefined);
   }, [selectedProjectType]);
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white w-full rounded-lg border border-neutral-200 p-8 flex flex-col gap-8 max-w-[800px]">
+      <div className="bg-muted w-full rounded-lg border p-8 flex flex-col gap-8 max-w-[800px]">
         <span className="text-lg font-semibold">
           Create or import new project
         </span>
@@ -99,7 +95,7 @@ export default function NewProjectPage() {
                 priority
                 className="w-32 h-20"
               />
-              <span>Nature-based</span>
+              <span className="dark:text-black">Nature-based</span>
             </BoxSelection>
             <BoxSelection
               disabled={true}
@@ -114,7 +110,7 @@ export default function NewProjectPage() {
                 priority
                 className="w-32 h-20"
               />
-              <span>Cookstove</span>
+              <span className="dark:text-black">Cookstove</span>
             </BoxSelection>
             <BoxSelection
               disabled
@@ -129,7 +125,7 @@ export default function NewProjectPage() {
                 priority
                 className="w-32 h-20"
               />
-              <span>Other</span>
+              <span className="dark:text-black">Other</span>
             </BoxSelection>
           </div>
         </div>
@@ -149,7 +145,7 @@ export default function NewProjectPage() {
                   height={80}
                   className="w-32 h-20"
                 />
-                <span>Create project manually</span>
+                <span className="dark:text-black">Create project manually</span>
               </BoxSelection>
               <BoxSelection
                 selected={selectedSource === VERRA}
@@ -162,7 +158,7 @@ export default function NewProjectPage() {
                   height={80}
                   className="w-32 h-20"
                 />
-                <span>Import from Verra</span>
+                <span className="dark:text-black">Import from Verra</span>
               </BoxSelection>
               <BoxSelection
                 disabled
@@ -176,7 +172,7 @@ export default function NewProjectPage() {
                   height={80}
                   className="w-32 h-20"
                 />
-                <span>Import from Gold Standard</span>
+                <span className="dark:text-black">Import from Gold Standard</span>
               </BoxSelection>
             </div>
           </div>
@@ -186,32 +182,27 @@ export default function NewProjectPage() {
           <div className="flex flex-col gap-2">
             <span>Available projects to import</span>
             <div className="flex flex-row gap-4 items-center min-h-10">
-              <Button
-                size="small"
-                variant="outline"
-                onClick={() => setSelectedProjectId('1650')}
-              >
+              <span className='text-sm border p-2 rounded-sm'>
                 1650 - Reduced Emissions from Deforestation and Degradation in
                 Keo Seima Wildlife Sanctuary
+              </span>
+
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={() => {
+                  setImporting(true);
+                  setProgress(15);
+                  setTimeout(() => setProgress(40), 500);
+                  setTimeout(() => setProgress(75), 900);
+                  setTimeout(() => {
+                    setProgress(100);
+                    importProject();
+                  }, 1500);
+                }}
+              >
+                Import
               </Button>
-              {typeof selectedProjectId !== 'undefined' && (
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={() => {
-                    setImporting(true);
-                    setProgress(15);
-                    setTimeout(() => setProgress(40), 500);
-                    setTimeout(() => setProgress(75), 900);
-                    setTimeout(() => {
-                      setProgress(100);
-                      importProject();
-                    }, 1500);
-                  }}
-                >
-                  Import
-                </Button>
-              )}
             </div>
             {importing && (
               <div className="flex flex-col gap-2 w-full">

@@ -12,6 +12,7 @@ import { Project, Source } from '@/types/project';
 import { Plus, Sigma } from 'lucide-react';
 import Logo from '@/public/icons/logo.svg';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const QatalystIcon = () => (
   <div className="w-5 h-5 rounded-full flex items-center justify-center bg-blaze-orange-600 ml-2">
@@ -40,21 +41,25 @@ const TableCellWithValue = ({
   </TableCell>
 );
 
-const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => (
-  <TableCell>
-    <div className="border flex items-center justify-center bg-background w-full rounded-sm h-9 p-2">
-      {sources.length === 0 ? (
-        <span className="flex flex-row gap-2 items-center text-muted-foreground">
-          <Plus className="h-4 w-4" /> source
-        </span>
-      ) : (
-        <span>
-          {sources.length} {sources.length > 1 ? 'sources' : 'source'}
-        </span>
-      )}
-    </div>
-  </TableCell>
-);
+const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => {
+  const { t } = useTranslation();
+  
+  return (
+    <TableCell>
+      <div className="border flex items-center justify-center bg-background w-full rounded-sm h-9 p-2">
+        {sources.length === 0 ? (
+          <span className="flex flex-row gap-2 items-center text-muted-foreground">
+            <Plus className="h-4 w-4" /> {t('financialAssessment.source')}
+          </span>
+        ) : (
+          <span>
+            {sources.length} {sources.length > 1 ? t('financialAssessment.sources') : t('financialAssessment.source')}
+          </span>
+        )}
+      </div>
+    </TableCell>
+  );
+};
 
 export function Content({
   projectData,
@@ -63,7 +68,9 @@ export function Content({
   projectData: Project | null;
   setAiSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const [elId, setElId] = useState<string | undefined>();
+  
   useEffect(() => {
     if (!elId) {
       return;
@@ -76,10 +83,13 @@ export function Content({
       behavior: 'smooth',
     });
     childEl.classList.add('bg-orange-100');
+    childEl.classList.add('dark:bg-orange-800')
     setTimeout(() => {
       childEl.classList.remove('bg-orange-100');
+      childEl.classList.remove('dark:bg-orange-800')
     }, 2000);
   }, [elId]);
+  
   const handleRowClick = (elementId: string) => {
     if (!elementId) return;
     setAiSidebarOpen(true);
@@ -89,7 +99,7 @@ export function Content({
   if (!projectData) {
     return (
       <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">
-        <span>No financial assessment data is available for this project.</span>
+        <span>{t('financialAssessment.noData')}</span>
       </div>
     );
   }
@@ -97,19 +107,18 @@ export function Content({
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
       <div className="p-4 flex flex-row justify-between items-center">
-        <span className="text-lg font-semibold">Volumes</span>
+        <span className="text-lg font-semibold">{t('financialAssessment.volumes')}</span>
         <span className="text-xs bg-neutral-200 p-1 px-2 rounded-lg text-muted-foreground">
-        Values are not editable in demo app
-      </span>
-
+          {t('financialAssessment.demoNotice')}
+        </span>
       </div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-1/2">Name</TableHead>
-            <TableHead className="w-[17%]">Value</TableHead>
-            <TableHead className="w-[17%]">Unit</TableHead>
-            <TableHead className="w-[17%]">Source</TableHead>
+            <TableHead className="w-1/2">{t('financialAssessment.name')}</TableHead>
+            <TableHead className="w-[17%]">{t('financialAssessment.value')}</TableHead>
+            <TableHead className="w-[17%]">{t('financialAssessment.unit')}</TableHead>
+            <TableHead className="w-[17%]">{t('financialAssessment.source')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -118,7 +127,7 @@ export function Content({
             onClick={() => handleRowClick(data.projectValue.id)}
           >
             <TableCell>
-              <span className="">Project Value (Investment Amount)</span>
+              <span className="">{t('financialAssessment.projectValue')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -137,7 +146,7 @@ export function Content({
             onClick={() => handleRowClick(data.estimatedReductions.id)}
           >
             <TableCell>
-              <span>Estimated Reductions (over Project Duration)</span>
+              <span>{t('financialAssessment.estimatedReductions')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -160,7 +169,7 @@ export function Content({
             onClick={() => handleRowClick(data.totalEstimatedReductions.id)}
           >
             <TableCell>
-              <span className="">Total Estimated Reductions</span>
+              <span className="">{t('financialAssessment.totalEstimatedReductions')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -183,7 +192,7 @@ export function Content({
             onClick={() => handleRowClick(data.projectDuration.id)}
           >
             <TableCell>
-              <span className="">Project Duration</span>
+              <span className="">{t('financialAssessment.projectDuration')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -202,7 +211,7 @@ export function Content({
             onClick={() => handleRowClick(data.projectArea.id)}
           >
             <TableCell>
-              <span className="">Project Area</span>
+              <span className="">{t('financialAssessment.projectArea')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -224,7 +233,7 @@ export function Content({
           >
             <TableCell>
               <span className="">
-                Estimated Reduction Per Unit of Area Per Year
+                {t('scorecard.estimatedReductionPerUnit')}
               </span>
             </TableCell>
             <TableCellWithValue
@@ -252,7 +261,7 @@ export function Content({
             }
           >
             <TableCell>
-              <span className="">Estimated Reduction Per Unit of Area</span>
+              <span className="">{t('financialAssessment.estimatedReductionPerUnitArea')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -273,7 +282,7 @@ export function Content({
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
               <Plus className="w-4 h-4" />
-              <span className="text-xs">Add criteria</span>
+              <span className="text-xs">{t('financialAssessment.addCriteria')}</span>
             </TableCell>
             <TableCell />
             <TableCell />
@@ -283,18 +292,18 @@ export function Content({
       </Table>
 
       <div className="p-4 flex flex-row justify-between items-center">
-        <span className="text-lg font-semibold">Cost of Production</span>
+        <span className="text-lg font-semibold">{t('financialAssessment.costOfProduction')}</span>
         <span className="text-xs bg-neutral-200 p-1 px-2 rounded-lg text-muted-foreground">
-          Values are not editable in demo app
+          {t('financialAssessment.demoNotice')}
         </span>
       </div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-1/2">Name</TableHead>
-            <TableHead className="w-[17%]">Value</TableHead>
-            <TableHead className="w-[17%]">Unit</TableHead>
-            <TableHead className="w-[17%]">Source</TableHead>
+            <TableHead className="w-1/2">{t('financialAssessment.name')}</TableHead>
+            <TableHead className="w-[17%]">{t('financialAssessment.value')}</TableHead>
+            <TableHead className="w-[17%]">{t('financialAssessment.unit')}</TableHead>
+            <TableHead className="w-[17%]">{t('financialAssessment.source')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -303,7 +312,7 @@ export function Content({
             onClick={() => handleRowClick(data.landAcquisitionCost.id)}
           >
             <TableCell>
-              <span className="">Land Acquisition Cost</span>
+              <span className="">{t('financialAssessment.landAcquisitionCost')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -326,7 +335,7 @@ export function Content({
             onClick={() => handleRowClick(data.landPerUnitAreaCost.id)}
           >
             <TableCell>
-              <span className="">Land Per Unit Area Cost</span>
+              <span className="">{t('financialAssessment.landPerUnitAreaCost')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -353,7 +362,7 @@ export function Content({
           >
             <TableCell>
               <span className="">
-                Plantation Establishment and Maintenance Cost
+                {t('financialAssessment.plantationEstablishmentMaintenanceCost')}
               </span>
             </TableCell>
             <TableCellWithValue
@@ -381,7 +390,7 @@ export function Content({
             onClick={() => handleRowClick(data.costOfGoodsSold.id)}
           >
             <TableCell>
-              <span className="">Cost of Goods Sold (COGS)</span>
+              <span className="">{t('financialAssessment.costOfGoodsSold')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -401,7 +410,7 @@ export function Content({
             onClick={() => handleRowClick(data.overheads.id)}
           >
             <TableCell>
-              <span className="">Overheads</span>
+              <span className="">{t('financialAssessment.overheads')}</span>
             </TableCell>
             <TableCellWithValue
               icon={data.overheads.qatalystGenerated ? <QatalystIcon /> : null}
@@ -419,7 +428,7 @@ export function Content({
             onClick={() => handleRowClick(data.totalGrossCosts.id)}
           >
             <TableCell>
-              <span className="">Total Gross Costs</span>
+              <span className="">{t('financialAssessment.totalGrossCosts')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -439,7 +448,7 @@ export function Content({
             onClick={() => handleRowClick(data.alternateRevenueSources.id)}
           >
             <TableCell>
-              <span className="">Alternate Revenue Sources (Non-carbon)</span>
+              <span className="">{t('financialAssessment.alternateRevenueSources')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -463,7 +472,7 @@ export function Content({
             onClick={() => handleRowClick(data.costOfFinancing.id)}
           >
             <TableCell>
-              <span className="">Cost of Financing</span>
+              <span className="">{t('financialAssessment.costOfFinancing')}</span>
             </TableCell>
             <TableCellWithValue
               icon={
@@ -483,7 +492,7 @@ export function Content({
             onClick={() => handleRowClick(data.tax.id)}
           >
             <TableCell>
-              <span className="">Tax</span>
+              <span className="">{t('financialAssessment.tax')}</span>
             </TableCell>
             <TableCellWithValue
               icon={data.tax.qatalystGenerated ? <QatalystIcon /> : null}
@@ -498,7 +507,7 @@ export function Content({
 
           <TableRow>
             <TableCell>
-              <span className="">Capital Expense Intensity</span>
+              <span className="">{t('scorecard.capitalExpenseIntensity')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -510,7 +519,7 @@ export function Content({
           </TableRow>
           <TableRow>
             <TableCell>
-              <span className="">Operating Expense Intensity</span>
+              <span className="">{t('scorecard.operatingExpenseIntensity')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -523,7 +532,7 @@ export function Content({
 
           <TableRow>
             <TableCell>
-              <span className="">Total Expense Intensity</span>
+              <span className="">{t('scorecard.totalExpenseIntensity')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -536,7 +545,7 @@ export function Content({
           <TableRow>
             <TableCell>
               <span className="">
-                Cost of Production (Including Non Carbon Revenues)
+                {t('scorecard.costOfProduction')}
               </span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
@@ -550,7 +559,7 @@ export function Content({
 
           <TableRow>
             <TableCell>
-              <span className="">Total Net Costs</span>
+              <span className="">{t('scorecard.totalNetCosts')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
               <span>Auto</span>
@@ -564,7 +573,7 @@ export function Content({
           <TableRow>
             <TableCell>
               <span className="">
-                Cost of Production (Net - including Financing)
+                {t('scorecard.costOfProductionNet')}
               </span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
@@ -578,10 +587,10 @@ export function Content({
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
               <Plus className="w-4 h-4" />
-              <span className="text-xs">Add criteria</span>
+              <span className="text-xs">{t('financialAssessment.addCriteria')}</span>
             </TableCell>
             <TableCellWithValue icon={<Sigma className="w-4 h-4" />} disabled>
-              <span>Auto</span>
+              <span>{t('financialAssessment.auto')}</span>
             </TableCellWithValue>
             <TableCellWithValue disabled>
               <span>USD/tCO₂e</span>

@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function FinalRatingSelector({
   projectData,
@@ -22,6 +23,7 @@ export function FinalRatingSelector({
   assessment: 'esg' | 'financial';
   currentUser?: string | null;
 }) {
+  const { t } = useTranslation();
   const assessmentKey =
     assessment === 'esg' ? 'esgAssessment' : 'financialAssessment';
 
@@ -37,6 +39,12 @@ export function FinalRatingSelector({
       rating: newFinalRating,
     });
   };
+
+  // Function to get translated status based on the current finalRating
+  const getTranslatedStatus = (status: string) => {
+    return t(`projectDetails.status.${status.replace(/\s+/g, '_').toLowerCase()}`);
+  };
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -44,6 +52,7 @@ export function FinalRatingSelector({
         asChild
       >
         <Button
+          id="final-rating-button"
           className={clsx('text-white', {
             'bg-neutral-500': finalRating.toLowerCase() === 'not started',
             'bg-blue-500': finalRating.toLowerCase() === 'in progress',
@@ -53,7 +62,7 @@ export function FinalRatingSelector({
           })}
           size="sm"
         >
-          <span className="capitalize">Final Rating: {finalRating}</span>
+          <span className="capitalize">{t('projectDetails.finalRating')}: {getTranslatedStatus(finalRating)}</span>
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
@@ -62,23 +71,23 @@ export function FinalRatingSelector({
           onClick={() => handleUpdateFinalRating('not started')}
         >
           <div className="rounded-full w-2 h-2 bg-neutral-400" />
-          <span className="text-neutral-500">Not started</span>
+          <span className="text-neutral-500">{t('projectDetails.status.not_started')}</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => handleUpdateFinalRating('in progress')}
         >
           <div className="rounded-full w-2 h-2 bg-blue-500" />
-          <span className="text-blue-600">In progress</span>
+          <span className="text-blue-600">{t('projectDetails.status.in_progress')}</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleUpdateFinalRating('eligible')}>
           <div className="rounded-full w-2 h-2 bg-branding-green-600" />
-          <span className="text-branding-green-700">Eligible</span>
+          <span className="text-branding-green-700">{t('projectDetails.status.eligible')}</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => handleUpdateFinalRating('not eligible')}
         >
           <div className="rounded-full w-2 h-2 bg-destructive" />
-          <span className="text-destructive">Not Eligible</span>
+          <span className="text-destructive">{t('projectDetails.status.not_eligible')}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

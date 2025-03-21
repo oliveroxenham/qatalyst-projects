@@ -1,0 +1,341 @@
+{
+  "languages": {
+    "en": "English",
+    "id": "Bahasa",
+    "ja": "日本語"
+  },
+  "aiResponses": {
+    "estimatedReductions": {
+      "title": "推定削減量（プロジェクト期間中）",
+      "response": "プロジェクト期間中の推定削減量は21,171,578 tCO₂eと決定されました。この値は複数の情報源から抽出されています：プロジェクト文書内の表では、「プロジェクト地域内の純推定排出削減量（プロジェクトなしシナリオと比較して）」が「プロジェクト寿命中の成果」として21,171,578と明示されています[1]。この同じ数字は別のテキストソースでも裏付けられており、少し異なる形式で提示されていますが同じ値です[2]。この値の決定は、プロジェクトの全期間にわたる影響の包括的な計算とモデリングに基づいている可能性が高いです。これは、プロジェクトなしのベースラインシナリオと比較して、プロジェクト活動に起因する温室効果ガス排出量の予想される総削減量を表しています。この数字はプロジェクト全体の期間における累積削減量を表し、年間の数字ではないことに注意することが重要です。このプロジェクトは、年間削減量が300,000トンCO₂eを超える重要な影響があるため、「大規模プロジェクト」に分類されています[3]。"
+    },
+    "totalEstimatedReductions": {
+      "title": "総推定削減量",
+      "response": "総推定削減量の値は、以下の分析に基づいて決定されました：最も関連性の高い情報はソース[1]にあり、プロジェクト期間中の成果の表が提供されています。[1]の表には、「プロジェクト地域内の純推定排出削減量（プロジェクトなしシナリオと比較して）」が21,171,578と記載されています。この値は最も包括的であり、プロジェクト全期間の総推定削減量を表しているように見えます。tCO₂eの単位はソースで明示的に述べられていませんが、GHG排出削減の標準単位であり、提供された他のソースと一致しています。[2]や[3]などの他のソースは部分的または年間データを提供していますが、プロジェクト全体の明確な合計は提供していません。[4]は1,641,141の合計を示していますが、これはより短い期間（2018-2019）のものであり、プロジェクト全体の期間ではないようです。したがって、21,171,578 tCO₂eがプロジェクトの寿命にわたる総推定削減量の最良の一致です。"
+    },
+    "communityHealth": {
+      "title": "コミュニティの健康、安全、セキュリティ",
+      "response": "「満足」という回答は、文書ソースからの以下の証拠に基づいています：1. プロジェクトはスタッフと地域コミュニティの両方に包括的な健康と安全対策を提供しています：WCS健康安全ポリシーはすべてのプロジェクトスタッフとカウンターパートを保護します[1][2]。健康・事故保険がスタッフに提供され、仕事関連の事故や病気の場合のすべての医療費をカバーしています[1][2]。2. コミュニティの安全のためのトレーニングと能力構築：パトロールやエコツーリズムなどのプロジェクト活動に関わるコミュニティメンバーは、通常年1回の安全・セキュリティトレーニングを受けます[3]。クメール語でのコミュニティパトロールとSMARTレポートに関するトレーニングは、パトロールチームに安全とセキュリティに関する情報を提供します[3]。3. コミュニティインフラと健康イニシアチブ：プロジェクトは、道路修理、橋の建設、道路排水設備の設置など、さまざまなコミュニティインフラプロジェクトをサポートしています[4]。健康関連の活動には、ポンプ井戸の設置、配管水システム、トイレの建設、移動診療所、健康緊急事態のためのコミュニティ基金などがあります[4]。4. モニタリングとリスク管理：人口統計や社会経済的モニタリングを含む、コミュニティ関連の高保全価値（HCV）をモニタリングする明確な計画があります[5]。プロジェクトはCOVID-19パンデミック中の地域コミュニティとのリスク管理のための特定のガイダンスを開発しました[6]。5. 職場の健康と安全：スタッフは、即時の是正措置のために、安全でない状態、病気、または怪我についてプロジェクト管理に通知する必要があります[7]。WCSはすべての人に安全な作業環境を提供することを約束しています[2]。これらの対策は、コミュニティの健康、安全、セキュリティに対する包括的なアプローチを示しており、「満足」という評価を正当化しています。"
+    }
+  },
+  "topbar": {
+    "dashboard": "ダッシュボード",
+    "projects": "プロジェクト",
+    "newProject": "新規プロジェクト"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "edit": "編集",
+    "delete": "削除",
+    "loading": "読み込み中...",
+    "export": "エクスポート",
+    "compare": "比較",
+    "wordDocument": "Word文書",
+    "pdfDocument": "PDF文書",
+    "source": "ソース",
+    "sources": "ソース",
+    "addCriteria": "基準を追加",
+    "keyinAnswer": "回答を入力してください...",
+    "generateAssessment": "評価を生成",
+    "satisfactory": "満足",
+    "investigate": "調査",
+    "unsatisfactory": "不満足"
+  },
+  "dashboard": {
+    "totalProjects": "ポートフォリオ内のプロジェクト総数",
+    "projectsUnderReview": "審査中のプロジェクト",
+    "amountContracted": "契約金額",
+    "amountDisbursed": "支払い金額",
+    "portfolioValue": "ポートフォリオ総額",
+    "geographicDistribution": "地理的分布によるプロジェクト",
+    "annualIssuance": "年間カーボンクレジット発行量",
+    "customizationMessage": "ダッシュボードは各ユーザーの好みに合わせて調整可能です。",
+    "demoTitle": "Qatalystデモ",
+    "demoDescription": "ダッシュボードはあなたのニーズに合わせてカスタマイズでき、組織に最も関連性の高いKPI、チャート、指標でパーソナライズできます。",
+    "goToWorkspace": "マイワークスペースへ"
+  },
+  "sidebar": {
+    "overview": "概要",
+    "project": "プロジェクト",
+    "myWorkspace": "マイワークスペース",
+    "myDashboard": "マイダッシュボード",
+    "projectDetails": "プロジェクト詳細",
+    "documents": "書類",
+    "financialAssessment": "財務評価",
+    "esgAssessment": "ESG評価",
+    "qualityAssessment": "品質評価",
+    "scorecard": "スコアカード",
+    "kycAssessment": "本人確認評価",
+    "aiEstimator": "AI見積もり",
+    "benchmark": "ベンチマーク",
+    "insurance": "保険",
+    "contract": "契約",
+    "pdd": "PDD",
+    "verification": "検証"
+  },
+  "user": {
+    "notifications": "通知",
+    "resetAppState": "アプリ状態のリセット",
+    "resetOnboarding": "オンボーディングのリセット",
+    "signOut": "サインアウト"
+  },
+  "projectDetails": {
+    "title": "プロジェクト詳細",
+    "details": "詳細",
+    "registryId": "レジストリプロジェクトID",
+    "projectType": "Qatalystプロジェクトタイプ",
+    "projectName": "プロジェクト名",
+    "country": "国",
+    "state": "州 / 県",
+    "latitude": "緯度",
+    "longitude": "経度",
+    "background": "背景",
+    "proponent": "提案者",
+    "projectStatus": "プロジェクト状態",
+    "estimatedAnnualCredits": "推定年間クレジット",
+    "methodology": "方法論",
+    "projectArea": "プロジェクト面積",
+    "sdgs": "持続可能な開発目標",
+    "taskManager": "タスク管理",
+    "creator": "作成者",
+    "collaborators": "共同作業者",
+    "financialAssessment": "財務評価",
+    "esgAssessment": "ESG評価",
+    "kycAssessment": "本人確認評価",
+    "comingSoon": "近日公開",
+    "assignTo": "担当者",
+    "finalRating": "最終評価",
+    "activity": "活動履歴",
+    "status": {
+      "not_started": "未開始",
+      "in_progress": "進行中",
+      "eligible": "適格",
+      "not_eligible": "不適格"
+    }
+  },
+  "documents": {
+    "title": "書類",
+    "upload": "アップロード",
+    "filename": "ファイル名",
+    "status": "状態",
+    "size": "サイズ",
+    "source": "ソース",
+    "date": "日付",
+    "lastActivity": "最終活動"
+  },
+  "financialAssessment": {
+    "title": "財務評価",
+    "assignee": "担当者",
+    "noData": "このプロジェクトの財務評価データはありません。",
+    "volumes": "数量",
+    "demoNotice": "デモアプリでは値を編集できません",
+    "name": "名前",
+    "value": "値",
+    "unit": "単位",
+    "source": "ソース",
+    "sources": "ソース",
+    "addCriteria": "基準を追加",
+    "auto": "自動",
+    "projectValue": "プロジェクト価値（投資額）",
+    "estimatedReductions": "推定削減量（プロジェクト期間中）",
+    "totalEstimatedReductions": "総推定削減量",
+    "projectDuration": "プロジェクト期間",
+    "projectArea": "プロジェクト面積",
+    "estimatedReductionPerUnitArea": "単位面積あたりの推定削減量",
+    "landAcquisitionCost": "土地取得費",
+    "landPerUnitAreaCost": "単位面積あたりの土地費用",
+    "plantationEstablishmentMaintenanceCost": "植林の設立・維持費用",
+    "costOfGoodsSold": "売上原価（COGS）",
+    "overheads": "間接費",
+    "totalGrossCosts": "総粗コスト",
+    "alternateRevenueSources": "代替収入源（非炭素）",
+    "costOfFinancing": "資金調達コスト",
+    "tax": "税金",
+    "costOfProduction": "生産コスト"
+  },
+  "esgAssessment": {
+    "title": "ESG評価",
+    "noData": "このプロジェクトのESG評価データはありません。",
+    "categories": "カテゴリ",
+    "name": "名前",
+    "qatalystResponses": "Qatalystの回答",
+    "userRating": "ユーザー評価"
+  },
+  "qualityAssessment": {
+    "title": "品質評価",
+    "criterias": "品質評価基準",
+    "questions": {
+      "stoveWork": "ストーブはどのように機能しますか？",
+      "manufacturer": "ストーブの製造元は誰ですか？",
+      "stoveType": "ストーブの種類は何ですか？",
+      "deliveryRisks": "ストーブの配送に関連するリスクはありますか？",
+      "lifeExpectancy": "ストーブの予想寿命はどれくらいですか？",
+      "sourcedFrom": "ストーブはどこから調達されていますか？",
+      "energySource": "使用されているエネルギー源は何ですか？",
+      "monitoringFrequency": "ストーブの使用状況はどの程度の頻度で監視されていますか？",
+      "monitoringMethod": "使用状況はどのように監視されていますか？",
+      "rawMaterial": "クックストーブの燃料として使用される原材料は何で、どのように調達されますか？",
+      "feedstockAccess": "原料へのアクセス",
+      "sourceRisks": "このソースを使用する主なリスクは何ですか？"
+    }
+  },
+  "scorecard": {
+    "title": "スコアカード",
+    "sustainableDevelopmentGoals": "持続可能な開発目標",
+    "collaborators": "共同作業者",
+    "annualCreditIssuance": "年間クレジット発行",
+    "creditingPeriod": "クレジット期間",
+    "totalCredits": "総クレジット",
+    "capitalExpenseIntensity": "資本支出の集約度",
+    "operatingExpenseIntensity": "運営支出の集約度",
+    "totalExpenseIntensity": "総支出の集約度",
+    "costOfProduction": "生産コスト（非炭素収入を含む）",
+    "totalNetCosts": "総純コスト",
+    "costOfProductionNet": "生産コスト（純額 - 資金調達を含む）",
+    "estimatedReductionPerUnit": "単位面積あたりの年間推定削減量",
+    "esgRisk": "ESGリスク",
+    "selectProject": "プロジェクトを選択...",
+    "searchProject": "プロジェクトを検索...",
+    "noProjectFound": "プロジェクトが見つかりません。",
+    "projectValue": "プロジェクト価値",
+    "carbonCredits": "カーボンクレジット",
+    "projectLifetime": "プロジェクト寿命",
+    "projectArea": "プロジェクト面積",
+    "registryStatus": "レジストリ状態",
+    "projectType": "プロジェクトタイプ",
+    "completedBy": "{{date}}に{{name}}により完了"
+  },
+  "projectCard": {
+    "owner": "所有者",
+    "financial": "財務",
+    "esg": "ESG",
+    "quality": "品質",
+    "status": {
+      "notStarted": "未開始",
+      "inProgress": "進行中",
+      "completed": "完了",
+      "eligible": "適格"
+    }
+  },
+  "qatalystAi": {
+    "title": "Qatalyst AI",
+    "notAvailable": "このプロジェクトのQatalyst AIはデモアプリでは利用できません。",
+    "foundFollowing": "Qatalystが以下を見つけました：",
+    "naInDemo": "デモでは利用不可",
+    "askSomething": "Qatalyst AIに質問してみてください..."
+  },
+  "api": {
+    "projectNotFound": "プロジェクトが見つかりません",
+    "projectAdded": "プロジェクトが正常に追加されました",
+    "failedToAddProject": "プロジェクトの追加に失敗しました",
+    "dataResetSuccess": "データのリセットに成功しました",
+    "failedToResetData": "データのリセットに失敗しました",
+    "missingAssigneeData": "担当者、プロジェクトID、評価を提供してください",
+    "invalidAssessment": "無効な評価",
+    "projectUpdated": "プロジェクトが正常に更新されました",
+    "failedToUpdateProject": "プロジェクトの更新に失敗しました",
+    "missingRatingData": "評価、プロジェクトID、評価タイプを提供してください",
+    "ratingUpdated": "プロジェクト評価が正常に更新されました",
+    "failedToUpdateRating": "プロジェクト評価の更新に失敗しました"
+  },
+  "unlockMoreDialog": {
+    "title": "Qatalystでさらに機能を解除",
+    "description": "この機能は完全版のQatalystアプリでのみ利用可能です。アップグレードして解除してください。",
+    "ok": "OK"
+  },
+  "driverjs": {
+    "projects": {
+      "welcome": {
+        "title": "Qatalystへようこそ",
+        "description": "<img src='https://v3jxx0dboaeguwsf.public.blob.vercel-storage.com/onboarding-cover-5Zva9QsgWitUNHzAvqIFlCQHswEnYL.png' /><p style='text-align: center;'>あなたは今Qatalyst内にいます！<br/>ガイドツアーのツールチップに従って、アプリの操作方法と最初のプロジェクトのインポート方法を学びましょう。</p>"
+      },
+      "workspace": {
+        "title": "マイワークスペース",
+        "description": "持続可能性プロジェクトを保存・管理します。"
+      },
+      "dashboard": {
+        "title": "マイダッシュボード",
+        "description": "プロジェクトポートフォリオからの洞察を表示します。"
+      },
+      "create": {
+        "title": "新規プロジェクト / グループ作成",
+        "description": "新しいプロジェクトまたはグループを開始します。"
+      }
+    },
+    "details": {
+      "projectDetails": {
+        "title": "プロジェクト詳細",
+        "description": "持続可能性プロジェクトに関する包括的な情報を表示します。"
+      },
+      "documents": {
+        "title": "書類",
+        "description": "関連するすべてのプロジェクト文書を一箇所に保存してアクセスします。"
+      },
+      "financialAssessment": {
+        "title": "財務評価",
+        "description": "持続可能性を確保するためにプロジェクトの財務を評価します。"
+      },
+      "esgAssessment": {
+        "title": "ESG評価",
+        "description": "持続可能性を確保するためにプロジェクトのESGを評価します。"
+      },
+      "scorecard": {
+        "title": "スコアカード",
+        "description": "プロジェクトの洞察、価値をまとめ、他との性能を比較します。"
+      }
+    },
+    "financialAssessment": {
+      "generateAssessment": {
+        "title": "完全評価を生成",
+        "description": "Qatalystを使用してプロジェクト文書からすべての回答を生成します。プロジェクト担当者のみが評価を生成できます。"
+      },
+      "finalRating": {
+        "title": "最終評価",
+        "description": "評価結果に基づいて最終的なプロジェクト評価を提供します。プロジェクト担当者のみが最終評価を更新できます。"
+      },
+      "assignee": {
+        "title": "プロジェクト担当者",
+        "description": "プロジェクト担当者を更新します。"
+      },
+      "qatalystChat": {
+        "title": "Qatalystチャット",
+        "description": "Qatalystと対話して、パーソナライズされたプロジェクトの洞察とサポートを得ます。"
+      }
+    },
+    "esgAssessment": {
+      "generateAssessment": {
+        "title": "完全評価を生成",
+        "description": "Qatalystを使用してプロジェクト文書からすべての回答を生成します。プロジェクト担当者のみが評価を生成できます。"
+      },
+      "finalRating": {
+        "title": "最終評価",
+        "description": "評価結果に基づいて最終的なプロジェクト評価を提供します。プロジェクト担当者のみが最終評価を更新できます。"
+      },
+      "assignee": {
+        "title": "プロジェクト担当者",
+        "description": "プロジェクト担当者を更新します。"
+      },
+      "qatalystChat": {
+        "title": "Qatalystチャット",
+        "description": "Qatalystと対話して、パーソナライズされたプロジェクトの洞察とサポートを得ます。"
+      }
+    },
+    "scorecard": {
+      "export": {
+        "title": "プロジェクトのエクスポート",
+        "description": "プロジェクトをWordまたはPDF文書に簡単にエクスポートします。"
+      },
+      "compare": {
+        "title": "プロジェクトの比較",
+        "description": "2つのプロジェクトのスコアカードを簡単に並べて比較します。"
+      }
+    },
+    "documents": {
+      "viewDocument": {
+        "title": "文書を表示",
+        "description": "文書を開いて詳細にレビューします。"
+      }
+    }
+  }
+}

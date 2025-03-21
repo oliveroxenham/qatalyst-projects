@@ -11,7 +11,7 @@ export default async function ProjectsLayout({
 }) {
   return (
     <div>
-      <TopBar title="Create a new project">
+      <TopBar title="topbar.newProject">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center gap-2">
             <Link href="/projects">

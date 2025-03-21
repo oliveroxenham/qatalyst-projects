@@ -10,6 +10,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import Image from 'next/image';
+// import { useTranslation } from 'react-i18next';
 
 export default function DocumentViewer({
   documentUrl,
@@ -18,6 +19,7 @@ export default function DocumentViewer({
   documentUrl?: string;
   setDocumentUrl: (url?: string) => void;
 }) {
+  // const { t } = useTranslation();
   return (
     <div className="mx-auto w-full max-w-sm">
       <Drawer
@@ -32,12 +34,12 @@ export default function DocumentViewer({
           <DrawerHeader className="bg-neutral-100 h-[88px] flex flex-row items-center justify-between px-4">
             <DrawerTitle>
               {documentUrl === '0' && (
-                <span className="text-lg text-foreground font-bold">
+                <span className="text-lg text-foreground dark:text-gray-800 font-bold">
                   1650 - Keo Seima REDD Project
                 </span>
               )}
               {documentUrl === '5' && (
-                <span className="text-lg text-foreground font-bold">
+                <span className="text-lg text-foreground dark:text-gray-800 font-bold">
                   2749 - DelAgua Clean Cooking Grouped Project
                 </span>
               )}

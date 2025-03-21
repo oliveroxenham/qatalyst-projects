@@ -36,4 +36,11 @@ export const API = {
   UPDATE_PROJECT_GROUP: (id: string) => `/project-group/${id}`,
   UPLOAD_DOCUMENT: '/documents/uploaded',
   USERS: '/users',
+  
+  // Helper function to add language param to any API URL
+  withLanguage: (url: string, language?: string) => {
+    if (!language) return url;
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}lang=${language}`;
+  }
 };

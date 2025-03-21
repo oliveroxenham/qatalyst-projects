@@ -10,6 +10,9 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
+// Import i18n configuration
+import '@/i18n/i18n';
+
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {

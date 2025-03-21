@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -7,6 +9,7 @@ import {
 } from '@/components/ui/table';
 import { Project } from '@/types/project';
 import { clsx } from 'clsx'; 
+import { useTranslation } from 'react-i18next';
 
 function FinancialAssessment({
   data,
@@ -15,10 +18,12 @@ function FinancialAssessment({
   data: { id: number; title: string; unit: React.ReactElement; value: number }[];
   projectData: Project
 }) {
+  const { t } = useTranslation();
+  
   return (
-    <div className="rounded-lg border border-neutral-200 bg-background p-6">
+    <div className="rounded-lg border bg-background p-6">
       <div className="pb-4">
-        <span className="text-xl font-semibold">Financial Assessment</span>
+        <span className="text-xl font-semibold">{t('financialAssessment.title')}</span>
       </div>
       <div
         className={clsx(
@@ -37,10 +42,10 @@ function FinancialAssessment({
         )}
       >
         <span className="text-white capitalize text-sm">
-          {projectData?.financialAssessment.status ?? 'Not Started'}
+          {projectData?.financialAssessment.status ?? t('projectDetails.status.not_started')}
         </span>
       </div>
-      <div className="flex flex-col rounded border-neutral-200 p-2">
+      <div className="flex flex-col rounded p-2">
         <Table>
           <TableBody>
             {data.map((item) => (
@@ -55,7 +60,7 @@ function FinancialAssessment({
             <TableRow>
               <TableCell colSpan={3}>
                 <span className="text-xs text-neutral-400">
-                  Completed by Kopal on 15 Oct 2024
+                  {t('scorecard.completedBy', { name: 'Kopal', date: '15 Oct 2024' })}
                 </span>
               </TableCell>
             </TableRow>

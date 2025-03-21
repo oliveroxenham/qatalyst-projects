@@ -5,6 +5,8 @@ import Logo from '@/public/icons/logo.svg';
 import { FAItem, Project } from '@/types/project';
 import { FINANCIAL_ASSESSMENT_ITEMS } from '@/lib/constants';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import { translateFinancialResponse } from '@/mock/translations';
 
 export function QatalystAi({
   projectData,
@@ -17,20 +19,22 @@ export function QatalystAi({
   setAiSidebarOpen?: Dispatch<SetStateAction<boolean>>;
   openDocumentUrl?: Dispatch<SetStateAction<string | undefined>>;
 }) {
+  const { t } = useTranslation();
+  console.log('QatalystAi projectData=', projectData);
   return (
     <div className="flex flex-row max-h-screen">
       {aiSidebarOpen && (
-        <div className="w-[560px] bg-background border-l p-4 flex flex-col justify-between">
+        <div className="w-[560px] bg-muted border-l p-4 flex flex-col justify-between">
           <div className="h-full border overflow-scroll" id="qatalyst-ai">
             {!projectData ||
               (!projectData.financialAssessment && (
                 <span className="text-xs p-2 text-neutral-500">
-                  Qatalyst AI is not available for this project in demo app.
+                  {t('qatalystAi.notAvailable')}
                 </span>
               ))}
             {projectData && ['1650'].indexOf(projectData?.id) < 0 && (
               <span className="text-xs p-2 text-neutral-500">
-                Qatalyst AI is not available for this project in demo app.
+                {t('qatalystAi.notAvailable')}
               </span>
             )}
             {projectData &&
@@ -51,13 +55,15 @@ export function QatalystAi({
                       </div>
 
                       <p className="text-foreground text-sm font-semibold">
-                        Qatalyst found the following for{' '}
+                        {t('qatalystAi.foundFollowing')}{' '}
                         <span className="text-secondary">
-                          {faItem.ai.title}
+                          {translateFinancialResponse(`${item}.title`, faItem.ai.title)}
                         </span>
                       </p>
                     </div>
-                    <p className="text-sm px-1">{faItem.ai.response}</p>
+                    <p className="text-sm px-1">
+                      {translateFinancialResponse(`${item}.response`, faItem.ai.response)}
+                    </p>
                     <div className="flex flex-row flex-wrap gap-2">
                       {faItem.sources.map((source, index) => {
                         if (
@@ -87,7 +93,7 @@ export function QatalystAi({
                               [{index + 1}] {source.name}
                             </span>
                             <span className="text-[10px] bg-neutral-200 text-muted-foreground rounded-lg p-1 ml-1">
-                              N/A in Demo
+                              {t('qatalystAi.naInDemo')}
                             </span>
                           </div>
                         );
@@ -97,15 +103,16 @@ export function QatalystAi({
                 );
               })}
           </div>
-          <div className="bg-neutral-100 w-full h-14 border rounded-lg flex items-center p-2 mt-2">
+          <div className="bg-background w-full h-14 border rounded-lg flex items-center p-2 mt-2">
             <span className="text-muted-foreground text-xs">
-              Ask Qatalyst AI something...
+              {t('qatalystAi.askSomething')}
             </span>
           </div>
         </div>
       )}
       <div className="w-[72px] bg-background border-l py-4 flex flex-col gap-2">
         <div
+          id="qatalyst-ai-button"
           className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16"
           onClick={() =>
             setAiSidebarOpen ? setAiSidebarOpen(!aiSidebarOpen) : null
@@ -123,14 +130,14 @@ export function QatalystAi({
             <Logo className="w-[18px] h-[18px] fill-white" />
           </div>
           <span className="text-[10px] text-center text-muted-foreground">
-            Qatalyst AI
+            {t('qatalystAi.title')}
           </span>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16">
           <Files className="w-5 h-5 text-muted-foreground" />
           <span className="text-[10px] text-center text-muted-foreground">
-            Documents
+            {t('sidebar.documents')}
           </span>
         </div>
       </div>

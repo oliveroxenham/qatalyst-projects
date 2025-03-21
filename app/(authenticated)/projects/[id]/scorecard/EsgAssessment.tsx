@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -11,16 +13,20 @@ import { clsx } from 'clsx';
 import type { Project } from '@/types/project';
 import { UserRatingBoxed } from '@/components/user-rating';
 import { QatalystResponseBoxed } from '@/components/qatalyst-response-boxed';
+import { useTranslation } from 'react-i18next';
+import { translateRiskName } from '@/mock/translations';
 
 function EsgAssessment({
   projectData,
 }: {
   projectData: Project;
 }) {
+  const { t } = useTranslation();
+  
   return (
-    <div className="rounded-lg border border-neutral-200 bg-background p-6">
+    <div className="rounded-lg border bg-background p-6">
       <div className="pb-4">
-        <span className="text-xl font-semibold">ESG Assessment</span>
+        <span className="text-xl font-semibold">{t('esgAssessment.title')}</span>
       </div>
       <div
         className={clsx(
@@ -39,22 +45,22 @@ function EsgAssessment({
         )}
       >
         <span className="text-white capitalize text-sm">
-          {projectData?.esgAssessment.status ?? 'Not Started'}
+          {projectData?.esgAssessment.status ?? t('projectDetails.status.not_started')}
         </span>
       </div>
-      <div className="flex flex-col rounded border-neutral-200 p-2">
+      <div className="flex flex-col rounded p-2">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>
-              <TableHead>Qatalyst Response</TableHead>
-              <TableHead>User Rating</TableHead>
+              <TableHead>{t('esgAssessment.qatalystResponses')}</TableHead>
+              <TableHead>{t('esgAssessment.userRating')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {projectData.esgAssessment.risks?.map((item) => (
               <TableRow key={item.id}>
-                <TableCell className="font-medium">{item.name}</TableCell>
+                <TableCell className="font-medium">{translateRiskName(item.name)}</TableCell>
                 <TableCell>
                   {typeof item.qatalystResponse !== 'undefined' && (
                     <QatalystResponseBoxed response={item.qatalystResponse} />
@@ -70,7 +76,7 @@ function EsgAssessment({
             <TableRow>
               <TableCell colSpan={3}>
                 <span className="text-xs text-neutral-400">
-                  Completed by Kopal on 15 Oct 2024
+                  {t('scorecard.completedBy', { name: 'Kopal', date: '15 Oct 2024' })}
                 </span>
               </TableCell>
             </TableRow>

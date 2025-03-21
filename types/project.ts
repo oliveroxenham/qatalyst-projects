@@ -15,7 +15,7 @@ export type Source = {
   url: string;
 };
 
-export type EsgRisk = {
+export type Risk = {
   id: string;
   name: string;
   qatalystResponse?: number;
@@ -27,6 +27,8 @@ export type EsgRisk = {
     response: string;
   }
 }
+
+export type EsgRisk = Risk
 
 export type IssuanceRecord = {
   year: string;
@@ -99,13 +101,18 @@ export type Project = {
     alternateRevenueSources: FAItem;
     costOfFinancing: FAItem;
     tax: FAItem;
-
   };
   esgAssessment: {
     assignedTo?: string;
     status: string;
     progress: number;
     risks?: EsgRisk[];
+  };
+  carbonQualityAssessment?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
   };
   kycAssessment: {
     assignedTo?: string;

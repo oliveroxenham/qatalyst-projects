@@ -16,8 +16,10 @@ import { getDocumentsByProjectIdClient } from '@/server/db';
 import { useQuery } from '@tanstack/react-query';
 import DocumentViewer from './document-viewer-drawer';
 import { UnlockMoreDialog } from '@/components/unlock-more-dialog';
+import { useTranslation } from 'react-i18next';
 
 export default function DocumentList({ projectId }: { projectId: string }) {
+  const { t } = useTranslation();
   const [documentUrl, setDocumentUrl] = useState<string>();
   const [dialogOpen, setDialogOpen] = useState(
     typeof documentUrl !== 'undefined' && documentUrl !== '0'
@@ -45,13 +47,13 @@ export default function DocumentList({ projectId }: { projectId: string }) {
           <TableRow>
             <TableHead className="flex gap-1 items-center">
               <File />
-              Filename
+              {t('documents.filename')}
             </TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Size</TableHead>
-            <TableHead>Source</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead>Last activity</TableHead>
+            <TableHead>{t('documents.status')}</TableHead>
+            <TableHead>{t('documents.size')}</TableHead>
+            <TableHead>{t('documents.source')}</TableHead>
+            <TableHead>{t('documents.date')}</TableHead>
+            <TableHead>{t('documents.lastActivity')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -61,7 +63,7 @@ export default function DocumentList({ projectId }: { projectId: string }) {
               key={document.id}
               onClick={() => setDocumentUrl(document.id.toString())}
             >
-              <TableCell className="flex items-center gap-1">
+              <TableCell className="flex items-center gap-1" id="document-row">
                 <Image
                   src={`/icons/${document.type}.svg`}
                   alt={document.type}
