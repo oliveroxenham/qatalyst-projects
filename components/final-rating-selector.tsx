@@ -21,7 +21,6 @@ export function FinalRatingSelector({
 }: {
   projectData: Project;
   assessment: 'esg' | 'financial' | 'carbonQuality';
-  assessment: 'esg' | 'financial' | 'carbonQuality';
   currentUser?: string | null;
 }) {
   const { t } = useTranslation();
