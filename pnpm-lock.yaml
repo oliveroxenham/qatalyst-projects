@@ -103,7 +103,7 @@ importers:
         version: 3.1.0(react@19.0.0)
       react-dnd:
         specifier: ^16.0.1
-        version: 16.0.1(@types/node@22.13.5)(@types/react@19.0.10)(react@19.0.0)
+        version: 16.0.1(@types/node@22.13.10)(@types/react@19.0.12)(react@19.0.0)
       react-dnd-html5-backend:
         specifier: ^16.0.1
         version: 16.0.1
@@ -7164,7 +7164,7 @@ snapshots:
     dependencies:
       dnd-core: 16.0.1
 
-  react-dnd@16.0.1(@types/node@22.13.5)(@types/react@19.0.10)(react@19.0.0):
+  react-dnd@16.0.1(@types/node@22.13.10)(@types/react@19.0.12)(react@19.0.0):
     dependencies:
       '@react-dnd/invariant': 4.0.2
       '@react-dnd/shallowequal': 4.0.2
@@ -7173,8 +7173,8 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 19.0.0
     optionalDependencies:
-      '@types/node': 22.13.5
-      '@types/react': 19.0.10
+      '@types/node': 22.13.10
+      '@types/react': 19.0.12
 
   react-dom@19.0.0(react@19.0.0):
     dependencies:
@@ -7295,7 +7295,7 @@ snapshots:
 
   redux@4.2.1:
     dependencies:
-      '@babel/runtime': 7.26.9
+      '@babel/runtime': 7.26.10
 
   reflect.getprototypeof@1.0.10:
     dependencies:
