@@ -265,7 +265,7 @@ const MapboxExample = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 h-full">
       <div className="flex gap-2">
         <Button 
           variant="primary" 
@@ -283,7 +283,7 @@ const MapboxExample = () => {
         <Button variant="primary" disabled>Draw area</Button>
       </div>
       <div
-        style={{ height: '85vh', width: '100%' }}
+        style={{ flex: '1', width: '100%' }}
         ref={mapContainerRef}
         className="map-container w-full"
       />
