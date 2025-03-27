@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import * as toGeoJSON from '@mapbox/togeojson';
 // Remove xmldom import as we'll use the browser's native DOMParser
 import { MapOverlay } from './map-overlay';
+import { cachedFetch } from '@/lib/utils';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -61,11 +62,11 @@ const MapboxExample = () => {
         animationRef.current = null;
       }
       
-      // Fetch the KML file
-      const response = await fetch(kmlUrl);
-      if (!response.ok) throw new Error('Failed to load KML');
-      
-      const kmlText = await response.text();
+      // Use our cached fetch utility with text response type
+      const kmlText = await cachedFetch<string>(kmlUrl, {
+        revalidate: 3600, // Cache for 1 hour since KML data rarely changes
+        responseType: 'text'
+      });
       
       // Parse KML to GeoJSON - Handle parsing issue
       let geoJson: GeoJSONCollection;
