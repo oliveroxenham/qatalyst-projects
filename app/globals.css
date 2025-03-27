@@ -83,3 +83,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Ensure Mapbox containers can take full height */
+.mapboxgl-canvas-container,
+.mapboxgl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Hide attribution until hover */
+.mapboxgl-ctrl-attrib {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
+.mapboxgl-ctrl-attrib:hover {
+  opacity: 1;
+}

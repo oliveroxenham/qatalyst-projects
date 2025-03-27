@@ -223,11 +223,17 @@ const MapboxExample = () => {
     if (mapContainerRef.current) {
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: 'mapbox://styles/mapbox/satellite-v9',  // Changed to satellite view for globe effect
+        style: 'mapbox://styles/mapbox/satellite-v9',  // Satellite view for a more realistic globe effect
         center: [0, 0],  // Center at [0,0] for a globe view
         zoom: 1.5,  // Zoomed out to see most of the globe
-        projection: 'globe'  // Using globe projection instead of mercator
+        projection: 'globe',  // Using globe projection instead of mercator
+        attributionControl: false  // Hide attribution for cleaner look
       });
+
+      // Add custom attribution in the bottom-right
+      map.addControl(new mapboxgl.AttributionControl({
+        compact: true
+      }), 'bottom-right');
 
       mapRef.current = map;
 
@@ -256,8 +262,18 @@ const MapboxExample = () => {
           'star-intensity': 0.6
         });
 
-        // Start the globe rotation
+        // Start the globe rotation automatically
         animationRef.current = requestAnimationFrame(spinGlobe);
+      });
+
+      // Allow users to stop/start rotation by clicking on the globe
+      map.on('click', () => {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+          animationRef.current = null;
+        } else {
+          animationRef.current = requestAnimationFrame(spinGlobe);
+        }
       });
     }
     
@@ -266,14 +282,20 @@ const MapboxExample = () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      
+      // Cleanup map on unmount
+      if (mapRef.current) {
+        mapRef.current.remove();
+      }
     };
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 h-full">
-      <div className="flex gap-2">
+    <div className="relative flex flex-col h-full">
+      <div className="p-2 flex gap-2 flex-wrap">
         <Button 
           variant="primary" 
+          size="sm"
           onClick={() => {
             // Only load KML if project ID is 1650
             if (params?.id === '1650') {
@@ -284,34 +306,42 @@ const MapboxExample = () => {
         >
           Load project KML
         </Button>
-        <Button variant="primary">Upload project KML</Button>
-        <Button variant="primary" disabled>Draw area</Button>
+        <Button size="sm" variant="primary">Upload project KML</Button>
+        <Button size="sm" variant="primary" disabled>Draw area</Button>
         
         {isKmlLoaded && (
           <Button 
+            size="sm"
             variant="secondary" 
             onClick={() => setIsOverlayOpen(!isOverlayOpen)}
-            className="ml-auto"
+            className="ml-4"
           >
             {isOverlayOpen ? 'Hide Details' : 'Show Details'}
           </Button>
         )}
       </div>
+      
+      {/* Full-size map container */}
       <div
-        style={{ flex: '1', width: '100%', position: 'relative' }}
-        className="map-container w-full"
+        className="w-full h-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 shadow-sm"
       >
+        {/* Map container */}
         <div 
           ref={mapContainerRef} 
-          className="absolute inset-0"
-        />
-        
-        {/* Project information overlay */}
-        <MapOverlay 
-          open={isOverlayOpen} 
-          onOpenChange={setIsOverlayOpen} 
+          className="w-full h-full bg-slate-900"
         />
       </div>
+      
+      {/* Instruction overlay - click to pause rotation */}
+      <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs pointer-events-none opacity-70 transition-opacity">
+        Click to pause/resume rotation
+      </div>
+      
+      {/* Project information overlay */}
+      <MapOverlay 
+        open={isOverlayOpen} 
+        onOpenChange={setIsOverlayOpen} 
+      />
     </div>
   );
 };

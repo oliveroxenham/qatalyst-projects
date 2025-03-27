@@ -2,7 +2,7 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TopBar } from '@/components/topbar';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import { getProjectByIdServer } from '@/server/db';
-import MapboxExample from './map';
+import MapClientComponent from './map-client';
 
 export default async function FinancialAssessmentPage({
   params,
@@ -11,8 +11,6 @@ export default async function FinancialAssessmentPage({
 }) {
   const projectId = (await params).id;
   const projectData = await getProjectByIdServer({ id: projectId });
-
-  console.log('projectData=', projectData);
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
@@ -33,8 +31,8 @@ export default async function FinancialAssessmentPage({
           </div>
         </div>
       </TopBar>
-      <div className="w-full h-full">
-        <MapboxExample />
+      <div className="w-full h-[calc(100vh-64px)]">
+        <MapClientComponent />
       </div>
     </div>
   );

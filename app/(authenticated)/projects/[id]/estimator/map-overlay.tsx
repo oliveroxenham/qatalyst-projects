@@ -238,7 +238,7 @@ export const MapOverlay: React.FC<MapOverlayProps> = ({ open, onOpenChange }) =>
   if (!open) return null;
 
   return (
-    <div className="absolute top-4 right-4 w-[400px] max-h-[calc(100%-2rem)] rounded-lg overflow-hidden bg-black/40 backdrop-blur-md border border-white/10 shadow-xl z-10">
+    <div className="absolute top-20 right-4 w-[400px] max-h-[calc(100%-2rem)] rounded-lg overflow-hidden bg-black/40 backdrop-blur-md border border-white/10 shadow-xl z-10">
       <div className="border-b border-white/10">
         <div className="flex items-center justify-between p-4">
           <h2 className="text-lg font-medium text-white">Project Details</h2>
