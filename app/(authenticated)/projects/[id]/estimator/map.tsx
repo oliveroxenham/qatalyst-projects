@@ -5,6 +5,7 @@ import { Button } from '@/components/qbutton';
 import { useParams } from 'next/navigation';
 import * as toGeoJSON from '@mapbox/togeojson';
 // Remove xmldom import as we'll use the browser's native DOMParser
+import { MapOverlay } from './map-overlay';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -43,6 +44,7 @@ const MapboxExample = () => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const animationRef = useRef<number | null>(null);
   const [isKmlLoaded, setIsKmlLoaded] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const params = useParams();
   
   // KML URL for project 1650
@@ -207,6 +209,9 @@ const MapboxExample = () => {
       }
       
       setIsKmlLoaded(true);
+      
+      // Open the overlay when KML is loaded
+      setIsOverlayOpen(true);
     } catch (error) {
       console.error('Error loading KML:', error);
     }
@@ -281,12 +286,32 @@ const MapboxExample = () => {
         </Button>
         <Button variant="primary">Upload project KML</Button>
         <Button variant="primary" disabled>Draw area</Button>
+        
+        {isKmlLoaded && (
+          <Button 
+            variant="secondary" 
+            onClick={() => setIsOverlayOpen(!isOverlayOpen)}
+            className="ml-auto"
+          >
+            {isOverlayOpen ? 'Hide Details' : 'Show Details'}
+          </Button>
+        )}
       </div>
       <div
-        style={{ flex: '1', width: '100%' }}
-        ref={mapContainerRef}
+        style={{ flex: '1', width: '100%', position: 'relative' }}
         className="map-container w-full"
-      />
+      >
+        <div 
+          ref={mapContainerRef} 
+          className="absolute inset-0"
+        />
+        
+        {/* Project information overlay */}
+        <MapOverlay 
+          open={isOverlayOpen} 
+          onOpenChange={setIsOverlayOpen} 
+        />
+      </div>
     </div>
   );
 };
