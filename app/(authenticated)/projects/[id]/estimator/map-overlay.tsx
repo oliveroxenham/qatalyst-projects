@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/qbutton';
 import { ChartContainer } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 // Sample data for the charts
 const carbonData = [
@@ -20,6 +20,52 @@ const revenueData = [
   { name: 'Q2', value: 55000 },
   { name: 'Q3', value: 48000 },
   { name: 'Q4', value: 62000 },
+];
+
+// Sample deforestation data
+const deforestationTimeData = [
+  { year: '2015', area: 3200 },
+  { year: '2016', area: 2800 },
+  { year: '2017', area: 3100 },
+  { year: '2018', area: 2400 },
+  { year: '2019', area: 1900 },
+  { year: '2020', area: 1700 },
+  { year: '2021', area: 1500 },
+  { year: '2022', area: 1200 },
+];
+
+// Sample biodiversity data
+const biodiversityScores = [
+  { year: 2019, score: 64 },
+  { year: 2020, score: 68 },
+  { year: 2021, score: 72 },
+  { year: 2022, score: 78 },
+];
+
+// Sample community data
+const communityProjects = [
+  { name: 'Sustainable farming', participants: 45, status: 'Active' },
+  { name: 'Ecotourism initiative', participants: 32, status: 'Active' },
+  { name: 'Forest rangers program', participants: 18, status: 'Active' },
+  { name: 'Artisan craft co-op', participants: 27, status: 'Active' },
+];
+
+// Sample risk data
+const riskAssessment = [
+  { category: 'Political', level: 'Medium', score: 65 },
+  { category: 'Financial', level: 'Low', score: 82 },
+  { category: 'Environmental', level: 'Low', score: 85 },
+  { category: 'Social', level: 'Very Low', score: 90 },
+];
+
+// Sample compliance data
+const complianceChecklist = [
+  { requirement: 'Baseline documentation', status: 'Completed', date: '2018-05-12' },
+  { requirement: 'Carbon quantification', status: 'Completed', date: '2018-07-24' },
+  { requirement: 'Leakage assessment', status: 'Completed', date: '2018-08-15' },
+  { requirement: 'Permanence risk analysis', status: 'Completed', date: '2018-09-03' },
+  { requirement: 'Verification audit', status: 'Completed', date: '2022-10-28' },
+  { requirement: 'Monitoring report', status: 'In progress', date: '2023-02-01' },
 ];
 
 type TabItem = {
@@ -233,6 +279,426 @@ export const MapOverlay: React.FC<MapOverlayProps> = ({ open, onOpenChange }) =>
         </div>
       ),
     },
+    {
+      id: 'geospatial',
+      label: 'Geospatial Data',
+      content: (
+        <div className="space-y-6 p-4">
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Deforestation Trends</h3>
+            <p className="text-sm text-white/70 mb-4">
+              Satellite-based deforestation analysis shows a decreasing trend in forest loss over the past 8 years 
+              within the project area.
+            </p>
+            <div className="h-48">
+              <ChartContainer
+                config={{
+                  deforestation: {
+                    label: 'Deforestation',
+                    color: '#ef4444',
+                  },
+                }}
+              >
+                <AreaChart data={deforestationTimeData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="year" stroke="#ffffff80" />
+                  <YAxis stroke="#ffffff80" />
+                  <Tooltip />
+                  <Area
+                    type="monotone"
+                    dataKey="area"
+                    name="Deforested Area (hectares)"
+                    fill="#ef444480"
+                    stroke="#ef4444"
+                  />
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Deforestation Hotspots</h3>
+            <p className="text-sm text-white/70 mb-4">
+              Analysis of deforestation patterns reveals specific hotspots where forest loss has been concentrated.
+            </p>
+            <div className="h-48 bg-black/20 rounded-lg overflow-hidden relative">
+              {/* Simulated deforestation heatmap */}
+              <div className="absolute inset-0 bg-[url('/cambodia.png')] bg-cover bg-center opacity-70"></div>
+              
+              {/* Hotspot indicators */}
+              <div className="absolute top-[30%] left-[25%] w-6 h-6 rounded-full bg-red-500/40 animate-pulse border-2 border-red-500"></div>
+              <div className="absolute top-[35%] left-[45%] w-8 h-8 rounded-full bg-red-500/40 animate-pulse border-2 border-red-500"></div>
+              <div className="absolute top-[55%] left-[65%] w-4 h-4 rounded-full bg-red-500/40 animate-pulse border-2 border-red-500"></div>
+              
+              <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                Satellite data: 2022
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <div>
+                <p className="text-xs text-white/60">Hotspot regions</p>
+                <p className="text-sm font-medium text-white">3 identified</p>
+              </div>
+              <div>
+                <p className="text-xs text-white/60">High risk areas</p>
+                <p className="text-sm font-medium text-white">12% of project</p>
+              </div>
+              <div>
+                <p className="text-xs text-white/60">Monitoring frequency</p>
+                <p className="text-sm font-medium text-white">Monthly</p>
+              </div>
+              <div>
+                <p className="text-xs text-white/60">Data source</p>
+                <p className="text-sm font-medium text-white">Landsat/Sentinel</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Forest Cover Analysis</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="h-32 bg-black/20 rounded-lg overflow-hidden relative">
+                <div className="absolute inset-0 bg-[url('/cambodia.png')] bg-cover bg-center opacity-60"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/60 to-transparent"></div>
+                <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                  2015
+                </div>
+              </div>
+              <div className="h-32 bg-black/20 rounded-lg overflow-hidden relative">
+                <div className="absolute inset-0 bg-[url('/cambodia.png')] bg-cover bg-center opacity-60"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/40 to-transparent"></div>
+                <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                  2022
+                </div>
+              </div>
+            </div>
+            <div className="mt-4">
+              <p className="text-xs text-white/60">Forest cover change</p>
+              <p className="text-sm font-medium text-white">-8.4% (2015-2022)</p>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'biodiversity',
+      label: 'Biodiversity',
+      content: (
+        <div className="space-y-6 p-4">
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Biodiversity Score</h3>
+            <p className="text-sm text-white/70 mb-4">
+              Biodiversity assessment scores have shown steady improvement since project implementation, indicating 
+              successful ecosystem conservation efforts.
+            </p>
+            <div className="h-48">
+              <ChartContainer
+                config={{
+                  biodiversity: {
+                    label: 'Biodiversity',
+                    color: '#059669',
+                  },
+                }}
+              >
+                <BarChart data={biodiversityScores}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="year" stroke="#ffffff80" />
+                  <YAxis stroke="#ffffff80" domain={[0, 100]} />
+                  <Tooltip />
+                  <Bar 
+                    dataKey="score" 
+                    name="Biodiversity Score (0-100)" 
+                    fill="#059669" 
+                    radius={[4, 4, 0, 0]}
+                  />
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Species Monitoring</h3>
+            <p className="text-sm text-white/70 mb-4">
+              Regular monitoring has documented the presence of several indicator species, confirming the health of the ecosystem.
+            </p>
+            <div className="space-y-3">
+              <div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-white/60">Mammals</p>
+                  <p className="text-xs font-medium text-white">14 species</p>
+                </div>
+                <div className="w-full h-2 bg-black/20 rounded-full mt-1">
+                  <div className="h-full rounded-full bg-green-500" style={{ width: '78%' }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-white/60">Birds</p>
+                  <p className="text-xs font-medium text-white">87 species</p>
+                </div>
+                <div className="w-full h-2 bg-black/20 rounded-full mt-1">
+                  <div className="h-full rounded-full bg-blue-500" style={{ width: '92%' }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-white/60">Reptiles</p>
+                  <p className="text-xs font-medium text-white">23 species</p>
+                </div>
+                <div className="w-full h-2 bg-black/20 rounded-full mt-1">
+                  <div className="h-full rounded-full bg-yellow-500" style={{ width: '65%' }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-white/60">Amphibians</p>
+                  <p className="text-xs font-medium text-white">11 species</p>
+                </div>
+                <div className="w-full h-2 bg-black/20 rounded-full mt-1">
+                  <div className="h-full rounded-full bg-purple-500" style={{ width: '58%' }}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Threatened Species</h3>
+            <p className="text-sm text-white/70 mb-4">
+              The project area serves as critical habitat for several endangered species.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs text-white/60">Critically endangered</p>
+                <p className="text-sm font-medium text-white">3 species</p>
+              </div>
+              <div>
+                <p className="text-xs text-white/60">Endangered</p>
+                <p className="text-sm font-medium text-white">7 species</p>
+              </div>
+              <div>
+                <p className="text-xs text-white/60">Vulnerable</p>
+                <p className="text-sm font-medium text-white">12 species</p>
+              </div>
+              <div>
+                <p className="text-xs text-white/60">Near threatened</p>
+                <p className="text-sm font-medium text-white">18 species</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'community',
+      label: 'Community',
+      content: (
+        <div className="space-y-6 p-4">
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Community Engagement</h3>
+            <p className="text-sm text-white/70 mb-4">
+              The project actively involves local communities in conservation and sustainable development activities.
+            </p>
+            <div className="space-y-4">
+              {communityProjects.map((project, index) => (
+                <div key={index} className="flex justify-between items-center">
+                  <div>
+                    <p className="text-sm font-medium text-white">{project.name}</p>
+                    <p className="text-xs text-white/60">{project.participants} participants</p>
+                  </div>
+                  <span className="px-2 py-1 text-xs rounded-full bg-green-500/20 text-green-400">
+                    {project.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Stakeholder Distribution</h3>
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center bg-blue-500/20 mb-2">
+                  <span className="text-lg font-bold text-white">12</span>
+                </div>
+                <p className="text-xs text-white/60">Villages</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center bg-green-500/20 mb-2">
+                  <span className="text-lg font-bold text-white">4</span>
+                </div>
+                <p className="text-xs text-white/60">Partnerships</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center bg-yellow-500/20 mb-2">
+                  <span className="text-lg font-bold text-white">850+</span>
+                </div>
+                <p className="text-xs text-white/60">Community members</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center bg-purple-500/20 mb-2">
+                  <span className="text-lg font-bold text-white">6</span>
+                </div>
+                <p className="text-xs text-white/60">Training programs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'risk',
+      label: 'Risk Profile',
+      content: (
+        <div className="space-y-6 p-4">
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Risk Assessment</h3>
+            <p className="text-sm text-white/70 mb-4">
+              Overall project risk profile is low, with well-managed mitigation strategies in place.
+            </p>
+            <div className="space-y-4">
+              {riskAssessment.map((risk, index) => (
+                <div key={index}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm text-white">{risk.category}</span>
+                    <span className={cn(
+                      "text-xs px-2 py-0.5 rounded-full",
+                      risk.level === "Very Low" ? "bg-green-500/20 text-green-400" :
+                      risk.level === "Low" ? "bg-blue-500/20 text-blue-400" :
+                      risk.level === "Medium" ? "bg-yellow-500/20 text-yellow-400" :
+                      "bg-red-500/20 text-red-400"
+                    )}>
+                      {risk.level}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-black/20 rounded-full">
+                    <div className="h-full rounded-full bg-green-500" style={{ width: `${risk.score}%` }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Certification Status</h3>
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <p className="text-sm font-medium text-white">Verified Carbon Standard (VCS)</p>
+            </div>
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <p className="text-sm font-medium text-white">Climate, Community & Biodiversity (CCB) Standards</p>
+            </div>
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <p className="text-sm font-medium text-white">SOCIALCARBON Standard (pending)</p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 rounded-full bg-gray-400"></div>
+              <p className="text-sm font-medium text-white/60">Gold Standard (not applicable)</p>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'compliance',
+      label: 'Compliance',
+      content: (
+        <div className="space-y-6 p-4">
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Compliance Checklist</h3>
+            <p className="text-sm text-white/70 mb-4">
+              The project adheres to all relevant standards and methodologies for REDD+ carbon projects.
+            </p>
+            <div className="space-y-3">
+              {complianceChecklist.map((item, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <div className={cn(
+                    "flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center",
+                    item.status === "Completed" ? "bg-green-500/20" : "bg-yellow-500/20"
+                  )}>
+                    {item.status === "Completed" ? (
+                      <svg width="12" height="12" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="#10b981" fillRule="evenodd" clipRule="evenodd"></path>
+                      </svg>
+                    ) : (
+                      <svg width="12" height="12" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.85355 3.14645C7.04882 3.34171 7.04882 3.65829 6.85355 3.85355L3.70711 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H3.70711L6.85355 11.1464C7.04882 11.3417 7.04882 11.6583 6.85355 11.8536C6.65829 12.0488 6.34171 12.0488 6.14645 11.8536L2.14645 7.85355C1.95118 7.65829 1.95118 7.34171 2.14645 7.14645L6.14645 3.14645C6.34171 2.95118 6.65829 2.95118 6.85355 3.14645Z" fill="#facc15" fillRule="evenodd" clipRule="evenodd"></path>
+                      </svg>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center">
+                      <p className="text-sm font-medium text-white">{item.requirement}</p>
+                      <span className={cn(
+                        "text-xs px-2 py-0.5 rounded-full",
+                        item.status === "Completed" ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"
+                      )}>
+                        {item.status}
+                      </span>
+                    </div>
+                    <p className="text-xs text-white/60 mt-0.5">
+                      {item.status === "Completed" ? 
+                        `Completed on ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : 
+                        `Started on ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`
+                      }
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-white/10">
+            <h3 className="text-base font-medium mb-2 text-white">Verification Timeline</h3>
+            <div className="relative pt-2">
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-600"></div>
+              
+              <div className="relative pl-10 pb-5">
+                <div className="absolute left-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500">
+                  <span className="text-xs font-medium text-white">1</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">Initial validation</p>
+                  <p className="text-xs text-white/60">Completed August 2018</p>
+                </div>
+              </div>
+              
+              <div className="relative pl-10 pb-5">
+                <div className="absolute left-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500">
+                  <span className="text-xs font-medium text-white">2</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">First verification</p>
+                  <p className="text-xs text-white/60">Completed October 2020</p>
+                </div>
+              </div>
+              
+              <div className="relative pl-10 pb-5">
+                <div className="absolute left-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500">
+                  <span className="text-xs font-medium text-white">3</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">Second verification</p>
+                  <p className="text-xs text-white/60">Completed October 2022</p>
+                </div>
+              </div>
+              
+              <div className="relative pl-10">
+                <div className="absolute left-0 w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center border-2 border-yellow-500">
+                  <span className="text-xs font-medium text-white">4</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">Third verification</p>
+                  <p className="text-xs text-white/60">Scheduled October 2024</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   if (!open) return null;
@@ -254,21 +720,23 @@ export const MapOverlay: React.FC<MapOverlayProps> = ({ open, onOpenChange }) =>
           </Button>
         </div>
         
-        <div className="flex px-4 space-x-1">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors",
-                activeTab === tab.id 
-                  ? "border-b-2 border-primary text-white" 
-                  : "text-white/60 hover:text-white"
-              )}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+          <div className="flex px-4 space-x-1 min-w-min">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap",
+                  activeTab === tab.id 
+                    ? "border-b-2 border-primary text-white" 
+                    : "text-white/60 hover:text-white"
+                )}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       
