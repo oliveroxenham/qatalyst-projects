@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/qbutton';
 import { ChartContainer } from '@/components/ui/chart';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts';
 
 // Sample data for the charts
 const carbonData = [
