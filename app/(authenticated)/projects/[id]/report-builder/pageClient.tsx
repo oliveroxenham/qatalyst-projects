@@ -170,7 +170,7 @@ function DocumentUploadDrawer({
   onRemoveFile: (fileId: string) => void;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -602,7 +602,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               ? {
                   ...f,
                   isAnalyzing: false,
-                  insights: generateFileInsights(file.name, file.type)
+                  insights: generateFileInsights(file.name)
                 }
               : f
           )
@@ -617,7 +617,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     setUploadedFiles(files => files.filter(file => file.id !== fileId));
   };
   
-  const generateFileInsights = (fileName: string, fileType: string) => {
+  const generateFileInsights = (fileName: string) => {
     // In a real application, this would be an AI analysis of the file content
     // Here we'll simulate insights based on the file name and type
     
