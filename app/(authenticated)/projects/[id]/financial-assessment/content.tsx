@@ -96,6 +96,8 @@ export function Content({
     setElId(elementId);
   };
 
+  console.log('projectData=', projectData);
+
   if (!projectData) {
     return (
       <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">

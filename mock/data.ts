@@ -53,11 +53,24 @@ const PROJECT_ID_1650: Project = {
     progress: 32,
     projectValue: {
       id: 'projectValue',
-      formatted: '',
-      value: null,
+      formatted: '25,750,000',
+      value: 25750000,
       unit: 'USD',
-      sources: [],
-      qatalystGenerated: false,
+      sources: [
+        {
+          name: 'KSWS REDD+ Financial Assessment Report 2023',
+          url: '#Source-1',
+        },
+        {
+          name: 'Project Investment Documentation',
+          url: '#Source-2',
+        }
+      ],
+      qatalystGenerated: true,
+      ai: {
+        title: 'Project Value',
+        response: 'The project value of $25,750,000 represents the total estimated investment for the REDD+ initiative, including land acquisition, conservation activities, and community development programs over the project duration.'
+      }
     },
     estimatedReductions: {
       id: 'estimatedReductions',
