@@ -15,7 +15,11 @@ import {
   FileText, 
   Download, 
   Brain,
-  PenLine
+  PenLine,
+  UploadCloud,
+  X,
+  FileUp,
+  FileCheck
 } from 'lucide-react';
 import QatalystAiIcon from '@/public/icons/AI-icon.svg';
 import React from 'react';
@@ -47,6 +51,13 @@ import {
 } from '@/components/ui/tooltip';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 
 // Custom QatalystResponse component for report builder
 function QatalystResponse({ 
@@ -89,12 +100,23 @@ interface EsgBenefits {
   governanceBenefits: string[];
 }
 
+interface UploadedFile {
+  id: string;
+  name: string;
+  type: string;
+  size: number;
+  lastModified: number;
+  insights?: string;
+  isAnalyzing?: boolean;
+}
+
 interface ReportData {
   projectSummary: Record<string, string>;
   financialOverview: Record<string, string>;
   esgBenefits: EsgBenefits;
   sdgContributions: SdgContribution[];
   executiveSummary: string;
+  referencedDocuments?: UploadedFile[];
 }
 
 // Section types for customizable report
@@ -132,6 +154,149 @@ const mockEsgAssessmentSources = [
   { id: '3', name: 'Biodiversity Baseline Study.pdf', description: 'Scientific assessment of biodiversity in the project area' },
   { id: '4', name: 'Governance Structure and Compliance.pdf', description: 'Project governance framework and regulatory compliance documentation' },
 ];
+
+// File Upload Drawer Component
+function DocumentUploadDrawer({
+  isOpen,
+  onClose,
+  uploadedFiles,
+  onFileUpload,
+  onRemoveFile,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  uploadedFiles: UploadedFile[];
+  onFileUpload: (files: FileList) => void;
+  onRemoveFile: (fileId: string) => void;
+}) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
+  
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      onFileUpload(e.target.files);
+    }
+  };
+  
+  const triggerFileDialog = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+  
+  const getFileIcon = (fileType: string) => {
+    if (fileType.includes('pdf')) {
+      return <FileIcon className="h-8 w-8 text-red-500" />;
+    } else if (fileType.includes('word') || fileType.includes('doc')) {
+      return <FileText className="h-8 w-8 text-blue-500" />;
+    } else if (fileType.includes('excel') || fileType.includes('sheet') || fileType.includes('csv')) {
+      return <FileText className="h-8 w-8 text-green-500" />;
+    } else {
+      return <FileText className="h-8 w-8 text-gray-500" />;
+    }
+  };
+  
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return bytes + ' B';
+    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    else return (bytes / 1048576).toFixed(1) + ' MB';
+  };
+
+  return (
+    <Drawer
+      open={isOpen}
+      onOpenChange={(open) => !open && onClose()}
+      direction="right"
+      dismissible={true}
+    >
+      <DrawerContent>
+        <DrawerHeader className="bg-neutral-100 dark:bg-gray-800 h-[88px] flex flex-row items-center justify-between px-4">
+          <DrawerTitle>
+            <span className="text-lg text-foreground dark:text-white font-bold">
+              Report Reference Documents
+            </span>
+          </DrawerTitle>
+          <DrawerClose asChild>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={onClose}
+            >
+              <X />
+            </Button>
+          </DrawerClose>
+        </DrawerHeader>
+        
+        <div className="p-6 space-y-4">
+          <div className="border-2 border-dashed rounded-lg p-8 text-center hover:bg-muted transition-colors cursor-pointer"
+            onClick={triggerFileDialog}>
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              className="hidden" 
+              multiple 
+              onChange={handleFileSelect}
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
+            />
+            <UploadCloud className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+            <h3 className="text-lg font-medium mb-2">Upload Reference Documents</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Drag and drop or click to upload audit reports, financial assessments, or other reference materials
+            </p>
+            <Button variant="secondary" size="sm" className="mx-auto">
+              <FileUp className="mr-2 h-4 w-4" />
+              Select Files
+            </Button>
+          </div>
+          
+          {uploadedFiles.length > 0 && (
+            <div className="space-y-4">
+              <h3 className="font-medium">Uploaded Documents</h3>
+              <div className="space-y-2">
+                {uploadedFiles.map((file) => (
+                  <div key={file.id} className="border rounded-md p-4 flex items-start justify-between">
+                    <div className="flex items-center space-x-3">
+                      {getFileIcon(file.type)}
+                      <div>
+                        <p className="font-medium">{file.name}</p>
+                        <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
+                      {file.isAnalyzing ? (
+                        <div className="flex items-center space-x-2 text-amber-500">
+                          <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span className="text-xs">Analyzing...</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center space-x-2 text-green-500">
+                          <FileCheck className="h-4 w-4" />
+                          <span className="text-xs">Analyzed</span>
+                        </div>
+                      )}
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="text-destructive h-8 w-8"
+                        onClick={() => onRemoveFile(file.id)}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+}
 
 // Draggable section component
 const DraggableSection = ({ 
@@ -312,65 +477,6 @@ const mockEsgAssessmentData = {
   },
 };
 
-// Mock report data
-const mockReportData: ReportData = {
-  projectSummary: {
-    projectName: 'Tonle Sap Flooded Forest Protection',
-    country: 'Cambodia',
-    projectType: 'REDD+',
-    startDate: '2025-04-01',
-    status: 'Active',
-    projectArea: '566,560 hectares',
-    creditsIssued: '21,171,578 tCO₂e',
-    annualReductions: '704,000 tCO₂e/year',
-  },
-  financialOverview: {
-    projectValue: '$25,000,000',
-    capitalExpense: '$12,500,000',
-    operatingExpense: '$850,000/year',
-    revenueProjection: '$10,500,000/year',
-    breakEvenPoint: '3.4 years',
-    carbonPriceAssumption: '$15/tCO₂e',
-  },
-  esgBenefits: {
-    environmentalBenefits: [
-      'Protection of 566,560 hectares of critical forest habitat',
-      'Conservation of biodiversity including 28 endangered species',
-      'Preservation of water quality in the Tonle Sap Lake ecosystem',
-      'Reduced deforestation rate by 85% compared to baseline',
-    ],
-    socialBenefits: [
-      'Employment for 120 local community members',
-      'Improved livelihoods for 1,500 households through sustainable forestry practices',
-      'Development of community infrastructure including 5 schools and 3 health centers',
-      'Training programs reaching 2,000 community members',
-    ],
-    governanceBenefits: [
-      'Strengthened local governance of natural resources',
-      'Community-led forest monitoring program',
-      'Transparent benefit-sharing mechanism with local stakeholders',
-      'Regular audits and third-party verification',
-    ],
-  },
-  sdgContributions: [
-    { sdg: 1, name: 'No Poverty', contribution: 'Significant' },
-    { sdg: 13, name: 'Climate Action', contribution: 'Major' },
-    { sdg: 15, name: 'Life on Land', contribution: 'Major' },
-    { sdg: 6, name: 'Clean Water and Sanitation', contribution: 'Moderate' },
-    { sdg: 8, name: 'Decent Work and Economic Growth', contribution: 'Moderate' },
-  ],
-  executiveSummary: `
-    The Tonle Sap Flooded Forest Protection project represents a significant opportunity to generate carbon credits through the protection of critical forest ecosystems in Cambodia while delivering substantial environmental and social co-benefits.
-    
-    With an annual carbon credit generation potential of 704,000 tCO₂e and a total expected issuance of 21,171,578 tCO₂e over the project lifetime, this project offers an attractive financial return with a breakeven point of 3.4 years based on current carbon market projections.
-    
-    Beyond carbon benefits, the project contributes significantly to biodiversity conservation, protecting habitat for 28 endangered species, while also supporting sustainable livelihoods for 1,500 local households through employment, infrastructure development, and capacity building.
-    
-    The project's strong governance framework, including community-led monitoring and transparent benefit-sharing mechanisms, ensures long-term sustainability and accountability to both investors and local stakeholders.
-    
-    We recommend this project as a high-quality investment opportunity that aligns environmental and social impact with strong financial returns.
-  `,
-};
 
 export function ReportBuilderClient({ projectId }: { projectId: string }) {
   const { t } = useTranslation();
@@ -385,6 +491,8 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
   const [addSectionType, setAddSectionType] = useState<SectionType>('customText');
   const [addSectionDialogOpen, setAddSectionDialogOpen] = useState(false);
   const [loadedFromStorage, setLoadedFromStorage] = useState(false);
+  const [isUploadDrawerOpen, setIsUploadDrawerOpen] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const project = getProjectId(projectId);
   
@@ -448,10 +556,11 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
       localStorage.setItem(`report-${projectId}`, JSON.stringify({
         report: generatedReport,
         sections: reportSections,
-        prompt: inputValue
+        prompt: inputValue,
+        uploadedFiles: uploadedFiles
       }));
     }
-  }, [generatedReport, reportSections, projectId, inputValue]);
+  }, [generatedReport, reportSections, projectId, inputValue, uploadedFiles]);
 
   // Function to delete saved report
   const handleDeleteReport = () => {
@@ -466,6 +575,289 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     setInputValue('');
     setIsCustomizing(false);
     setLoadedFromStorage(false);
+    setUploadedFiles([]);
+  };
+  
+  // File handling functions
+  const handleFileUpload = (files: FileList) => {
+    const newFiles: UploadedFile[] = [];
+    
+    Array.from(files).forEach(file => {
+      const fileId = `file-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+      
+      newFiles.push({
+        id: fileId,
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        lastModified: file.lastModified,
+        isAnalyzing: true
+      });
+      
+      // Simulate AI analysis of the file
+      setTimeout(() => {
+        setUploadedFiles(currentFiles => 
+          currentFiles.map(f => 
+            f.id === fileId
+              ? {
+                  ...f,
+                  isAnalyzing: false,
+                  insights: generateFileInsights(file.name, file.type)
+                }
+              : f
+          )
+        );
+      }, 2000 + Math.random() * 3000); // Random time between 2-5 seconds
+    });
+    
+    setUploadedFiles(prev => [...prev, ...newFiles]);
+  };
+  
+  const handleRemoveFile = (fileId: string) => {
+    setUploadedFiles(files => files.filter(file => file.id !== fileId));
+  };
+  
+  const generateFileInsights = (fileName: string, fileType: string) => {
+    // In a real application, this would be an AI analysis of the file content
+    // Here we'll simulate insights based on the file name and type
+    
+    if (fileName.toLowerCase().includes('audit') || fileName.toLowerCase().includes('report')) {
+      return "Contains financial performance data, carbon credit verification records, and compliance information relevant to project valuation.";
+    } else if (fileName.toLowerCase().includes('financial') || fileName.toLowerCase().includes('finance')) {
+      return "Includes project cash flow projections, expense breakdowns, and revenue forecasts valuable for financial assessment.";
+    } else if (fileName.toLowerCase().includes('community') || fileName.toLowerCase().includes('social')) {
+      return "Details community engagement activities, social impact metrics, and stakeholder feedback useful for ESG assessment.";
+    } else if (fileName.toLowerCase().includes('environment') || fileName.toLowerCase().includes('biodiversity')) {
+      return "Contains environmental impact data, biodiversity metrics, and ecosystem service valuations relevant to ESG scoring.";
+    } else {
+      return "Document contains relevant project information that will be referenced during report generation.";
+    }
+  };
+
+  // Financial report data
+  const financialReportData: ReportData = {
+    projectSummary: {
+      projectName: 'Tonle Sap Flooded Forest Protection',
+      country: 'Cambodia',
+      projectType: 'REDD+',
+      startDate: '2025-04-01',
+      status: 'Active',
+      projectArea: '566,560 hectares',
+      creditsIssued: '21,171,578 tCO₂e',
+      annualReductions: '704,000 tCO₂e/year',
+    },
+    financialOverview: {
+      projectValue: '$25,000,000',
+      capitalExpense: '$12,500,000',
+      operatingExpense: '$850,000/year',
+      revenueProjection: '$10,500,000/year',
+      breakEvenPoint: '3.4 years',
+      carbonPriceAssumption: '$15/tCO₂e',
+      returnOnInvestment: '18.5% (5-year)',
+      annualOperatingMargin: '42%',
+    },
+    esgBenefits: {
+      environmentalBenefits: [
+        'Protection of 566,560 hectares of critical forest habitat',
+        'Conservation of biodiversity including 28 endangered species',
+        'Preservation of water quality in the Tonle Sap Lake ecosystem',
+        'Reduced deforestation rate by 85% compared to baseline',
+      ],
+      socialBenefits: [
+        'Employment for 120 local community members',
+        'Improved livelihoods for 1,500 households through sustainable forestry practices',
+        'Development of community infrastructure including 5 schools and 3 health centers',
+        'Training programs reaching 2,000 community members',
+      ],
+      governanceBenefits: [
+        'Strengthened local governance of natural resources',
+        'Community-led forest monitoring program',
+        'Transparent benefit-sharing mechanism with local stakeholders',
+        'Regular audits and third-party verification',
+      ],
+    },
+    sdgContributions: [
+      { sdg: 13, name: 'Climate Action', contribution: 'Major' },
+      { sdg: 15, name: 'Life on Land', contribution: 'Major' },
+      { sdg: 8, name: 'Decent Work and Economic Growth', contribution: 'Moderate' },
+      { sdg: 1, name: 'No Poverty', contribution: 'Moderate' },
+    ],
+    executiveSummary: `
+      Financial Analysis Summary for Tonle Sap Flooded Forest Protection Project
+
+      This financial summary focuses on the carbon credit projections and financial viability of the Tonle Sap Flooded Forest Protection project in Cambodia.
+      
+      With a total expected carbon credit issuance of 21,171,578 tCO₂e over its lifetime and annual generation of 704,000 tCO₂e, this project represents a significant opportunity in the voluntary carbon market. Based on the current carbon price assumption of $15/tCO₂e, the project is expected to generate annual revenues of $10.5 million.
+      
+      Capital expenditure for project establishment is estimated at $12.5 million, with annual operating expenses of $850,000. This results in a favorable breakeven point of 3.4 years and a 5-year return on investment of 18.5%, significantly exceeding the industry average of 12% for REDD+ projects.
+      
+      The project's financial efficiency metrics are particularly strong, with a cost of production per carbon credit of $4.80, compared to the industry average of $5.70. This provides a comfortable buffer against carbon price volatility and ensures sustainable project economics even in conservative market scenarios.
+      
+      We recommend this project as a financially sound investment opportunity with strong carbon credit generation potential and above-average returns for the risk profile.
+    `,
+  };
+
+  // ESG impact report data
+  const esgReportData: ReportData = {
+    projectSummary: {
+      projectName: 'Tonle Sap Flooded Forest Protection',
+      country: 'Cambodia',
+      projectType: 'REDD+',
+      startDate: '2025-04-01',
+      status: 'Active',
+      projectArea: '566,560 hectares',
+      creditsIssued: '21,171,578 tCO₂e',
+      annualReductions: '704,000 tCO₂e/year',
+    },
+    financialOverview: {
+      projectValue: '$25,000,000',
+      capitalExpense: '$12,500,000',
+      operatingExpense: '$850,000/year',
+      revenueProjection: '$10,500,000/year',
+      breakEvenPoint: '3.4 years',
+      carbonPriceAssumption: '$15/tCO₂e',
+    },
+    esgBenefits: {
+      environmentalBenefits: [
+        'Protection of 566,560 hectares of critical forest habitat',
+        'Conservation of biodiversity including 28 endangered species',
+        'Preservation of water quality in the Tonle Sap Lake ecosystem',
+        'Reduced deforestation rate by 85% compared to baseline',
+        'Carbon sequestration of 704,000 tCO₂e annually',
+        'Protection of 120+ endemic plant species',
+      ],
+      socialBenefits: [
+        'Employment for 120 local community members',
+        'Improved livelihoods for 1,500 households through sustainable forestry practices',
+        'Development of community infrastructure including 5 schools and 3 health centers',
+        'Training programs reaching 2,000 community members',
+        'Healthcare access improvements for 12 villages',
+        'Clean water access for 3,500 residents',
+        'Gender equality initiatives with 45% women in project leadership roles',
+        'Indigenous rights protection for 4 local communities',
+      ],
+      governanceBenefits: [
+        'Strengthened local governance of natural resources',
+        'Community-led forest monitoring program',
+        'Transparent benefit-sharing mechanism with local stakeholders',
+        'Regular audits and third-party verification',
+        'Anti-corruption safeguards and whistleblower protection',
+        'Participatory decision-making structure with community representation',
+      ],
+    },
+    sdgContributions: [
+      { sdg: 1, name: 'No Poverty', contribution: 'Significant' },
+      { sdg: 3, name: 'Good Health and Well-being', contribution: 'Moderate' },
+      { sdg: 4, name: 'Quality Education', contribution: 'Moderate' },
+      { sdg: 5, name: 'Gender Equality', contribution: 'Moderate' },
+      { sdg: 6, name: 'Clean Water and Sanitation', contribution: 'Significant' },
+      { sdg: 8, name: 'Decent Work and Economic Growth', contribution: 'Significant' },
+      { sdg: 10, name: 'Reduced Inequalities', contribution: 'Moderate' },
+      { sdg: 13, name: 'Climate Action', contribution: 'Major' },
+      { sdg: 15, name: 'Life on Land', contribution: 'Major' },
+      { sdg: 17, name: 'Partnerships for the Goals', contribution: 'Moderate' },
+    ],
+    executiveSummary: `
+      ESG Impact Report for Tonle Sap Flooded Forest Protection Project - Community Benefits Focus
+
+      The Tonle Sap Flooded Forest Protection project delivers exceptional environmental, social, and governance benefits to local communities while addressing climate change through carbon sequestration.
+
+      Social Impact:
+      The project directly improves the lives of 1,500 households across 12 villages through sustainable livelihood programs. It has created 120 permanent jobs, with 45% of positions filled by women and 35% by indigenous community members. Through our community development fund, $2.5 million has been allocated to build 5 schools and 3 health centers, expanding educational access to 850 children and healthcare access to over 3,500 residents.
+
+      Community Engagement:
+      Our participatory governance model ensures local communities maintain decision-making power over resource management. The project established 8 community forest management committees with 120 trained community members conducting regular forest patrols. Benefit-sharing mechanisms ensure 40% of carbon revenues flow directly back to community development initiatives prioritized through democratic consultation processes.
+
+      Environmental Co-benefits:
+      Beyond carbon sequestration, the project protects critical habitat for 28 endangered species and preserves the Tonle Sap Lake ecosystem, vital for local fishing communities. Water quality monitoring shows marked improvements, with a 65% reduction in sedimentation and 45% improvement in water purity indices.
+
+      This project exemplifies how climate action can simultaneously address multiple sustainable development goals while empowering local communities through meaningful participation and equitable benefit-sharing.
+    `,
+  };
+
+  // Executive summary report data
+  const executiveSummaryReportData: ReportData = {
+    projectSummary: {
+      projectName: 'Tonle Sap Flooded Forest Protection',
+      country: 'Cambodia',
+      projectType: 'REDD+',
+      startDate: '2025-04-01',
+      status: 'Active',
+      projectArea: '566,560 hectares',
+      creditsIssued: '21,171,578 tCO₂e',
+      annualReductions: '704,000 tCO₂e/year',
+      verificationStandard: 'Verra VCS & CCB Standards',
+      credibilityRating: 'Premium (AA)',
+    },
+    financialOverview: {
+      projectValue: '$25,000,000',
+      capitalExpense: '$12,500,000',
+      operatingExpense: '$850,000/year',
+      revenueProjection: '$10,500,000/year',
+      breakEvenPoint: '3.4 years',
+      carbonPriceAssumption: '$15/tCO₂e',
+      IRR: '22.3%',
+      NPV: '$18.7 million',
+      paybackPeriod: '3.2 years',
+    },
+    esgBenefits: {
+      environmentalBenefits: [
+        'Protection of 566,560 hectares of critical forest habitat',
+        'Conservation of biodiversity including 28 endangered species',
+        'Preservation of water quality in the Tonle Sap Lake ecosystem',
+        'Reduced deforestation rate by 85% compared to baseline',
+      ],
+      socialBenefits: [
+        'Employment for 120 local community members',
+        'Improved livelihoods for 1,500 households through sustainable forestry practices',
+        'Development of community infrastructure including 5 schools and 3 health centers',
+        'Training programs reaching 2,000 community members',
+      ],
+      governanceBenefits: [
+        'Strengthened local governance of natural resources',
+        'Community-led forest monitoring program',
+        'Transparent benefit-sharing mechanism with local stakeholders',
+        'Regular audits and third-party verification',
+      ],
+    },
+    sdgContributions: [
+      { sdg: 1, name: 'No Poverty', contribution: 'Significant' },
+      { sdg: 13, name: 'Climate Action', contribution: 'Major' },
+      { sdg: 15, name: 'Life on Land', contribution: 'Major' },
+      { sdg: 6, name: 'Clean Water and Sanitation', contribution: 'Moderate' },
+      { sdg: 8, name: 'Decent Work and Economic Growth', contribution: 'Moderate' },
+    ],
+    executiveSummary: `
+      Executive Summary for Investors - Tonle Sap Flooded Forest Protection Project
+
+      Investment Opportunity Overview
+      The Tonle Sap Flooded Forest Protection Project presents a premium investment opportunity in the rapidly growing voluntary carbon market. This REDD+ project in Cambodia is designed to protect 566,560 hectares of critical forest habitat while generating 704,000 tCO₂e annually over a 30-year crediting period.
+
+      Financial Highlights
+      • Project Valuation: $25 million
+      • Annual Revenue: $10.5 million (based on $15/tCO₂e)
+      • IRR: 22.3% (significantly above sector average of 15.7%)
+      • Payback Period: 3.2 years
+      • NPV: $18.7 million (10% discount rate)
+      • Operating Margin: 42% (industry top quartile)
+
+      Market Position
+      This project is certified under both Verra VCS and CCB Standards (Climate, Community & Biodiversity), positioning it in the premium segment of the carbon market. With growing corporate net-zero commitments and the implementation of Article 6 of the Paris Agreement, demand for high-integrity credits is projected to increase by 15x by 2030.
+
+      Risk Mitigation
+      Key risks have been identified and mitigated through:
+      • Robust buffer pool allocations (25% of credits)
+      • Legal forest protection agreements with government agencies
+      • Community benefit-sharing frameworks ensuring long-term stakeholder support
+      • Technical assistance from Conservation International with 20+ years in-country experience
+
+      Strategic Exit Options
+      1. Sale of future carbon rights to corporate buyers (pre-contracted offtake agreements)
+      2. Partial asset sale in Year 5 at projected 2.5x valuation multiple
+      3. Complete project sale to conservation trust or institutional investor
+
+      This investment combines attractive financial returns with quantifiable climate impact and significant co-benefits across 10 Sustainable Development Goals, offering both financial and reputation benefits to investors.
+    `,
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -475,9 +867,58 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     setIsGenerating(true);
     setReportSections([]);
     
+    // Determine which report data to use based on the input prompt
+    let reportToGenerate: ReportData;
+    
+    if (inputValue.toLowerCase().includes('financial') || inputValue.toLowerCase().includes('carbon credit')) {
+      reportToGenerate = financialReportData;
+    } else if (inputValue.toLowerCase().includes('esg') || inputValue.toLowerCase().includes('community')) {
+      reportToGenerate = esgReportData;
+    } else if (inputValue.toLowerCase().includes('executive') || inputValue.toLowerCase().includes('investor')) {
+      reportToGenerate = executiveSummaryReportData;
+    } else {
+      // Default to the financial report if no keywords match
+      reportToGenerate = financialReportData;
+    }
+    
+    // Add insights from uploaded files if available
+    if (uploadedFiles.length > 0) {
+      // Clone the report data to avoid mutating the original
+      reportToGenerate = {
+        ...reportToGenerate,
+        referencedDocuments: uploadedFiles
+      };
+      
+      // Enhance the executive summary with insights from uploaded files
+      if (uploadedFiles.some(file => !file.isAnalyzing && file.insights)) {
+        const insightsSummary = "Based on uploaded reference documents, ";
+        
+        // Add financial insights if relevant
+        if (uploadedFiles.some(file => 
+          file.name.toLowerCase().includes('financial') || 
+          file.name.toLowerCase().includes('audit')
+        )) {
+          if (reportToGenerate === financialReportData) {
+            reportToGenerate.executiveSummary = insightsSummary + "the project's financial performance indicators show stronger metrics than initially estimated. The audit reports confirm a 12% higher carbon credit generation capacity and a more favorable cost structure, reducing the breakeven timeline by approximately 8 months.\n\n" + reportToGenerate.executiveSummary;
+          }
+        }
+        
+        // Add ESG insights if relevant
+        if (uploadedFiles.some(file => 
+          file.name.toLowerCase().includes('community') || 
+          file.name.toLowerCase().includes('environment') ||
+          file.name.toLowerCase().includes('social')
+        )) {
+          if (reportToGenerate === esgReportData) {
+            reportToGenerate.executiveSummary = insightsSummary + "community impact assessments validate stronger social outcomes than previously documented. Reference materials show a 35% increase in household income for participating communities and expanded educational programs reaching 22% more beneficiaries than initially reported.\n\n" + reportToGenerate.executiveSummary;
+          }
+        }
+      }
+    }
+    
     // Simulate AI processing time
     setTimeout(() => {
-      setGeneratedReport(mockReportData);
+      setGeneratedReport(reportToGenerate);
       setIsGenerating(false);
     }, 3000);
   };
@@ -487,6 +928,65 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+    
+    // Immediately generate a report based on the selected example
+    setIsGenerating(true);
+    setReportSections([]);
+    
+    // Determine which report data to use based on the example prompt
+    let reportToGenerate: ReportData;
+    
+    if (example.toLowerCase().includes('financial') || example.toLowerCase().includes('carbon credit')) {
+      reportToGenerate = financialReportData;
+    } else if (example.toLowerCase().includes('esg') || example.toLowerCase().includes('community')) {
+      reportToGenerate = esgReportData;
+    } else if (example.toLowerCase().includes('executive') || example.toLowerCase().includes('investor')) {
+      reportToGenerate = executiveSummaryReportData;
+    } else {
+      // Default to the financial report if no keywords match
+      reportToGenerate = financialReportData;
+    }
+    
+    // Add insights from uploaded files if available
+    if (uploadedFiles.length > 0) {
+      // Clone the report data to avoid mutating the original
+      reportToGenerate = {
+        ...reportToGenerate,
+        referencedDocuments: uploadedFiles
+      };
+      
+      // Enhance the executive summary with insights from uploaded files
+      if (uploadedFiles.some(file => !file.isAnalyzing && file.insights)) {
+        const insightsSummary = "Based on uploaded reference documents, ";
+        
+        // Add financial insights if relevant
+        if (uploadedFiles.some(file => 
+          file.name.toLowerCase().includes('financial') || 
+          file.name.toLowerCase().includes('audit')
+        )) {
+          if (reportToGenerate === financialReportData) {
+            reportToGenerate.executiveSummary = insightsSummary + "the project's financial performance indicators show stronger metrics than initially estimated. The audit reports confirm a 12% higher carbon credit generation capacity and a more favorable cost structure, reducing the breakeven timeline by approximately 8 months.\n\n" + reportToGenerate.executiveSummary;
+          }
+        }
+        
+        // Add ESG insights if relevant
+        if (uploadedFiles.some(file => 
+          file.name.toLowerCase().includes('community') || 
+          file.name.toLowerCase().includes('environment') ||
+          file.name.toLowerCase().includes('social')
+        )) {
+          if (reportToGenerate === esgReportData) {
+            reportToGenerate.executiveSummary = insightsSummary + "community impact assessments validate stronger social outcomes than previously documented. Reference materials show a 35% increase in household income for participating communities and expanded educational programs reaching 22% more beneficiaries than initially reported.\n\n" + reportToGenerate.executiveSummary;
+          }
+        }
+      }
+    }
+    
+    // Simulate AI processing time
+    setTimeout(() => {
+      setGeneratedReport(reportToGenerate);
+      setIsGenerating(false);
+    }, 3000);
   };
 
   const addSection = () => {
@@ -609,6 +1109,30 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               className="flex-1"
               disabled={isGenerating}
             />
+            <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      onClick={() => setIsUploadDrawerOpen(true)}
+                      disabled={isGenerating}
+                      className="relative"
+                    >
+                      <FileUp className="h-4 w-4" />
+                      {uploadedFiles.length > 0 && (
+                        <span className="absolute -top-1 -right-1 h-4 w-4 text-xs bg-primary text-primary-foreground rounded-full flex items-center justify-center">
+                          {uploadedFiles.length}
+                        </span>
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Upload reference documents</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             <Button type="submit" disabled={!inputValue.trim() || isGenerating}>
               {isGenerating ? t('reportBuilder.generating') : <Send className="h-4 w-4" />}
             </Button>
@@ -1055,17 +1579,74 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 return null;
               })}
+              
+              {/* Reference Documents Section */}
+              {generatedReport?.referencedDocuments && generatedReport.referencedDocuments.length > 0 && (
+                <div className="border-t pt-6 mt-6">
+                  <h2 className="text-xl font-semibold mb-4">Reference Documents</h2>
+                  <div className="space-y-3">
+                    {generatedReport.referencedDocuments.map(file => (
+                      <div key={file.id} className="border rounded-md p-3 bg-muted/30">
+                        <div className="flex items-start space-x-3">
+                          <div className="flex-shrink-0">
+                            {file.type.includes('pdf') ? (
+                              <FileIcon className="h-6 w-6 text-red-500" />
+                            ) : file.type.includes('word') || file.type.includes('doc') ? (
+                              <FileText className="h-6 w-6 text-blue-500" />
+                            ) : file.type.includes('excel') || file.type.includes('sheet') ? (
+                              <FileText className="h-6 w-6 text-green-500" />
+                            ) : (
+                              <FileText className="h-6 w-6 text-gray-500" />
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-medium text-sm">{file.name}</p>
+                            {file.insights && (
+                              <p className="text-sm text-muted-foreground mt-1">{file.insights}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </Card>
             
             <div className="mt-6">
               <QatalystResponse
                 title=""
                 prompt={inputValue}
-                response="The report has been generated based on available data from the project documents and Qatalyst's analysis. The report highlights key financial metrics, ESG benefits, and SDG contributions. You can customize this report by adding, removing, or reordering sections."
+                response={
+                  uploadedFiles.length > 0 
+                  ? (inputValue.toLowerCase().includes('financial') || inputValue.toLowerCase().includes('carbon credit')
+                    ? `I've generated a financial analysis report focused on carbon credit projections for the Tonle Sap project, incorporating insights from your ${uploadedFiles.length} uploaded reference document${uploadedFiles.length > 1 ? 's' : ''}. The analysis includes refined financial metrics based on the audit data you provided, showing stronger performance than initial estimates.`
+                    : inputValue.toLowerCase().includes('esg') || inputValue.toLowerCase().includes('community')
+                    ? `I've created a comprehensive ESG impact report with special emphasis on community benefits, enhanced with data from your ${uploadedFiles.length} uploaded reference document${uploadedFiles.length > 1 ? 's' : ''}. The report incorporates the latest social impact metrics showing higher community income improvements and more extensive educational program reach.`
+                    : inputValue.toLowerCase().includes('executive') || inputValue.toLowerCase().includes('investor')
+                    ? `I've prepared an executive summary tailored for investors, using insights from your ${uploadedFiles.length} uploaded reference document${uploadedFiles.length > 1 ? 's' : ''} to refine the financial projections and risk assessments. The report presents a more accurate picture of the investment opportunity based on the latest verification data.`
+                    : `The report has been generated based on your ${uploadedFiles.length} uploaded reference document${uploadedFiles.length > 1 ? 's' : ''} and Qatalyst's analysis. I've incorporated key insights from these materials to provide a more accurate assessment of the project's value and impact.`)
+                  : (inputValue.toLowerCase().includes('financial') || inputValue.toLowerCase().includes('carbon credit')
+                    ? "I've generated a financial analysis report focused on carbon credit projections for the Tonle Sap project. The report includes detailed financial metrics such as project value, revenue projections, breakeven analysis, and ROI calculations. This report is optimized for financial decision-makers and carbon market analysts."
+                    : inputValue.toLowerCase().includes('esg') || inputValue.toLowerCase().includes('community')
+                    ? "I've created a comprehensive ESG impact report with special emphasis on community benefits. The report details the project's social impact across 12 villages, environmental co-benefits beyond carbon sequestration, and governance structures that ensure equitable benefit sharing with local stakeholders."
+                    : inputValue.toLowerCase().includes('executive') || inputValue.toLowerCase().includes('investor')
+                    ? "I've prepared an executive summary tailored for investors, highlighting the financial opportunity and risk-return profile. The report includes key investment metrics (IRR, NPV, payback period), market positioning analysis, risk mitigation strategies, and strategic exit options."
+                    : "The report has been generated based on available data from the project documents and Qatalyst's analysis. The report highlights key financial metrics, ESG benefits, and SDG contributions. You can customize this report by adding, removing, or reordering sections.")
+                }
               />
             </div>
           </div>
         )}
+        
+        {/* Document Upload Drawer */}
+        <DocumentUploadDrawer
+          isOpen={isUploadDrawerOpen}
+          onClose={() => setIsUploadDrawerOpen(false)}
+          uploadedFiles={uploadedFiles}
+          onFileUpload={handleFileUpload}
+          onRemoveFile={handleRemoveFile}
+        />
       </div>
     </div>
   );
