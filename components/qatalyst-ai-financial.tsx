@@ -134,7 +134,10 @@ export function QatalystAi({
           </span>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16">
+        <div 
+          className="flex flex-col items-center justify-center gap-1 hover:cursor-pointer hover:bg-blaze-orange-200/25 py-2 min-h-16"
+          onClick={() => openDocumentUrl && openDocumentUrl('documents')}
+        >
           <Files className="w-5 h-5 text-muted-foreground" />
           <span className="text-[10px] text-center text-muted-foreground">
             {t('sidebar.documents')}

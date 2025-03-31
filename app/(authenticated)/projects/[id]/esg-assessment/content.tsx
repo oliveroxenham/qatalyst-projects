@@ -67,10 +67,27 @@ const UserRatingBoxed = ({ currentRating }: { currentRating: number }) => {
   );
 };
 
-const SourcesBoxed = ({ num = 0 }: { num: number }) => {
+const SourcesBoxed = ({ 
+  num = 0, 
+  setDocumentUrl 
+}: { 
+  num: number,
+  setDocumentUrl?: (url: string) => void
+}) => {
   const { t } = useTranslation();
+  
+  const handleSourceClick = (e: React.MouseEvent) => {
+    if (setDocumentUrl) {
+      e.stopPropagation();
+      setDocumentUrl('0'); // For demo purposes, open document '0'
+    }
+  };
+  
   return (
-    <div className="border rounded-sm flex items-center justify-center bg-background min-w-20 h-[36px]">
+    <div 
+      className="border rounded-sm flex items-center justify-center bg-background min-w-20 h-[36px] hover:bg-gray-50 hover:cursor-pointer"
+      onClick={handleSourceClick}
+    >
       <span className="text-xs">{num} {t('common.sources')}</span>
     </div>
   );
@@ -79,9 +96,11 @@ const SourcesBoxed = ({ num = 0 }: { num: number }) => {
 export function Content({
   projectData,
   setAiSidebarOpen,
+  setDocumentUrl,
 }: {
   projectData: Project | null;
   setAiSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  setDocumentUrl?: (url: string) => void;
 }) {
   const { t } = useTranslation();
   const [elId, setElId] = useState<string | undefined>();
@@ -154,7 +173,7 @@ export function Content({
                   <UserRatingBoxed currentRating={0} />
                 </TableCell>
                 <TableCell>
-                  <SourcesBoxed num={risk.sources?.length ?? 0} />
+                  <SourcesBoxed num={risk.sources?.length ?? 0} setDocumentUrl={setDocumentUrl} />
                 </TableCell>
               </TableRow>
             );

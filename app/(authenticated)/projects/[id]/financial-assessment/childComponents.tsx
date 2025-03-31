@@ -18,8 +18,9 @@ export function ChildComponents({
       <DocumentViewer
         documentUrl={documentUrl}
         setDocumentUrl={setDocumentUrl}
+        projectId={projectData?.id}
       />
-      <Content projectData={projectData} setAiSidebarOpen={setAiSidebarOpen} />
+      <Content projectData={projectData} setAiSidebarOpen={setAiSidebarOpen} setDocumentUrl={setDocumentUrl} />
       <QatalystAi
         openDocumentUrl={setDocumentUrl}
         projectData={projectData}

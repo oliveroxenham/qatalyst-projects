@@ -41,18 +41,33 @@ const TableCellWithValue = ({
   </TableCell>
 );
 
-const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => {
+const TableCellWithValueSource = ({ 
+  sources, 
+  setDocumentUrl 
+}: { 
+  sources: Source[], 
+  setDocumentUrl: (url: string) => void 
+}) => {
   const { t } = useTranslation();
+  
+  const handleSourceClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // For demo purposes, always open the '0' document (1650 project document)
+    setDocumentUrl('0');
+  };
   
   return (
     <TableCell>
-      <div className="border flex items-center justify-center bg-background w-full rounded-sm h-9 p-2">
+      <div 
+        onClick={handleSourceClick}
+        className="border flex items-center justify-center bg-background w-full rounded-sm h-9 p-2 hover:bg-gray-50 hover:cursor-pointer"
+      >
         {sources.length === 0 ? (
           <span className="flex flex-row gap-2 items-center text-muted-foreground">
             <Plus className="h-4 w-4" /> {t('financialAssessment.source')}
           </span>
         ) : (
-          <span>
+          <span className="flex flex-row gap-1 items-center">
             {sources.length} {sources.length > 1 ? t('financialAssessment.sources') : t('financialAssessment.source')}
           </span>
         )}
@@ -64,9 +79,11 @@ const TableCellWithValueSource = ({ sources }: { sources: Source[] }) => {
 export function Content({
   projectData,
   setAiSidebarOpen,
+  setDocumentUrl,
 }: {
   projectData: Project | null;
   setAiSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  setDocumentUrl: (url: string) => void;
 }) {
   const { t } = useTranslation();
   const [elId, setElId] = useState<string | undefined>();
@@ -95,8 +112,6 @@ export function Content({
     setAiSidebarOpen(true);
     setElId(elementId);
   };
-
-  console.log('projectData=', projectData);
 
   if (!projectData) {
     return (
@@ -141,7 +156,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.projectValue.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.projectValue.sources} />
+            <TableCellWithValueSource sources={data.projectValue.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
           <TableRow
             className="hover:cursor-pointer"
@@ -164,6 +179,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.estimatedReductions.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
           <TableRow
@@ -187,6 +203,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.totalEstimatedReductions.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
           <TableRow
@@ -206,7 +223,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.projectDuration.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.projectDuration.sources} />
+            <TableCellWithValueSource sources={data.projectDuration.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
           <TableRow
             className="hover:cursor-pointer"
@@ -225,7 +242,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.projectArea.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.projectArea.sources} />
+            <TableCellWithValueSource sources={data.projectArea.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
           <TableRow
             className="hover:cursor-pointer"
@@ -254,6 +271,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.estimatedReductionsPerUnitAreaPerYear.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
           <TableRow
@@ -279,6 +297,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.estimatedReductionsPerUnitArea.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
           <TableRow>
@@ -330,6 +349,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.landAcquisitionCost.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
           <TableRow
@@ -353,6 +373,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.landPerUnitAreaCost.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
 
@@ -384,6 +405,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.plantationEstablishmentMaintenanceCost.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
 
@@ -404,7 +426,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.costOfGoodsSold.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.costOfGoodsSold.sources} />
+            <TableCellWithValueSource sources={data.costOfGoodsSold.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow
@@ -422,7 +444,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.overheads.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.overheads.sources} />
+            <TableCellWithValueSource sources={data.overheads.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow
@@ -442,7 +464,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.totalGrossCosts.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.totalGrossCosts.sources} />
+            <TableCellWithValueSource sources={data.totalGrossCosts.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow
@@ -466,6 +488,7 @@ export function Content({
             </TableCellWithValue>
             <TableCellWithValueSource
               sources={data.alternateRevenueSources.sources}
+              setDocumentUrl={setDocumentUrl}
             />
           </TableRow>
 
@@ -486,7 +509,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.costOfFinancing.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.costOfFinancing.sources} />
+            <TableCellWithValueSource sources={data.costOfFinancing.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow
@@ -504,7 +527,7 @@ export function Content({
             <TableCellWithValue>
               <span>{data.tax.unit}</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={data.tax.sources} />
+            <TableCellWithValueSource sources={data.tax.sources} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow>
@@ -517,7 +540,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>USD/tCO₂e</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
           <TableRow>
             <TableCell>
@@ -529,7 +552,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>USD/tCO₂e</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow>
@@ -542,7 +565,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>USD/tCO₂e</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
           <TableRow>
             <TableCell>
@@ -556,7 +579,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>USD</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow>
@@ -569,7 +592,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>kUSD</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
 
           <TableRow>
@@ -584,7 +607,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>USD/tCO₂e</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
           <TableRow>
             <TableCell className="flex flex-row gap-1 items-center">
@@ -597,7 +620,7 @@ export function Content({
             <TableCellWithValue disabled>
               <span>USD/tCO₂e</span>
             </TableCellWithValue>
-            <TableCellWithValueSource sources={[]} />
+            <TableCellWithValueSource sources={[]} setDocumentUrl={setDocumentUrl} />
           </TableRow>
         </TableBody>
       </Table>
