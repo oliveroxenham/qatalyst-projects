@@ -100,6 +100,7 @@ interface ReportSection {
   includeSources?: boolean;
   coverTitle?: string;
   coverSubtitle?: string;
+  coverImage?: string; // Base64 string for uploaded cover image
 }
 
 // Mock assessment sources data
@@ -174,12 +175,14 @@ const DraggableSection = ({
   section, 
   index, 
   moveItem, 
-  toggleSources
+  toggleSources,
+  deleteSection
 }: { 
   section: ReportSection, 
   index: number, 
   moveItem: (dragIndex: number, hoverIndex: number) => void, 
-  toggleSources: (id: string) => void
+  toggleSources: (id: string) => void,
+  deleteSection: (id: string) => void
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   
@@ -268,6 +271,15 @@ const DraggableSection = ({
           </label>
         </div>
       )}
+      <Button
+        size="sm"
+        variant="ghost"
+        className="ml-2 text-muted-foreground hover:text-destructive"
+        onClick={() => deleteSection(section.id)}
+        title="Delete section"
+      >
+        <Trash2 className="h-4 w-4" />
+      </Button>
     </div>
   );
 };
@@ -333,13 +345,40 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
   const [newSectionTitle, setNewSectionTitle] = useState('');
   const [newSectionContent, setNewSectionContent] = useState('');
   const [newSectionPrompt, setNewSectionPrompt] = useState('');
+  const [newCoverImage, setNewCoverImage] = useState<string | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [showPageNumbers, setShowPageNumbers] = useState(false);
   const [prompt, setPrompt] = useState('');
+  const [sectionToDelete, setSectionToDelete] = useState<string | null>(null);
   const project = getProjectId(projectId);
   
   // Generate a unique ID for sections
   const generateId = () => `section-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+  
+  // Handle cover image uploads
+  const handleCoverImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    // Check file size (limit to 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Image size should be less than 5MB');
+      return;
+    }
+    
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      alert('Only image files are allowed');
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      setNewCoverImage(base64String);
+    };
+    reader.readAsDataURL(file);
+  };
   
   // Function to add a new section
   const addSection = () => {
@@ -355,7 +394,8 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
       prompt: addSectionType === 'aiGenerated' ? newSectionPrompt : undefined,
       isGenerating: addSectionType === 'aiGenerated' ? true : undefined,
       coverTitle: addSectionType === 'coverPage' ? newSectionTitle : undefined,
-      coverSubtitle: addSectionType === 'coverPage' ? newSectionContent : undefined
+      coverSubtitle: addSectionType === 'coverPage' ? newSectionContent : undefined,
+      coverImage: addSectionType === 'coverPage' ? newCoverImage || undefined : undefined
     };
 
     const updatedSections = [newSection, ...reportSections];
@@ -366,6 +406,7 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
     setNewSectionTitle('');
     setNewSectionPrompt('');
     setNewSectionContent('');
+    setNewCoverImage(null);
     setAddSectionType('coverPage');
 
     // Save to localStorage
@@ -453,6 +494,41 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
         }
       }
     }
+  };
+  
+  // Function to set a section for deletion (shows confirmation dialog)
+  const deleteSection = (sectionId: string) => {
+    setSectionToDelete(sectionId);
+  };
+  
+  // Function to confirm and execute section deletion
+  const confirmDeleteSection = () => {
+    if (!sectionToDelete) return;
+    
+    // Filter out the section to be deleted
+    const newSections = reportSections.filter(section => section.id !== sectionToDelete);
+    
+    // Update state
+    setReportSections(newSections);
+    
+    // Save to localStorage
+    if (typeof window !== 'undefined') {
+      const savedReport = localStorage.getItem(`report-${projectId}`);
+      if (savedReport) {
+        try {
+          const parsedData = JSON.parse(savedReport);
+          localStorage.setItem(`report-${projectId}`, JSON.stringify({
+            ...parsedData,
+            sections: newSections
+          }));
+        } catch (error) {
+          console.error('Error updating report after deletion:', error);
+        }
+      }
+    }
+    
+    // Clear the section to delete
+    setSectionToDelete(null);
   };
   
   // Load saved report from localStorage
@@ -690,6 +766,41 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                         placeholder="Enter the subtitle for the cover page..."
                       />
                     </div>
+                    <div className="space-y-2">
+                      <label className="font-medium">Cover Image</label>
+                      <div className="flex flex-col gap-2">
+                        <input 
+                          type="file" 
+                          accept="image/*"
+                          className="block w-full text-sm text-slate-500
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-full file:border-0
+                            file:text-sm file:font-semibold
+                            file:bg-violet-50 file:text-primary
+                            hover:file:bg-violet-100"
+                          onChange={handleCoverImageUpload}
+                        />
+                        {newCoverImage && (
+                          <div className="relative w-full h-64 mt-2">
+                            <Image 
+                              src={newCoverImage}
+                              alt="Cover preview" 
+                              fill
+                              style={{ objectFit: 'contain' }}
+                              className="rounded-md"
+                            />
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              className="absolute top-2 right-2"
+                              onClick={() => setNewCoverImage(null)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </>
                 )}
                 
@@ -770,6 +881,7 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                       section={section}
                       index={index}
                       moveItem={moveItem}
+                      deleteSection={deleteSection}
                       toggleSources={(id) => {
                         const updatedSections = reportSections.map(s => 
                           s.id === id 
@@ -849,6 +961,37 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+          
+          {/* Section Delete Confirmation Dialog */}
+          <Dialog
+            open={sectionToDelete !== null}
+            onOpenChange={(open) => {
+              if (!open) setSectionToDelete(null);
+            }}
+          >
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Delete Section</DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to delete this section? This action cannot be undone.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter className="gap-2 sm:justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() => setSectionToDelete(null)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={confirmDeleteSection}
+                >
+                  Delete Section
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         
           <div className="flex justify-center flex-grow overflow-y-auto">
             <div className="w-full max-w-[210mm] mx-auto space-y-8">
@@ -864,12 +1007,25 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                   
                 if (section.type === 'coverPage') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-center items-center relative">
-                      <div className="space-y-6 text-center">
-                        <h1 className="text-4xl font-bold">{section.coverTitle}</h1>
-                        <h2 className="text-2xl text-muted-foreground">{section.coverSubtitle}</h2>
-                        {project?.imgUrl && (
-                          <div className="mt-8 w-full h-[350px] relative overflow-hidden rounded-md mx-auto">
+                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-6 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-between items-center relative">
+                      <div className="w-full flex flex-col items-center space-y-8">
+                        <div className="text-center mb-2">
+                          <h1 className="text-4xl font-bold">{section.coverTitle}</h1>
+                          <h2 className="text-2xl text-muted-foreground mt-3">{section.coverSubtitle}</h2>
+                        </div>
+                        {section.coverImage ? (
+                          <div className="w-full h-[500px] relative overflow-hidden rounded-md">
+                            <Image
+                              src={section.coverImage}
+                              alt="Cover Image"
+                              fill
+                              style={{ objectFit: 'cover' }}
+                              className="rounded-md"
+                              priority
+                            />
+                          </div>
+                        ) : project?.imgUrl && (
+                          <div className="w-full h-[500px] relative overflow-hidden rounded-md">
                             <Image
                               src={project.imgUrl}
                               alt={project?.name || "Project Image"}
@@ -880,7 +1036,7 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                             />
                           </div>
                         )}
-                        <p className="mt-8 text-muted-foreground pt-8">Generated by Qatalyst AI on {new Date().toLocaleDateString()}</p>
+                        <p className="text-muted-foreground mt-auto">Generated by Qatalyst AI on {new Date().toLocaleDateString()}</p>
                       </div>
                       {/* No page number on cover page */}
                     </div>
