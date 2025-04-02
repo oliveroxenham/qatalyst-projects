@@ -6,7 +6,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { getProjectId } from '@/mock/data';
@@ -14,10 +13,8 @@ import {
   FileIcon, 
   Download, 
   Trash2, 
-  ArrowLeft,
   PenLine,
   FileText,
-  GripVertical,
   Eye,
   EyeOff,
   Plus,
