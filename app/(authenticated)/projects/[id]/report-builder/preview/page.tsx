@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ReportBuilderClient } from './pageClient';
+import { ReportPreviewClient } from "./previewClient";
 
-export default async function ReportBuilderPage({
+export default async function ReportPreviewPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -12,10 +12,10 @@ export default async function ReportBuilderPage({
   // Check if a report exists in the cookie
   const reportExists = cookies().get(`report-exists-${projectId}`)?.value === 'true';
   
-  // If a report exists, redirect to the preview page
-  if (reportExists) {
-    redirect(`/projects/${projectId}/report-builder/preview`);
+  // If no report exists, redirect to the input page
+  if (!reportExists) {
+    redirect(`/projects/${projectId}/report-builder`);
   }
   
-  return <ReportBuilderClient projectId={projectId} />;
+  return <ReportPreviewClient projectId={projectId} />;
 }

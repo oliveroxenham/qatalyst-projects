@@ -563,6 +563,9 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
         prompt: inputValue,
         uploadedFiles: uploadedFiles
       }));
+      
+      // Set cookie to indicate report exists
+      document.cookie = `report-exists-${projectId}=true; path=/`;
     }
   }, [generatedReport, reportSections, projectId, inputValue, uploadedFiles]);
 
@@ -571,6 +574,9 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     // Clear from localStorage
     if (typeof window !== 'undefined') {
       localStorage.removeItem(`report-${projectId}`);
+      
+      // Set cookie to indicate report no longer exists
+      document.cookie = `report-exists-${projectId}=false; path=/`;
     }
     
     // Reset state
