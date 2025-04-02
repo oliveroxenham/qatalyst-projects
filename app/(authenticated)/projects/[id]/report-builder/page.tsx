@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ReportBuilderClient } from './pageClient';
 
@@ -9,13 +8,7 @@ export default async function ReportBuilderPage({
 }) {
   const projectId = (await params).id;
   
-  // Check if a report exists in the cookie
-  const reportExists = cookies().get(`report-exists-${projectId}`)?.value === 'true';
-  
-  // If a report exists, redirect to the preview page
-  if (reportExists) {
-    redirect(`/projects/${projectId}/report-builder/preview`);
-  }
-  
+  // For server components, we can't directly check localStorage
+  // The client component will handle redirect if a report exists
   return <ReportBuilderClient projectId={projectId} />;
 }

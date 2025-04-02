@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -483,6 +484,7 @@ const mockEsgAssessmentData = {
 
 
 export function ReportBuilderClient({ projectId }: { projectId: string }) {
+  const router = useRouter();
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -503,7 +505,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
   // Generate a unique ID for sections
   const generateId = () => `section-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
-  // Load saved report from localStorage
+  // Load saved report from localStorage and redirect to preview if exists
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedReport = localStorage.getItem(`report-${projectId}`);
@@ -511,6 +513,14 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
       if (savedReport) {
         try {
           const parsedData = JSON.parse(savedReport);
+          
+          // If we have valid report data, redirect to preview
+          if (parsedData.report && parsedData.sections) {
+            router.push(`/projects/${projectId}/report-builder/preview`);
+            return;
+          }
+          
+          // Otherwise, load the data for the form
           setGeneratedReport(parsedData.report);
           setReportSections(parsedData.sections);
           setInputValue(parsedData.prompt || '');
@@ -525,7 +535,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
         }
       }
     }
-  }, [projectId]);
+  }, [projectId, router]);
 
   // Log the project data to ensure we have the image URL
   useEffect(() => {
@@ -554,7 +564,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     }
   }, [generatedReport]);
   
-  // Save report to localStorage whenever it changes
+  // Save report to localStorage whenever it changes and redirect to preview
   useEffect(() => {
     if (generatedReport && reportSections.length > 0 && typeof window !== 'undefined') {
       localStorage.setItem(`report-${projectId}`, JSON.stringify({
@@ -564,19 +574,18 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
         uploadedFiles: uploadedFiles
       }));
       
-      // Set cookie to indicate report exists
-      document.cookie = `report-exists-${projectId}=true; path=/`;
+      // Redirect to preview page upon initial report generation
+      if (!loadedFromStorage) {
+        router.push(`/projects/${projectId}/report-builder/preview`);
+      }
     }
-  }, [generatedReport, reportSections, projectId, inputValue, uploadedFiles]);
+  }, [generatedReport, reportSections, projectId, inputValue, uploadedFiles, loadedFromStorage, router]);
 
   // Function to delete saved report
   const handleDeleteReport = () => {
     // Clear from localStorage
     if (typeof window !== 'undefined') {
       localStorage.removeItem(`report-${projectId}`);
-      
-      // Set cookie to indicate report no longer exists
-      document.cookie = `report-exists-${projectId}=false; path=/`;
     }
     
     // Reset state
@@ -1111,14 +1120,14 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl mx-auto bg-card p-6 rounded-lg shadow-md border border-border">
           <div className="flex gap-2">
             <Input
               ref={inputRef}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder={t('reportBuilder.inputPlaceholder')}
-              className="flex-1"
+              className="flex-1 text-lg h-12"
               disabled={isGenerating}
             />
             <TooltipProvider>
@@ -1130,11 +1139,11 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                       size="icon"
                       onClick={() => setIsUploadDrawerOpen(true)}
                       disabled={isGenerating}
-                      className="relative"
+                      className="relative h-12 w-12"
                     >
-                      <FileUp className="h-4 w-4" />
+                      <FileUp className="h-5 w-5" />
                       {uploadedFiles.length > 0 && (
-                        <span className="absolute -top-1 -right-1 h-4 w-4 text-xs bg-primary text-primary-foreground rounded-full flex items-center justify-center">
+                        <span className="absolute -top-1 -right-1 h-5 w-5 text-xs bg-primary text-primary-foreground rounded-full flex items-center justify-center">
                           {uploadedFiles.length}
                         </span>
                       )}
@@ -1145,12 +1154,16 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            <Button type="submit" disabled={!inputValue.trim() || isGenerating}>
-              {isGenerating ? t('reportBuilder.generating') : <Send className="h-4 w-4" />}
+            <Button 
+              type="submit" 
+              disabled={!inputValue.trim() || isGenerating}
+              className="h-12 px-6"
+            >
+              {isGenerating ? t('reportBuilder.generating') : <Send className="h-5 w-5" />}
             </Button>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <p className="text-sm font-medium">{t('reportBuilder.examples')}:</p>
             <div className="flex flex-wrap gap-2">
               {(t('reportBuilder.examplePrompts', { returnObjects: true }) as string[]).map((example, i) => (
