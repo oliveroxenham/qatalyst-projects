@@ -21,7 +21,8 @@ import {
   X,
   FileUp,
   FileCheck,
-  BookImage
+  BookImage,
+  Image as ImageIcon
 } from 'lucide-react';
 import QatalystAiIcon from '@/public/icons/AI-icon.svg';
 import React from 'react';
@@ -131,7 +132,8 @@ type SectionType =
   | 'esgAssessment' 
   | 'sdgContributions' 
   | 'customText'
-  | 'aiGenerated';
+  | 'aiGenerated'
+  | 'gallery';
 
 interface ReportSection {
   id: string;
@@ -143,6 +145,7 @@ interface ReportSection {
   includeSources?: boolean;
   coverTitle?: string;
   coverSubtitle?: string;
+  galleryImages?: string[]; // Array of base64 image strings
 }
 
 // Mock assessment sources data
@@ -1009,7 +1012,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
   };
 
   const addSection = () => {
-    if ((addSectionType === 'customText' || addSectionType === 'coverPage') && !newSectionTitle) {
+    if ((addSectionType === 'customText' || addSectionType === 'coverPage' || addSectionType === 'gallery') && !newSectionTitle) {
       return;
     }
 
@@ -1021,7 +1024,8 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
       prompt: addSectionType === 'aiGenerated' ? newSectionPrompt : undefined,
       isGenerating: addSectionType === 'aiGenerated' ? true : undefined,
       coverTitle: addSectionType === 'coverPage' ? newSectionTitle : undefined,
-      coverSubtitle: addSectionType === 'coverPage' ? newSectionContent : undefined
+      coverSubtitle: addSectionType === 'coverPage' ? newSectionContent : undefined,
+      galleryImages: addSectionType === 'gallery' && newSectionContent ? JSON.parse(newSectionContent) : undefined
     };
 
     setReportSections([...reportSections, newSection]);
@@ -1280,6 +1284,24 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                             </Button>
                             <Button 
                               type="button" 
+                              variant={addSectionType === 'gallery' ? "default" : "outline"}
+                              className="justify-start"
+                              onClick={() => setAddSectionType('gallery')}
+                            >
+                              <ImageIcon className="mr-2 h-4 w-4" />
+                              Gallery
+                            </Button>
+                            <Button 
+                              type="button" 
+                              variant={addSectionType === 'executiveSummary' ? "default" : "outline"}
+                              className="justify-start"
+                              onClick={() => setAddSectionType('executiveSummary')}
+                            >
+                              <FileText className="mr-2 h-4 w-4" />
+                              Executive Summary
+                            </Button>
+                            <Button 
+                              type="button" 
                               variant={addSectionType === 'projectSummary' ? "default" : "outline"}
                               className="justify-start"
                               onClick={() => setAddSectionType('projectSummary')}
@@ -1294,7 +1316,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                               onClick={() => setAddSectionType('financialOverview')}
                             >
                               <FileText className="mr-2 h-4 w-4" />
-                              {t('reportBuilder.addSectionTypes.financialOverview')}
+                              Financial Overview
                             </Button>
                             <Button 
                               type="button" 
@@ -1303,7 +1325,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                               onClick={() => setAddSectionType('financialAssessment')}
                             >
                               <FileText className="mr-2 h-4 w-4" />
-                              {t('reportBuilder.addSectionTypes.financialAssessment')}
+                              Financial Assessment
                             </Button>
                             <Button 
                               type="button" 
@@ -1312,10 +1334,95 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                               onClick={() => setAddSectionType('esgAssessment')}
                             >
                               <FileText className="mr-2 h-4 w-4" />
-                              {t('reportBuilder.addSectionTypes.esgAssessment')}
+                              ESG Assessment
+                            </Button>
+                            <Button 
+                              type="button" 
+                              variant={addSectionType === 'sdgContributions' ? "default" : "outline"}
+                              className="justify-start"
+                              onClick={() => setAddSectionType('sdgContributions')}
+                            >
+                              <FileText className="mr-2 h-4 w-4" />
+                              SDG Contributions
                             </Button>
                           </div>
                         </div>
+                        
+                        {addSectionType === 'gallery' && (
+                          <>
+                            <div className="space-y-2">
+                              <label className="font-medium">Gallery Title</label>
+                              <Input 
+                                value={newSectionTitle}
+                                onChange={(e) => setNewSectionTitle(e.target.value)}
+                                placeholder="Enter gallery title..."
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <label className="font-medium">Gallery Images</label>
+                              <p className="text-xs text-muted-foreground mb-2">
+                                Upload images to be displayed in a grid layout. You can select multiple images at once.
+                              </p>
+                              <input 
+                                type="file" 
+                                accept="image/*"
+                                multiple
+                                className="block w-full text-sm text-slate-500
+                                  file:mr-4 file:py-2 file:px-4
+                                  file:rounded-full file:border-0
+                                  file:text-sm file:font-semibold
+                                  file:bg-violet-50 file:text-primary
+                                  hover:file:bg-violet-100"
+                                onChange={(e) => {
+                                  if (e.target.files && e.target.files.length > 0) {
+                                    // Create array to store base64 strings
+                                    const filePromises = Array.from(e.target.files).map(file => {
+                                      return new Promise((resolve) => {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                          resolve(reader.result);
+                                        };
+                                        reader.readAsDataURL(file);
+                                      });
+                                    });
+                                    
+                                    // Process all files and set the state
+                                    Promise.all(filePromises).then(base64strings => {
+                                      setNewSectionContent(JSON.stringify(base64strings));
+                                    });
+                                  }
+                                }}
+                              />
+                              {newSectionContent && (
+                                <div className="mt-4">
+                                  <p className="text-sm font-medium mb-2">Selected images: {JSON.parse(newSectionContent).length}</p>
+                                  <div className="grid grid-cols-3 gap-2">
+                                    {JSON.parse(newSectionContent).map((img: string, i: number) => (
+                                      <div key={i} className="relative h-20 w-full overflow-hidden rounded-md">
+                                        <Image
+                                          src={img}
+                                          alt={`Selected image ${i+1}`}
+                                          fill
+                                          style={{ objectFit: 'cover' }}
+                                          className="rounded-md"
+                                        />
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="mt-2"
+                                    onClick={() => setNewSectionContent('')}
+                                  >
+                                    <Trash2 className="h-4 w-4 mr-2" />
+                                    Clear all images
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+                          </>
+                        )}
                         
                         {addSectionType === 'coverPage' && (
                           <>
@@ -1420,7 +1527,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               {reportSections.map((section) => {
                 if (section.type === 'coverPage') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-center items-center">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-center items-center">
                       <div className="space-y-6 text-center">
                         <h1 className="text-4xl font-bold">{section.coverTitle}</h1>
                         <h2 className="text-2xl text-muted-foreground">{section.coverSubtitle}</h2>
@@ -1436,7 +1543,6 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                             />
                           </div>
                         )}
-                        <p className="mt-8 text-muted-foreground pt-8">Generated by Qatalyst AI on {new Date().toLocaleDateString()}</p>
                       </div>
                     </div>
                   );
@@ -1444,7 +1550,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'executiveSummary') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       <div className="whitespace-pre-line text-sm">
                         {generatedReport.executiveSummary}
@@ -1455,7 +1561,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'projectSummary') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       <div className="grid grid-cols-2 gap-6">
                         {Object.entries(generatedReport.projectSummary).map(([key, value]: [string, string]) => (
@@ -1471,7 +1577,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'financialOverview') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       <div className="grid grid-cols-2 gap-6">
                         {Object.entries(generatedReport.financialOverview).map(([key, value]: [string, string]) => (
@@ -1487,7 +1593,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'financialAssessment') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       
                       <div className="overflow-hidden border rounded-md">
@@ -1542,7 +1648,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'esgAssessment') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       
                       <div className="space-y-4">
@@ -1554,10 +1660,10 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                               </h3>
                               <div className={`text-xs px-3 py-1 rounded-full ${
                                 value.rating === 'Satisfactory' 
-                                  ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200' 
+                                  ? 'bg-green-100 text-green-800' 
                                   : value.rating === 'Investigate' 
-                                    ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200' 
-                                    : 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
+                                    ? 'bg-orange-100 text-orange-800' 
+                                    : 'bg-red-100 text-red-800'
                               }`}>
                                 {value.rating}
                               </div>
@@ -1586,7 +1692,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'sdgContributions') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       <div className="grid grid-cols-2 gap-6">
                         {generatedReport.sdgContributions.map((sdg: SdgContribution) => (
@@ -1605,10 +1711,10 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                               <p className="text-sm font-semibold mt-1">
                                 <span className={`inline-block px-2 py-1 rounded-full text-xs ${
                                   sdg.contribution === 'Major' 
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200' 
+                                    ? 'bg-green-100 text-green-800' 
                                     : sdg.contribution === 'Significant' 
-                                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200'
-                                      : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
+                                      ? 'bg-blue-100 text-blue-800'
+                                      : 'bg-gray-100 text-gray-800'
                                 }`}>
                                   Contribution: {sdg.contribution}
                                 </span>
@@ -1623,7 +1729,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'customText') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       <div className="whitespace-pre-line text-sm">{section.content}</div>
                     </div>
@@ -1632,7 +1738,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'aiGenerated') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
                       {section.isGenerating ? (
                         <div className="flex items-center justify-center p-8">
@@ -1648,12 +1754,37 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                   );
                 }
                 
+                if (section.type === 'gallery') {
+                  return (
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                      {section.galleryImages && section.galleryImages.length > 0 ? (
+                        <div className="grid grid-cols-3 gap-4">
+                          {section.galleryImages.map((image, index) => (
+                            <div key={index} className="relative aspect-square w-full overflow-hidden rounded-md">
+                              <Image
+                                src={image}
+                                alt={`Gallery image ${index + 1}`}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                className="rounded-md hover:scale-105 transition-transform duration-200"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-muted-foreground text-center py-10">No images available</p>
+                      )}
+                    </div>
+                  );
+                }
+                
                 return null;
               })}
               
               {/* Reference Documents Section */}
               {generatedReport?.referencedDocuments && generatedReport.referencedDocuments.length > 0 && (
-                <div className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
+                <div className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
                   <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">Reference Documents</h2>
                   <div className="space-y-4">
                     {generatedReport.referencedDocuments.map(file => (

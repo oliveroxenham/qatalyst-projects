@@ -19,7 +19,8 @@ import {
   EyeOff,
   Plus,
   MoveVertical,
-  LayoutGrid
+  LayoutGrid,
+  FileImage
 } from 'lucide-react';
 import Image from 'next/image';
 import { TopBar } from '@/components/topbar';
@@ -85,7 +86,8 @@ type SectionType =
   | 'esgAssessment' 
   | 'sdgContributions' 
   | 'customText'
-  | 'aiGenerated';
+  | 'aiGenerated'
+  | 'gallery';
 
 interface ReportSection {
   id: string;
@@ -98,6 +100,7 @@ interface ReportSection {
   coverTitle?: string;
   coverSubtitle?: string;
   coverImage?: string; // Base64 string for uploaded cover image
+  galleryImages?: string[]; // Array of base64 image strings
 }
 
 // Mock assessment sources data
@@ -295,7 +298,7 @@ function PageNumber({
     <>
       {/* Add a spacer to ensure content doesn't overlap with page number */}
       <div className="h-8"></div>
-      <div className="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-400 pointer-events-none">
+      <div className="absolute bottom-4 left-0 right-0 text-center text-xs text-gray-500 pointer-events-none">
         {pageNumber}
       </div>
     </>
@@ -313,18 +316,18 @@ function QatalystResponse({
   response: string;
 }) {
   return (
-    <div className="border rounded-md p-4 bg-background">
+    <div className="border rounded-md p-4 bg-white">
       <div className="flex items-start space-x-3 mb-4">
         <div className="rounded-full bg-blaze-orange-500 flex items-center justify-center p-1.5 mt-1">
           <Logo className="w-4 h-4 fill-white" />
         </div>
         <div>
-          {title && <h3 className="font-semibold mb-1">{title}</h3>}
-          <p className="text-sm text-muted-foreground font-medium">Prompt: {prompt}</p>
+          {title && <h3 className="font-semibold mb-1 text-black">{title}</h3>}
+          <p className="text-sm text-gray-600 font-medium">Prompt: {prompt}</p>
         </div>
       </div>
       <div className="pl-10">
-        <p className="text-sm">{response}</p>
+        <p className="text-sm text-black">{response}</p>
       </div>
     </div>
   );
@@ -379,7 +382,7 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
   
   // Function to add a new section
   const addSection = () => {
-    if ((addSectionType === 'customText' || addSectionType === 'coverPage') && !newSectionTitle) {
+    if ((addSectionType === 'customText' || addSectionType === 'coverPage' || addSectionType === 'gallery') && !newSectionTitle) {
       return;
     }
 
@@ -392,7 +395,8 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
       isGenerating: addSectionType === 'aiGenerated' ? true : undefined,
       coverTitle: addSectionType === 'coverPage' ? newSectionTitle : undefined,
       coverSubtitle: addSectionType === 'coverPage' ? newSectionContent : undefined,
-      coverImage: addSectionType === 'coverPage' ? newCoverImage || undefined : undefined
+      coverImage: addSectionType === 'coverPage' ? newCoverImage || undefined : undefined,
+      galleryImages: addSectionType === 'gallery' && newSectionContent ? JSON.parse(newSectionContent) : undefined
     };
 
     const updatedSections = [newSection, ...reportSections];
@@ -742,8 +746,149 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                       />
                       AI Generated
                     </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'gallery' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('gallery')}
+                    >
+                      <FileImage className="mr-2 h-4 w-4" />
+                      Gallery
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'executiveSummary' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('executiveSummary')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      Executive Summary
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'projectSummary' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('projectSummary')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      Project Summary
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'financialOverview' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('financialOverview')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      Financial Overview
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'financialAssessment' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('financialAssessment')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      Financial Assessment
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'esgAssessment' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('esgAssessment')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      ESG Assessment
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant={addSectionType === 'sdgContributions' ? "default" : "outline"}
+                      className="justify-start"
+                      onClick={() => setAddSectionType('sdgContributions')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      SDG Contributions
+                    </Button>
                   </div>
                 </div>
+                
+                {addSectionType === 'gallery' && (
+                  <>
+                    <div className="space-y-2">
+                      <label className="font-medium">Gallery Title</label>
+                      <Input 
+                        value={newSectionTitle}
+                        onChange={(e) => setNewSectionTitle(e.target.value)}
+                        placeholder="Enter gallery title..."
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="font-medium">Gallery Images</label>
+                      <p className="text-xs text-muted-foreground mb-2">
+                        Upload images to be displayed in a grid layout. You can select multiple images at once.
+                      </p>
+                      <input 
+                        type="file" 
+                        accept="image/*"
+                        multiple
+                        className="block w-full text-sm text-slate-500
+                          file:mr-4 file:py-2 file:px-4
+                          file:rounded-full file:border-0
+                          file:text-sm file:font-semibold
+                          file:bg-violet-50 file:text-primary
+                          hover:file:bg-violet-100"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files.length > 0) {
+                            // Create array to store base64 strings
+                            const filePromises = Array.from(e.target.files).map(file => {
+                              return new Promise((resolve) => {
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                  resolve(reader.result);
+                                };
+                                reader.readAsDataURL(file);
+                              });
+                            });
+                            
+                            // Process all files and set the state
+                            Promise.all(filePromises).then(base64strings => {
+                              setNewSectionContent(JSON.stringify(base64strings));
+                            });
+                          }
+                        }}
+                      />
+                      {newSectionContent && (
+                        <div className="mt-4">
+                          <p className="text-sm font-medium mb-2">
+                            Selected images: {newSectionContent && JSON.parse(newSectionContent).length}
+                          </p>
+                          <div className="grid grid-cols-3 gap-2">
+                            {JSON.parse(newSectionContent).map((img: string, i: number) => (
+                              <div key={i} className="relative h-20 w-full overflow-hidden rounded-md">
+                                <Image
+                                  src={img}
+                                  alt={`Selected image ${i+1}`}
+                                  fill
+                                  style={{ objectFit: 'cover' }}
+                                  className="rounded-md"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="mt-2"
+                            onClick={() => setNewSectionContent('')}
+                          >
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Clear all images
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
                 
                 {addSectionType === 'coverPage' && (
                   <>
@@ -773,7 +918,7 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-full file:border-0
                             file:text-sm file:font-semibold
-                            file:bg-violet-50 file:text-primary
+                            file:bg-violet-50 file:text-primary file:dark:text-black
                             hover:file:bg-violet-100"
                           onChange={handleCoverImageUpload}
                         />
@@ -1004,11 +1149,11 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                   
                 if (section.type === 'coverPage') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-6 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-between items-center relative">
+                    <div key={section.id} className="bg-white shadow-lg p-6 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-between items-center relative">
                       <div className="w-full flex flex-col items-center space-y-8">
                         <div className="text-center mb-2">
-                          <h1 className="text-4xl font-bold">{section.coverTitle}</h1>
-                          <h2 className="text-2xl text-muted-foreground mt-3">{section.coverSubtitle}</h2>
+                          <h1 className="text-4xl font-bold text-black">{section.coverTitle}</h1>
+                          <h2 className="text-2xl text-gray-600 mt-3">{section.coverSubtitle}</h2>
                         </div>
                         {section.coverImage ? (
                           <div className="w-full h-[500px] relative overflow-hidden rounded-md">
@@ -1033,7 +1178,6 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                             />
                           </div>
                         )}
-                        <p className="text-muted-foreground mt-auto">Generated by Qatalyst AI on {new Date().toLocaleDateString()}</p>
                       </div>
                       {/* No page number on cover page */}
                     </div>
@@ -1042,9 +1186,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'executiveSummary') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="whitespace-pre-line text-sm">
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
+                      <div className="whitespace-pre-line text-sm text-black">
                         {reportData.executiveSummary}
                       </div>
                       <PageNumber pageNumber={pageNumber} showPageNumbers={showPageNumbers} />
@@ -1054,13 +1198,13 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'projectSummary') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
                       <div className="grid grid-cols-2 gap-6">
                         {Object.entries(reportData.projectSummary).map(([key, value]: [string, string]) => (
-                          <div key={key} className="space-y-2 p-3 border rounded-md bg-muted/20">
-                            <p className="text-sm font-semibold">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
-                            <p className="text-sm">{value}</p>
+                          <div key={key} className="space-y-2 p-3 border rounded-md bg-gray-50">
+                            <p className="text-sm font-semibold text-black">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
+                            <p className="text-sm text-black">{value}</p>
                           </div>
                         ))}
                       </div>
@@ -1071,13 +1215,13 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'financialOverview') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
                       <div className="grid grid-cols-2 gap-6">
                         {Object.entries(reportData.financialOverview).map(([key, value]: [string, string]) => (
-                          <div key={key} className="space-y-2 p-3 border rounded-md bg-muted/20">
-                            <p className="text-sm font-semibold">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
-                            <p className="text-sm font-medium text-primary">{value}</p>
+                          <div key={key} className="space-y-2 p-3 border rounded-md bg-gray-50">
+                            <p className="text-sm font-semibold text-black">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
+                            <p className="text-sm font-medium text-branding-green-600">{value}</p>
                           </div>
                         ))}
                       </div>
@@ -1088,34 +1232,34 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'financialAssessment') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
                       
                       <div className="overflow-hidden border rounded-md">
                         <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-muted">
+                          <thead className="bg-gray-100">
                             <tr>
-                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-1/4">
+                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/4">
                                 Criterion
                               </th>
-                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-1/4">
+                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/4">
                                 Value
                               </th>
-                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-2/4">
+                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-2/4">
                                 Assessment
                               </th>
                             </tr>
                           </thead>
-                          <tbody className="bg-background divide-y divide-gray-200">
+                          <tbody className="bg-white divide-y divide-gray-200">
                             {mockFinancialAssessmentData.map((item, i) => (
-                              <tr key={i} className={i % 2 === 0 ? 'bg-background' : 'bg-muted/30'}>
-                                <td className="px-4 py-3 text-sm font-medium">
+                              <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                <td className="px-4 py-3 text-sm font-medium text-black">
                                   {item.criterion}
                                 </td>
                                 <td className="px-4 py-3 text-sm text-primary font-medium">
                                   {item.value}
                                 </td>
-                                <td className="px-4 py-3 text-sm">
+                                <td className="px-4 py-3 text-sm text-black">
                                   {item.assessment}
                                 </td>
                               </tr>
@@ -1129,9 +1273,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                           <h3 className="text-lg font-medium mb-2">{t('reportBuilder.appendices')}: {t('reportBuilder.financialAssessmentSources')}</h3>
                           <div className="space-y-2">
                             {mockFinancialAssessmentSources.map(source => (
-                              <div key={source.id} className="p-2 bg-muted rounded-md">
-                                <p className="text-sm font-medium">{source.name}</p>
-                                <p className="text-xs text-muted-foreground">{source.description}</p>
+                              <div key={source.id} className="p-2 bg-gray-50 rounded-md">
+                                <p className="text-sm font-medium text-black">{source.name}</p>
+                                <p className="text-xs text-gray-600">{source.description}</p>
                               </div>
                             ))}
                           </div>
@@ -1144,27 +1288,27 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'esgAssessment') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
                       
                       <div className="space-y-4">
                         {Object.entries(mockEsgAssessmentData).map(([key, value]) => (
-                          <div key={key} className="p-4 border rounded-md bg-muted/10">
+                          <div key={key} className="p-4 border rounded-md bg-gray-50">
                             <div className="flex justify-between mb-3">
-                              <h3 className="text-md font-medium">
+                              <h3 className="text-md font-medium text-black">
                                 {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
                               </h3>
                               <div className={`text-xs px-3 py-1 rounded-full ${
                                 value.rating === 'Satisfactory' 
-                                  ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200' 
+                                  ? 'bg-green-100 text-green-800' 
                                   : value.rating === 'Investigate' 
-                                    ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200' 
-                                    : 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
+                                    ? 'bg-orange-100 text-orange-800' 
+                                    : 'bg-red-100 text-red-800'
                               }`}>
                                 {value.rating}
                               </div>
                             </div>
-                            <p className="text-sm">{value.assessment}</p>
+                            <p className="text-sm text-black">{value.assessment}</p>
                           </div>
                         ))}
                       </div>
@@ -1174,9 +1318,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                           <h3 className="text-lg font-medium mb-2">{t('reportBuilder.appendices')}: {t('reportBuilder.esgAssessmentSources')}</h3>
                           <div className="space-y-2">
                             {mockEsgAssessmentSources.map(source => (
-                              <div key={source.id} className="p-3 bg-muted rounded-md">
-                                <p className="text-sm font-medium">{source.name}</p>
-                                <p className="text-xs text-muted-foreground">{source.description}</p>
+                              <div key={source.id} className="p-3 bg-gray-50 rounded-md">
+                                <p className="text-sm font-medium text-black">{source.name}</p>
+                                <p className="text-xs text-gray-600">{source.description}</p>
                               </div>
                             ))}
                           </div>
@@ -1189,8 +1333,8 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'sdgContributions') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
                       <div className="grid grid-cols-2 gap-6">
                         {reportData.sdgContributions.map((sdg: SdgContribution) => (
                           <div key={sdg.sdg} className="flex items-center space-x-4 p-3 border rounded-md bg-muted/10">
@@ -1204,14 +1348,14 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                               />
                             </div>
                             <div>
-                              <p className="text-sm font-medium">SDG {sdg.sdg}: {sdg.name}</p>
+                              <p className="text-sm font-medium text-black">SDG {sdg.sdg}: {sdg.name}</p>
                               <p className="text-sm font-semibold mt-1">
                                 <span className={`inline-block px-2 py-1 rounded-full text-xs ${
                                   sdg.contribution === 'Major' 
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200' 
+                                    ? 'bg-green-100 text-green-800' 
                                     : sdg.contribution === 'Significant' 
-                                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200'
-                                      : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
+                                      ? 'bg-blue-100 text-blue-800'
+                                      : 'bg-gray-100 text-gray-800'
                                 }`}>
                                   Contribution: {sdg.contribution}
                                 </span>
@@ -1227,9 +1371,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'customText') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="whitespace-pre-line text-sm">{section.content}</div>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
+                      <div className="whitespace-pre-line text-sm text-black">{section.content}</div>
                       <PageNumber pageNumber={pageNumber} showPageNumbers={showPageNumbers} />
                     </div>
                   );
@@ -1237,17 +1381,43 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                 
                 if (section.type === 'aiGenerated') {
                   return (
-                    <div key={section.id} className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
                       {section.isGenerating ? (
                         <div className="flex items-center justify-center p-8">
                           <div className="flex flex-col items-center gap-4">
                             <QatalystAiIcon className="h-8 w-8 animate-pulse" />
-                            <p className="text-sm">{t('reportBuilder.generating')}</p>
+                            <p className="text-sm text-black">{t('reportBuilder.generating')}</p>
                           </div>
                         </div>
                       ) : (
-                        <div className="whitespace-pre-line text-sm">{section.content}</div>
+                        <div className="whitespace-pre-line text-sm text-black">{section.content}</div>
+                      )}
+                      <PageNumber pageNumber={pageNumber} showPageNumbers={showPageNumbers} />
+                    </div>
+                  );
+                }
+                
+                if (section.type === 'gallery') {
+                  return (
+                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">{section.title}</h2>
+                      {section.galleryImages && section.galleryImages.length > 0 ? (
+                        <div className="grid grid-cols-3 gap-4">
+                          {section.galleryImages.map((image, index) => (
+                            <div key={index} className="relative aspect-square w-full overflow-hidden rounded-md">
+                              <Image
+                                src={image}
+                                alt={`Gallery image ${index + 1}`}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                className="rounded-md hover:scale-105 transition-transform duration-200"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-gray-600 text-center py-10">No images available</p>
                       )}
                       <PageNumber pageNumber={pageNumber} showPageNumbers={showPageNumbers} />
                     </div>
@@ -1259,8 +1429,8 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
               
               {/* Reference Documents Section */}
               {reportData?.referencedDocuments && reportData.referencedDocuments.length > 0 && (
-                <div className="bg-white dark:bg-gray-900 shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
-                  <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">Reference Documents</h2>
+                <div className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto relative">
+                  <h2 className="text-2xl font-semibold mb-6 pb-2 border-b text-black">Reference Documents</h2>
                   <div className="space-y-4">
                     {reportData?.referencedDocuments?.map(file => (
                       <div key={file.id} className="border rounded-md p-4 bg-muted/10 hover:bg-muted/20 transition-colors">
@@ -1277,9 +1447,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
                             )}
                           </div>
                           <div className="flex-1">
-                            <p className="font-medium">{file.name}</p>
+                            <p className="font-medium text-black">{file.name}</p>
                             {file.insights && (
-                              <p className="text-sm text-muted-foreground mt-2">{file.insights}</p>
+                              <p className="text-sm text-gray-600 mt-2">{file.insights}</p>
                             )}
                           </div>
                         </div>
