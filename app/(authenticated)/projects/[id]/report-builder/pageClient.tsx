@@ -878,12 +878,12 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
             </div>
             <div id="templates-carousel" className="flex overflow-x-auto pb-4 gap-4 scroll-smooth">
               <div className="flex-shrink-0 w-48 h-64">
-                <div className="border-2 border-primary rounded-md p-4 bg-white hover:bg-primary/5 cursor-pointer transition-colors h-full flex flex-col shadow-sm">
+                <div className="border-2 border-primary rounded-md p-4 bg-card hover:bg-primary/5 cursor-pointer transition-colors h-full flex flex-col shadow-sm dark:border-primary">
                   <div className="relative">
-                    <div className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                    <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded-full">
                       Active
                     </div>
-                    <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
+                    <div className="h-32 bg-muted mb-3 flex items-center justify-center">
                       <FileText className="h-10 w-10 text-primary" />
                     </div>
                   </div>
@@ -891,25 +891,20 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                     <h3 className="font-semibold text-center">A4 Portrait Report</h3>
                     <p className="text-xs text-center mt-1 text-muted-foreground">Standard report format</p>
                   </div>
-                  <div className="mt-auto text-center">
-                    <Button variant="outline" size="sm" className="px-3 py-1 h-auto text-xs border-primary text-primary hover:bg-primary/10">
-                      Select Template
-                    </Button>
-                  </div>
                 </div>
               </div>
               
               <div className="flex-shrink-0 w-48 h-64">
-                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
-                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
-                    <FileText className="h-10 w-10 text-gray-400" />
+                <div className="border rounded-md p-4 bg-card opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-muted mb-3 flex items-center justify-center">
+                    <FileText className="h-10 w-10 text-muted-foreground" />
                   </div>
                   <div className="flex-grow">
                     <h3 className="font-medium text-center">A4 Landscape Report</h3>
                     <p className="text-xs text-center mt-1 text-muted-foreground">Ideal for data-rich content</p>
                   </div>
                   <div className="mt-auto text-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
                       Coming soon
                     </span>
                   </div>
@@ -917,16 +912,16 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               </div>
               
               <div className="flex-shrink-0 w-48 h-64">
-                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
-                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
-                    <Presentation className="h-10 w-10 text-gray-400" />
+                <div className="border rounded-md p-4 bg-card opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-muted mb-3 flex items-center justify-center">
+                    <Presentation className="h-10 w-10 text-muted-foreground" />
                   </div>
                   <div className="flex-grow">
                     <h3 className="font-medium text-center">Presentation</h3>
                     <p className="text-xs text-center mt-1 text-muted-foreground">PowerPoint compatible</p>
                   </div>
                   <div className="mt-auto text-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
                       Coming soon
                     </span>
                   </div>
@@ -934,16 +929,16 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               </div>
 
               <div className="flex-shrink-0 w-48 h-64">
-                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
-                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
-                    <LayoutDashboard className="h-10 w-10 text-gray-400" />
+                <div className="border rounded-md p-4 bg-card opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-muted mb-3 flex items-center justify-center">
+                    <LayoutDashboard className="h-10 w-10 text-muted-foreground" />
                   </div>
                   <div className="flex-grow">
                     <h3 className="font-medium text-center">Dashboard</h3>
                     <p className="text-xs text-center mt-1 text-muted-foreground">Interactive analytics</p>
                   </div>
                   <div className="mt-auto text-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
                       Coming soon
                     </span>
                   </div>
@@ -951,16 +946,16 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               </div>
 
               <div className="flex-shrink-0 w-48 h-64">
-                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
-                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
-                    <BookOpen className="h-10 w-10 text-gray-400" />
+                <div className="border rounded-md p-4 bg-card opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-muted mb-3 flex items-center justify-center">
+                    <BookOpen className="h-10 w-10 text-muted-foreground" />
                   </div>
                   <div className="flex-grow">
                     <h3 className="font-medium text-center">Interactive Report</h3>
                     <p className="text-xs text-center mt-1 text-muted-foreground">Digital-first experience</p>
                   </div>
                   <div className="mt-auto text-center">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
                       Coming soon
                     </span>
                   </div>
