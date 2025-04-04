@@ -618,11 +618,6 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
         </div>
       </TopBar>
       <div className="p-6 flex flex-col flex-grow overflow-hidden">
-        <div className="space-y-2 mb-4">
-          <p className="text-muted-foreground">
-            {t('reportBuilder.description')}
-          </p>
-        </div>
 
         <div className="flex flex-col flex-grow overflow-hidden">
           <div className="flex justify-between items-center mb-4">

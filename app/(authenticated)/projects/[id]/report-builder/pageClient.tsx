@@ -4,61 +4,42 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { getProjectId } from '@/mock/data';
 import { 
   FileIcon, 
   Send, 
-  Plus, 
-  Trash2, 
-  GripVertical, 
   FileText, 
   Download, 
-  Brain,
   PenLine,
   UploadCloud,
   X,
   FileUp,
   FileCheck,
-  BookImage,
   BookOpen,
   LayoutDashboard,
   ChevronLeft,
   ChevronRight,
   Presentation,
-  Image as ImageIcon
+  Trash2
 } from 'lucide-react';
 import QatalystAiIcon from '@/public/icons/AI-icon.svg';
-import React from 'react';
 import Logo from '@/public/icons/logo.svg';
-import Image from 'next/image';
-import { Textarea } from '@/components/ui/textarea';
 import { TopBar } from '@/components/topbar';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
 import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogTrigger,
-  DialogFooter
-} from '@/components/ui/dialog';
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
-  Tooltip,
-  TooltipContent,
   TooltipProvider,
+  Tooltip,
   TooltipTrigger,
+  TooltipContent,
 } from '@/components/ui/tooltip';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
   Drawer,
   DrawerClose,
@@ -126,47 +107,6 @@ interface ReportData {
   executiveSummary: string;
   referencedDocuments?: UploadedFile[];
 }
-
-// Section types for customizable report
-type SectionType = 
-  | 'coverPage'
-  | 'executiveSummary' 
-  | 'projectSummary' 
-  | 'financialOverview' 
-  | 'financialAssessment'
-  | 'esgAssessment' 
-  | 'sdgContributions' 
-  | 'customText'
-  | 'aiGenerated'
-  | 'gallery';
-
-interface ReportSection {
-  id: string;
-  type: SectionType;
-  title: string;
-  content?: string;
-  prompt?: string;
-  isGenerating?: boolean;
-  includeSources?: boolean;
-  coverTitle?: string;
-  coverSubtitle?: string;
-  galleryImages?: string[]; // Array of base64 image strings
-}
-
-// Mock assessment sources data
-const mockFinancialAssessmentSources = [
-  { id: '1', name: 'Project Financial Statement 2024.pdf', description: 'Annual financial projections document for the Tonle Sap project' },
-  { id: '2', name: 'Carbon Credit Market Analysis Q1 2025.xlsx', description: 'Market analysis for carbon credit pricing and volume estimates' },
-  { id: '3', name: 'Investment Memorandum - Tonle Sap.docx', description: 'Detailed project investment proposal with financial projections' },
-  { id: '4', name: 'Operational Cost Breakdown.pdf', description: 'Detailed breakdown of project operational costs and sustainability metrics' },
-];
-
-const mockEsgAssessmentSources = [
-  { id: '1', name: 'Environmental Impact Assessment 2024.pdf', description: 'Comprehensive evaluation of environmental impacts and mitigation strategies' },
-  { id: '2', name: 'Community Engagement Report.docx', description: 'Documentation of community consultations and social impact projections' },
-  { id: '3', name: 'Biodiversity Baseline Study.pdf', description: 'Scientific assessment of biodiversity in the project area' },
-  { id: '4', name: 'Governance Structure and Compliance.pdf', description: 'Project governance framework and regulatory compliance documentation' },
-];
 
 // File Upload Drawer Component
 function DocumentUploadDrawer({
@@ -311,207 +251,18 @@ function DocumentUploadDrawer({
   );
 }
 
-// Draggable section component
-const DraggableSection = ({ 
-  section, 
-  index, 
-  moveItem, 
-  toggleSources, 
-  removeSection,
-}: { 
-  section: ReportSection, 
-  index: number, 
-  moveItem: (dragIndex: number, hoverIndex: number) => void, 
-  toggleSources: (id: string) => void,
-  removeSection: (id: string) => void,
-  moveSection: (id: string, direction: 'up' | 'down') => void
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  
-  const [{ isDragging }, drag] = useDrag({
-    type: 'REPORT_SECTION',
-    item: { id: section.id, index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-  
-  const [, drop] = useDrop({
-    accept: 'REPORT_SECTION',
-    hover: (item: { id: string, index: number }, monitor) => {
-      if (!ref.current) {
-        return;
-      }
-      
-      const dragIndex = item.index;
-      const hoverIndex = index;
-      
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-      
-      // Determine rectangle on screen
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-      
-      // Get vertical middle
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-      
-      // Get pixels to the top
-      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
-      
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-      
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-      
-      // Time to actually perform the action
-      moveItem(dragIndex, hoverIndex);
-      
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
-      item.index = hoverIndex;
-    },
-  });
-  
-  drag(drop(ref));
-  
-  return (
-    <div 
-      ref={ref} 
-      className={`flex items-center p-2 border rounded-md bg-background ${isDragging ? 'opacity-50 border-dashed border-primary' : ''} hover:border-primary transition-colors duration-200`}
-    >
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <div className="mr-2 text-muted-foreground cursor-grab flex hover:text-primary">
-              <GripVertical className="h-5 w-5" />
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Drag to reorder</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-      <div className="flex-1 font-medium">{section.title}</div>
-      <div className="flex items-center space-x-2">
-        {(section.type === 'financialAssessment' || section.type === 'esgAssessment') && (
-          <div className="flex items-center space-x-1">
-            <input 
-              type="checkbox" 
-              id={`sources-${section.id}`}
-              checked={section.includeSources}
-              onChange={() => toggleSources(section.id)}
-              className="rounded border-gray-300 text-primary focus:ring-primary"
-            />
-            <label htmlFor={`sources-${section.id}`} className="text-xs text-muted-foreground">
-              Include Sources
-            </label>
-          </div>
-        )}
-        <div className="flex space-x-1">
-          <Button 
-            size="icon" 
-            variant="ghost" 
-            className="h-8 w-8 text-destructive hover:text-destructive"
-            onClick={() => removeSection(section.id)}
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const mockFinancialAssessmentData = [
-  {
-    criterion: 'Project Value',
-    assessment: 'The project value was calculated to be $25 million based on carbon credit projections, operational costs, and comparable project valuation metrics.',
-    value: '$25,000,000'
-  },
-  {
-    criterion: 'Cost of Production',
-    assessment: 'The cost of production analysis shows a cost per carbon credit of $4.80, which is below the industry average of $5.70 for comparable REDD+ projects.',
-    value: '$4.80 per credit'
-  },
-  {
-    criterion: 'Revenue Projections',
-    assessment: 'Based on conservative carbon credit price forecasts, the project is expected to generate $10.5 million in annual revenue with a steady growth trajectory of 4% year-over-year.',
-    value: '$10,500,000 per year'
-  },
-  {
-    criterion: 'Capital Expense Intensity',
-    assessment: 'The project has a capital expense intensity of $22.06 per tCO₂e, indicating efficient use of capital for carbon reduction.',
-    value: '$22.06 per tCO₂e'
-  },
-  {
-    criterion: 'Operating Expense Intensity',
-    assessment: 'Annual operating expenses amount to $1.50 per tCO₂e, which is favorable compared to the industry benchmark of $1.85 per tCO₂e.',
-    value: '$1.50 per tCO₂e'
-  },
-  {
-    criterion: 'Breakeven Timeline',
-    assessment: 'With current carbon pricing and cost projections, the project is expected to reach breakeven in 3.4 years.',
-    value: '3.4 years'
-  },
-];
-
-const mockEsgAssessmentData = {
-  environmentalImpact: {
-    assessment: 'The project will protect 566,560 hectares of critical forest habitat, conserve biodiversity including 28 endangered species, and preserve water quality in the Tonle Sap Lake ecosystem.',
-    rating: 'Satisfactory',
-  },
-  socialImpact: {
-    assessment: 'The project will provide employment for 120 local community members, improve livelihoods for 1,500 households, and develop community infrastructure including schools and health centers.',
-    rating: 'Satisfactory',
-  },
-  governance: {
-    assessment: 'The project has established a strong governance framework with community-led monitoring programs and transparent benefit-sharing mechanisms.',
-    rating: 'Satisfactory',
-  },
-  communityEngagement: {
-    assessment: 'While community engagement processes have been established, there are concerns about the inclusivity of decision-making processes and representation of indigenous communities.',
-    rating: 'Investigate',
-  },
-};
-
-
 export function ReportBuilderClient({ projectId }: { projectId: string }) {
   const router = useRouter();
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedReport, setGeneratedReport] = useState<ReportData | null>(null);
-  const [reportSections, setReportSections] = useState<ReportSection[]>([]);
   const [isCustomizing, setIsCustomizing] = useState(false);
-  const [newSectionTitle, setNewSectionTitle] = useState('');
-  const [newSectionPrompt, setNewSectionPrompt] = useState('');
-  const [newSectionContent, setNewSectionContent] = useState('');
-  const [addSectionType, setAddSectionType] = useState<SectionType>('customText');
-  const [addSectionDialogOpen, setAddSectionDialogOpen] = useState(false);
   const [loadedFromStorage, setLoadedFromStorage] = useState(false);
   const [isUploadDrawerOpen, setIsUploadDrawerOpen] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const project = getProjectId(projectId);
-  
-  // Generate a unique ID for sections
-  const generateId = () => `section-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
   // Load saved report from localStorage and redirect to preview if exists
   useEffect(() => {
@@ -530,7 +281,6 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
           
           // Otherwise, load the data for the form
           setGeneratedReport(parsedData.report);
-          setReportSections(parsedData.sections);
           setInputValue(parsedData.prompt || '');
           setLoadedFromStorage(true);
           
@@ -545,39 +295,25 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     }
   }, [projectId, router]);
 
-  // Log the project data to ensure we have the image URL
-  useEffect(() => {
-    if (project) {
-      console.log('Project data loaded:', project);
-    }
-  }, [project]);
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
-  // Create default sections when a report is generated
-  useEffect(() => {
-    if (generatedReport && reportSections.length === 0) {
-      setReportSections([
-        { id: generateId(), type: 'executiveSummary', title: 'Executive Summary' },
-        { id: generateId(), type: 'projectSummary', title: 'Project Summary' },
-        { id: generateId(), type: 'financialOverview', title: 'Financial Overview' },
-        { id: generateId(), type: 'financialAssessment', title: 'Financial Assessment', includeSources: false },
-        { id: generateId(), type: 'esgAssessment', title: 'ESG Assessment', includeSources: false },
-        { id: generateId(), type: 'sdgContributions', title: 'SDG Contributions' }
-      ]);
-    }
-  }, [generatedReport]);
   
-  // Save report to localStorage whenever it changes and redirect to preview
+  // Save report to localStorage and redirect to preview
   useEffect(() => {
-    if (generatedReport && reportSections.length > 0 && typeof window !== 'undefined') {
+    if (generatedReport && typeof window !== 'undefined') {
       localStorage.setItem(`report-${projectId}`, JSON.stringify({
         report: generatedReport,
-        sections: reportSections,
+        sections: [
+          { id: `section-${Date.now()}-1`, type: 'executiveSummary', title: 'Executive Summary' },
+          { id: `section-${Date.now()}-2`, type: 'projectSummary', title: 'Project Summary' },
+          { id: `section-${Date.now()}-3`, type: 'financialOverview', title: 'Financial Overview' },
+          { id: `section-${Date.now()}-4`, type: 'financialAssessment', title: 'Financial Assessment', includeSources: false },
+          { id: `section-${Date.now()}-5`, type: 'esgAssessment', title: 'ESG Assessment', includeSources: false },
+          { id: `section-${Date.now()}-6`, type: 'sdgContributions', title: 'SDG Contributions' }
+        ],
         prompt: inputValue,
         uploadedFiles: uploadedFiles
       }));
@@ -587,7 +323,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
         router.push(`/projects/${projectId}/report-builder/preview`);
       }
     }
-  }, [generatedReport, reportSections, projectId, inputValue, uploadedFiles, loadedFromStorage, router]);
+  }, [generatedReport, projectId, inputValue, uploadedFiles, loadedFromStorage, router]);
 
   // Function to delete saved report
   const handleDeleteReport = () => {
@@ -598,7 +334,6 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     
     // Reset state
     setGeneratedReport(null);
-    setReportSections([]);
     setInputValue('');
     setIsCustomizing(false);
     setLoadedFromStorage(false);
@@ -892,7 +627,6 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     if (!inputValue.trim()) return;
     
     setIsGenerating(true);
-    setReportSections([]);
     
     // Determine which report data to use based on the input prompt
     let reportToGenerate: ReportData;
@@ -958,7 +692,6 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     
     // Immediately generate a report based on the selected example
     setIsGenerating(true);
-    setReportSections([]);
     
     // Determine which report data to use based on the example prompt
     let reportToGenerate: ReportData;
@@ -1016,85 +749,7 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
     }, 3000);
   };
 
-  const addSection = () => {
-    if ((addSectionType === 'customText' || addSectionType === 'coverPage' || addSectionType === 'gallery') && !newSectionTitle) {
-      return;
-    }
 
-    const newSection: ReportSection = {
-      id: generateId(),
-      type: addSectionType,
-      title: newSectionTitle || t(`reportBuilder.addSectionTypes.${addSectionType}`),
-      content: addSectionType === 'customText' ? newSectionContent : undefined,
-      prompt: addSectionType === 'aiGenerated' ? newSectionPrompt : undefined,
-      isGenerating: addSectionType === 'aiGenerated' ? true : undefined,
-      coverTitle: addSectionType === 'coverPage' ? newSectionTitle : undefined,
-      coverSubtitle: addSectionType === 'coverPage' ? newSectionContent : undefined,
-      galleryImages: addSectionType === 'gallery' && newSectionContent ? JSON.parse(newSectionContent) : undefined
-    };
-
-    setReportSections([...reportSections, newSection]);
-    setAddSectionDialogOpen(false);
-    
-    // Reset form
-    setNewSectionTitle('');
-    setNewSectionPrompt('');
-    setNewSectionContent('');
-    setAddSectionType('customText');
-
-    // If it's an AI-generated section, simulate generation
-    if (addSectionType === 'aiGenerated') {
-      setTimeout(() => {
-        setReportSections(sections => 
-          sections.map(section => 
-            section.id === newSection.id 
-              ? { 
-                  ...section, 
-                  isGenerating: false, 
-                  content: `This is an AI-generated section based on the prompt: "${newSectionPrompt}"\n\nThe ${project?.name || 'project'} demonstrates strong potential for both environmental impact and financial returns. Based on the assessment of similar projects in the region, we anticipate this initiative will deliver approximately 15% higher carbon credit yields than the regional average, making it an attractive investment opportunity.` 
-                } 
-              : section
-          )
-        );
-      }, 3000);
-    }
-  };
-
-  const removeSection = (id: string) => {
-    setReportSections(reportSections.filter(section => section.id !== id));
-  };
-
-  const moveSection = (id: string, direction: 'up' | 'down') => {
-    const index = reportSections.findIndex(section => section.id === id);
-    if (
-      (direction === 'up' && index === 0) || 
-      (direction === 'down' && index === reportSections.length - 1)
-    ) {
-      return;
-    }
-
-    const newSections = [...reportSections];
-    const newIndex = direction === 'up' ? index - 1 : index + 1;
-    const [removed] = newSections.splice(index, 1);
-    newSections.splice(newIndex, 0, removed);
-    setReportSections(newSections);
-  };
-  
-  const moveItem = (dragIndex: number, hoverIndex: number) => {
-    const newSections = [...reportSections];
-    const dragItem = newSections[dragIndex];
-    newSections.splice(dragIndex, 1);
-    newSections.splice(hoverIndex, 0, dragItem);
-    setReportSections(newSections);
-  };
-  
-  const toggleSources = (id: string) => {
-    setReportSections(reportSections.map(section => 
-      section.id === id 
-        ? { ...section, includeSources: !section.includeSources }
-        : section
-    ));
-  };
 
   return (
     <div>
