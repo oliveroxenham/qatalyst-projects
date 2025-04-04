@@ -699,7 +699,7 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
             open={addSectionDialogOpen} 
             onOpenChange={setAddSectionDialogOpen}
           >
-            <DialogContent>
+            <DialogContent className="max-h-[80vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Add New Section</DialogTitle>
               </DialogHeader>

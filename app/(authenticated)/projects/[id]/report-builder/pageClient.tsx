@@ -22,6 +22,11 @@ import {
   FileUp,
   FileCheck,
   BookImage,
+  BookOpen,
+  LayoutDashboard,
+  ChevronLeft,
+  ChevronRight,
+  Presentation,
   Image as ImageIcon
 } from 'lucide-react';
 import QatalystAiIcon from '@/public/icons/AI-icon.svg';
@@ -1183,6 +1188,131 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
               ))}
             </div>
           </div>
+          
+          <div className="space-y-3 pt-4 border-t">
+            <div className="flex justify-between items-center mb-2">
+              <p className="text-sm font-medium">Select a template:</p>
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-8 w-8 rounded-full"
+                  onClick={() => {
+                    const container = document.getElementById('templates-carousel');
+                    if (container) {
+                      container.scrollBy({ left: -300, behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-8 w-8 rounded-full"
+                  onClick={() => {
+                    const container = document.getElementById('templates-carousel');
+                    if (container) {
+                      container.scrollBy({ left: 300, behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+            <div id="templates-carousel" className="flex overflow-x-auto pb-4 gap-4 scroll-smooth">
+              <div className="flex-shrink-0 w-48 h-64">
+                <div className="border-2 border-primary rounded-md p-4 bg-white hover:bg-primary/5 cursor-pointer transition-colors h-full flex flex-col shadow-sm">
+                  <div className="relative">
+                    <div className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                      Active
+                    </div>
+                    <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
+                      <FileText className="h-10 w-10 text-primary" />
+                    </div>
+                  </div>
+                  <div className="flex-grow">
+                    <h3 className="font-semibold text-center">A4 Portrait Report</h3>
+                    <p className="text-xs text-center mt-1 text-muted-foreground">Standard report format</p>
+                  </div>
+                  <div className="mt-auto text-center">
+                    <Button variant="outline" size="sm" className="px-3 py-1 h-auto text-xs border-primary text-primary hover:bg-primary/10">
+                      Select Template
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex-shrink-0 w-48 h-64">
+                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
+                    <FileText className="h-10 w-10 text-gray-400" />
+                  </div>
+                  <div className="flex-grow">
+                    <h3 className="font-medium text-center">A4 Landscape Report</h3>
+                    <p className="text-xs text-center mt-1 text-muted-foreground">Ideal for data-rich content</p>
+                  </div>
+                  <div className="mt-auto text-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      Coming soon
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex-shrink-0 w-48 h-64">
+                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
+                    <Presentation className="h-10 w-10 text-gray-400" />
+                  </div>
+                  <div className="flex-grow">
+                    <h3 className="font-medium text-center">Presentation</h3>
+                    <p className="text-xs text-center mt-1 text-muted-foreground">PowerPoint compatible</p>
+                  </div>
+                  <div className="mt-auto text-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      Coming soon
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-shrink-0 w-48 h-64">
+                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
+                    <LayoutDashboard className="h-10 w-10 text-gray-400" />
+                  </div>
+                  <div className="flex-grow">
+                    <h3 className="font-medium text-center">Dashboard</h3>
+                    <p className="text-xs text-center mt-1 text-muted-foreground">Interactive analytics</p>
+                  </div>
+                  <div className="mt-auto text-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      Coming soon
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-shrink-0 w-48 h-64">
+                <div className="border rounded-md p-4 bg-white opacity-60 cursor-not-allowed h-full flex flex-col">
+                  <div className="h-32 bg-gray-100 mb-3 flex items-center justify-center">
+                    <BookOpen className="h-10 w-10 text-gray-400" />
+                  </div>
+                  <div className="flex-grow">
+                    <h3 className="font-medium text-center">Interactive Report</h3>
+                    <p className="text-xs text-center mt-1 text-muted-foreground">Digital-first experience</p>
+                  </div>
+                  <div className="mt-auto text-center">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      Coming soon
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
 
         {isGenerating && (
@@ -1233,586 +1363,6 @@ export function ReportBuilderClient({ projectId }: { projectId: string }) {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </div>
-            </div>
-          
-            {isCustomizing && (
-              <Card className="p-4 mb-4">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-medium">{t('reportBuilder.reportSections')}</h3>
-                  <Dialog open={addSectionDialogOpen} onOpenChange={setAddSectionDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button size="sm">
-                        <Plus className="mr-2 h-4 w-4" />
-                        {t('reportBuilder.addSection')}
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>{t('reportBuilder.addSection')}</DialogTitle>
-                      </DialogHeader>
-                      <div className="space-y-4 py-4">
-                        <div className="space-y-2">
-                          <label className="font-medium">Section Type</label>
-                          <div className="grid grid-cols-2 gap-2">
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'coverPage' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('coverPage')}
-                            >
-                              <BookImage className="mr-2 h-4 w-4" />
-                              Cover Page
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'customText' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('customText')}
-                            >
-                              <PenLine className="mr-2 h-4 w-4" />
-                              {t('reportBuilder.addSectionTypes.text')}
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'aiGenerated' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('aiGenerated')}
-                            >
-                              <Brain className="mr-2 h-4 w-4" />
-                              {t('reportBuilder.addSectionTypes.ai')}
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'gallery' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('gallery')}
-                            >
-                              <ImageIcon className="mr-2 h-4 w-4" />
-                              Gallery
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'executiveSummary' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('executiveSummary')}
-                            >
-                              <FileText className="mr-2 h-4 w-4" />
-                              Executive Summary
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'projectSummary' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('projectSummary')}
-                            >
-                              <FileText className="mr-2 h-4 w-4" />
-                              {t('reportBuilder.addSectionTypes.projectSummary')}
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'financialOverview' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('financialOverview')}
-                            >
-                              <FileText className="mr-2 h-4 w-4" />
-                              Financial Overview
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'financialAssessment' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('financialAssessment')}
-                            >
-                              <FileText className="mr-2 h-4 w-4" />
-                              Financial Assessment
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'esgAssessment' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('esgAssessment')}
-                            >
-                              <FileText className="mr-2 h-4 w-4" />
-                              ESG Assessment
-                            </Button>
-                            <Button 
-                              type="button" 
-                              variant={addSectionType === 'sdgContributions' ? "default" : "outline"}
-                              className="justify-start"
-                              onClick={() => setAddSectionType('sdgContributions')}
-                            >
-                              <FileText className="mr-2 h-4 w-4" />
-                              SDG Contributions
-                            </Button>
-                          </div>
-                        </div>
-                        
-                        {addSectionType === 'gallery' && (
-                          <>
-                            <div className="space-y-2">
-                              <label className="font-medium">Gallery Title</label>
-                              <Input 
-                                value={newSectionTitle}
-                                onChange={(e) => setNewSectionTitle(e.target.value)}
-                                placeholder="Enter gallery title..."
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="font-medium">Gallery Images</label>
-                              <p className="text-xs text-muted-foreground mb-2">
-                                Upload images to be displayed in a grid layout. You can select multiple images at once.
-                              </p>
-                              <input 
-                                type="file" 
-                                accept="image/*"
-                                multiple
-                                className="block w-full text-sm text-slate-500
-                                  file:mr-4 file:py-2 file:px-4
-                                  file:rounded-full file:border-0
-                                  file:text-sm file:font-semibold
-                                  file:bg-violet-50 file:text-primary
-                                  hover:file:bg-violet-100"
-                                onChange={(e) => {
-                                  if (e.target.files && e.target.files.length > 0) {
-                                    // Create array to store base64 strings
-                                    const filePromises = Array.from(e.target.files).map(file => {
-                                      return new Promise((resolve) => {
-                                        const reader = new FileReader();
-                                        reader.onloadend = () => {
-                                          resolve(reader.result);
-                                        };
-                                        reader.readAsDataURL(file);
-                                      });
-                                    });
-                                    
-                                    // Process all files and set the state
-                                    Promise.all(filePromises).then(base64strings => {
-                                      setNewSectionContent(JSON.stringify(base64strings));
-                                    });
-                                  }
-                                }}
-                              />
-                              {newSectionContent && (
-                                <div className="mt-4">
-                                  <p className="text-sm font-medium mb-2">Selected images: {JSON.parse(newSectionContent).length}</p>
-                                  <div className="grid grid-cols-3 gap-2">
-                                    {JSON.parse(newSectionContent).map((img: string, i: number) => (
-                                      <div key={i} className="relative h-20 w-full overflow-hidden rounded-md">
-                                        <Image
-                                          src={img}
-                                          alt={`Selected image ${i+1}`}
-                                          fill
-                                          style={{ objectFit: 'cover' }}
-                                          className="rounded-md"
-                                        />
-                                      </div>
-                                    ))}
-                                  </div>
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    className="mt-2"
-                                    onClick={() => setNewSectionContent('')}
-                                  >
-                                    <Trash2 className="h-4 w-4 mr-2" />
-                                    Clear all images
-                                  </Button>
-                                </div>
-                              )}
-                            </div>
-                          </>
-                        )}
-                        
-                        {addSectionType === 'coverPage' && (
-                          <>
-                            <div className="space-y-2">
-                              <label className="font-medium">Cover Page Title</label>
-                              <Input 
-                                value={newSectionTitle}
-                                onChange={(e) => setNewSectionTitle(e.target.value)}
-                                placeholder="Enter the main title for the cover page..."
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="font-medium">Cover Page Subtitle</label>
-                              <Input 
-                                value={newSectionContent}
-                                onChange={(e) => setNewSectionContent(e.target.value)}
-                                placeholder="Enter the subtitle for the cover page..."
-                              />
-                            </div>
-                          </>
-                        )}
-                        
-                        {addSectionType === 'customText' && (
-                          <>
-                            <div className="space-y-2">
-                              <label className="font-medium">{t('reportBuilder.sectionTitle')}</label>
-                              <Input 
-                                value={newSectionTitle}
-                                onChange={(e) => setNewSectionTitle(e.target.value)}
-                                placeholder="Enter section title..."
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="font-medium">Content</label>
-                              <Textarea 
-                                value={newSectionContent}
-                                onChange={(e) => setNewSectionContent(e.target.value)}
-                                placeholder="Enter section content..."
-                                className="min-h-[150px]"
-                              />
-                            </div>
-                          </>
-                        )}
-                        
-                        {addSectionType === 'aiGenerated' && (
-                          <>
-                            <div className="space-y-2">
-                              <label className="font-medium">{t('reportBuilder.sectionTitle')}</label>
-                              <Input 
-                                value={newSectionTitle}
-                                onChange={(e) => setNewSectionTitle(e.target.value)}
-                                placeholder="Enter section title..."
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="font-medium">{t('reportBuilder.promptForSection')}</label>
-                              <Textarea 
-                                value={newSectionPrompt}
-                                onChange={(e) => setNewSectionPrompt(e.target.value)}
-                                placeholder="E.g. Analyze the carbon credit price projections for this project..."
-                                className="min-h-[100px]"
-                              />
-                            </div>
-                          </>
-                        )}
-                      </div>
-                      <DialogFooter>
-                        <Button 
-                          onClick={addSection}
-                          disabled={(addSectionType === 'customText' && !newSectionTitle) || 
-                                    (addSectionType === 'aiGenerated' && (!newSectionTitle || !newSectionPrompt))}
-                        >
-                          {t('reportBuilder.addSection')}
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-                
-                <div className="space-y-2">
-                  <DndProvider backend={HTML5Backend}>
-                    {reportSections.map((section, index) => (
-                      <DraggableSection
-                        key={section.id}
-                        section={section}
-                        index={index}
-                        moveItem={moveItem}
-                        toggleSources={toggleSources}
-                        removeSection={removeSection}
-                        moveSection={moveSection}
-                      />
-                    ))}
-                  </DndProvider>
-                </div>
-              </Card>
-            )}
-            
-            <div className="flex justify-center">
-              <div className="w-full max-w-[210mm] mx-auto space-y-8">
-              
-              {/* Dynamic A4 Page Sections */}
-              {reportSections.map((section) => {
-                if (section.type === 'coverPage') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid flex flex-col justify-center items-center">
-                      <div className="space-y-6 text-center">
-                        <h1 className="text-4xl font-bold">{section.coverTitle}</h1>
-                        <h2 className="text-2xl text-muted-foreground">{section.coverSubtitle}</h2>
-                        {project?.imgUrl && (
-                          <div className="mt-8 w-full h-[350px] relative overflow-hidden rounded-md mx-auto">
-                            <Image
-                              src={project.imgUrl}
-                              alt={project?.name || "Project Image"}
-                              fill
-                              style={{ objectFit: 'cover' }}
-                              className="rounded-md"
-                              priority
-                            />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'executiveSummary') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="whitespace-pre-line text-sm">
-                        {generatedReport.executiveSummary}
-                      </div>
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'projectSummary') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="grid grid-cols-2 gap-6">
-                        {Object.entries(generatedReport.projectSummary).map(([key, value]: [string, string]) => (
-                          <div key={key} className="space-y-2 p-3 border rounded-md bg-muted/20">
-                            <p className="text-sm font-semibold">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
-                            <p className="text-sm">{value}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'financialOverview') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="grid grid-cols-2 gap-6">
-                        {Object.entries(generatedReport.financialOverview).map(([key, value]: [string, string]) => (
-                          <div key={key} className="space-y-2 p-3 border rounded-md bg-muted/20">
-                            <p className="text-sm font-semibold">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</p>
-                            <p className="text-sm font-medium text-primary">{value}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'financialAssessment') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      
-                      <div className="overflow-hidden border rounded-md">
-                        <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-muted">
-                            <tr>
-                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-1/4">
-                                Criterion
-                              </th>
-                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-1/4">
-                                Value
-                              </th>
-                              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-2/4">
-                                Assessment
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody className="bg-background divide-y divide-gray-200">
-                            {mockFinancialAssessmentData.map((item, i) => (
-                              <tr key={i} className={i % 2 === 0 ? 'bg-background' : 'bg-muted/30'}>
-                                <td className="px-4 py-3 text-sm font-medium">
-                                  {item.criterion}
-                                </td>
-                                <td className="px-4 py-3 text-sm text-primary font-medium">
-                                  {item.value}
-                                </td>
-                                <td className="px-4 py-3 text-sm">
-                                  {item.assessment}
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                      
-                      {section.includeSources && (
-                        <div className="mt-6 pt-4 border-t">
-                          <h3 className="text-lg font-medium mb-2">{t('reportBuilder.appendices')}: {t('reportBuilder.financialAssessmentSources')}</h3>
-                          <div className="space-y-2">
-                            {mockFinancialAssessmentSources.map(source => (
-                              <div key={source.id} className="p-2 bg-muted rounded-md">
-                                <p className="text-sm font-medium">{source.name}</p>
-                                <p className="text-xs text-muted-foreground">{source.description}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'esgAssessment') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      
-                      <div className="space-y-4">
-                        {Object.entries(mockEsgAssessmentData).map(([key, value]) => (
-                          <div key={key} className="p-4 border rounded-md bg-muted/10">
-                            <div className="flex justify-between mb-3">
-                              <h3 className="text-md font-medium">
-                                {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
-                              </h3>
-                              <div className={`text-xs px-3 py-1 rounded-full ${
-                                value.rating === 'Satisfactory' 
-                                  ? 'bg-green-100 text-green-800' 
-                                  : value.rating === 'Investigate' 
-                                    ? 'bg-orange-100 text-orange-800' 
-                                    : 'bg-red-100 text-red-800'
-                              }`}>
-                                {value.rating}
-                              </div>
-                            </div>
-                            <p className="text-sm">{value.assessment}</p>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      {section.includeSources && (
-                        <div className="mt-6 pt-4 border-t">
-                          <h3 className="text-lg font-medium mb-2">{t('reportBuilder.appendices')}: {t('reportBuilder.esgAssessmentSources')}</h3>
-                          <div className="space-y-2">
-                            {mockEsgAssessmentSources.map(source => (
-                              <div key={source.id} className="p-3 bg-muted rounded-md">
-                                <p className="text-sm font-medium">{source.name}</p>
-                                <p className="text-xs text-muted-foreground">{source.description}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'sdgContributions') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="grid grid-cols-2 gap-6">
-                        {generatedReport.sdgContributions.map((sdg: SdgContribution) => (
-                          <div key={sdg.sdg} className="flex items-center space-x-4 p-3 border rounded-md bg-muted/10">
-                            <div className="flex-shrink-0">
-                              <Image
-                                src={`/icons/goal-${sdg.sdg.toString().padStart(2, '0')}.svg`}
-                                alt={`SDG ${sdg.sdg}`}
-                                width={50}
-                                height={50}
-                                className="h-12 w-12"
-                              />
-                            </div>
-                            <div>
-                              <p className="text-sm font-medium">SDG {sdg.sdg}: {sdg.name}</p>
-                              <p className="text-sm font-semibold mt-1">
-                                <span className={`inline-block px-2 py-1 rounded-full text-xs ${
-                                  sdg.contribution === 'Major' 
-                                    ? 'bg-green-100 text-green-800' 
-                                    : sdg.contribution === 'Significant' 
-                                      ? 'bg-blue-100 text-blue-800'
-                                      : 'bg-gray-100 text-gray-800'
-                                }`}>
-                                  Contribution: {sdg.contribution}
-                                </span>
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'customText') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      <div className="whitespace-pre-line text-sm">{section.content}</div>
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'aiGenerated') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      {section.isGenerating ? (
-                        <div className="flex items-center justify-center p-8">
-                          <div className="flex flex-col items-center gap-4">
-                            <QatalystAiIcon className="h-8 w-8 animate-pulse" />
-                            <p className="text-sm">{t('reportBuilder.generating')}</p>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="whitespace-pre-line text-sm">{section.content}</div>
-                      )}
-                    </div>
-                  );
-                }
-                
-                if (section.type === 'gallery') {
-                  return (
-                    <div key={section.id} className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                      <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">{section.title}</h2>
-                      {section.galleryImages && section.galleryImages.length > 0 ? (
-                        <div className="grid grid-cols-3 gap-4">
-                          {section.galleryImages.map((image, index) => (
-                            <div key={index} className="relative aspect-square w-full overflow-hidden rounded-md">
-                              <Image
-                                src={image}
-                                alt={`Gallery image ${index + 1}`}
-                                fill
-                                style={{ objectFit: 'cover' }}
-                                className="rounded-md hover:scale-105 transition-transform duration-200"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-muted-foreground text-center py-10">No images available</p>
-                      )}
-                    </div>
-                  );
-                }
-                
-                return null;
-              })}
-              
-              {/* Reference Documents Section */}
-              {generatedReport?.referencedDocuments && generatedReport.referencedDocuments.length > 0 && (
-                <div className="bg-white shadow-lg p-8 aspect-[1/1.4142] w-full max-w-[210mm] mx-auto rounded-md mb-8 break-inside-avoid overflow-y-auto">
-                  <h2 className="text-2xl font-semibold mb-6 pb-2 border-b">Reference Documents</h2>
-                  <div className="space-y-4">
-                    {generatedReport.referencedDocuments.map(file => (
-                      <div key={file.id} className="border rounded-md p-4 bg-muted/10 hover:bg-muted/20 transition-colors">
-                        <div className="flex items-start space-x-4">
-                          <div className="flex-shrink-0">
-                            {file.type.includes('pdf') ? (
-                              <FileIcon className="h-8 w-8 text-red-500" />
-                            ) : file.type.includes('word') || file.type.includes('doc') ? (
-                              <FileText className="h-8 w-8 text-blue-500" />
-                            ) : file.type.includes('excel') || file.type.includes('sheet') ? (
-                              <FileText className="h-8 w-8 text-green-500" />
-                            ) : (
-                              <FileText className="h-8 w-8 text-gray-500" />
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <p className="font-medium">{file.name}</p>
-                            {file.insights && (
-                              <p className="text-sm text-muted-foreground mt-2">{file.insights}</p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
               </div>
             </div>
             
