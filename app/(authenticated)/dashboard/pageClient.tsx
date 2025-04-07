@@ -11,11 +11,11 @@ import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import dynamic from 'next/dynamic';
 import { useState, useRef } from 'react';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import type { MapboxMapRef } from './map-flat';
 
 // Dynamically import MapboxMap to prevent SSR issues with mapbox-gl
 const MapboxMapComponent = dynamic(
@@ -80,7 +80,7 @@ const alertItems = [
 export default function DashboardClient() {
   const { t } = useTranslation();
   const [selectedMapCountry, setSelectedMapCountry] = useState<string | null>(null);
-  const mapFlatRef = useRef<any>(null);
+  const mapFlatRef = useRef<MapboxMapRef>(null);
   
   return (
     <div className="relative">

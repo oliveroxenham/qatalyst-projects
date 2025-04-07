@@ -66,8 +66,11 @@ const MapboxMap = forwardRef<MapboxMapRef, { countries?: CountryMarker[] }>(({
         markerEl.style.zIndex = "10";
       }
       
-      // Show the popup
-      marker.getPopup().addTo(mapRef.current);
+      // Show the popup - with null checks
+      const popup = marker.getPopup();
+      if (popup && mapRef.current) {
+        popup.addTo(mapRef.current);
+      }
     }
   }, [countries]);
 
@@ -159,12 +162,18 @@ const MapboxMap = forwardRef<MapboxMapRef, { countries?: CountryMarker[] }>(({
           
           // Show popup on mouse enter
           markerElement.addEventListener('mouseenter', () => {
-            marker.getPopup().addTo(map);
+            const popup = marker.getPopup();
+            if (popup) {
+              popup.addTo(map);
+            }
           });
           
           // Hide popup on mouse leave
           markerElement.addEventListener('mouseleave', () => {
-            marker.getPopup().remove();
+            const popup = marker.getPopup();
+            if (popup) {
+              popup.remove();
+            }
           });
           
           // Track markers for cleanup
