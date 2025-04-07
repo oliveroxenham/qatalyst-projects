@@ -13,6 +13,22 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import dynamic from 'next/dynamic';
+import { useState, useRef } from 'react';
+import { ThemeSwitcher } from '@/components/theme-switcher';
+
+// Dynamically import MapboxMap to prevent SSR issues with mapbox-gl
+const MapboxMapComponent = dynamic(
+  () => import('./map-flat'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="h-[350px] bg-gray-900 animate-pulse flex items-center justify-center">
+        <div className="text-white/50">Loading map...</div>
+      </div>
+    )
+  }
+);
 
 // Mock data for charts
 const monthlyIssuance = [
@@ -63,15 +79,18 @@ const alertItems = [
 
 export default function DashboardClient() {
   const { t } = useTranslation();
+  const [selectedMapCountry, setSelectedMapCountry] = useState<string | null>(null);
+  const mapFlatRef = useRef<any>(null);
   
   return (
     <div className="relative">
       <TopBar title={t('topbar.dashboard')}>
-        <div className="flex justify-end w-full gap-3">
+        <div className="flex justify-end w-full gap-3 items-center">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CalendarDays className="h-4 w-4" />
             <span>Last updated: Today, 10:45 AM</span>
           </div>
+          <ThemeSwitcher />
         </div>
       </TopBar>
 
@@ -175,43 +194,112 @@ export default function DashboardClient() {
         </Card>
       </div>
 
-      {/* Charts and map */}
-      <div className="p-4 grid md:grid-cols-2 grid-cols-1 gap-4">
-        <Card className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium text-lg">{t('dashboard.geographicDistribution')}</h3>
-            <Badge variant="outline" className="flex items-center gap-1">
-              <Globe className="h-3 w-3" /> Global View
-            </Badge>
-          </div>
-          <div className="h-[350px]">
-            <WorldMap 
-              countryColors={{
-                "116": "fill-blue-500 hover:fill-blue-600", // Cambodia
-                "076": "fill-green-500 hover:fill-green-600", // Brazil
-                "702": "fill-purple-500 hover:fill-purple-600", // Singapore
-                "360": "fill-amber-500 hover:fill-amber-600" // Indonesia
-              }}
-            />
-          </div>
-          <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs">
-            <span className="font-medium">Countries with active projects:</span>
-            {recentProjects.map((project) => (
-              <div key={project.country} className="flex items-center gap-1">
-                <div className={`w-3 h-3 rounded-full ${
-                  project.country === 'Cambodia' 
-                    ? 'bg-blue-500' 
-                    : project.country === 'Brazil'
-                      ? 'bg-green-500'
-                      : project.country === 'Singapore'
-                        ? 'bg-purple-500'
-                        : 'bg-amber-500'
-                }`}></div>
-                <span>{project.country}</span>
-              </div>
-            ))}
-          </div>
-        </Card>
+      {/* Charts and maps */}
+      <div className="p-4 grid grid-cols-1 gap-4">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+          {/* React Simple Maps */}
+          <Card className="p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-medium text-lg">{t('dashboard.geographicDistribution')}</h3>
+              <Badge variant="outline" className="flex items-center gap-1">
+                <Globe className="h-3 w-3" /> Simple Maps
+              </Badge>
+            </div>
+            <div className="h-[350px]">
+              <WorldMap 
+                countryColors={{
+                  "116": "fill-blue-500 hover:fill-blue-600", // Cambodia
+                  "076": "fill-green-500 hover:fill-green-600", // Brazil
+                  "702": "fill-purple-500 hover:fill-purple-600", // Singapore
+                  "360": "fill-amber-500 hover:fill-amber-600" // Indonesia
+                }}
+              />
+            </div>
+            <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs">
+              <span className="font-medium">Countries with active projects:</span>
+              {recentProjects.map((project) => (
+                <div key={project.country} className="flex items-center gap-1">
+                  <div className={`w-3 h-3 rounded-full ${
+                    project.country === 'Cambodia' 
+                      ? 'bg-blue-500' 
+                      : project.country === 'Brazil'
+                        ? 'bg-green-500'
+                        : project.country === 'Singapore'
+                          ? 'bg-purple-500'
+                          : 'bg-amber-500'
+                  }`}></div>
+                  <span>{project.country}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Mapbox Flat Map */}
+          <Card className="p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-medium text-lg">{t('dashboard.geographicDistribution')}</h3>
+              <Badge variant="outline" className="flex items-center gap-1">
+                <Globe className="h-3 w-3" /> Mapbox Map
+              </Badge>
+            </div>
+            <div className="h-[350px]">
+              <MapboxMapComponent 
+                ref={mapFlatRef}
+                countries={[
+                  { 
+                    name: 'Cambodia',
+                    coordinates: [104.9910, 12.5657],
+                    color: '#3b82f6' // blue-500
+                  },
+                  { 
+                    name: 'Brazil',
+                    coordinates: [-51.9253, -14.2350],
+                    color: '#22c55e' // green-500
+                  },
+                  { 
+                    name: 'Singapore',
+                    coordinates: [103.8198, 1.3521],
+                    color: '#a855f7' // purple-500
+                  },
+                  { 
+                    name: 'Indonesia',
+                    coordinates: [113.9213, -0.7893],
+                    color: '#f59e0b' // amber-500
+                  }
+                ]}
+              />
+            </div>
+            <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs">
+              <span className="font-medium">Countries with active projects:</span>
+              {recentProjects.map((project) => (
+                <div 
+                  key={project.country} 
+                  className={`flex items-center gap-1 cursor-pointer hover:text-blue-600 transition-colors py-1 px-2 rounded-full ${
+                    selectedMapCountry === project.country ? 'bg-gray-100 dark:bg-gray-800' : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedMapCountry(project.country);
+                    // Use the focusOnCountry function from the map component
+                    if (mapFlatRef.current?.focusOnCountry) {
+                      mapFlatRef.current.focusOnCountry(project.country);
+                    }
+                  }}
+                >
+                  <div className={`w-3 h-3 rounded-full ${
+                    project.country === 'Cambodia' 
+                      ? 'bg-blue-500' 
+                      : project.country === 'Brazil'
+                        ? 'bg-green-500'
+                        : project.country === 'Singapore'
+                          ? 'bg-purple-500'
+                          : 'bg-amber-500'
+                  }`}></div>
+                  <span>{project.country}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
 
         <Card className="p-4">
           <div className="flex justify-between items-center mb-4">

@@ -100,3 +100,13 @@
 .mapboxgl-ctrl-attrib:hover {
   opacity: 1;
 }
+
+/* Custom Mapbox marker styling */
+.mapbox-marker {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mapbox-marker:hover {
+  transform: scale(1.5);
+}
