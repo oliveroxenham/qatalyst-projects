@@ -289,6 +289,11 @@ This value is consistent across multiple sources and is the most specific and de
       {
         id: 'gender-equality',
         name: 'Risk 2: Gender Equality',
+        qatalystResponse: QATALYST_RESPONSE.UNSATISFACTORY,
+        ai: {
+          title: 'Gender Equality',
+          response: `The project lacks adequate measures to address gender equality concerns. There is insufficient evidence of gender-responsive planning, implementation, or monitoring. Key issues include limited women's participation in decision-making processes, absence of gender-disaggregated data collection, and no specific strategies to address potential differential impacts on women and men. The project should develop a comprehensive gender action plan that includes targeted interventions, gender-sensitive indicators, and mechanisms to ensure women's meaningful participation throughout the project lifecycle.`
+        },
       },
       {
         id: 'community-health',

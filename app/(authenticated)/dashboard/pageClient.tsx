@@ -49,10 +49,10 @@ const projectTypes = [
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const recentProjects = [
-  { id: '1650', name: 'REDD+ Project in Cambodia', type: 'Conservation', status: 'In Progress', progress: 65 },
-  { id: '2749', name: 'Brazil Forest Conservation Project', type: 'Conservation', status: 'Completed', progress: 100 },
-  { id: '3214', name: 'Solar Farm Implementation', type: 'Renewable Energy', status: 'In Progress', progress: 40 },
-  { id: '4532', name: 'Community Cookstove Program', type: 'Cookstove', status: 'Not Started', progress: 10 },
+  { id: '1650', name: 'REDD+ Project in Cambodia', country: 'Cambodia', type: 'Conservation', status: 'In Progress', progress: 65 },
+  { id: '2749', name: 'Brazil Forest Conservation Project', country: 'Brazil', type: 'Conservation', status: 'Completed', progress: 100 },
+  { id: '3214', name: 'Solar Farm Implementation', country: 'Singapore', type: 'Renewable Energy', status: 'In Progress', progress: 40 },
+  { id: '4532', name: 'Community Cookstove Program', country: 'Indonesia', type: 'Cookstove', status: 'Not Started', progress: 10 },
 ];
 
 const alertItems = [
@@ -185,7 +185,31 @@ export default function DashboardClient() {
             </Badge>
           </div>
           <div className="h-[350px]">
-            <WorldMap />
+            <WorldMap 
+              countryColors={{
+                "116": "fill-blue-500 hover:fill-blue-600", // Cambodia
+                "076": "fill-green-500 hover:fill-green-600", // Brazil
+                "702": "fill-purple-500 hover:fill-purple-600", // Singapore
+                "360": "fill-amber-500 hover:fill-amber-600" // Indonesia
+              }}
+            />
+          </div>
+          <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs">
+            <span className="font-medium">Countries with active projects:</span>
+            {recentProjects.map((project) => (
+              <div key={project.country} className="flex items-center gap-1">
+                <div className={`w-3 h-3 rounded-full ${
+                  project.country === 'Cambodia' 
+                    ? 'bg-blue-500' 
+                    : project.country === 'Brazil'
+                      ? 'bg-green-500'
+                      : project.country === 'Singapore'
+                        ? 'bg-purple-500'
+                        : 'bg-amber-500'
+                }`}></div>
+                <span>{project.country}</span>
+              </div>
+            ))}
           </div>
         </Card>
 
@@ -222,6 +246,7 @@ export default function DashboardClient() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Project</TableHead>
+                  <TableHead>Country</TableHead>
                   <TableHead>Type</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Progress</TableHead>
@@ -235,6 +260,7 @@ export default function DashboardClient() {
                         {project.name}
                       </Link>
                     </TableCell>
+                    <TableCell>{project.country}</TableCell>
                     <TableCell>{project.type}</TableCell>
                     <TableCell>
                       <Badge 
@@ -394,20 +420,6 @@ export default function DashboardClient() {
         </Card>
       </div>
 
-      {/* Overlay with customization message */}
-      <div className="fixed top-0 bottom-0 left-0 right-0 bg-neutral-900 bg-opacity-70 flex items-center justify-center z-50">
-        <Card className="max-w-md p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">{t('dashboard.demoTitle')}</h2>
-          <p className="text-muted-foreground mb-6">
-            {t('dashboard.demoDescription')}
-          </p>
-          <Link href="/projects">
-            <Button variant="default" className="px-6 py-2">
-              {t('dashboard.goToWorkspace')}
-            </Button>
-          </Link>
-        </Card>
-      </div>
     </div>
   );
 }

@@ -117,9 +117,7 @@ export function WorldMap({
             className={clsx(baseFillColor, baseStrokeColor, baseStrokeWidth)}
           >
             {({ geographies }) =>
-              geographies.map((geo) => {
-                console.log("geo", geo);
-                return (
+              geographies.map((geo) => (
                   <Geography
                     data-tooltip-id="map-tooltip"
                     data-tooltip-float
@@ -144,8 +142,7 @@ export function WorldMap({
                         : null
                     )}
                   />
-                );
-              })
+              ))
             }
           </Geographies>
 
