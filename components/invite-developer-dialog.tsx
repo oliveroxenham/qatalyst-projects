@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { X } from 'lucide-react';
 import { Button } from '@/components/qbutton';
 import {
   Dialog,
@@ -18,12 +17,9 @@ import {
   Select,
   SelectContent,
   SelectGroup,
-  SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Avatar } from '@/components/ui/avatar';
-import { getInitialsFromName } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 
 interface InviteDeveloperDialogProps {
