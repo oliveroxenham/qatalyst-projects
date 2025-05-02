@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/qbutton';
 import {
   Dialog,
@@ -21,6 +22,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { sendInvitationEmail, generateInvitationEmailHtml } from '@/server/email';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface InviteDeveloperDialogProps {
   open: boolean;
@@ -40,9 +43,11 @@ export function InviteDeveloperDialog({
   const [email, setEmail] = useState('');
   const [requirements, setRequirements] = useState('');
   const [newTeamMember, setNewTeamMember] = useState('');
-  const [selectedCollaborators, setSelectedCollaborators] = useState<string[]>(
-    []
-  );
+  const [selectedCollaborators, setSelectedCollaborators] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailId, setEmailId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleCollaboratorToggle = (collaborator: string) => {
     setSelectedCollaborators((prev) => {
@@ -54,16 +59,55 @@ export function InviteDeveloperDialog({
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would implement the actual invitation logic
-    console.log('Submitted form:', {
-      email,
-      requirements,
-      newTeamMember,
-      selectedCollaborators,
-    });
-    onOpenChange(false);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      // Get the names of selected collaborators
+      const collaboratorNames = selectedCollaborators.map(id => {
+        const member = teamMembers.find(m => m.id === id);
+        return member?.name || '';
+      }).filter(Boolean);
+
+      // Generate email HTML
+      const emailHtml = await generateInvitationEmailHtml(requirements, collaboratorNames);
+
+      // Send the invitation email
+      const result = await sendInvitationEmail({
+        to: email,
+        subject: 'Invitation to Create a Carbon Project on Qatalyst',
+        html: emailHtml,
+        requirements,
+        collaborators: selectedCollaborators,
+        newCollaborator: newTeamMember,
+      });
+
+      if (result.success) {
+        setEmailSent(true);
+        if (result.emailId) {
+          setEmailId(result.emailId);
+        }
+        
+        // Clear form after successful submission
+        setTimeout(() => {
+          // Don't auto-close on success so user can see confirmation
+          // Just reset the form for another send if needed
+          setEmail('');
+          setRequirements('');
+          setNewTeamMember('');
+          setSelectedCollaborators([]);
+        }, 1000);
+      } else {
+        setError(result.message);
+      }
+    } catch (err) {
+      setError('Failed to send invitation. Please try again.');
+      console.error('Error sending invitation:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Generate a display string for the selected collaborators
@@ -86,6 +130,52 @@ export function InviteDeveloperDialog({
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-6 py-4">
+            {/* Error message */}
+            {error && (
+              <Alert variant="destructive" className="mb-2">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
+            {/* Success message */}
+            {emailSent && (
+              <Alert className="mb-2 bg-branding-green-100 text-branding-green-800 border-branding-green-200">
+                <CheckCircle2 className="h-4 w-4 mr-2" />
+                <div>
+                  <AlertDescription className="font-medium">Invitation sent successfully!</AlertDescription>
+                  {emailId && (
+                    <div className="text-xs mt-1">
+                      Email ID: <code className="bg-branding-green-200/50 px-1 py-0.5 rounded">{emailId}</code>
+                    </div>
+                  )}
+                  <div className="text-xs mt-2">
+                    The developer <span className="font-medium">{email}</span> will receive an invitation to access our carbon estimator tool at: 
+                    <a 
+                      href="https://qatalyst-carbon-estimator-chat.vercel.app/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-branding-green-700 underline ml-1"
+                    >
+                      qatalyst-carbon-estimator-chat.vercel.app
+                    </a>
+                  </div>
+                  {selectedCollaborators.length > 0 && (
+                    <div className="text-xs mt-1">
+                      Collaborators: {selectedCollaborators.map(id => {
+                        const member = teamMembers.find(m => m.id === id);
+                        return member?.name;
+                      }).filter(Boolean).join(', ')}
+                    </div>
+                  )}
+                  {newTeamMember && (
+                    <div className="text-xs mt-1">
+                      New team member invited: {newTeamMember}
+                    </div>
+                  )}
+                </div>
+              </Alert>
+            )}
+            
             <div className="grid gap-2">
               <Label htmlFor="email" className="font-normal">
                 Enter the email of the Project Developer{' '}
@@ -98,6 +188,7 @@ export function InviteDeveloperDialog({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isSubmitting || emailSent}
               />
             </div>
             <div className="grid gap-2">
@@ -109,7 +200,8 @@ export function InviteDeveloperDialog({
                 placeholder="Example: Need carbon credits certified by Q4 2024. Must align with SDG 7 and 13. Budget ceiling: $50,000"
                 value={requirements}
                 onChange={(e) => setRequirements(e.target.value)}
-                className="min-h-[100px] border-purple-200 border-2 border-dashed"
+                className="min-h-[100px] border-branding-green-200 border-2 border-dashed"
+                disabled={isSubmitting || emailSent}
               />
             </div>
             <div className="grid gap-4">
@@ -123,7 +215,7 @@ export function InviteDeveloperDialog({
                 >
                   Existing team members
                 </Label>
-                <Select value="" onValueChange={() => {}}>
+                <Select value="" onValueChange={() => {}} disabled={isSubmitting || emailSent}>
                   <SelectTrigger id="existing-members">
                     <SelectValue placeholder={getCollaboratorsDisplay()} />
                   </SelectTrigger>
@@ -140,6 +232,7 @@ export function InviteDeveloperDialog({
                               onCheckedChange={() =>
                                 handleCollaboratorToggle(member.id)
                               }
+                              disabled={isSubmitting || emailSent}
                             />
                             <div className="flex flex-row items-center justify-center gap-2">
                               <label
@@ -166,17 +259,53 @@ export function InviteDeveloperDialog({
                   placeholder="Type Email Address"
                   value={newTeamMember}
                   onChange={(e) => setNewTeamMember(e.target.value)}
+                  disabled={isSubmitting || emailSent}
                 />
               </div>
             </div>
           </div>
           <DialogFooter className="flex justify-end gap-2">
-            <DialogClose asChild>
-              <Button type="button" variant="outline">
-                Cancel
-              </Button>
-            </DialogClose>
-            <Button type="submit">Send invitation</Button>
+            {!emailSent ? (
+              <>
+                <DialogClose asChild>
+                  <Button type="button" variant="outline" disabled={isSubmitting}>
+                    Cancel
+                  </Button>
+                </DialogClose>
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Send invitation'
+                  )}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button 
+                  type="button" 
+                  variant="outline"
+                  onClick={() => {
+                    setEmailSent(false);
+                    setEmailId(null);
+                  }}
+                >
+                  Send another
+                </Button>
+                <Button 
+                  type="button" 
+                  onClick={() => onOpenChange(false)}
+                >
+                  Close
+                </Button>
+              </>
+            )}
           </DialogFooter>
         </form>
       </DialogContent>
