@@ -44,7 +44,18 @@ import { getProjectId } from '@/mock/data';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const getMenuData = (t: (key: string) => string) => ({
+// Define interface for menu items
+interface MenuItem {
+  icon: React.ComponentType;
+  key: string;
+  name: string;
+  url: string;
+  disabled?: boolean;
+  cookstoveOnly?: boolean;
+  hidden?: boolean;
+}
+
+const getMenuData = (t: (key: string) => string): { overview: MenuItem[], projects: MenuItem[] } => ({
   overview: [
     {
       icon: LayoutList,
@@ -118,11 +129,12 @@ const getMenuData = (t: (key: string) => string) => ({
       url: '/projects/{id}/estimator',
     },
     {
-      disabled: false,
+      disabled: true, // Hide report builder menu
       icon: FilePen,
       key: 'report-builder',
       name: t('sidebar.reportBuilder'),
       url: '/projects/{id}/report-builder',
+      hidden: true, // Add hidden flag for extra safety
     },
     {
       disabled: true,
@@ -244,7 +256,10 @@ export const AppSidebar = ({
           <SidebarGroup>
             <SidebarGroupLabel>{t('sidebar.project')}</SidebarGroupLabel>
             <SidebarMenu>
-              {data.projects.map((item) => (
+              {data.projects
+                // Filter out hidden menu items
+                .filter(item => !item.hidden) 
+                .map((item) => (
                 <div id={item.key} key={item.key}>
                   <SidebarMenuItem className="pl-2">
                     {item.cookstoveOnly && isCookstove && (
