@@ -62,7 +62,9 @@ const projectTypes = [
   { name: 'Other', value: 5 },
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+// Using branded colors from the theme instead of random colors
+// branding-green-600, chart-1, chart-2, chart-3, chart-4
+const COLORS = ['#00938C', '#F08A5D', '#32C1B3', '#1B3A4B', '#F7CA44'];
 
 const recentProjects = [
   { id: '1650', name: 'REDD+ Project in Cambodia', country: 'Cambodia', type: 'Conservation', status: 'In Progress', progress: 65 },
@@ -101,13 +103,13 @@ export default function DashboardClient() {
             <div className="text-muted-foreground text-sm font-medium">
               {t('dashboard.totalProjects')}
             </div>
-            <div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
-              <Briefcase className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
+              <Briefcase className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
             <span className="font-bold text-2xl">48</span>
-            <span className="text-green-600 dark:text-green-400 text-xs flex items-center">
+            <span className="text-branding-green-600 dark:text-branding-green-400 text-xs flex items-center">
               <ArrowUpRight className="h-3 w-3" /> +8%
             </span>
           </div>
@@ -122,8 +124,8 @@ export default function DashboardClient() {
             <div className="text-muted-foreground text-sm font-medium">
               {t('dashboard.projectsUnderReview')}
             </div>
-            <div className="bg-amber-100 dark:bg-amber-900 p-2 rounded-full">
-              <ClipboardList className="h-4 w-4 text-amber-600 dark:text-amber-300" />
+            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
+              <ClipboardList className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
@@ -141,8 +143,8 @@ export default function DashboardClient() {
             <div className="text-muted-foreground text-sm font-medium">
               {t('dashboard.amountContracted')}
             </div>
-            <div className="bg-green-100 dark:bg-green-900 p-2 rounded-full">
-              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-300" />
+            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
+              <CheckCircle className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
@@ -160,8 +162,8 @@ export default function DashboardClient() {
             <div className="text-muted-foreground text-sm font-medium">
               {t('dashboard.amountDisbursed')}
             </div>
-            <div className="bg-purple-100 dark:bg-purple-900 p-2 rounded-full">
-              <DollarSign className="h-4 w-4 text-purple-600 dark:text-purple-300" />
+            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
+              <DollarSign className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
@@ -179,8 +181,8 @@ export default function DashboardClient() {
             <div className="text-muted-foreground text-sm font-medium">
               {t('dashboard.portfolioValue')}
             </div>
-            <div className="bg-indigo-100 dark:bg-indigo-900 p-2 rounded-full">
-              <Activity className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
+            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
+              <Activity className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
@@ -189,7 +191,7 @@ export default function DashboardClient() {
           </div>
           <Separator className="my-2" />
           <div className="text-xs text-muted-foreground">
-            <span className="text-green-600 dark:text-green-400">↑ 12.4%</span> from previous quarter
+            <span className="text-branding-green-600 dark:text-branding-green-400">↑ 12.4%</span> from previous quarter
           </div>
         </Card>
       </div>
@@ -208,10 +210,10 @@ export default function DashboardClient() {
             <div className="h-[350px]">
               <WorldMap 
                 countryColors={{
-                  "116": "fill-blue-500 hover:fill-blue-600", // Cambodia
-                  "076": "fill-green-500 hover:fill-green-600", // Brazil
-                  "702": "fill-purple-500 hover:fill-purple-600", // Singapore
-                  "360": "fill-amber-500 hover:fill-amber-600" // Indonesia
+                  "116": "fill-branding-green-600 hover:fill-branding-green-500", // Cambodia
+                  "076": "fill-branding-green-500 hover:fill-branding-green-400", // Brazil
+                  "702": "fill-branding-green-400 hover:fill-branding-green-300", // Singapore
+                  "360": "fill-branding-green-300 hover:fill-branding-green-200" // Indonesia
                 }}
               />
             </div>
@@ -221,12 +223,12 @@ export default function DashboardClient() {
                 <div key={project.country} className="flex items-center gap-1">
                   <div className={`w-3 h-3 rounded-full ${
                     project.country === 'Cambodia' 
-                      ? 'bg-blue-500' 
+                      ? 'bg-branding-green-600' 
                       : project.country === 'Brazil'
-                        ? 'bg-green-500'
+                        ? 'bg-branding-green-500'
                         : project.country === 'Singapore'
-                          ? 'bg-purple-500'
-                          : 'bg-amber-500'
+                          ? 'bg-branding-green-400'
+                          : 'bg-branding-green-300'
                   }`}></div>
                   <span>{project.country}</span>
                 </div>
@@ -249,22 +251,22 @@ export default function DashboardClient() {
                   { 
                     name: 'Cambodia',
                     coordinates: [104.9910, 12.5657],
-                    color: '#3b82f6' // blue-500
+                    color: '#00938C' // branding-green-600
                   },
                   { 
                     name: 'Brazil',
                     coordinates: [-51.9253, -14.2350],
-                    color: '#22c55e' // green-500
+                    color: '#32C1B3' // branding-green-500
                   },
                   { 
                     name: 'Singapore',
                     coordinates: [103.8198, 1.3521],
-                    color: '#a855f7' // purple-500
+                    color: '#5EDFCF' // branding-green-400
                   },
                   { 
                     name: 'Indonesia',
                     coordinates: [113.9213, -0.7893],
-                    color: '#f59e0b' // amber-500
+                    color: '#90E5D6' // branding-green-300
                   }
                 ]}
               />
@@ -274,7 +276,7 @@ export default function DashboardClient() {
               {recentProjects.map((project) => (
                 <div 
                   key={project.country} 
-                  className={`flex items-center gap-1 cursor-pointer hover:text-blue-600 transition-colors py-1 px-2 rounded-full ${
+                  className={`flex items-center gap-1 cursor-pointer hover:text-branding-green-600 transition-colors py-1 px-2 rounded-full ${
                     selectedMapCountry === project.country ? 'bg-gray-100 dark:bg-gray-800' : ''
                   }`}
                   onClick={() => {
@@ -287,12 +289,12 @@ export default function DashboardClient() {
                 >
                   <div className={`w-3 h-3 rounded-full ${
                     project.country === 'Cambodia' 
-                      ? 'bg-blue-500' 
+                      ? 'bg-branding-green-600' 
                       : project.country === 'Brazil'
-                        ? 'bg-green-500'
+                        ? 'bg-branding-green-500'
                         : project.country === 'Singapore'
-                          ? 'bg-purple-500'
-                          : 'bg-amber-500'
+                          ? 'bg-branding-green-400'
+                          : 'bg-branding-green-300'
                   }`}></div>
                   <span>{project.country}</span>
                 </div>
@@ -313,7 +315,7 @@ export default function DashboardClient() {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="credits" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="credits" fill="#00938C" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -325,7 +327,7 @@ export default function DashboardClient() {
         <Card className="md:col-span-2 p-4">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-medium text-lg">Recent Projects</h3>
-            <Link href="/projects" className="text-sm text-blue-600 dark:text-blue-400 flex items-center hover:underline">
+            <Link href="/projects" className="text-sm text-branding-green-600 dark:text-branding-green-400 flex items-center hover:underline">
               View all <ArrowUpRight className="h-3 w-3 ml-1" />
             </Link>
           </div>
@@ -344,7 +346,7 @@ export default function DashboardClient() {
                 {recentProjects.map((project) => (
                   <TableRow key={project.id}>
                     <TableCell className="font-medium">
-                      <Link href={`/projects/${project.id}/details`} className="hover:text-blue-600 dark:hover:text-blue-400">
+                      <Link href={`/projects/${project.id}/details`} className="hover:text-branding-green-600 dark:hover:text-branding-green-400">
                         {project.name}
                       </Link>
                     </TableCell>
@@ -355,9 +357,9 @@ export default function DashboardClient() {
                         variant="outline" 
                         className={
                           project.status === 'Completed' 
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' 
+                            ? 'bg-branding-green-100 text-branding-green-800 dark:bg-branding-green-900 dark:text-branding-green-300' 
                             : project.status === 'In Progress'
-                              ? 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300'
+                              ? 'bg-branding-green-100/50 text-branding-green-800 dark:bg-branding-green-900/50 dark:text-branding-green-300'
                               : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
                         }
                       >
@@ -407,7 +409,7 @@ export default function DashboardClient() {
           <div className="space-y-2">
             {alertItems.map((alert) => (
               <div key={alert.id} className="flex items-start gap-2 text-sm p-2 rounded-md bg-neutral-50 dark:bg-neutral-900">
-                <AlertCircle className="h-4 w-4 text-amber-500 mt-0.5" />
+                <AlertCircle className="h-4 w-4 text-branding-green-600 mt-0.5" />
                 <div>
                   <div className="font-medium">{alert.title}</div>
                   <div className="text-muted-foreground text-xs">
@@ -434,18 +436,18 @@ export default function DashboardClient() {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="actual" stroke="#8884d8" strokeWidth={2} />
-                <Line type="monotone" dataKey="projected" stroke="#82ca9d" strokeWidth={2} strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="actual" stroke="#00938C" strokeWidth={2} />
+                <Line type="monotone" dataKey="projected" stroke="#5EDFCF" strokeWidth={2} strokeDasharray="5 5" />
               </LineChart>
             </ResponsiveContainer>
           </div>
           <div className="flex gap-4 justify-center mt-2 text-xs">
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-[#8884d8] rounded-full"></div>
+              <div className="w-3 h-3 bg-branding-green-600 rounded-full"></div>
               <span>Actual Credits</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-[#82ca9d] rounded-full"></div>
+              <div className="w-3 h-3 bg-branding-green-400 rounded-full"></div>
               <span>Projected Credits</span>
             </div>
           </div>
@@ -457,51 +459,51 @@ export default function DashboardClient() {
           </div>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-blue-100 text-blue-800">OO</Avatar>
+              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">OO</Avatar>
               <div>
                 <div className="font-medium">Oliver Oxenham</div>
                 <div className="text-xs text-muted-foreground">
-                  Completed financial assessment for <span className="text-blue-600 dark:text-blue-400">REDD+ Project in Cambodia</span>
+                  Completed financial assessment for <span className="text-branding-green-600 dark:text-branding-green-400">REDD+ Project in Cambodia</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground ml-auto">2h ago</div>
             </div>
             
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-green-100 text-green-800">JS</Avatar>
+              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">JS</Avatar>
               <div>
                 <div className="font-medium">Jane Smith</div>
                 <div className="text-xs text-muted-foreground">
-                  Added document to <span className="text-blue-600 dark:text-blue-400">Brazil Forest Conservation Project</span>
+                  Added document to <span className="text-branding-green-600 dark:text-branding-green-400">Brazil Forest Conservation Project</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground ml-auto">Yesterday</div>
             </div>
             
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-purple-100 text-purple-800">TK</Avatar>
+              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">TK</Avatar>
               <div>
                 <div className="font-medium">Thomas King</div>
                 <div className="text-xs text-muted-foreground">
-                  Updated ESG assessment for <span className="text-blue-600 dark:text-blue-400">Solar Farm Implementation</span>
+                  Updated ESG assessment for <span className="text-branding-green-600 dark:text-branding-green-400">Solar Farm Implementation</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground ml-auto">2 days ago</div>
             </div>
             
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-amber-100 text-amber-800">MP</Avatar>
+              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">MP</Avatar>
               <div>
                 <div className="font-medium">Maria Perez</div>
                 <div className="text-xs text-muted-foreground">
-                  Created new project <span className="text-blue-600 dark:text-blue-400">Community Cookstove Program</span>
+                  Created new project <span className="text-branding-green-600 dark:text-branding-green-400">Community Cookstove Program</span>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground ml-auto">1 week ago</div>
             </div>
           </div>
           <div className="mt-4 text-center">
-            <Link href="#" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+            <Link href="#" className="text-sm text-branding-green-600 dark:text-branding-green-400 hover:underline">
               View all activity
             </Link>
           </div>

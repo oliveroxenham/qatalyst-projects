@@ -129,6 +129,8 @@ const MapboxMap = forwardRef<MapboxMapRef, { countries?: CountryMarker[] }>(({
       mapRef.current = map;
 
       map.on('load', () => {
+        // Save a reference to the current markers for cleanup
+        const markers: mapboxgl.Marker[] = [];
 
         // Add country markers once map is loaded
         countries.forEach(country => {
@@ -177,14 +179,20 @@ const MapboxMap = forwardRef<MapboxMapRef, { countries?: CountryMarker[] }>(({
           });
           
           // Track markers for cleanup
-          markersRef.current.push(marker);
+          markers.push(marker);
         });
+        
+        // Update the ref with the new markers
+        markersRef.current = markers;
       });
     }
     
     return () => {
+      // Capture markers at cleanup time to avoid the stale reference
+      const currentMarkers = markersRef.current;
+      
       // Cleanup markers
-      markersRef.current.forEach(marker => {
+      currentMarkers.forEach(marker => {
         marker.remove();
       });
       
@@ -193,7 +201,7 @@ const MapboxMap = forwardRef<MapboxMapRef, { countries?: CountryMarker[] }>(({
         mapRef.current.remove();
       }
     };
-  }, [countries]);
+  }, [countries, resolvedTheme]);
 
   return (
     <div className="relative flex flex-col h-full">
