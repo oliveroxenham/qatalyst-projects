@@ -101,7 +101,7 @@ export const NavUser = ({ user }: { readonly user: User }) => {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem onClick={() => signOut({ redirectUrl: '/sign-in' })}>
               <LogOut />
               {t('user.signOut')}
             </DropdownMenuItem>
