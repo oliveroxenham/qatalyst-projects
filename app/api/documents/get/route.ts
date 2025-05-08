@@ -1,7 +1,7 @@
 import { Document } from '@/types/document';
 import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from 'next/server';
-// import { getTranslation } from '@/i18n/i18n';
+// import { getServerTranslation } from '@/i18n/server';
 
 const redis = Redis.fromEnv();
 

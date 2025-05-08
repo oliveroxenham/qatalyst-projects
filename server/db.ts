@@ -30,6 +30,7 @@ export async function getProjectsClient() {
 export async function getProjectByIdServer({ id, language } : { id: string, language?: string }) {
   // Use absolute URL since GET_PROJECTS_URL is already a path
   const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  console.log('baseUrl=', baseUrl);
   let url = new URL(`${GET_PROJECTS_URL}?id=${id}`, baseUrl);
   
   // Add language parameter if provided

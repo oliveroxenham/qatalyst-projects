@@ -1,7 +1,7 @@
 import { Project } from '@/types/project';
 import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from 'next/server';
-import { getTranslation } from '@/i18n/i18n';
+import { getServerTranslation } from '@/i18n/server';
 
 const redis = Redis.fromEnv();
 
@@ -24,7 +24,7 @@ export async function GET(req:NextRequest) {
       }
     }
     return NextResponse.json({
-      msg: getTranslation('api.projectNotFound', 'Project not found', language),
+      msg: getServerTranslation('api.projectNotFound', 'Project not found', language),
       status: 400
     });
   }
