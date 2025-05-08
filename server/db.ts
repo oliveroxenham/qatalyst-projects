@@ -2,7 +2,8 @@ import { GET_DOCUMENTS_URL, GET_PROJECTS_URL } from '@/lib/constants';
 import { Project } from '@/types/project';
 
 export async function getProjectsServer() {
-  const url = new URL(GET_PROJECTS_URL, process.env.BASE_URL);
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const url = new URL(GET_PROJECTS_URL, baseUrl);
   console.log('getProjectsServer:', url.toString());
   return fetch(url, {
     cache: 'force-cache',
@@ -27,7 +28,9 @@ export async function getProjectsClient() {
 }
 
 export async function getProjectByIdServer({ id, language } : { id: string, language?: string }) {
-  let url = new URL(`${GET_PROJECTS_URL}?id=${id}`, process.env.BASE_URL);
+  // Use absolute URL since GET_PROJECTS_URL is already a path
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  let url = new URL(`${GET_PROJECTS_URL}?id=${id}`, baseUrl);
   
   // Add language parameter if provided
   if (language) {
@@ -45,7 +48,8 @@ export async function getProjectByIdServer({ id, language } : { id: string, lang
 }
 
 export async function getDocumentsServer() {
-  const url = new URL(GET_DOCUMENTS_URL, process.env.BASE_URL);
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const url = new URL(GET_DOCUMENTS_URL, baseUrl);
   console.log('getDocumentsServer:', url.toString());
   return fetch(url, {
     cache: 'force-cache',
@@ -58,7 +62,8 @@ export async function getDocumentsServer() {
 }
 
 export async function getDocumentsByProjectIdServer({ id, language }: { id: string, language?: string }) {
-  const url = new URL(GET_DOCUMENTS_URL, process.env.BASE_URL);
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const url = new URL(GET_DOCUMENTS_URL, baseUrl);
   url.searchParams.set('id', id);
   
   // Add language parameter if provided
