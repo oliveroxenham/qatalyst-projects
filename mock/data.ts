@@ -2440,7 +2440,7 @@ const PROJECT_ID_4: Project = {
   createdBy: 'John Doe',
   collaborators: ['Jane Smith', 'Bob Johnson', 'John Doe'],
   registryStatus: 'Registered',
-  projectType: 'Nature-based',
+  projectType: 'Early Stage',
   sourceType: 'Verra',
   estimatedAnnualCredits: {
     formatted: '1,000,000',

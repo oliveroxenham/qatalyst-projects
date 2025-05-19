@@ -21,11 +21,15 @@ import type { User } from '@/types/user';
 import { resetAppState } from '@/server/actions';
 import { Bell, ChevronsUpDown, LogOut, RotateCcw, MessageCircleQuestion } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 export const NavUser = ({ user }: { readonly user: User }) => {
   const { isMobile } = useSidebar();
   const { signOut } = useClerk();
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const initials = user.name
     ? user.name
@@ -81,7 +85,15 @@ export const NavUser = ({ user }: { readonly user: User }) => {
                 <Bell />
                 {t('user.notifications')}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={resetAppState}>
+              <DropdownMenuItem onClick={async () => {
+                await resetAppState();
+                await queryClient.invalidateQueries();
+                queryClient.clear();
+                router.refresh();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 100);
+              }}>
                 <RotateCcw />
                 {t('user.resetAppState')}
               </DropdownMenuItem>

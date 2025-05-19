@@ -47,7 +47,7 @@ export function ProjectCard({
   return (
     <Link
       className="group border rounded-lg bg-card dark:bg-muted shadow w-[344px] hover:border-neutral-400 hover:cursor-pointer hover:shadow-lg transition-all"
-      href={`/projects/${data.id}/details`}
+      href={`/projects/${data.id}/scorecard`}
     >
       {(data.id === '1650' || data.id === '2749') && <span className="absolute bg-blaze-orange-300 dark:bg-muted text-[10px] mt-1 ml-1 px-1 rounded-xl font-semibold">SAMPLE</span>}
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>

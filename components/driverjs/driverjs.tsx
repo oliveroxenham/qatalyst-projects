@@ -1,6 +1,6 @@
 'use client';
 import { driver } from 'driver.js';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import './driver.css';
 import { useTranslation } from '@/i18n/i18n';
@@ -20,7 +20,7 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
   const pageName: string | undefined = pathname.split('/').at(-1);
   
   // Define steps with translations
-  const steps: { [key: string]: DriverStep[] } = {
+  const steps: { [key: string]: DriverStep[] } = useMemo(() => ({
     projects: [
       {
         popover: {
@@ -172,7 +172,7 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
         },
       },
     ],
-  };
+  }), [t]);
   
   useEffect(() => {
     const driverObj = driver({
@@ -189,7 +189,7 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
       driverObj.drive();
       window.localStorage.setItem(`driverjs.${pageName}`, 'true');
     }, 1000);
-  }, [pageName, t]);
+  }, [pageName, t, steps]);
 
   return <>{children}</>;
 }

@@ -12,11 +12,18 @@ export async function importProject() {
 }
 
 export async function resetAppState() {
+  // Clear the Redis cache
   await fetch(`${process.env.BASE_URL}/api/projects/reset`, {
     method: 'POST',
+    cache: 'no-store', // Bypass cache for this request
   });
+  
+  // Revalidate all project-related paths
   revalidatePath('/projects');
-  redirect('/projects');
+  revalidatePath('/dashboard');
+  revalidatePath('/', 'layout');
+  
+  // Don't redirect immediately to allow client-side cache clearing
 }
 
 export async function updateAssignee({

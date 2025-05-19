@@ -2,6 +2,7 @@ import { Project } from '@/types/project';
 import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerTranslation } from '@/i18n/server';
+import { getInitialMockProjects } from '@/mock/data';
 
 const redis = Redis.fromEnv();
 
@@ -10,7 +11,15 @@ export async function GET(req:NextRequest) {
   const language = req.nextUrl.searchParams.get('lang') || 'en';
   console.log('projectId=', projectId, 'language=', language);
   
-  const projects = await redis.get('projects') as Project[];
+  let projects = await redis.get('projects') as Project[];
+  console.log('Projects from Redis:', projects ? projects.length : 'null');
+  
+  // If Redis is empty, load initial mock data
+  if (!projects || projects.length === 0) {
+    console.log('Redis empty, loading mock data');
+    projects = getInitialMockProjects();
+    await redis.set('projects', projects);
+  }
   
   if (projectId) {
     for (let i = 0; i < projects.length; i++) {
@@ -31,9 +40,16 @@ export async function GET(req:NextRequest) {
   console.log('redis: projects=', projects);
   
   // Return all projects with a flag indicating translated content
-  return NextResponse.json(projects.map(project => ({
+  const response = NextResponse.json(projects.map(project => ({
     ...project,
     translatedContent: true,
     language
   })));
+  
+  // Prevent caching
+  response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  response.headers.set('Pragma', 'no-cache');
+  response.headers.set('Expires', '0');
+  
+  return response;
 }
