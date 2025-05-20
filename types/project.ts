@@ -114,6 +114,34 @@ export type Project = {
     progress: number;
     risks?: Risk[];
   };
+  // Added reputationalRisk as an alias to carbonQualityAssessment
+  reputationalRisk?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
+  };
+  // Added carbonAccounting as an alias to carbonQualityAssessment
+  carbonAccounting?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
+  };
+  // Added additionality as an alias to carbonQualityAssessment
+  additionality?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
+  };
+  // Added permanence as an alias to carbonQualityAssessment
+  permanence?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
+  };
   kycAssessment: {
     assignedTo?: string;
     status: string;

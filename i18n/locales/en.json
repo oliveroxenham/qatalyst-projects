@@ -65,8 +65,13 @@
     "financialAssessment": "Financial Assessment",
     "esgAssessment": "ESG Assessment",
     "qualityAssessment": "Quality Assessment",
-    "carbonQualityAssessment": "Carbon Quality Assessment",
-    "scorecard": "Scorecard",
+    "reputationalRisk": "Reputational Risk",
+    "carbonAccounting": "Carbon Accounting",
+    "additionality": "Additionality",
+    "permanence": "Permanence",
+    "projectOverview": "Project Overview",
+    "executiveSummary": "Executive Summary",
+    "projectDescriptionAndDesign": "Project Description and Design",
     "reportBuilder": "Report Builder",
     "kycAssessment": "KYC Assessment",
     "aiEstimator": "AI Estimator",
@@ -182,15 +187,42 @@
       "sourceRisks": "What are the key risks of using this source?"
     }
   },
-  "carbonQualityAssessment": {
-    "title": "Carbon Quality Assessment",
+  "reputationalRisk": {
+    "title": "Reputational Risk",
     "categories": "Categories",
     "name": "Name",
     "qatalystResponses": "Qatalyst Responses",
     "userRating": "User Rating"
   },
-  "scorecard": {
-    "title": "Scorecard",
+  "carbonAccounting": {
+    "title": "Carbon Accounting",
+    "categories": "Categories",
+    "name": "Name",
+    "qatalystResponses": "Qatalyst Responses",
+    "userRating": "User Rating"
+  },
+  "additionality": {
+    "title": "Additionality",
+    "categories": "Categories",
+    "name": "Name",
+    "qatalystResponses": "Qatalyst Responses",
+    "userRating": "User Rating"
+  },
+  "permanence": {
+    "title": "Permanence",
+    "categories": "Categories",
+    "name": "Name",
+    "qatalystResponses": "Qatalyst Responses",
+    "userRating": "User Rating"
+  },
+  "executiveSummary": {
+    "title": "Executive Summary"
+  },
+  "projectDescriptionAndDesign": {
+    "title": "Project Description and Design"
+  },
+  "projectOverview": {
+    "title": "Project Overview",
     "sustainableDevelopmentGoals": "Sustainable Development Goals",
     "collaborators": "Collaborators",
     "annualCreditIssuance": "Annual Credit Issuance",
@@ -329,8 +361,8 @@
         "title": "ESG Assessment",
         "description": "Evaluate project ESG to ensure sustainability."
       },
-      "scorecard": {
-        "title": "Scorecard",
+      "projectOverview": {
+        "title": "Project Overview",
         "description": "Summarize project insights, value, and compare performance with others."
       }
     },
@@ -370,14 +402,14 @@
         "description": "Engage with Qatalyst to get personalized project insights and support."
       }
     },
-    "scorecard": {
+    "projectOverview": {
       "export": {
         "title": "Export Project",
         "description": "Easily export project to Word or PDF document."
       },
       "compare": {
         "title": "Compare Projects",
-        "description": "Easily compare two projects scorecard side-by-side."
+        "description": "Easily compare two projects side-by-side."
       }
     },
     "documents": {

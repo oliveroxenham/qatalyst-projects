@@ -80,10 +80,10 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
         },
       },
       {
-        element: '#scorecard',
+        element: '#project-overview',
         popover: {
-          title: t('driverjs.details.scorecard.title'),
-          description: t('driverjs.details.scorecard.description'),
+          title: t('driverjs.details.projectOverview.title'),
+          description: t('driverjs.details.projectOverview.description'),
         },
       },
     ],
@@ -147,19 +147,19 @@ export function DriverJs({ children }: { children?: React.ReactNode }) {
         },
       },
     ],
-    scorecard: [
+    'project-overview': [
       {
         element: '#export-button',
         popover: {
-          title: t('driverjs.scorecard.export.title'),
-          description: t('driverjs.scorecard.export.description'),
+          title: t('driverjs.projectOverview.export.title'),
+          description: t('driverjs.projectOverview.export.description'),
         },
       },
       {
         element: '#compare-button',
         popover: {
-          title: t('driverjs.scorecard.compare.title'),
-          description: t('driverjs.scorecard.compare.description'),
+          title: t('driverjs.projectOverview.compare.title'),
+          description: t('driverjs.projectOverview.compare.description'),
         },
       },
     ],
