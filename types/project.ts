@@ -96,6 +96,8 @@ export type Project = {
     unit: string;
   };
   tags?: Tag[];
+  imgUrl?: string;
+  mapUrl?: string;
   assessmentStatus: {
     carbonAccounting: string;
     permanence: string;
@@ -138,7 +140,22 @@ export type Project = {
     assignedTo?: string;
     status: string;
     progress: number;
-    [key: string]: unknown;
+    projectValue: FAItem;
+    estimatedReductions: FAItem;
+    totalEstimatedReductions: FAItem;
+    projectDuration: FAItem;
+    projectArea: FAItem;
+    estimatedReductionsPerUnitAreaPerYear: FAItem;
+    estimatedReductionsPerUnitArea: FAItem;
+    landAcquisitionCost: FAItem;
+    landPerUnitAreaCost: FAItem;
+    plantationEstablishmentMaintenanceCost: FAItem;
+    costOfGoodsSold: FAItem;
+    overheads: FAItem;
+    totalGrossCosts: FAItem;
+    alternateRevenueSources: FAItem;
+    costOfFinancing: FAItem;
+    tax: FAItem;
   };
   esgAssessment?: {
     assignedTo?: string;

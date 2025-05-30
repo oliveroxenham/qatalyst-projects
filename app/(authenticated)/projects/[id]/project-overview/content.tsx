@@ -37,8 +37,8 @@ export default function ProjectOverviewPage({
               })}
             >
               <ProjectTitle
-                projectId={projectData.id}
-                title={projectData.name}
+                projectId={projectData.id || projectData._id}
+                title={projectData.name || projectData.projectName}
                 countryCode={projectData.country}
               />
               <ProjectSummary
@@ -54,7 +54,7 @@ export default function ProjectOverviewPage({
                   <span className="text-muted-foreground text-sm">
                     {t('projectOverview.sustainableDevelopmentGoals')}
                   </span>
-                  <SdgSummary sdgs={projectData.sdgs} />
+                  <SdgSummary sdgs={projectData.sdgs?.map(sdg => typeof sdg === "string" ? parseInt(sdg) : sdg)} />
                 </div>
                 <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
                   <span className="text-muted-foreground text-sm">
@@ -85,7 +85,7 @@ export default function ProjectOverviewPage({
                   ]}
                   creditingStartDate="2021-01-01"
                   creditingEndDate="2028-12-31"
-                  carbonCredits={projectData.estimatedAnnualCredits.value}
+                  carbonCredits={projectData.estimatedAnnualCredits?.value || 0}
                 />
                 <Map projectData={projectData} />
               </div>
@@ -170,7 +170,7 @@ export default function ProjectOverviewPage({
             </main>
             {benchmarkLayoutVisible && (
               <div className="h-[calc(100%-84px)] w-1/2">
-                <ProjectPicker currentProjectId={projectData.id} />
+                <ProjectPicker currentProjectId={projectData.id || projectData._id} />
               </div>
             )}
           </div>

@@ -52,8 +52,8 @@ export function ProjectCard({
       {(data.id === '1650' || data.id === '2749') && <span className="absolute bg-blaze-orange-300 dark:bg-muted text-[10px] mt-1 ml-1 px-1 rounded-xl font-semibold">SAMPLE</span>}
       <div className={`flex-grow bg-neutral-300 h-[161px] rounded-t-lg`}>
         <Image
-          src={data.imgUrl}
-          alt={data.name}
+          src={data.imgUrl || "/placeholder.jpg"}
+          alt={data.name || data.projectName || "Project"}
           width={344}
           height={161}
           style={{ height: 161 }}
@@ -65,7 +65,7 @@ export function ProjectCard({
           <span className="line-clamp-2">{data.name}</span>
         </div>
         <div className="flex flex-row gap-2 flex-wrap my-4">
-          {data.tags.map((tag, index) => (
+          {data.tags?.map((tag, index) => (
             <Tag key={index} size="small" type={tag.type}>
               {tag.value}
             </Tag>
@@ -88,7 +88,7 @@ export function ProjectCard({
         <div className="flex my-4 items-center justify-between">
           <div className="flex gap-2 items-center">
             <span className="text-xs">{t('projectCard.owner')}</span>
-            <CollaboratorTag collaborator={data.owner} />
+            <CollaboratorTag collaborator={data.owner || 'Unknown'} />
           </div>
           <span className="text-sm">{data.lastUpdated}</span>
         </div>
@@ -108,18 +108,18 @@ export function ProjectCard({
               <div
                 className={clsx('h-1 w-1 rounded-full', {
                   'bg-neutral-500':
-                    data.financialAssessment.status.toLowerCase() ===
+                    data.financialAssessment?.status?.toLowerCase() ===
                     'not started',
                   'bg-orange-500':
-                    data.financialAssessment.status.toLowerCase() ===
+                    data.financialAssessment?.status?.toLowerCase() ===
                     'in progress',
                   'bg-branding-green-600':
-                    data.financialAssessment.status.toLowerCase() === 'completed' ||
-                    data.financialAssessment.status.toLowerCase() === 'eligible',
+                    data.financialAssessment?.status?.toLowerCase() === 'completed' ||
+                    data.financialAssessment?.status?.toLowerCase() === 'eligible',
                 })}
               />
               <span className="capitalize">
-                {getStatusTranslation(data.financialAssessment.status)}
+                {getStatusTranslation(data.financialAssessment?.status || 'not started')}
               </span>
             </Tag>
             <Progress
@@ -141,16 +141,16 @@ export function ProjectCard({
               <div
                 className={clsx('h-1 w-1 rounded-full', {
                   'bg-neutral-500':
-                    data.esgAssessment.status.toLowerCase() === 'not started',
+                    data.esgAssessment?.status?.toLowerCase() === 'not started',
                   'bg-orange-500':
-                    data.esgAssessment.status.toLowerCase() === 'in progress',
+                    data.esgAssessment?.status?.toLowerCase() === 'in progress',
                   'bg-branding-green-600':
-                    data.esgAssessment.status.toLowerCase() === 'completed' ||
-                    data.esgAssessment.status.toLowerCase() === 'eligible',
+                    data.esgAssessment?.status?.toLowerCase() === 'completed' ||
+                    data.esgAssessment?.status?.toLowerCase() === 'eligible',
                 })}
               />
               <span className="capitalize">
-                {getStatusTranslation(data.esgAssessment.status)}
+                {getStatusTranslation(data.esgAssessment?.status || 'not started')}
               </span>
             </Tag>
             <Progress
@@ -173,25 +173,23 @@ export function ProjectCard({
                   <div
                     className={clsx('h-1 w-1 rounded-full', {
                       'bg-neutral-500':
-                        data.kycAssessment.status.toLowerCase() ===
+                        data.kycAssessment?.status?.toLowerCase() ===
                         'not started',
                       'bg-orange-500':
-                        data.kycAssessment.status.toLowerCase() ===
+                        data.kycAssessment?.status?.toLowerCase() ===
                         'in progress',
                       'bg-branding-green-600':
-                        data.kycAssessment.status.toLowerCase() === 'completed' ||
-                        data.kycAssessment.status.toLowerCase() === 'eligible',
+                        data.kycAssessment?.status?.toLowerCase() === 'completed' ||
+                        data.kycAssessment?.status?.toLowerCase() === 'eligible',
                     })}
                   />
                   <span className="capitalize">
-                    {getStatusTranslation(data.kycAssessment.status)}
+                    {getStatusTranslation(data.kycAssessment?.status || 'not started')}
                   </span>
                 </Tag>
                 <Progress
                   value={
-                    data.kycAssessment.progress
-                      ? data.kycAssessment.progress
-                      : 0
+                    data.kycAssessment?.progress || 0
                   }
                   className="w-1/2"
                 />

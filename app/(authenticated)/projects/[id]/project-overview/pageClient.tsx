@@ -119,7 +119,11 @@ export default function PageClient({ projectData }: { projectData: Project | nul
             <div className="space-y-4">
               <div>
                 <p className="text-sm text-muted-foreground">Project Area</p>
-                <p className="font-medium">{projectData.projectArea}</p>
+                <p className="font-medium">
+                  {typeof projectData.projectArea === 'string' 
+                    ? projectData.projectArea 
+                    : `${projectData.projectArea?.formatted} ${projectData.projectArea?.unit}`}
+                </p>
               </div>
             </div>
             <div className="space-y-4">

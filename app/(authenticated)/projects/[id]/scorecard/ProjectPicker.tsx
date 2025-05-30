@@ -120,8 +120,8 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
   return (
     <div>
       <ProjectTitle
-        projectId={projectData.id}
-        title={projectData.name}
+        projectId={projectData.id || projectData._id}
+        title={projectData.name || projectData.projectName}
         countryCode={projectData.country}
       />
       <ProjectSummary benchmarkLayoutVisible projectData={projectData} />
@@ -134,7 +134,7 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
           <span className="text-muted-foreground text-sm">
             {t('scorecard.sustainableDevelopmentGoals')}
           </span>
-          <SdgSummary sdgs={projectData.sdgs} />
+          <SdgSummary sdgs={projectData.sdgs?.map(sdg => typeof sdg === "string" ? parseInt(sdg) : sdg)} />
         </div>
         <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
           <span className="text-muted-foreground text-sm">{t('scorecard.collaborators')}</span>
@@ -162,7 +162,7 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
           ]}
           creditingStartDate="2021-01-01"
           creditingEndDate="2028-12-31"
-          carbonCredits={projectData.estimatedAnnualCredits.value}
+          carbonCredits={projectData.estimatedAnnualCredits?.value || 0}
         />
         <Map projectData={projectData} />
       </div>

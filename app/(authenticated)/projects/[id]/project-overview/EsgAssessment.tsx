@@ -58,7 +58,7 @@ function EsgAssessment({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {projectData.esgAssessment.risks?.map((item) => (
+            {projectData?.esgAssessment?.risks?.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className="font-medium">{translateRiskName(item.name)}</TableCell>
                 <TableCell>

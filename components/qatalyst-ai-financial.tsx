@@ -32,7 +32,7 @@ export function QatalystAi({
                   {t('qatalystAi.notAvailable')}
                 </span>
               ))}
-            {projectData && ['1650'].indexOf(projectData?.id) < 0 && (
+            {projectData && ['1650'].indexOf(projectData?.id || projectData._id) < 0 && (
               <span className="text-xs p-2 text-neutral-500">
                 {t('qatalystAi.notAvailable')}
               </span>

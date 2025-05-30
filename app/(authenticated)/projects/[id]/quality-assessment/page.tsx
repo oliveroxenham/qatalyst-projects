@@ -39,7 +39,7 @@ export default async function QualityAssessmentPage({
             <div className="flex flex-row items-center gap-1">
               <span className="text-sm">Assignee:</span>
               <AssigneeSelector
-                projectId={projectData.id}
+                projectId={projectData.id || projectData._id}
                 currentUser={user?.fullName}
                 assessment="financial"
                 assignedTo={projectData?.financialAssessment?.assignedTo}

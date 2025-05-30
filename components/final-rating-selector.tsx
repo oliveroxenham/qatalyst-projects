@@ -38,7 +38,7 @@ export function FinalRatingSelector({
   const handleUpdateFinalRating = async (newFinalRating: string) => {
     setFinalRating(newFinalRating);
     await updateFinalRating({
-      projectId: projectData.id,
+      projectId: projectData.id || projectData._id,
       assessment,
       rating: newFinalRating,
     });

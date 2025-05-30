@@ -577,9 +577,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
           <div className="flex justify-between items-center w-full gap-2">
             {project && (
               <ProjectInfoTooltip
-                name={project.name}
-                sourceType={project.sourceType}
-                originalId={project.id}
+                name={project.name || project.projectName}
+                sourceType={project.sourceType || "convex"}
+                originalId={project.id || project._id}
                 projectType={project.projectType}
               />
             )}
@@ -606,9 +606,9 @@ export function ReportPreviewClient({ projectId }: { projectId: string }) {
         <div className="flex justify-between items-center w-full gap-2">
           {project && (
             <ProjectInfoTooltip
-              name={project.name}
-              sourceType={project.sourceType}
-              originalId={project.id}
+              name={project.name || project.projectName}
+              sourceType={project.sourceType || "convex"}
+              originalId={project.id || project._id}
               projectType={project.projectType}
             />
           )}

@@ -156,7 +156,11 @@ function ProjectCard({ project }: { project: Project }) {
         
         <div className="flex justify-between">
           <span className="text-muted-foreground">Project Area</span>
-          <span>{project.projectArea}</span>
+          <span>
+            {typeof project.projectArea === 'string' 
+              ? project.projectArea 
+              : `${project.projectArea?.formatted} ${project.projectArea?.unit}`}
+          </span>
         </div>
         
         <div className="flex justify-between">

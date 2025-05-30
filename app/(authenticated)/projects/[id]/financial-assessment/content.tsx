@@ -121,6 +121,15 @@ export function Content({
     );
   }
   const data = projectData.financialAssessment;
+  
+  if (!data) {
+    return (
+      <div className="w-full p-4 bg-background rounded-sm border mr-2 flex items-center justify-center">
+        <span>{t('financialAssessment.noData')}</span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full p-4 bg-background rounded-sm border mr-2 overflow-scroll">
       <div className="p-4 flex flex-row justify-between items-center">
@@ -141,7 +150,7 @@ export function Content({
         <TableBody>
           <TableRow
             className="hover:cursor-pointer"
-            onClick={() => handleRowClick(data.projectValue.id)}
+            onClick={() => handleRowClick(data.projectValue?.id || '')}
           >
             <TableCell>
               <span className="">{t('financialAssessment.projectValue')}</span>

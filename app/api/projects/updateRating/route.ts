@@ -23,10 +23,10 @@ export async function POST(req: NextRequest) {
     for (let i = 0; i < allProjects.length; i++) {
       if (allProjects[i].id === currentProject.id) {
         if (assessment === 'financial') {
-          allProjects[i].financialAssessment.status = rating;
+          if (allProjects[i].financialAssessment) { allProjects[i].financialAssessment!.status = rating; }
           console.log('project=', allProjects[i])
         } else if (assessment === 'esg') {
-          allProjects[i].esgAssessment.status = rating;
+          if (allProjects[i].esgAssessment) { allProjects[i].esgAssessment!.status = rating; }
           console.log('project=', allProjects[i])
         } else if (assessment === 'carbonQuality') {
           if (!allProjects[i].carbonQualityAssessment) {

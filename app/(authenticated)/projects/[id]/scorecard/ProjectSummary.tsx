@@ -23,12 +23,12 @@ const ProjectSummary = ({
       <div className="border-r text-sm">
         <span className="text-muted-foreground">{t('scorecard.projectValue')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
-          {projectData.financialAssessment.projectValue.value
-            ? projectData.financialAssessment.projectValue.formatted
+          {projectData?.financialAssessment?.projectValue.value
+            ? projectData?.financialAssessment?.projectValue.formatted
             : '-'}{' '}
-          {projectData.financialAssessment.projectValue.value ? (
+          {projectData?.financialAssessment?.projectValue.value ? (
             <span className="text-lg">
-              {projectData.financialAssessment.projectValue.unit}
+              {projectData?.financialAssessment?.projectValue.unit}
             </span>
           ) : null}
         </p>
@@ -36,9 +36,9 @@ const ProjectSummary = ({
       <div className="border-r text-sm">
         <span className="text-muted-foreground">{t('scorecard.carbonCredits')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
-          {projectData.estimatedAnnualCredits.formatted}{' '}
+          {projectData?.estimatedAnnualCredits?.formatted}{' '}
           <span className="text-lg">
-            {projectData.estimatedAnnualCredits.unit}
+            {projectData?.estimatedAnnualCredits?.unit}
           </span>
         </p>
       </div>
@@ -50,19 +50,23 @@ const ProjectSummary = ({
       >
         <span className="text-muted-foreground">{t('scorecard.projectLifetime')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
-          {projectData.financialAssessment.projectDuration.formatted}{' '}
+          {projectData?.financialAssessment?.projectDuration.formatted}{' '}
           <span className="text-lg">
-            {projectData.financialAssessment.projectDuration.unit}
+            {projectData?.financialAssessment?.projectDuration.unit}
           </span>
         </p>
       </div>
       <div className="border-r text-sm">
         <span className="text-muted-foreground">{t('scorecard.projectArea')}</span>
         <p className="pt-2 text-xl font-medium truncate text-ellipsis">
-          {projectData.projectArea.value
+          {typeof projectData.projectArea === 'string'
+            ? projectData.projectArea
+            : projectData.projectArea?.value
             ? projectData.projectArea.formatted
             : '-'}{' '}
-          {projectData.projectArea.value && <span className="text-lg">{projectData.projectArea.unit}</span>}
+          {typeof projectData.projectArea !== 'string' && projectData.projectArea?.value && (
+            <span className="text-lg">{projectData.projectArea.unit}</span>
+          )}
         </p>
       </div>
       <div className="border-r text-sm">
