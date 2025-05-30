@@ -61,7 +61,7 @@ export default function ScoreCardPage({
                     {t('scorecard.collaborators')}
                   </span>
                   <div className="flex flex-wrap gap-1">
-                    {projectData?.collaborators.map((collaborator) => (
+                    {projectData?.collaborators?.map((collaborator) => (
                       <CollaboratorTag
                         key={collaborator}
                         collaborator={collaborator}

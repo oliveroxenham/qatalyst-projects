@@ -43,9 +43,9 @@ export default function ProjectDetailsClient({
         <div className="flex justify-between items-center w-full gap-2">
           {projectData && (
             <ProjectInfoTooltip
-              name={translateProjectName(projectData.id, projectData.name)}
-              sourceType={projectData.sourceType}
-              originalId={projectData.id}
+              name={translateProjectName(projectData.id || projectData._id, projectData.name || projectData.projectName)}
+              sourceType={projectData.sourceType || "convex"}
+              originalId={projectData.id || projectData._id}
               projectType={projectData.projectType}
             />
           )}
@@ -150,8 +150,8 @@ export default function ProjectDetailsClient({
             <div className="flex flex-col gap-1 grow p-4">
               <span>{t('projectDetails.estimatedAnnualCredits')}</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                {projectData?.estimatedAnnualCredits.formatted}{' '}
-                {projectData?.estimatedAnnualCredits.unit}
+                {projectData?.estimatedAnnualCredits?.formatted}{' '}
+                {projectData?.estimatedAnnualCredits?.unit}
               </p>
             </div>
 
@@ -165,15 +165,16 @@ export default function ProjectDetailsClient({
             <div className="flex flex-col gap-1 grow p-4">
               <span>{t('projectDetails.projectArea')}</span>
               <p className="text-sm p-2 border rounded bg-muted">
-                {projectData?.projectArea.formatted}{' '}
-                {projectData?.projectArea.unit}
+                {typeof projectData?.projectArea === 'string' 
+                  ? projectData.projectArea 
+                  : `${projectData?.projectArea?.formatted} ${projectData?.projectArea?.unit}`}
               </p>
             </div>
 
             <div className="flex flex-col gap-1 grow p-4">
               <span>{t('projectDetails.sdgs')}</span>
               <div className="text-sm p-2 border rounded bg-muted">
-                <SdgSummary sdgs={projectData?.sdgs} />
+                <SdgSummary sdgs={projectData?.sdgs?.map(sdg => typeof sdg === 'string' ? parseInt(sdg) : sdg)} />
               </div>
             </div>
           </div>
@@ -206,7 +207,7 @@ export default function ProjectDetailsClient({
                   </span>
                 </div>
                 <div className="w-3/4 flex flex-wrap gap-1">
-                  {projectData?.collaborators.map((collaborator) => (
+                  {projectData?.collaborators?.map((collaborator) => (
                     <CollaboratorTag
                       key={collaborator}
                       collaborator={collaborator}
@@ -231,7 +232,7 @@ export default function ProjectDetailsClient({
                         projectId={projectId}
                         assessment="financial"
                         currentUser={user?.fullName}
-                        assignedTo={projectData?.financialAssessment.assignedTo}
+                        assignedTo={projectData?.financialAssessment?.assignedTo}
                       />
                     </div>
                   </div>
@@ -248,23 +249,23 @@ export default function ProjectDetailsClient({
                           'flex items-center border rounded-sm p-2 h-10 text-white',
                           {
                             'bg-neutral-500':
-                              projectData?.financialAssessment.status.toLowerCase() ===
+                              projectData?.financialAssessment?.status.toLowerCase() ===
                               'not started',
                             'bg-blue-500':
-                              projectData?.financialAssessment.status.toLowerCase() ===
+                              projectData?.financialAssessment?.status.toLowerCase() ===
                               'in progress',
                             'bg-branding-green-600':
-                              projectData?.financialAssessment.status.toLowerCase() ===
+                              projectData?.financialAssessment?.status.toLowerCase() ===
                               'eligible',
                             'bg-destructive':
-                              projectData?.financialAssessment.status.toLowerCase() ===
+                              projectData?.financialAssessment?.status.toLowerCase() ===
                               'not eligible',
                           }
                         )}
                       >
                         <span className="text-white capitalize">
                           {t(
-                            `projectDetails.status.${projectData?.financialAssessment.status
+                            `projectDetails.status.${projectData?.financialAssessment?.status
                               .toLowerCase()
                               .replace(/\s+/g, '_')}` as string,
                             {
@@ -279,7 +280,7 @@ export default function ProjectDetailsClient({
                         <GenerateAssessmentButton
                           size="lg"
                           currentUser={user?.fullName}
-                          assignee={projectData?.financialAssessment.assignedTo}
+                          assignee={projectData?.financialAssessment?.assignedTo}
                         />
                       </div>
                     </div>
@@ -303,7 +304,7 @@ export default function ProjectDetailsClient({
                         projectId={projectId}
                         assessment="esg"
                         currentUser={user?.fullName}
-                        assignedTo={projectData?.esgAssessment.assignedTo}
+                        assignedTo={projectData?.esgAssessment?.assignedTo}
                       />
                     </div>
                   </div>
@@ -320,23 +321,23 @@ export default function ProjectDetailsClient({
                           'flex items-center border rounded-sm p-2 h-10 text-white',
                           {
                             'bg-neutral-500':
-                              projectData?.esgAssessment.status.toLowerCase() ===
+                              projectData?.esgAssessment?.status.toLowerCase() ===
                               'not started',
                             'bg-blue-500':
-                              projectData?.esgAssessment.status.toLowerCase() ===
+                              projectData?.esgAssessment?.status.toLowerCase() ===
                               'in progress',
                             'bg-branding-green-600':
-                              projectData?.esgAssessment.status.toLowerCase() ===
+                              projectData?.esgAssessment?.status.toLowerCase() ===
                               'eligible',
                             'bg-destructive':
-                              projectData?.esgAssessment.status.toLowerCase() ===
+                              projectData?.esgAssessment?.status.toLowerCase() ===
                               'not eligible',
                           }
                         )}
                       >
                         <span className="text-white capitalize">
                           {t(
-                            `projectDetails.status.${projectData?.esgAssessment.status
+                            `projectDetails.status.${projectData?.esgAssessment?.status
                               .toLowerCase()
                               .replace(/\s+/g, '_')}` as string,
                             {
@@ -351,7 +352,7 @@ export default function ProjectDetailsClient({
                         <GenerateAssessmentButton
                           size="lg"
                           currentUser={user?.fullName}
-                          assignee={projectData?.esgAssessment.assignedTo}
+                          assignee={projectData?.esgAssessment?.assignedTo}
                         />
                       </div>
                     </div>
@@ -383,7 +384,7 @@ export default function ProjectDetailsClient({
                         projectId={projectId}
                         assessment="financial"
                         currentUser={user?.fullName}
-                        assignedTo={projectData?.kycAssessment.assignedTo}
+                        assignedTo={projectData?.kycAssessment?.assignedTo}
                         disabled
                       />
                     </div>
@@ -399,7 +400,7 @@ export default function ProjectDetailsClient({
                       <div className="flex items-center border rounded-sm p-2 h-10 bg-neutral-500">
                         <span className="text-white capitalize">
                           {t(
-                            `projectDetails.status.${projectData?.kycAssessment.status
+                            `projectDetails.status.${projectData?.kycAssessment?.status
                               .toLowerCase()
                               .replace(/\s+/g, '_')}` as string,
                             {

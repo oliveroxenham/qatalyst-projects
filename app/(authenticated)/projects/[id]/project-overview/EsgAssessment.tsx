@@ -33,19 +33,19 @@ function EsgAssessment({
           'flex items-center border rounded-sm p-2 h-10 text-white',
           {
             'bg-neutral-500':
-              projectData?.esgAssessment.status.toLowerCase() === 'not started',
+              projectData?.esgAssessment?.status.toLowerCase() === 'not started',
             'bg-blue-500':
-              projectData?.esgAssessment.status.toLowerCase() === 'in progress',
+              projectData?.esgAssessment?.status.toLowerCase() === 'in progress',
             'bg-branding-green-600':
-              projectData?.esgAssessment.status.toLowerCase() === 'eligible',
+              projectData?.esgAssessment?.status.toLowerCase() === 'eligible',
             'bg-destructive':
-              projectData?.esgAssessment.status.toLowerCase() ===
+              projectData?.esgAssessment?.status.toLowerCase() ===
               'not eligible',
           }
         )}
       >
         <span className="text-white capitalize text-sm">
-          {projectData?.esgAssessment.status ?? t('projectDetails.status.not_started')}
+          {projectData?.esgAssessment?.status ?? t('projectDetails.status.not_started')}
         </span>
       </div>
       <div className="flex flex-col rounded p-2">

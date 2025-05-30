@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Project } from "@/types/project";
 
-export default function PageClient({ projectData }: { projectData: any }) {
+export default function PageClient({ projectData }: { projectData: Project | null }) {
   const params = useParams();
   const projectId = params.id;
 

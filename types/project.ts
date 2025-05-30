@@ -49,64 +49,66 @@ export type FAItem = {
 }
 
 export type Project = {
-  id: string;
-  imgUrl: string;
-  mapUrl?: string;
-  name: string;
+  _id: string;
+  id?: string;
+  name?: string;
+  projectName: string;
+  verraGsNumber: string;
   country: string;
-  countryName: string;
-  state?: string;
-  lastUpdated: string;
-  tags: Tag[];
-  creditingStartDate: string;
-  creditingEndDate: string;
-  proponent: string;
-  background: string;
-  latitude: string;
-  longitude: string;
-  createdBy: string;
-  owner: string;
-  collaborators: string[];
-  sourceType: string;
-  registryStatus: string;
   projectType: string;
-  estimatedAnnualCredits: {
-    formatted: string;
-    value: number;
-    unit: string;
-  };
   methodology: string;
-  projectArea: {
+  status: string;
+  issuanceTiming: string;
+  projectDeveloper: string;
+  projectArea: string | {
     formatted: string;
     value: number | null;
     unit: string;
   };
-  financialAssessment: {
-    assignedTo?: string;
-    status: string;
-    progress: number;
-    projectValue: FAItem;
-    estimatedReductions: FAItem;
-    totalEstimatedReductions: FAItem;
-    projectDuration: FAItem;
-    projectArea: FAItem;
-    estimatedReductionsPerUnitAreaPerYear: FAItem;
-    estimatedReductionsPerUnitArea: FAItem;
-    landAcquisitionCost: FAItem;
-    landPerUnitAreaCost: FAItem;
-    plantationEstablishmentMaintenanceCost: FAItem;
-    costOfGoodsSold: FAItem;
-    overheads: FAItem;
-    totalGrossCosts: FAItem;
-    alternateRevenueSources: FAItem;
-    costOfFinancing: FAItem;
-    tax: FAItem;
+  projectLife: string;
+  creditType: string;
+  ccbGold: string;
+  ccpLabel: string;
+  corsiaLabel: string;
+  loaYN: string;
+  sylveraBeZeroRating: string;
+  sdgs: string[];
+  estimatedEmissionReductions: {
+    projectLife: string;
+    annual: string;
   };
-  esgAssessment: {
+  created: string;
+  collaborators: string[];
+  sourceType?: string;
+  countryName?: string;
+  state?: string;
+  latitude?: string;
+  longitude?: string;
+  background?: string;
+  proponent?: string;
+  lastUpdated?: string;
+  createdBy?: string;
+  owner?: string;
+  registryStatus?: string;
+  estimatedAnnualCredits?: {
+    formatted: string;
+    value: number;
+    unit: string;
+  };
+  tags?: Tag[];
+  assessmentStatus: {
+    carbonAccounting: string;
+    permanence: string;
+    additionality: string;
+    coBenefitsSafeguarding: string;
+    financialAssessment: string;
+  };
+  // Assessment data structures
+  additionality?: {
     assignedTo?: string;
     status: string;
     progress: number;
-    risks?: EsgRisk[];
+    risks?: Risk[];
   };
   carbonQualityAssessment?: {
     assignedTo?: string;
@@ -114,39 +116,40 @@ export type Project = {
     progress: number;
     risks?: Risk[];
   };
-  // Added reputationalRisk as an alias to carbonQualityAssessment
-  reputationalRisk?: {
-    assignedTo?: string;
-    status: string;
-    progress: number;
-    risks?: Risk[];
-  };
-  // Added carbonAccounting as an alias to carbonQualityAssessment
-  carbonAccounting?: {
-    assignedTo?: string;
-    status: string;
-    progress: number;
-    risks?: Risk[];
-  };
-  // Added additionality as an alias to carbonQualityAssessment
-  additionality?: {
-    assignedTo?: string;
-    status: string;
-    progress: number;
-    risks?: Risk[];
-  };
-  // Added permanence as an alias to carbonQualityAssessment
   permanence?: {
     assignedTo?: string;
     status: string;
     progress: number;
     risks?: Risk[];
   };
-  kycAssessment: {
+  carbonAccounting?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
+  };
+  reputationalRisk?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: Risk[];
+  };
+  financialAssessment?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    [key: string]: unknown;
+  };
+  esgAssessment?: {
+    assignedTo?: string;
+    status: string;
+    progress: number;
+    risks?: EsgRisk[];
+  };
+  kycAssessment?: {
     assignedTo?: string;
     status: string;
     progress: number;
   };
-  sdgs?: number[];
   activities?: Activity[];
 };

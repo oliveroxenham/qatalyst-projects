@@ -3,7 +3,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock } from "lucide-react";
 
-export default function PageClient({ projectData }: { projectData: any }) {
+import { Project } from "@/types/project";
+
+export default function PageClient({ projectData }: { projectData: Project | null }) {
   if (!projectData) {
     return <div>Project not found</div>;
   }

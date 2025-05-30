@@ -27,9 +27,9 @@ export default async function QualityAssessmentPage({
           <div className="flex flex-row items-center gap-2">
             {projectData && (
               <ProjectInfoTooltip
-                name={projectData.name}
-                sourceType={projectData.sourceType}
-                originalId={projectData.id}
+                name={projectData.name || projectData.projectName}
+                sourceType={projectData.sourceType || "convex"}
+                originalId={projectData.id || projectData._id}
                 projectType={projectData.projectType}
               />
             )}
@@ -42,7 +42,7 @@ export default async function QualityAssessmentPage({
                 projectId={projectData.id}
                 currentUser={user?.fullName}
                 assessment="financial"
-                assignedTo={projectData?.financialAssessment.assignedTo}
+                assignedTo={projectData?.financialAssessment?.assignedTo}
               />
             </div>
             <FinalRatingSelector
@@ -54,7 +54,7 @@ export default async function QualityAssessmentPage({
           <div className="flex items-center">
             <GenerateAssessmentButton
               currentUser={user?.fullName}
-              assignee={projectData?.financialAssessment.assignedTo}
+              assignee={projectData?.financialAssessment?.assignedTo}
             />
             <ThemeSwitcher />
           </div>

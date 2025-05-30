@@ -10,7 +10,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Badge } from "@/components/ui/badge";
 
 // Mock monthly emissions data
 const monthlyEmissionsData = [
@@ -28,7 +27,9 @@ const monthlyEmissionsData = [
   { month: "Dec", emissions: 10000 },
 ];
 
-export default function PageClient({ projectData }: { projectData: any }) {
+import { Project } from "@/types/project";
+
+export default function PageClient({ projectData }: { projectData: Project | null }) {
   if (!projectData) {
     return <div>Project not found</div>;
   }
@@ -167,7 +168,7 @@ export default function PageClient({ projectData }: { projectData: any }) {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
                 <YAxis tickFormatter={(value) => `$${value / 1000}k`} />
-                <Tooltip formatter={(value: any) => `$${value.toLocaleString()}`} />
+                <Tooltip formatter={(value: unknown) => `$${(value as number).toLocaleString()}`} />
                 <Bar dataKey="emissions" fill="#6B7280" />
               </BarChart>
             </ResponsiveContainer>

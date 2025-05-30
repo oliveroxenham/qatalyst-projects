@@ -8,7 +8,6 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
-  Legend,
   Pie,
   PieChart,
   ResponsiveContainer,
@@ -25,8 +24,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -290,7 +287,7 @@ export default function DashboardClient() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis tickFormatter={(value) => `$${value / 1000}k`} />
-                  <Tooltip formatter={(value: any) => formatCurrency(value)} />
+                  <Tooltip formatter={(value: unknown) => formatCurrency(value as number)} />
                   <Bar dataKey="projectsUnderReview" fill="#6B7280" />
                 </BarChart>
               </ResponsiveContainer>
@@ -311,7 +308,7 @@ export default function DashboardClient() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis tickFormatter={(value) => `$${value / 1000}k`} />
-                  <Tooltip formatter={(value: any) => formatCurrency(value)} />
+                  <Tooltip formatter={(value: unknown) => formatCurrency(value as number)} />
                   <Bar dataKey="creditsContracted" fill="#6B7280" />
                 </BarChart>
               </ResponsiveContainer>

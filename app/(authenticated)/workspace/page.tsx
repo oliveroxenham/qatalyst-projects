@@ -3,10 +3,10 @@
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useState } from "react";
-import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Project } from "@/types/project";
 
 export default function WorkspacePage() {
   const [activeTab, setActiveTab] = useState("all");
@@ -70,7 +70,7 @@ export default function WorkspacePage() {
   );
 }
 
-function ProjectCard({ project }: { project: any }) {
+function ProjectCard({ project }: { project: Project }) {
   const router = useRouter();
   
   const getRiskColor = (risk: string) => {

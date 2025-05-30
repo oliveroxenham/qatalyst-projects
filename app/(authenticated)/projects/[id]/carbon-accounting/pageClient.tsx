@@ -8,7 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function PageClient({ projectData }: { projectData: any }) {
+import { Project } from "@/types/project";
+
+export default function PageClient({ projectData }: { projectData: Project | null }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showAllQuestions, setShowAllQuestions] = useState(false);
   const [reviewer, setReviewer] = useState("");

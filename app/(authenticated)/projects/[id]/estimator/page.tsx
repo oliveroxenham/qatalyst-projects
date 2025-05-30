@@ -19,9 +19,9 @@ export default async function FinancialAssessmentPage({
           <div className="flex flex-row items-center gap-2">
             {projectData && (
               <ProjectInfoTooltip
-                name={projectData.name}
-                sourceType={projectData.sourceType}
-                originalId={projectData.id}
+                name={projectData.name || projectData.projectName}
+                sourceType={projectData.sourceType || "convex"}
+                originalId={projectData.id || projectData._id}
                 projectType={projectData.projectType}
               />
             )}

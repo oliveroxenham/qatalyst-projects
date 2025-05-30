@@ -19,7 +19,7 @@ export default function ReportBuilderPage() {
     return <ReportBuilderSkeleton />;
   }
 
-  return <PageClient projectData={projectData} />;
+  return <PageClient />;
 }
 
 function ReportBuilderSkeleton() {

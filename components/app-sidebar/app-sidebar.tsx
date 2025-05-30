@@ -18,27 +18,16 @@ import {
 import Logo from '@/public/icons/logo.svg';
 import Qatalyst from '@/public/icons/qatalyst.svg';
 import {
-  AlertTriangle,
-  BookCopy,
-  BookOpen,
   Calculator,
   ChartNoAxesCombined,
-  Clipboard,
   ClipboardCheck,
   Clock,
   Database,
-  Earth,
   FilePen,
   FileText,
-  Files,
-  Fingerprint,
   LayoutList,
-  ListChecks,
-  NotebookText,
   Plus,
-  ShieldAlert,
   ShieldCheck,
-  SquareSigma,
   Star,
 } from 'lucide-react';
 import Link from 'next/link';

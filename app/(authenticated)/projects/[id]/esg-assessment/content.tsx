@@ -154,7 +154,7 @@ export function Content({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {esgAssessment.risks?.map((risk) => {
+          {esgAssessment?.risks?.map((risk) => {
             return (
               <TableRow
                 key={risk.id}

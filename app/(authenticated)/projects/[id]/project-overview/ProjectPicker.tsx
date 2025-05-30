@@ -139,7 +139,7 @@ const ProjectPicker = ({ currentProjectId }: { currentProjectId: string }) => {
         <div className="flex flex-col gap-2 rounded-lg border bg-background p-6">
           <span className="text-muted-foreground text-sm">{t('scorecard.collaborators')}</span>
           <div className="flex flex-wrap gap-1">
-            {projectData?.collaborators.map((collaborator) => (
+            {projectData?.collaborators?.map((collaborator) => (
               <CollaboratorTag key={collaborator} collaborator={collaborator} />
             ))}
           </div>

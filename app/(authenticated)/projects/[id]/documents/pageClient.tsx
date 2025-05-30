@@ -25,9 +25,9 @@ export default function DocumentsClient({ projectData, projectId }: DocumentsCli
         <div className="flex justify-between items-center w-full gap-2">
           {projectData && (
             <ProjectInfoTooltip
-              name={projectData.name}
-              sourceType={projectData.sourceType}
-              originalId={projectData.id}
+              name={projectData.name || projectData.projectName}
+              sourceType={projectData.sourceType || "convex"}
+              originalId={projectData.id || projectData._id}
               projectType={projectData.projectType}
             />
           )}

@@ -28,9 +28,9 @@ export default async function FinancialAssessmentPage({
           <div className="flex flex-row items-center gap-2">
             {projectData && (
               <ProjectInfoTooltip
-                name={projectData.name}
-                sourceType={projectData.sourceType}
-                originalId={projectData.id}
+                name={projectData.name || projectData.projectName}
+                sourceType={projectData.sourceType || "convex"}
+                originalId={projectData.id || projectData._id}
                 projectType={projectData.projectType}
               />
             )}
@@ -43,7 +43,7 @@ export default async function FinancialAssessmentPage({
                 projectId={projectId}
                 currentUser={user?.fullName}
                 assessment="esg"
-                assignedTo={projectData?.esgAssessment.assignedTo}
+                assignedTo={projectData?.esgAssessment?.assignedTo}
               />
             </div>
             <FinalRatingSelector
@@ -55,7 +55,7 @@ export default async function FinancialAssessmentPage({
           <div className="flex items-center">
             <GenerateAssessmentButton
               currentUser={user?.fullName}
-              assignee={projectData?.esgAssessment.assignedTo}
+              assignee={projectData?.esgAssessment?.assignedTo}
             />
             <ThemeSwitcher />
           </div>

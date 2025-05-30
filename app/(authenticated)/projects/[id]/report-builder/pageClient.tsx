@@ -4,12 +4,10 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/navigation";
 
 type ReportFormat = "PPT" | "WORD" | "PDF";
 
-export default function PageClient({ projectData }: { projectData: any }) {
-  const router = useRouter();
+export default function PageClient() {
   const [selectedFormat, setSelectedFormat] = useState<ReportFormat>("PPT");
   const [selectedSections, setSelectedSections] = useState<string[]>([
     "Project overview",
