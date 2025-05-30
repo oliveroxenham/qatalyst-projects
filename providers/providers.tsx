@@ -7,6 +7,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { ConvexProvider, ConvexReactClient } from 'convex/react';
 
 // Import i18n configuration
 import '@/i18n/i18n';
@@ -39,6 +40,8 @@ function getQueryClient() {
   }
 }
 
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
 export default function Providers({
   children,
   ...props
@@ -50,10 +53,12 @@ export default function Providers({
   const queryClient = getQueryClient();
 
   return (
-    <NextThemesProvider {...props}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
-    </NextThemesProvider>
+    <ConvexProvider client={convex}>
+      <NextThemesProvider {...props}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </NextThemesProvider>
+    </ConvexProvider>
   );
 }

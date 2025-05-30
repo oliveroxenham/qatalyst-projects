@@ -1,515 +1,498 @@
-'use client';
+"use client";
 
-import { TopBar } from '@/components/topbar';
-import { WorldMap } from '@/components/WorldMap/world-map';
-import { useTranslation } from 'react-i18next';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Bar, BarChart, Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell } from 'recharts';
-import { CalendarDays, ArrowUpRight, TrendingUp, Briefcase, DollarSign, Globe, Activity, ClipboardList, CheckCircle, AlertCircle } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Avatar } from '@/components/ui/avatar';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import dynamic from 'next/dynamic';
-import { useState, useRef } from 'react';
-import { ThemeSwitcher } from '@/components/theme-switcher';
-import type { MapboxMapRef } from './map-flat';
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-// Dynamically import MapboxMap to prevent SSR issues with mapbox-gl
-const MapboxMapComponent = dynamic(
-  () => import('./map-flat'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="h-[350px] bg-gray-900 animate-pulse flex items-center justify-center">
-        <div className="text-white/50">Loading map...</div>
-      </div>
-    )
-  }
-);
+// Set Mapbox access token
+if (process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN) {
+  mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+}
 
-// Mock data for charts
-const monthlyIssuance = [
-  { name: 'Jan', credits: 5200 },
-  { name: 'Feb', credits: 4800 },
-  { name: 'Mar', credits: 6100 },
-  { name: 'Apr', credits: 5400 },
-  { name: 'May', credits: 7200 },
-  { name: 'Jun', credits: 6800 },
-  { name: 'Jul', credits: 8100 },
-  { name: 'Aug', credits: 7600 },
-  { name: 'Sep', credits: 9200 },
-  { name: 'Oct', credits: 8400 },
-  { name: 'Nov', credits: 9800 },
-  { name: 'Dec', credits: 10600 },
-];
+const COLORS = ["#6B7280", "#9CA3AF", "#D1D5DB"];
 
-const quarterlyPerformance = [
-  { name: 'Q1 2023', actual: 16100, projected: 15000 },
-  { name: 'Q2 2023', actual: 19400, projected: 18000 },
-  { name: 'Q3 2023', actual: 24900, projected: 22000 },
-  { name: 'Q4 2023', actual: 28800, projected: 25000 },
-  { name: 'Q1 2024', actual: 32400, projected: 30000 },
-];
+// Mapbox component
+function GeoDistributionMap({ countryDistribution }: { countryDistribution: Record<string, number> }) {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
+  const [lng] = useState(0);
+  const [lat] = useState(20);
+  const [zoom] = useState(1.5);
 
-const projectTypes = [
-  { name: 'Forestry', value: 42 },
-  { name: 'Renewable Energy', value: 28 },
-  { name: 'Cookstoves', value: 15 },
-  { name: 'Methane Capture', value: 10 },
-  { name: 'Other', value: 5 },
-];
+  useEffect(() => {
+    if (!mapContainer.current || map.current) return;
 
-// Using branded colors from the theme instead of random colors
-// branding-green-600, chart-1, chart-2, chart-3, chart-4
-const COLORS = ['#00938C', '#F08A5D', '#32C1B3', '#1B3A4B', '#F7CA44'];
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: "mapbox://styles/mapbox/light-v11",
+      center: [lng, lat],
+      zoom: zoom,
+      projection: "mercator", // Use 2D mercator projection instead of globe
+    });
 
-const recentProjects = [
-  { id: '1650', name: 'REDD+ Project in Cambodia', country: 'Cambodia', type: 'Conservation', status: 'In Progress', progress: 65 },
-  { id: '2749', name: 'Brazil Forest Conservation Project', country: 'Brazil', type: 'Conservation', status: 'Completed', progress: 100 },
-  { id: '3214', name: 'Solar Farm Implementation', country: 'Singapore', type: 'Renewable Energy', status: 'In Progress', progress: 40 },
-  { id: '4532', name: 'Community Cookstove Program', country: 'Indonesia', type: 'Cookstove', status: 'Not Started', progress: 10 },
-];
+    map.current.on("load", () => {
+      if (!map.current) return;
 
-const alertItems = [
-  { id: 1, title: 'Financial assessment pending', project: 'REDD+ Project in Cambodia', priority: 'High', date: '2 days ago' },
-  { id: 2, title: 'Document verification needed', project: 'Brazil Forest Conservation Project', priority: 'Medium', date: '1 week ago' },
-  { id: 3, title: 'ESG assessment pending', project: 'Solar Farm Implementation', priority: 'Low', date: '2 weeks ago' },
-];
+      // Add country highlights
+      const activeCountries = Object.keys(countryDistribution).filter(
+        (country) => countryDistribution[country] > 0
+      );
+
+      // Add a source for country boundaries
+      map.current.addSource("countries", {
+        type: "vector",
+        url: "mapbox://mapbox.country-boundaries-v1",
+      });
+
+      // Add fill layer for active countries
+      map.current.addLayer({
+        id: "active-countries-fill",
+        type: "fill",
+        source: "countries",
+        "source-layer": "country_boundaries",
+        paint: {
+          "fill-color": "#10B981",
+          "fill-opacity": 0.7,
+        },
+        filter: ["in", "name_en", ...activeCountries],
+      });
+
+      // Add outline for all countries
+      map.current.addLayer({
+        id: "countries-outline",
+        type: "line",
+        source: "countries",
+        "source-layer": "country_boundaries",
+        paint: {
+          "line-color": "#FFFFFF",
+          "line-width": 0.5,
+        },
+      });
+    });
+
+    return () => {
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, [lng, lat, zoom, countryDistribution]);
+
+  return <div ref={mapContainer} className="h-full w-full rounded-lg" />;
+}
 
 export default function DashboardClient() {
-  const { t } = useTranslation();
-  const [selectedMapCountry, setSelectedMapCountry] = useState<string | null>(null);
-  const mapFlatRef = useRef<MapboxMapRef>(null);
-  
+  const dashboardData = useQuery(api.dashboard.getDashboardData);
+
+  if (!dashboardData) {
+    return <DashboardSkeleton />;
+  }
+
+  const {
+    metrics,
+    countryDistribution,
+    projectTypes,
+    monthlyData,
+    recentProjects,
+    actionItems,
+  } = dashboardData;
+
+  // Format numbers for display
+  const formatNumber = (num: number) => {
+    return new Intl.NumberFormat("en-US").format(num);
+  };
+
+  const formatCurrency = (num: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(num);
+  };
+
+  // Prepare data for pie chart
+  const pieData = Object.entries(projectTypes).map(([type, count]) => ({
+    name: type,
+    value: count,
+  }));
+
   return (
-    <div className="relative">
-      <TopBar title={t('topbar.dashboard')}>
-        <div className="flex justify-end w-full gap-3 items-center">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <CalendarDays className="h-4 w-4" />
-            <span>Last updated: Today, 10:45 AM</span>
-          </div>
-          <ThemeSwitcher />
-        </div>
-      </TopBar>
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">My dashboard</h1>
 
-      {/* Key metrics */}
-      <div className="p-4 grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-        <Card className="p-4 flex flex-col">
-          <div className="flex justify-between items-start mb-2">
-            <div className="text-muted-foreground text-sm font-medium">
-              {t('dashboard.totalProjects')}
-            </div>
-            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
-              <Briefcase className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-2xl">48</span>
-            <span className="text-branding-green-600 dark:text-branding-green-400 text-xs flex items-center">
-              <ArrowUpRight className="h-3 w-3" /> +8%
-            </span>
-          </div>
-          <Separator className="my-2" />
-          <div className="text-xs text-muted-foreground">
-            <TrendingUp className="h-3 w-3 inline mr-1" /> Increased since last month
-          </div>
+      {/* Metrics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Projects in Portfolio
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{metrics.projectsInPortfolio}</div>
+            <p className="text-xs text-muted-foreground">projects</p>
+          </CardContent>
         </Card>
 
-        <Card className="p-4 flex flex-col">
-          <div className="flex justify-between items-start mb-2">
-            <div className="text-muted-foreground text-sm font-medium">
-              {t('dashboard.projectsUnderReview')}
-            </div>
-            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
-              <ClipboardList className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-2xl">56M</span>
-            <span className="text-xs text-muted-foreground">USD</span>
-          </div>
-          <Separator className="my-2" />
-          <div className="text-xs text-muted-foreground">
-            <span className="font-medium">12</span> projects currently in review
-          </div>
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Projects under Review
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{metrics.projectsUnderReview}</div>
+            <p className="text-xs text-muted-foreground">projects</p>
+          </CardContent>
         </Card>
 
-        <Card className="p-4 flex flex-col">
-          <div className="flex justify-between items-start mb-2">
-            <div className="text-muted-foreground text-sm font-medium">
-              {t('dashboard.amountContracted')}
-            </div>
-            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
-              <CheckCircle className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-2xl">30M</span>
-            <span className="text-xs text-muted-foreground">USD</span>
-          </div>
-          <Separator className="my-2" />
-          <div className="text-xs text-muted-foreground">
-            <span className="font-medium">18</span> contracted projects
-          </div>
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Credit under review
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{formatNumber(metrics.creditsUnderReview)} tCO₂e</div>
+          </CardContent>
         </Card>
 
-        <Card className="p-4 flex flex-col">
-          <div className="flex justify-between items-start mb-2">
-            <div className="text-muted-foreground text-sm font-medium">
-              {t('dashboard.amountDisbursed')}
-            </div>
-            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
-              <DollarSign className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-2xl">18.6M</span>
-            <span className="text-xs text-muted-foreground">USD</span>
-          </div>
-          <Separator className="my-2" />
-          <div className="text-xs text-muted-foreground">
-            <span className="font-medium">62%</span> of contracted amount
-          </div>
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Value of Credits under Review
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{formatCurrency(metrics.valueUnderReview)}</div>
+          </CardContent>
         </Card>
 
-        <Card className="p-4 flex flex-col">
-          <div className="flex justify-between items-start mb-2">
-            <div className="text-muted-foreground text-sm font-medium">
-              {t('dashboard.portfolioValue')}
-            </div>
-            <div className="bg-branding-green-100 dark:bg-branding-green-800/30 p-2 rounded-full">
-              <Activity className="h-4 w-4 text-branding-green-600 dark:text-branding-green-400" />
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-bold text-2xl">75.8M</span>
-            <span className="text-xs text-muted-foreground">USD</span>
-          </div>
-          <Separator className="my-2" />
-          <div className="text-xs text-muted-foreground">
-            <span className="text-branding-green-600 dark:text-branding-green-400">↑ 12.4%</span> from previous quarter
-          </div>
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Investment Amount under Review
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{formatCurrency(metrics.investmentUnderReview)}</div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Investment Amount Disbursed
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{formatCurrency(metrics.investmentDisbursed)}</div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Credits Contracted
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{formatNumber(metrics.creditsContracted)} tCO₂e</div>
+          </CardContent>
         </Card>
       </div>
 
-      {/* Charts and maps */}
-      <div className="p-4 grid grid-cols-1 gap-4">
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-          {/* React Simple Maps */}
-          <Card className="p-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium text-lg">{t('dashboard.geographicDistribution')}</h3>
-              <Badge variant="outline" className="flex items-center gap-1">
-                <Globe className="h-3 w-3" /> Simple Maps
-              </Badge>
+      {/* World Maps */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Geo distribution</CardTitle>
+            <div className="flex items-center gap-4 text-sm">
+              <span className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                Very Active
+              </span>
+              <span className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-gray-300" />
+                Inactive
+              </span>
             </div>
-            <div className="h-[350px]">
-              <WorldMap 
-                countryColors={{
-                  "116": "fill-branding-green-600 hover:fill-branding-green-500", // Cambodia
-                  "076": "fill-branding-green-500 hover:fill-branding-green-400", // Brazil
-                  "702": "fill-branding-green-400 hover:fill-branding-green-300", // Singapore
-                  "360": "fill-branding-green-300 hover:fill-branding-green-200" // Indonesia
-                }}
-              />
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <GeoDistributionMap countryDistribution={countryDistribution} />
             </div>
-            <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs">
-              <span className="font-medium">Countries with active projects:</span>
-              {recentProjects.map((project) => (
-                <div key={project.country} className="flex items-center gap-1">
-                  <div className={`w-3 h-3 rounded-full ${
-                    project.country === 'Cambodia' 
-                      ? 'bg-branding-green-600' 
-                      : project.country === 'Brazil'
-                        ? 'bg-branding-green-500'
-                        : project.country === 'Singapore'
-                          ? 'bg-branding-green-400'
-                          : 'bg-branding-green-300'
-                  }`}></div>
-                  <span>{project.country}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
+          </CardContent>
+        </Card>
 
-          {/* Mapbox Flat Map */}
-          <Card className="p-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium text-lg">{t('dashboard.geographicDistribution')}</h3>
-              <Badge variant="outline" className="flex items-center gap-1">
-                <Globe className="h-3 w-3" /> Mapbox Map
-              </Badge>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Geo distribution</CardTitle>
+            <div className="flex items-center gap-4 text-sm">
+              <span className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                Very Active
+              </span>
+              <span className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-gray-300" />
+                Inactive
+              </span>
             </div>
-            <div className="h-[350px]">
-              <MapboxMapComponent 
-                ref={mapFlatRef}
-                countries={[
-                  { 
-                    name: 'Cambodia',
-                    coordinates: [104.9910, 12.5657],
-                    color: '#00938C' // branding-green-600
-                  },
-                  { 
-                    name: 'Brazil',
-                    coordinates: [-51.9253, -14.2350],
-                    color: '#32C1B3' // branding-green-500
-                  },
-                  { 
-                    name: 'Singapore',
-                    coordinates: [103.8198, 1.3521],
-                    color: '#5EDFCF' // branding-green-400
-                  },
-                  { 
-                    name: 'Indonesia',
-                    coordinates: [113.9213, -0.7893],
-                    color: '#90E5D6' // branding-green-300
-                  }
-                ]}
-              />
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <GeoDistributionMap countryDistribution={countryDistribution} />
             </div>
-            <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs">
-              <span className="font-medium">Countries with active projects:</span>
-              {recentProjects.map((project) => (
-                <div 
-                  key={project.country} 
-                  className={`flex items-center gap-1 cursor-pointer hover:text-branding-green-600 transition-colors py-1 px-2 rounded-full ${
-                    selectedMapCountry === project.country ? 'bg-gray-100 dark:bg-gray-800' : ''
-                  }`}
-                  onClick={() => {
-                    setSelectedMapCountry(project.country);
-                    // Use the focusOnCountry function from the map component
-                    if (mapFlatRef.current?.focusOnCountry) {
-                      mapFlatRef.current.focusOnCountry(project.country);
-                    }
-                  }}
-                >
-                  <div className={`w-3 h-3 rounded-full ${
-                    project.country === 'Cambodia' 
-                      ? 'bg-branding-green-600' 
-                      : project.country === 'Brazil'
-                        ? 'bg-branding-green-500'
-                        : project.country === 'Singapore'
-                          ? 'bg-branding-green-400'
-                          : 'bg-branding-green-300'
-                  }`}></div>
-                  <span>{project.country}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-
-        <Card className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium text-lg">{t('dashboard.annualIssuance')}</h3>
-            <Badge variant="outline">2023-2024</Badge>
-          </div>
-          <div className="h-[350px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={monthlyIssuance} margin={{ top: 5, right: 20, bottom: 30, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="credits" fill="#00938C" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          </CardContent>
         </Card>
       </div>
 
-      {/* Additional section: Project details and alerts */}
-      <div className="p-4 grid md:grid-cols-3 grid-cols-1 gap-4">
-        <Card className="md:col-span-2 p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium text-lg">Recent Projects</h3>
-            <Link href="/projects" className="text-sm text-branding-green-600 dark:text-branding-green-400 flex items-center hover:underline">
-              View all <ArrowUpRight className="h-3 w-3 ml-1" />
-            </Link>
-          </div>
-          <div className="overflow-auto">
+      {/* Bar Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">
+              Annual Credits Issuance [Project under Review]
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis tickFormatter={(value) => `$${value / 1000}k`} />
+                  <Tooltip formatter={(value: any) => formatCurrency(value)} />
+                  <Bar dataKey="projectsUnderReview" fill="#6B7280" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">
+              Annual Credits Issuance [Credits Contracted]
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis tickFormatter={(value) => `$${value / 1000}k`} />
+                  <Tooltip formatter={(value: any) => formatCurrency(value)} />
+                  <Bar dataKey="creditsContracted" fill="#6B7280" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Projects and Other Info */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Recent Projects Table */}
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="text-lg">Recent Projects</CardTitle>
+          </CardHeader>
+          <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Project</TableHead>
+                  <TableHead>Projects</TableHead>
                   <TableHead>Country</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Progress</TableHead>
+                  <TableHead>Project type</TableHead>
+                  <TableHead>Methodology (version)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {recentProjects.map((project) => (
                   <TableRow key={project.id}>
                     <TableCell className="font-medium">
-                      <Link href={`/projects/${project.id}/details`} className="hover:text-branding-green-600 dark:hover:text-branding-green-400">
-                        {project.name}
-                      </Link>
+                      {project.projectName}
                     </TableCell>
                     <TableCell>{project.country}</TableCell>
-                    <TableCell>{project.type}</TableCell>
-                    <TableCell>
-                      <Badge 
-                        variant="outline" 
-                        className={
-                          project.status === 'Completed' 
-                            ? 'bg-branding-green-100 text-branding-green-800 dark:bg-branding-green-900 dark:text-branding-green-300' 
-                            : project.status === 'In Progress'
-                              ? 'bg-branding-green-100/50 text-branding-green-800 dark:bg-branding-green-900/50 dark:text-branding-green-300'
-                              : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-                        }
-                      >
-                        {project.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Progress value={project.progress} className="h-2" />
-                        <span className="text-xs">{project.progress}%</span>
-                      </div>
-                    </TableCell>
+                    <TableCell>{project.projectType}</TableCell>
+                    <TableCell>{project.methodology}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </div>
+            
+            <div className="mt-4 space-y-2">
+              <div>
+                <span className="font-medium">Owner:</span>
+              </div>
+              <div>
+                <span className="font-medium">Collaborators:</span>
+              </div>
+              <div>
+                <span className="font-medium">Add Collaborators:</span>
+              </div>
+            </div>
+          </CardContent>
         </Card>
 
-        <Card className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium text-lg">Project Types</h3>
-          </div>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={projectTypes}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {projectTypes.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <Separator className="my-4" />
-          <h3 className="font-medium mb-2">Alerts & Notifications</h3>
-          <div className="space-y-2">
-            {alertItems.map((alert) => (
-              <div key={alert.id} className="flex items-start gap-2 text-sm p-2 rounded-md bg-neutral-50 dark:bg-neutral-900">
-                <AlertCircle className="h-4 w-4 text-branding-green-600 mt-0.5" />
-                <div>
-                  <div className="font-medium">{alert.title}</div>
-                  <div className="text-muted-foreground text-xs">
-                    {alert.project} • {alert.date}
-                  </div>
+        {/* Project Types Pie Chart */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Project types</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={(entry) => `${entry.name}: ${entry.value}`}
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 space-y-2">
+              {pieData.map((entry, index) => (
+                <div key={entry.name} className="flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                  />
+                  <span className="text-sm">
+                    Type {index + 1}: {Math.round((entry.value / metrics.projectsInPortfolio) * 100)}%
+                  </span>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </CardContent>
         </Card>
       </div>
 
-      {/* Performance trends */}
-      <div className="p-4 grid md:grid-cols-2 grid-cols-1 gap-4 mb-4">
-        <Card className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium text-lg">Credit Performance</h3>
-            <Badge variant="outline">Quarterly</Badge>
-          </div>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={quarterlyPerformance} margin={{ top: 5, right: 20, bottom: 30, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="actual" stroke="#00938C" strokeWidth={2} />
-                <Line type="monotone" dataKey="projected" stroke="#5EDFCF" strokeWidth={2} strokeDasharray="5 5" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="flex gap-4 justify-center mt-2 text-xs">
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-branding-green-600 rounded-full"></div>
-              <span>Actual Credits</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-branding-green-400 rounded-full"></div>
-              <span>Projected Credits</span>
-            </div>
-          </div>
-        </Card>
+      {/* Action Items */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Action</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Projects</TableHead>
+                <TableHead>Action type / Person Responsible</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {actionItems.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium">{item.project}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center justify-between">
+                      <span>{item.actionType}</span>
+                      <span className="text-muted-foreground">
+                        {item.responsible}
+                      </span>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
-        <Card className="p-4">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium text-lg">Team Activity</h3>
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">OO</Avatar>
-              <div>
-                <div className="font-medium">Oliver Oxenham</div>
-                <div className="text-xs text-muted-foreground">
-                  Completed financial assessment for <span className="text-branding-green-600 dark:text-branding-green-400">REDD+ Project in Cambodia</span>
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground ml-auto">2h ago</div>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">JS</Avatar>
-              <div>
-                <div className="font-medium">Jane Smith</div>
-                <div className="text-xs text-muted-foreground">
-                  Added document to <span className="text-branding-green-600 dark:text-branding-green-400">Brazil Forest Conservation Project</span>
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground ml-auto">Yesterday</div>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">TK</Avatar>
-              <div>
-                <div className="font-medium">Thomas King</div>
-                <div className="text-xs text-muted-foreground">
-                  Updated ESG assessment for <span className="text-branding-green-600 dark:text-branding-green-400">Solar Farm Implementation</span>
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground ml-auto">2 days ago</div>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 bg-branding-green-100 text-branding-green-700">MP</Avatar>
-              <div>
-                <div className="font-medium">Maria Perez</div>
-                <div className="text-xs text-muted-foreground">
-                  Created new project <span className="text-branding-green-600 dark:text-branding-green-400">Community Cookstove Program</span>
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground ml-auto">1 week ago</div>
-            </div>
-          </div>
-          <div className="mt-4 text-center">
-            <Link href="#" className="text-sm text-branding-green-600 dark:text-branding-green-400 hover:underline">
-              View all activity
-            </Link>
-          </div>
-        </Card>
+function DashboardSkeleton() {
+  return (
+    <div className="p-6 space-y-6">
+      <Skeleton className="h-8 w-48" />
+      
+      {/* Metrics Cards Skeleton */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[...Array(7)].map((_, i) => (
+          <Card key={i}>
+            <CardHeader className="pb-3">
+              <Skeleton className="h-4 w-32" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-8 w-24" />
+              <Skeleton className="h-3 w-16 mt-1" />
+            </CardContent>
+          </Card>
+        ))}
       </div>
-
+      
+      {/* Maps Skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {[...Array(2)].map((_, i) => (
+          <Card key={i}>
+            <CardHeader>
+              <Skeleton className="h-6 w-48" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-64 w-full" />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+      
+      {/* Charts Skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {[...Array(2)].map((_, i) => (
+          <Card key={i}>
+            <CardHeader>
+              <Skeleton className="h-6 w-64" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-64 w-full" />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

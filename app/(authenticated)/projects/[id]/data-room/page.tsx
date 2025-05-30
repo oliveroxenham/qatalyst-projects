@@ -7,7 +7,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import PageClient from "./pageClient";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ReportBuilderPage() {
+export default function DataRoomPage() {
   const params = useParams();
   const projectId = params.id as Id<"projects">;
   
@@ -16,24 +16,18 @@ export default function ReportBuilderPage() {
   });
 
   if (!projectData) {
-    return <ReportBuilderSkeleton />;
+    return <DataRoomSkeleton />;
   }
 
   return <PageClient projectData={projectData} />;
 }
 
-function ReportBuilderSkeleton() {
+function DataRoomSkeleton() {
   return (
     <div className="p-6 space-y-6">
       <Skeleton className="h-12 w-64" />
-      <div className="space-y-4">
-        <Skeleton className="h-10 w-full max-w-md" />
-        <div className="space-y-2">
-          {[...Array(7)].map((_, i) => (
-            <Skeleton key={i} className="h-12 w-full max-w-2xl" />
-          ))}
-        </div>
-        <Skeleton className="h-12 w-40" />
+      <div className="flex items-center justify-center h-[400px]">
+        <Skeleton className="h-32 w-96" />
       </div>
     </div>
   );

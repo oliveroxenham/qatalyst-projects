@@ -1,21 +1,34 @@
-import { currentUser } from '@clerk/nextjs/server';
-import { getProjectByIdServer } from '@/server/db';
-import FinancialAssessmentClient from './pageClient';
+"use client";
 
-export default async function FinancialAssessmentPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const projectId = (await params).id;
-  const projectData = await getProjectByIdServer({ id: projectId });
-  const user = await currentUser();
+import { useParams } from "next/navigation";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import PageClient from "./pageClient";
+import { Skeleton } from "@/components/ui/skeleton";
+
+export default function FinancialAssessmentPage() {
+  const params = useParams();
+  const projectId = params.id as Id<"projects">;
   
-  // Extract only the needed user properties to avoid serialization issues
-  const serializedUser = user ? {
-    id: user.id,
-    fullName: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.username
-  } : null;
-  
-  return <FinancialAssessmentClient projectData={projectData} projectId={projectId} user={serializedUser} />;
+  const projectData = useQuery(api.projects.getById, { 
+    projectId: projectId 
+  });
+
+  if (!projectData) {
+    return <FinancialAssessmentSkeleton />;
+  }
+
+  return <PageClient projectData={projectData} />;
+}
+
+function FinancialAssessmentSkeleton() {
+  return (
+    <div className="p-6 space-y-6">
+      <Skeleton className="h-12 w-64" />
+      <div className="flex items-center justify-center h-[400px]">
+        <Skeleton className="h-32 w-96" />
+      </div>
+    </div>
+  );
 }

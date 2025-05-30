@@ -1,69 +1,38 @@
-import { ThemeSwitcher } from '@/components/theme-switcher';
-import { TopBar } from '@/components/topbar';
-import { Button } from '@/components/qbutton';
-import { Lock } from 'lucide-react';
-import { ProjectInfoTooltip } from '@/components/project-info-tooltip';
-import { AssigneeSelector } from '@/components/assignee-selector';
-import { currentUser } from '@clerk/nextjs/server';
-import { GenerateAssessmentButton } from '@/components/generate-assessment-button';
-import { ChildComponents } from './childComponents';
-import { getProjectByIdServer } from '@/server/db';
-import { FinalRatingSelector } from '@/components/final-rating-selector';
-import { DriverJs } from '@/components/driverjs/driverjs';
+"use client";
 
-export default async function CarbonAccountingPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const projectId = (await params).id;
-  const projectData = await getProjectByIdServer({ id: projectId });
-  const user = await currentUser();
+import { useParams } from "next/navigation";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import PageClient from "./pageClient";
+import { Skeleton } from "@/components/ui/skeleton";
 
+export default function CarbonAccountingPage() {
+  const params = useParams();
+  const projectId = params.id as Id<"projects">;
+  
+  const projectData = useQuery(api.projects.getById, { 
+    projectId: projectId 
+  });
+
+  if (!projectData) {
+    return <CarbonAccountingSkeleton />;
+  }
+
+  return <PageClient projectData={projectData} />;
+}
+
+function CarbonAccountingSkeleton() {
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
-      <TopBar title="sidebar.carbonAccounting">
-        <div className="flex justify-between items-center w-full gap-2">
-          <div className="flex flex-row items-center gap-2">
-            {projectData && (
-              <ProjectInfoTooltip
-                name={projectData.name}
-                sourceType={projectData.sourceType}
-                originalId={projectData.id}
-                projectType={projectData.projectType}
-              />
-            )}
-            <Button variant="ghost" size="sm">
-              <Lock />
-            </Button>
-            <div className="flex flex-row items-center gap-1">
-              <span className="text-sm">Assignee:</span>
-              <AssigneeSelector
-                projectId={projectId}
-                currentUser={user?.fullName}
-                assessment="carbonQuality"
-                assignedTo={projectData?.carbonAccounting?.assignedTo || projectData?.carbonQualityAssessment?.assignedTo}
-              />
-            </div>
-            <FinalRatingSelector
-              projectData={projectData}
-              assessment="carbonQuality"
-              currentUser={user?.fullName}
-            />
-          </div>
-          <div className="flex items-center">
-            <GenerateAssessmentButton
-              currentUser={user?.fullName}
-              assignee={projectData?.carbonAccounting?.assignedTo || projectData?.carbonQualityAssessment?.assignedTo}
-            />
-            <ThemeSwitcher />
-          </div>
-        </div>
-      </TopBar>
-      <div className="w-full flex justify-center p-2 pb-[53px] h-full">
-        <ChildComponents projectData={projectData} />
+    <div className="p-6 space-y-6">
+      <Skeleton className="h-12 w-64" />
+      <div className="grid grid-cols-3 gap-6">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
       </div>
-      <DriverJs />
+      <Skeleton className="h-96 w-full" />
+      <Skeleton className="h-48 w-full" />
     </div>
   );
 }

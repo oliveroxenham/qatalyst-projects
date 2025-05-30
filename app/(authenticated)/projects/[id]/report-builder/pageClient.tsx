@@ -1,82 +1,112 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/qbutton';
-import { Card } from '@/components/ui/card';
-import { TopBar } from '@/components/topbar';
-import { useTranslation } from 'react-i18next';
-import { Lock } from 'lucide-react';
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useRouter } from "next/navigation";
 
-export function ReportBuilderClient({ projectId }: { projectId: string }) {
-  const { t } = useTranslation();
+type ReportFormat = "PPT" | "WORD" | "PDF";
+
+export default function PageClient({ projectData }: { projectData: any }) {
   const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
+  const [selectedFormat, setSelectedFormat] = useState<ReportFormat>("PPT");
+  const [selectedSections, setSelectedSections] = useState<string[]>([
+    "Project overview",
+    "Executive Summary",
+    "Carbon Accounting",
+    "Additionality",
+    "Permanence",
+    "Co-Benefits & Safeguarding",
+    "Financial Assessment"
+  ]);
 
-  useEffect(() => {
-    setIsClient(true);
-    // Check if there's a saved report draft in localStorage
-    const savedReport = localStorage.getItem(`report_draft_${projectId}`);
-    if (savedReport) {
-      // If a draft exists, redirect to the preview page
-      router.push(`/projects/${projectId}/report-builder/preview`);
-    }
-  }, [projectId, router]);
+  const sections = [
+    { id: "1", name: "Project overview" },
+    { id: "2", name: "Executive Summary" },
+    { id: "3", name: "Carbon Accounting" },
+    { id: "4", name: "Additionality" },
+    { id: "5", name: "Permanence" },
+    { id: "6", name: "Co-Benefits & Safeguarding" },
+    { id: "7", name: "Financial Assessment" },
+  ];
 
-  if (!isClient) {
-    return null;
-  }
+  const formats: ReportFormat[] = ["PPT", "WORD", "PDF"];
+
+  const handleSectionToggle = (sectionName: string) => {
+    setSelectedSections(prev => 
+      prev.includes(sectionName)
+        ? prev.filter(s => s !== sectionName)
+        : [...prev, sectionName]
+    );
+  };
+
+  const handleGenerateReport = () => {
+    // In a real implementation, this would trigger report generation
+    console.log("Generating report:", {
+      format: selectedFormat,
+      sections: selectedSections
+    });
+  };
 
   return (
-    <div className="flex flex-col h-full">
-      <TopBar title="sidebar.reportBuilder">
-        <div className="flex justify-end w-full"></div>
-      </TopBar>
-      <div className="p-8 flex flex-col items-center">
-        <div className="max-w-2xl w-full">
-          <h1 className="text-2xl font-semibold mb-6">{t('reportBuilder.title')}</h1>
-          <p className="text-muted-foreground mb-8">
-            {t('reportBuilder.description')}
-          </p>
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">Report builder</h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <Card className="p-6 border-2 border-blue-200 hover:border-blue-300 transition-colors cursor-pointer">
-              <h3 className="text-lg font-medium mb-2">{t('reportBuilder.basicReport')}</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                {t('reportBuilder.basicReportDescription')}
-              </p>
-              <Button
-                onClick={() => router.push(`/projects/${projectId}/report-builder/preview`)}
-                className="w-full"
+      <Card>
+        <CardContent className="pt-6">
+          <div className="space-y-6">
+            {/* Format Selection */}
+            <div>
+              <h3 className="text-lg font-medium mb-4">Generate report:</h3>
+              <div className="flex gap-2">
+                {formats.map((format) => (
+                  <Button
+                    key={format}
+                    variant={selectedFormat === format ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedFormat(format)}
+                    className={selectedFormat === format ? "bg-gray-200 text-gray-900 hover:bg-gray-300" : ""}
+                  >
+                    {format}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Sections Checklist */}
+            <div className="space-y-4">
+              {sections.map((section) => (
+                <div key={section.id} className="flex items-center space-x-3">
+                  <span className="text-sm font-medium w-8">{section.id}.</span>
+                  <Checkbox
+                    id={section.id}
+                    checked={selectedSections.includes(section.name)}
+                    onCheckedChange={() => handleSectionToggle(section.name)}
+                    className="data-[state=checked]:bg-gray-900 data-[state=checked]:border-gray-900"
+                  />
+                  <label
+                    htmlFor={section.id}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  >
+                    {section.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            {/* Generate Button */}
+            <div>
+              <Button 
+                onClick={handleGenerateReport}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
-                {t('reportBuilder.generate')}
+                Generate Report
               </Button>
-            </Card>
-
-            <Card className="p-6 border-2 border-gray-200 bg-gray-50 dark:bg-gray-800">
-              <h3 className="text-lg font-medium mb-2 flex items-center">
-                {t('reportBuilder.premiumReport')}
-                <Lock className="ml-2 h-4 w-4" />
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                {t('reportBuilder.premiumReportDescription')}
-              </p>
-              <Button disabled className="w-full">
-                {t('reportBuilder.unlock')}
-              </Button>
-            </Card>
+            </div>
           </div>
-
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800">
-            <h4 className="font-medium">{t('reportBuilder.tipsTitle')}</h4>
-            <ul className="text-sm list-disc pl-5 mt-2 space-y-1">
-              <li>{t('reportBuilder.tip1')}</li>
-              <li>{t('reportBuilder.tip2')}</li>
-              <li>{t('reportBuilder.tip3')}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
